@@ -1,4 +1,4 @@
-import { dbConn } from '../database.js';
+import { dbConn } from '../database/database.js';
 
 export function all(query, params = {}) {
 	try {
