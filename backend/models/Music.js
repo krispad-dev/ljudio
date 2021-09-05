@@ -10,13 +10,10 @@ export const Music = {
 
             const res = await fetch(`https://yt-music-api.herokuapp.com/api/yt/songs/${searchString}`)
             const data = await res.json()
-            
             return data
             
         } catch (error) {
-
             return error
-
         }
     },
 
@@ -27,13 +24,10 @@ export const Music = {
 
             const res = await fetch(`https://yt-music-api.herokuapp.com/api/yt/songs/${searchString}`)
             const data = await res.json()
-            
             return data
             
         } catch (error) {
-
             return error
-
         }
     }
 
