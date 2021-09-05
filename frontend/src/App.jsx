@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
+import YouTube from 'react-youtube';
+
 import './App.css';
 
-
 function App() {
-  
+	return (
+		<div className='App'>
+			<header>
+				<h1>LJUDIO</h1>
+			</header>
 
-  return (
-    <div className="App">
+      <aside>
 
-      <header>
+      </aside>
 
-      </header>
+			<main>
+				<YouTube />
+			</main>
 
-      <main>
-        <Route path="/profile" component={ProfilePage} />
-      </main>
-
-      <footer>
-
-      </footer>
-      
-    </div>
-  );
+			<footer></footer>
+		</div>
+	);
 }
 
 export default App;
