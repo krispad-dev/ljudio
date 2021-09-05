@@ -7,7 +7,19 @@ function App() {
 
   return (
     <div className="App">
-      <Route path="/profile" component={ProfilePage} />
+
+      <header>
+
+      </header>
+
+      <main>
+        <Route path="/profile" component={ProfilePage} />
+      </main>
+
+      <footer>
+
+      </footer>
+      
     </div>
   );
 }
