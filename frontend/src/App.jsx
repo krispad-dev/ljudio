@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import YouTube from 'react-youtube';
 
 import './App.css';
 
@@ -15,7 +14,7 @@ function App() {
       </aside>
 
 			<main>
-				<YouTube />
+
 			</main>
 
 			<footer></footer>
