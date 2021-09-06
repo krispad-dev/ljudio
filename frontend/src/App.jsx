@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
+import { Button } from '@material-ui/core'
+import PlayerController from './components/YoutubePlayer/PlayerController'
+import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
+import TestPage from './pages/TestPage';
+import { BrowserRouter as Router, Route, Link  } from 'react-router-dom'
 
 import './App.css';
 
 function App() {
 	return (
 		<div className='App'>
+			<Router>
 			<header>
 				<h1>LJUDIO</h1>
+				<Link to={'/music'}>Music Page</Link>
+				<Link to={'/'}>Home  </Link>
 			</header>
 
-      <aside>
-
-      </aside>
+			<aside></aside>
 
 			<main>
-
+				<Route path={'/music'} exact component={TestPage} />
+				<YouTubePlayer/>
 			</main>
 
-			<footer></footer>
+			<footer>
+				<PlayerController />
+			</footer>
+			</Router>
 		</div>
 	);
 }

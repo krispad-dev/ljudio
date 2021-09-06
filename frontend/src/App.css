@@ -4,6 +4,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
 	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .App {
@@ -31,12 +32,16 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    background-color: #333;
+    background-color: black;
 }
 
 footer {
+
 	grid-area: footer;
 	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 h1,
