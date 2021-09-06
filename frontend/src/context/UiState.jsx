@@ -1,10 +1,13 @@
 import React, { createContext, useReducer } from 'react';
 import { UiReducer } from '../reducers/UiReducer';
 
-const UiContext = createContext();
+export const UiContext = createContext();
 
 const initialState = {
-    searchString: ''
+    musicData: {},
+    test: 'Hello context',
+    menuOpen: false,
+    settingsOpen: false
 }
 
 
