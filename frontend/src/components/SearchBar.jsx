@@ -36,21 +36,16 @@ const SearchBarWrapper = styled.div`
   height: 2rem;
   border-radius: 10px;
 
-  form {
+  .searchInputs form {
     display: flex;
   }
 
-  input {
+  .searchInputs input {
     all: unset;
   }
 
   .searchIcon {
     background-color: #fff;
-
-    button {
-      all: unset;
-      cursor: pointer;
-    }
   }
 `;
 
