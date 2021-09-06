@@ -1,28 +1,26 @@
 import React, { useContext } from 'react';
 import { UiContext } from './context/UiState';
 
+// Components
+import SearchBar from './components/exempelmapp/SearchBar';
+
 import './App.css';
 
 function App() {
+  return (
+    <div className='App'>
+      <header>
+        <h1>LJUDIO</h1>
+        <SearchBar />
+      </header>
 
-	return (
-		<div className='App'>
-			<header>
-				<h1>LJUDIO</h1>
-				
-			</header>
+      <aside></aside>
 
-      <aside>
+      <main></main>
 
-      </aside>
-
-			<main>
-
-			</main>
-
-			<footer></footer>
-		</div>
-	);
+      <footer></footer>
+    </div>
+  );
 }
 
 export default App;

@@ -1,6 +1,4 @@
-async function fetchFunction(e) {
-  let query = e.target.value;
-  console.log(query);
+export default async function fetchFunction(query) {
   const getFetch = await fetch(
     `https://yt-music-api.herokuapp.com/api/yt/songs/${query}`,
     {
@@ -10,6 +8,7 @@ async function fetchFunction(e) {
       },
     }
   );
+
   const data = await getFetch.json();
 
   console.log(data);
