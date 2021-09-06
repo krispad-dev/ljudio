@@ -4,8 +4,7 @@ import { UiReducer } from '../reducers/UiReducer';
 export const UiContext = createContext();
 
 const initialState = {
-    musicData: {},
-    test: 'Hello context',
+    searchString: '',
     menuOpen: false,
     settingsOpen: false
 }
