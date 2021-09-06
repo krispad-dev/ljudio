@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
-import getSong from '../../hooks/getSong';
+import { UiContext } from '../context/UiState';
+
+import getSong from '../hooks/getSong';
 
 function SearchBar() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const { dispatch } = useContext(UiContext);
 
-  function searchMusic(e) {
+  async function searchMusic(e) {
     let question = e.target.value;
-    getSong(question);
+    const data = await getSong(question);
+    console.log(data);
+    dispatch({ type: 'SEARCH_MUSIC', payload: { musicData: data } });
   }
 
   return (
