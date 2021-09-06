@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UiContext } from './context/UiState';
+import useGetSongs from './hooks/useGetSongs';
 
 // Components
 import SearchBar from './components/SearchBar';
@@ -9,7 +10,11 @@ import './App.css';
 function App() {
   const { state } = useContext(UiContext);
 
-  console.log(state.musicData);
+  console.log(state.searchString);
+
+  const { data } = useGetSongs(state.searchString);
+
+  console.log(data);
 
   return (
     <div className='App'>

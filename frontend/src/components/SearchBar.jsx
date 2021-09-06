@@ -3,16 +3,15 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import { UiContext } from '../context/UiState';
 
-import getSong from '../hooks/getSong';
-
 function SearchBar() {
-  const { dispatch } = useContext(UiContext);
+  const { dispatch, state } = useContext(UiContext);
 
   async function searchMusic(e) {
-    let question = e.target.value;
-    const data = await getSong(question);
-    console.log(data);
-    dispatch({ type: 'SEARCH_MUSIC', payload: { musicData: data } });
+    let musicSearchString = e.target.value;
+    dispatch({
+      type: 'SEARCH_STRING',
+      payload: { searchString: musicSearchString },
+    });
   }
 
   return (
