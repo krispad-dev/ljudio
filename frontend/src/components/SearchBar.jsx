@@ -8,6 +8,7 @@ function SearchBar() {
 
   async function searchMusic(e) {
     let musicSearchString = e.target.value;
+
     dispatch({
       type: 'SEARCH_STRING',
       payload: { searchString: musicSearchString },

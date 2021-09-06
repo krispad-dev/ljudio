@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { UiContext } from './context/UiState';
 import useGetSongs from './hooks/useGetSongs';
+import MusicPage from './pages/MusicPage';
 
 // Components
 import SearchBar from './components/SearchBar';
@@ -25,7 +26,9 @@ function App() {
 
       <aside></aside>
 
-      <main></main>
+      <main>
+		<MusicPage />
+	  </main>
 
       <footer></footer>
     </div>
