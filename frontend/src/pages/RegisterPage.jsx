@@ -28,8 +28,25 @@ function RegisterPage() {
   });
 
   const onSubmitHandler = (data) => {
-    console.log(data);
-    reset();
+    const newUser = {
+      userName: data.userName,
+      email: data.email,
+      password: data.password,
+    };
+
+    const createUser = async () => {
+      const req = await fetch('http://localhost:7000/api/users', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(newUser),
+      });
+      const res = await req.json();
+    };
+    createUser();
+
+    // reset();
   };
 
   return (
