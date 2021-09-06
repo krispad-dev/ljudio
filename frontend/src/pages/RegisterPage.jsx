@@ -43,6 +43,7 @@ function RegisterPage() {
         body: JSON.stringify(newUser),
       });
       const res = await req.json();
+      console.log(res);
     };
     createUser();
 

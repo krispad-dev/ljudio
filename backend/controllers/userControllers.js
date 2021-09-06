@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { Bcrypt } from '../helpers/helpers.js';
+import { Users } from '../models/Users.js';
 
 export async function createUser(req, res) {
   try {
@@ -9,7 +10,8 @@ export async function createUser(req, res) {
     const hashedPassword = await Bcrypt.hashPassword(user.password);
 
     user.password = hashedPassword;
-    console.log(user);
+
+    Users.createUser(user);
 
     res.status(200).json({ success: true, user });
   } catch (error) {
