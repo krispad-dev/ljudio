@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { UiContext } from './context/UiState';
 
 // Components
 import SearchBar from './components/exempelmapp/SearchBar';
