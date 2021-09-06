@@ -15,7 +15,7 @@ function App() {
 
         <aside></aside>
         <main>
-          <Route path='/register' component={RegisterPage}></Route>
+          <Route exact path='/register' component={RegisterPage} />
         </main>
         <footer></footer>
       </BrowserRouter>

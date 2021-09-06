@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 //Validation Schema
@@ -35,9 +34,6 @@ function RegisterPage() {
 
   return (
     <RegisterPageWrapper>
-      {/* <Link to='/' className='close-register'>
-        X
-      </Link> */}
       <a onClick={() => history.goBack()} className='close-register'>
         X
       </a>
@@ -98,13 +94,17 @@ const RegisterPageWrapper = styled.div`
     position: absolute;
     top: 30px;
     right: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     font-size: 1rem;
-    padding: 7px 10px;
+
+    height: 25px;
+    width: 25px;
     border: 1px solid white;
     border-radius: 50%;
-
-    text-align: center;
+    cursor: pointer;
   }
   .register-page-contentWrapper {
     max-width: 700px;
@@ -116,7 +116,13 @@ const RegisterPageWrapper = styled.div`
     font-size: 4rem;
     text-align: center;
     font-weight: lighter;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
+  }
+
+  @media (max-width: 350px) {
+    .register-heading {
+      font-size: 3rem;
+    }
   }
 
   .register-form {
