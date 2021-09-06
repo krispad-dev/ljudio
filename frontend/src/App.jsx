@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 
+// Components
+import SearchBar from './components/exempelmapp/SearchBar';
+
 import './App.css';
 
 function App() {
-	return (
-		<div className='App'>
-			<header>
-				<h1>LJUDIO</h1>
-			</header>
+  return (
+    <div className='App'>
+      <header>
+        <h1>LJUDIO</h1>
+        <SearchBar />
+      </header>
 
-      <aside>
+      <aside></aside>
 
-      </aside>
+      <main></main>
 
-			<main>
-
-			</main>
-
-			<footer></footer>
-		</div>
-	);
+      <footer></footer>
+    </div>
+  );
 }
 
 export default App;
