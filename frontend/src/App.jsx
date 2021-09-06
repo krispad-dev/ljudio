@@ -2,11 +2,15 @@ import React, { useContext } from 'react';
 import { UiContext } from './context/UiState';
 
 // Components
-import SearchBar from './components/exempelmapp/SearchBar';
+import SearchBar from './components/SearchBar';
 
 import './App.css';
 
 function App() {
+  const { state } = useContext(UiContext);
+
+  console.log(state.musicData);
+
   return (
     <div className='App'>
       <header>
