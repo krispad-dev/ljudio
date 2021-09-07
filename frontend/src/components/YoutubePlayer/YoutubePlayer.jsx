@@ -8,9 +8,10 @@ import { useWindowSize } from '@react-hook/window-size';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 
 function YouTubePlayer() {
-	const [{ videoIsShowing, currentSong }, dispatch] = useContext(playerControllerStateContext);
+	const [{ videoIsShowing, currentSong, currentTime }, dispatch] = useContext(playerControllerStateContext);
 	const playerRef = useRef();
 	const [windowWidth, windowHeight] = useWindowSize();
+
 
 	const opts = {
 		controls: 0,
@@ -41,7 +42,7 @@ function YouTubePlayer() {
 	}
 
 	useEffect(() => {
-		console.log(windowWidth);
+
 		setSize(windowWidth, windowHeight);
 	}, [windowWidth]);
 
@@ -56,7 +57,7 @@ function YouTubePlayer() {
 	useEffect(async () => {
 		const durationInMinutes = await playerRef.current.internalPlayer.getDuration();
 		dispatch({ type: PLAYER_ACTIONS.SET_DURATION, payload: durationInMinutes });
-	}, []);
+	}, [ currentSong ]);
 
 	useEffect(() => {
 		dispatch({ type: PLAYER_ACTIONS.PLAY_VIDEO, payload: playVideo });
