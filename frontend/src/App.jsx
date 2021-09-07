@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UiContext } from './context/UiState';
+import useGetSongs from './hooks/useGetSongs';
+
+// Components
+import SearchBar from './components/SearchBar';
 import PlayerController from './components/YoutubePlayer/PlayerController';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import Logo from './components/Logo';
@@ -6,10 +11,22 @@ import Logo from './components/Logo';
 import './App.css';
 
 function App() {
+
+  const { state } = useContext(UiContext);
+
+  console.log(state.searchString);
+
+  const { data } = useGetSongs(state.searchString);
+
+  console.log(data);
+
+
+
 	return (
 		<div className='App'>
 			<header>
 				<Logo />
+        <SearchBar />
 			</header>
 
 			<aside></aside>

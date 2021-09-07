@@ -8,23 +8,25 @@ body {
 }
 
 .App {
-	display: grid;
-	grid-template-columns: 20% 80%;
-	grid-template-rows: 10vh 80vh 10vh;
-	grid-template-areas:
-		'header header'
-		'aside main'
-		'footer footer';
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 10vh 80vh 10vh;
+  grid-template-areas:
+    'header header'
+    'aside main'
+    'footer footer';
 }
 
 header {
-	grid-area: header;
-	background-color: black;
+  grid-area: header;
+  background-color: black;
+  display: flex;
+  align-items: center;
 }
 
 aside {
-	grid-area: aside;
-	background-color: black;
+  grid-area: aside;
+  background-color: black;
 }
 
 main {
@@ -49,9 +51,9 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0;
-	padding: 0;
-	color: #fff;
+  margin: 0;
+  padding: 0;
+  color: #fff;
 }
 
 @media only screen and (max-width: 1000px) {
