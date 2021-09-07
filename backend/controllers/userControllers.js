@@ -11,13 +11,15 @@ export async function createUser(req, res) {
 
     user.password = hashedPassword;
 
-    const emailExist = Users.findUserByEmail(user);
+    const emailExist = Users.getUserByEmail(user);
+    console.log(Boolean(emailExist));
     console.log('FROM CONTROLLER', emailExist);
 
-    if (emailExist)
+    if (emailExist) {
       return res
         .status(200)
         .json({ success: false, message: 'Email already Exist' });
+    }
 
     Users.createUser(user);
 

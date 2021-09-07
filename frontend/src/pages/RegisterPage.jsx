@@ -42,7 +42,9 @@ function RegisterPage() {
         method: 'POST',
         body: JSON.stringify(newUser),
       });
+
       const res = await req.json();
+
       console.log(res);
     };
     createUser();

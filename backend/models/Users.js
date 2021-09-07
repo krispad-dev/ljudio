@@ -6,11 +6,18 @@ export const Users = {
     return run(query, newUser);
   },
 
-  findUserByEmail({ email }) {
-    const query = `SELECT email FROM users WHERE email = ?`;
+  doesEmailExist({ email }) {
+    const query = `SELECT * FROM users WHERE email = ?`;
+
     const emailExist = all(query, email);
 
-    if (emailExist) return true;
-    return false;
+    if (emailExist[0]) return false;
+    return true;
+  },
+
+  getUserByEmail({ email }) {
+    const query = `SELECT * FROM users WHERE email = ?`;
+    const user = all(query, email);
+    return user[0];
   },
 };
