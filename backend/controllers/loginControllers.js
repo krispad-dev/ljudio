@@ -11,7 +11,7 @@ export async function loginUser(req, res) {
     console.log('No user');
 
     return res
-      .status(200)
+      .status(400)
       .json({ success: false, message: 'Wrong password or username' });
   }
 
@@ -19,7 +19,7 @@ export async function loginUser(req, res) {
 
   if (!match) {
     return res
-      .status(200)
+      .status(400)
       .json({ success: false, message: 'Wrong password or username' });
   }
 
@@ -31,9 +31,7 @@ export async function loginUser(req, res) {
 
   res
     .cookie('authToken', token, {
-      sameSite: 'strict',
       httpOnly: true,
-      secure: true,
     })
     .json({ success: true });
 }

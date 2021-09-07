@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import RegisterPage from './pages/RegisterPage';
 import { UiContext } from './context/UiState';
 import useGetSongs from './hooks/useGetSongs';
 
 // Components
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import SearchBar from './components/SearchBar';
 import PlayerController from './components/YoutubePlayer/PlayerController';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
@@ -29,12 +30,14 @@ function App() {
 
           <SearchBar />
           <Link to='/register'>REGISTER</Link>
+          <Link to='/login'>Login</Link>
         </header>
 
         <aside></aside>
         <main>
           <YouTubePlayer />
           <Route exact path='/register' component={RegisterPage} />
+          <Route exact path='/login' component={LoginPage} />
         </main>
         <footer>
           <PlayerController />
