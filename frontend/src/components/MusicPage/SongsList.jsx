@@ -8,7 +8,11 @@ import styled from 'styled-components';
 function SongsList() {
 
     const { state } = useContext(UiContext); 
-    const { data, isLoading } = useGetSongs(state.searchString); 
+    const { data, isLoading } = useGetSongs(state.searchString);
+    
+    const songs = data?.searchResults?.content?.filter(item => item.type === 'song');
+
+    console.log(songs);
 
     return (
         <SongListWrapper>
@@ -29,7 +33,8 @@ export default SongsList;
 
 const SongListWrapper = styled.div`
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-direction: column;
+    flex-wrap: wrap;
     
 
 `;
