@@ -13,7 +13,7 @@ function YouTubePlayer() {
 	const [windowWidth, windowHeight] = useWindowSize();
 
 	const opts = {
-		controls: 450,
+		controls: 0,
 		cc_load_policy: 0,
 		playerVars: {
 			autoplay: 1,
@@ -83,7 +83,7 @@ function YouTubePlayer() {
 				onPause={() => dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true })}
 				onPlay={() => dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false })}
 				onEnd={() => onEndHandler()}
-				videoId={'lKwEswgOwuQ'}  // Change to currentSong var.
+				videoId={currentSong}  // Change to currentSong var.
 			/>
 			;
 			<div className={'mask-top'}>
@@ -102,8 +102,7 @@ const IframeWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: relative;
-	width: 100%;
+	position: absolute;
 
 
 	.mask-top {

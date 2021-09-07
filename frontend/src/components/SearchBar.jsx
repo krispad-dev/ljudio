@@ -33,8 +33,8 @@ const SearchBarWrapper = styled.div`
   align-items: center;
   background-color: #fff;
   min-width: 250px;
-  height: 2rem;
-  border-radius: 10px;
+  height: 2.5rem;
+  border-radius: 50px;
 
   .searchInputs form {
     display: flex;

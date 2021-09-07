@@ -2,50 +2,45 @@ import React, { useContext } from 'react';
 import { UiContext } from '../context/UiState';
 import useGetSongs from '../hooks/useGetSongs';
 import styled from 'styled-components';
-import Loader from '../components/Loader';
-import SongsList from '../components/MusicPage/SongsList';
 
+import SongsList from '../components/MusicPage/SongsList';
+import ArtiststList from '../components/MusicPage/ArtiststList';
+import AlbumsList from '../components/MusicPage/AlbumsList';
 
 function MusicPage() {
+	const { state } = useContext(UiContext);
+	const { data, isLoading } = useGetSongs(state.searchString);
 
-    const { state } = useContext(UiContext);
-    const { data, isLoading } = useGetSongs(state.searchString);
+	return (
+		<MusicPageWrapper>
+			<div className='songs-list'>
+				{data && state.searchString && <h1>SONGS</h1>}
+				<SongsList />
+			</div>
 
-    if(isLoading) {
-        return <Loader text="Loading music..." />
-    }
+			<div className='artists-list'>
+				{data && state.searchString && <h1>ARTISTS</h1>}
+				<ArtiststList />
+			</div>
 
-    
-    return (
-        <MusicPageWrapper>
-            
-            <div className="songs-list">
-                <SongsList />
-            </div>
-
-            <div className="artists-list">
-                {/* <ArtistsList /> */}
-            </div>
-
-            <div className="albums-list">
-                {/* <AlbumsList /> */}
-            </div>
-
-            {data && 
-            data.searchResults && 
-            data.searchResults.content && 
-            data.searchResults.content.length === 0 && <p>No matches</p>}
-
-            {data && data.searchResults && !data.searchResults.content && <p>No matches</p>}
-
-        </MusicPageWrapper>
-    );
+			<div className='albums-list'>
+				{data && state.searchString && <h1>ALBUMS</h1>}
+				<AlbumsList />
+			</div>
+		</MusicPageWrapper>
+	);
 }
 
 export default MusicPage;
 
-
 const MusicPageWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
+	margin-top: 60rem;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	h1 {
+		background-color: rgba(255, 255, 255, 0.05);
+		font-weight: 400;
+		margin-top: 2rem;
+	}
 `;

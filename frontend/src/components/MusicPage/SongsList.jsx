@@ -6,35 +6,39 @@ import Loader from '../Loader';
 import styled from 'styled-components';
 
 function SongsList() {
+	const { state } = useContext(UiContext);
+	const { data, isLoading } = useGetSongs(state.searchString);
 
-    const { state } = useContext(UiContext); 
-    const { data, isLoading } = useGetSongs(state.searchString);
-    
-    const songs = data?.searchResults?.content?.filter(item => item.type === 'song');
+	const songs = data?.searchResults?.content?.filter(item => item.type === 'song');
+	
+	return (
+		<SongListWrapper>
 
-    console.log(songs);
+			{isLoading && <Loader text='Loading music...' />}
 
-    return (
-        <SongListWrapper>
-            {isLoading && <Loader text="Loading music..." />}
-
-            {data && 
-            data.searchResults && 
-            data.searchResults.content && 
-            data.searchResults.content.map(item => {
-                    return <SongCard key={item.videoId} {...item} />
-            })}
-        </SongListWrapper>
-    );
+			{data &&
+				data.searchResults &&
+				data.searchResults.content &&
+				data.searchResults.content.map(item => {
+					return <SongCard key={item.videoId} {...item} />;
+				})}
+		</SongListWrapper>
+	);
 }
 
 export default SongsList;
 
-
 const SongListWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    
 
+	::-webkit-scrollbar {
+		display: none;
+	}
+	
+
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	height: 15rem;
+	overflow-y: scroll;
+	margin: 1rem 0rem;
 `;

@@ -4,13 +4,14 @@ body {
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
 	box-sizing: border-box;
-	/* overflow: hidden; */
+	overflow: hidden;
+	font-weight: 300;
 }
 
 .App {
   display: grid;
   grid-template-columns: 20% 80%;
-  grid-template-rows: 10vh 80vh 10vh;
+  grid-template-rows: 10vh 70vh 20vh;
   grid-template-areas:
     'header header'
     'aside main'
@@ -22,6 +23,7 @@ header {
   background-color: black;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 aside {
@@ -34,7 +36,8 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: rgb(167, 159, 159);
+	background-color: black;
+	overflow-y: scroll;
 }
 
 footer {
@@ -51,9 +54,11 @@ h3,
 h4,
 h5,
 h6 {
+	font-weight: 200;
   margin: 0;
   padding: 0;
   color: #fff;
+
 }
 
 @media only screen and (max-width: 1000px) {
@@ -61,10 +66,34 @@ h6 {
 		overflow: hidden;
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: 10vh 80vh 10vh;
+		grid-template-rows: 10vh 65vh 25vh;
 		grid-template-areas:
 			'header header'
 			'main main'
 			'footer footer';
 	}
+}
+
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+p {
+	margin: 0.5rem 0rem;
+	color: #fff;
+	font-size: 0.8rem;
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hideC::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hideC {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
