@@ -1,26 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import RegisterPage from './pages/RegisterPage';
+import { UiContext } from './context/UiState';
+import useGetSongs from './hooks/useGetSongs';
+
+// Components
+import SearchBar from './components/SearchBar';
+import PlayerController from './components/YoutubePlayer/PlayerController';
+import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
+import Logo from './components/Logo';
 
 import './App.css';
 
 function App() {
+  
+    const { state } = useContext(UiContext);
+  
+    console.log(state.searchString);
+  
+    const { data } = useGetSongs(state.searchString);
+  
+    console.log(data);
+
   return (
     <div className='App'>
       <BrowserRouter>
         <header>
-          <h1>LJUDIO</h1>
+      <Logo />
+       
+      <SearchBar />
           <Link to='/register'>REGISTER</Link>
         </header>
 
         <aside></aside>
         <main>
+      <YouTubePlayer />
           <Route exact path='/register' component={RegisterPage} />
         </main>
-        <footer></footer>
+        <footer>
+
+      <PlayerController />
+
+        </footer>
       </BrowserRouter>
     </div>
   );
+
+
+
+	
 }
 
 export default App;

@@ -8,14 +8,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 env.config();
+const PORT = process.env.PORT || 7000;
 
 app.use('/api/music', musicRouter);
 app.use('/api/users', userRouter);
 
 app.listen(
-  process.env.PORT || 7000,
+  PORT,
   console.log({
     success: true,
-    message: `Server listens  @${process.env.PORT || 7000}`,
+    message: `Server listens @${PORT}`,
   })
 );
