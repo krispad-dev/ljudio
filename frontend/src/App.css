@@ -34,7 +34,7 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: black;
+	background-color: rgb(167, 159, 159);
 }
 
 footer {

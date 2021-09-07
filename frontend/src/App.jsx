@@ -33,15 +33,15 @@ function App() {
         </header>
 
         <aside></aside>
-        
+
         <main>
-          <YouTubePlayer />
+         {/*  <YouTubePlayer /> */}
           <MusicPage />
           <Route exact path='/register' component={RegisterPage} />
         </main>
 
         <footer>
-          <PlayerController />
+          {/* <PlayerController /> */}
         </footer>
 
       </BrowserRouter>
