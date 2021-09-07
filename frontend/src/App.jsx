@@ -1,14 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { UiContext } from './context/UiState';
 import useGetSongs from './hooks/useGetSongs';
 import MusicPage from './pages/MusicPage';
 
 // Components
 import SearchBar from './components/SearchBar';
+import PlayerController from './components/YoutubePlayer/PlayerController';
+import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
+import Logo from './components/Logo';
 
 import './App.css';
 
 function App() {
+
   const { state } = useContext(UiContext);
 
   console.log(state.searchString);
@@ -17,22 +21,27 @@ function App() {
 
   console.log(data);
 
-  return (
-    <div className='App'>
-      <header>
-        <h1>LJUDIO</h1>
-        <SearchBar />
-      </header>
 
-      <aside></aside>
+
+	return (
+		<div className='App'>
+			<header>
+				<Logo />
+        <SearchBar />
+			</header>
+
+			<aside></aside>
 
       <main>
-		<MusicPage />
-	  </main>
-
-      <footer></footer>
-    </div>
-  );
+		    <MusicPage />
+	      <YouTubePlayer />
+	    </main>
+		
+			<footer>
+        <PlayerController />
+			</footer>
+		</div>
+	);
 }
 
 export default App;

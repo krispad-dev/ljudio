@@ -21,7 +21,10 @@ function MusicPage() {
                 return <p>{item.artist.name} - {item.name}</p>
             })}
 
-            {data && data.searchResults && data.searchResults.content && data.searchResults.content.length === 0 && <p>No matches</p>}
+            {data && 
+            data.searchResults && 
+            data.searchResults.content && 
+            data.searchResults.content.length === 0 && <p>No matches</p>}
 
             {data && data.searchResults && !data.searchResults.content && <p>No matches</p>}
 
