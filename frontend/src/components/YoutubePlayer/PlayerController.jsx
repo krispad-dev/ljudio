@@ -9,7 +9,7 @@ import ProgressSlider from './ProgressSlider';
 import styled from 'styled-components';
 
 function Controller() {
-	const [{ playVideo, pauseVideo, setVolume, durationInMinutes, playerIsPaused }, dispatch] = useContext(
+	const [ { playVideo, pauseVideo, setVolume, durationInMinutes, playerIsPaused }, dispatch ] = useContext(
 		playerControllerStateContext
 	);
 
@@ -24,11 +24,9 @@ function Controller() {
 			</div>
 
 			<div className={'buttonsContainer'}>
-				{playerIsPaused ? (
-					<MdPlayCircleOutline onClick={() => playVideo()} className={'playPauseBtn'} />
-				) : (
-					<MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} />
-				)}
+				{playerIsPaused 
+				? <MdPlayCircleOutline onClick={() => playVideo()} className={'playPauseBtn'} />
+				: <MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} />}
 			</div>
 
 			<div>
@@ -47,7 +45,7 @@ const PlayerControllerWrapper = styled.div`
 	flex-direction: row;
 	padding: 0.5rem;
 	border-radius: 50px;
-	margin-bottom: 4rem;
+	margin-bottom: 6rem;
 
 	@media (max-width: 1000px) {
 		flex-direction: column;

@@ -32,11 +32,10 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    background-color: black;
+	background-color: black;
 }
 
 footer {
-
 	grid-area: footer;
 	background-color: black;
 	display: flex;
@@ -53,4 +52,17 @@ h6 {
 	margin: 0;
 	padding: 0;
 	color: #fff;
+}
+
+@media only screen and (max-width: 1000px) {
+	.App {
+		overflow: hidden;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 10vh 80vh 10vh;
+		grid-template-areas:
+			'header header'
+			'main main'
+			'footer footer';
+	}
 }
