@@ -1,4 +1,4 @@
-import { run } from '../database/sqLiteFunctions.js';
+import { run, all } from '../database/sqLiteFunctions.js';
 
 export const Users = {
   createUser(newUser) {
@@ -8,6 +8,9 @@ export const Users = {
 
   findUserByEmail({ email }) {
     const query = `SELECT email FROM users WHERE email = ?`;
-    return all(query, email);
+    const emailExist = all(query, email);
+
+    if (emailExist) return true;
+    return false;
   },
 };

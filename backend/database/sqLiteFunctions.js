@@ -19,3 +19,13 @@ export function run(query, params = {}) {
     return { err };
   }
 }
+
+export function get(query, params = {}) {
+  try {
+    const preparedStatement = dbConn.prepare(query);
+    return preparedStatement.get(params);
+  } catch (err) {
+    console.log(err);
+    return { err };
+  }
+}
