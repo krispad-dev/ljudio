@@ -3,11 +3,12 @@ import { playerControllerStateContext } from '../../context/YouTubePlayerContext
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
 
+import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import { useWindowSize } from '@react-hook/window-size';
 
-import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 
 function YouTubePlayer() {
+	
 	const [{ videoIsShowing, currentSong, currentTime }, dispatch] = useContext(playerControllerStateContext);
 	const playerRef = useRef();
 	const [windowWidth, windowHeight] = useWindowSize();
@@ -20,6 +21,7 @@ function YouTubePlayer() {
 			autoplay: 1,
 		},
 	};
+
 
 	function playVideo(event) {
 		return playerRef.current.internalPlayer.playVideo();
@@ -46,6 +48,7 @@ function YouTubePlayer() {
 		setSize(windowWidth, windowHeight);
 	}, [windowWidth]);
 
+
 	useEffect(() => {
 		const interval = setInterval(async () => {
 			const currentTime = await playerRef.current.internalPlayer.getCurrentTime();
@@ -54,10 +57,12 @@ function YouTubePlayer() {
 		return () => clearInterval(interval);
 	}, []);
 
+
 	useEffect(async () => {
 		const durationInMinutes = await playerRef.current.internalPlayer.getDuration();
 		dispatch({ type: PLAYER_ACTIONS.SET_DURATION, payload: durationInMinutes });
-	}, [ currentSong ]);
+	}, [ currentTime ]);
+
 
 	useEffect(() => {
 		dispatch({ type: PLAYER_ACTIONS.PLAY_VIDEO, payload: playVideo });
@@ -66,10 +71,12 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SEEK_TO, payload: seekTo });
 	}, []);
 
+
 	function onEndHandler() {
 		dispatch({ type: PLAYER_ACTIONS.SET_SHOW_VIDEO });
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 	}
+
 
 	return (
 		<IframeWrapper
@@ -88,7 +95,6 @@ function YouTubePlayer() {
 			/>
 			;
 			<div className={'mask-top'}>
-				<h2></h2>
 			</div>
 			<div className={'mask-bottom'}>
 				<h2>SONG NAME</h2>
@@ -97,9 +103,11 @@ function YouTubePlayer() {
 	);
 }
 
+
 export default YouTubePlayer;
 
 const IframeWrapper = styled.div`
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
