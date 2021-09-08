@@ -21,10 +21,13 @@ function LoginPage() {
     resolver: yupResolver(schema),
   });
 
-  const { mutate, error } = useLoginUser();
+  const { mutate, data } = useLoginUser();
+
+  console.log('loginpage data', data);
 
   const onSubmitHandler = (data) => {
-    console.log(data);
+    console.log('submit', data);
+    
     mutate(data);
   };
 
@@ -46,7 +49,7 @@ function LoginPage() {
             name='password'
             placeholder='Password'
           />
-          <p>{errors.password?.message}</p>
+          <p>{errors.password?.message} {data && data.error && data.error}</p>
           <button type='submit'>SUBMIT</button>
         </form>
       </div>

@@ -6,12 +6,12 @@ import cookieParser from 'cookie-parser';
 import {
   musicRouter,
   userRouter,
-  loginRouter,
   authRouter,
 } from './routes/routes.js';
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
@@ -19,14 +19,12 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser());
 env.config();
 
 const PORT = process.env.PORT || 7000;
 
 app.use('/api/music', musicRouter);
 app.use('/api/users', userRouter);
-app.use('/api/login', loginRouter);
 app.use('/api/auth', authRouter);
 
 app.listen(

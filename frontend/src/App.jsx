@@ -1,13 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
-import { UiContext } from './context/UiState';
+import { fetchFunction } from './hooks/useLogoutUser';
 
 //hooks
-import useGetSongs from './hooks/useGetSongs';
 import useAuth from './hooks/useAuth';
 
 // Components
-import Test from './components/test';
+import Test from './components/Test';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import SearchBar from './components/SearchBar';
@@ -18,11 +17,12 @@ import Logo from './components/Logo';
 import './App.css';
 
 function App() {
-  const { state } = useContext(UiContext);
-
+  
   const { data: auth } = useAuth();
-
-  const { data } = useGetSongs(state.searchString);
+  
+  if(auth) {
+    console.log(auth);
+  }
 
   return (
     <div className='App'>
@@ -31,8 +31,9 @@ function App() {
           <Logo />
 
           <SearchBar />
-          <Link to='/register'>REGISTER</Link>
-          <Link to='/login'>Login</Link>
+          {auth && !auth.loggedIn && <Link to='/register'>REGISTER</Link>}
+          {auth && !auth.loggedIn && <Link to='/login'>Login</Link>}
+        
         </header>
 
         <aside></aside>

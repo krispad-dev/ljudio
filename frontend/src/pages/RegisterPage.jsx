@@ -35,7 +35,7 @@ function RegisterPage() {
     };
 
     const createUser = async () => {
-      const req = await fetch('http://localhost:7000/api/users', {
+      const req = await fetch('http://localhost:7000/api/users/create-user', {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -49,7 +49,9 @@ function RegisterPage() {
     };
     createUser();
 
-    // reset();
+    history.push('/login');
+
+    reset();
   };
 
   return (

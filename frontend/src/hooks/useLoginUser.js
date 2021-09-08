@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 
 async function loginUser(userInfo) {
-  const res = await fetch('http://localhost:7000/api/login/', {
+  const res = await fetch('http://localhost:7000/api/users/login/', {
     headers: {
       'Content-Type': 'application/json',
     },
