@@ -27,8 +27,6 @@ export async function loginUser(req, res) {
 
   user.token = token;
 
-  console.log(user);
-
   res
     .cookie('authToken', token, {
       httpOnly: true,

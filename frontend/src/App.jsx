@@ -1,9 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import { UiContext } from './context/UiState';
+
+//hooks
 import useGetSongs from './hooks/useGetSongs';
+import useAuth from './hooks/useAuth';
 
 // Components
+import Test from './components/test';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import SearchBar from './components/SearchBar';
@@ -16,11 +20,9 @@ import './App.css';
 function App() {
   const { state } = useContext(UiContext);
 
-  console.log(state.searchString);
+  const { data: auth } = useAuth();
 
   const { data } = useGetSongs(state.searchString);
-
-  console.log(data);
 
   return (
     <div className='App'>
@@ -36,8 +38,14 @@ function App() {
         <aside></aside>
         <main>
           <YouTubePlayer />
+
           <Route exact path='/register' component={RegisterPage} />
-          <Route exact path='/login' component={LoginPage} />
+          <Route exact path='/login' component={LoginPage}>
+            {auth && auth.loggedIn && <Redirect to='/test' />}
+          </Route>
+          <Route exact path='/test' component={Test}>
+            {auth && !auth.loggedIn && <Redirect to='/login' />}
+          </Route>
         </main>
         <footer>
           <PlayerController />

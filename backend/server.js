@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 7000;
 app.use('/api/music', musicRouter);
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
-app.use('/apu/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 app.listen(
   PORT,

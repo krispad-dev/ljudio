@@ -4,7 +4,12 @@ export async function verifyToken(req, res, next) {
   try {
     const { authToken } = req.cookies;
 
-    await jwt.verify(authToken, 'sEcReTkEy');
+    const data = await jwt.verify(authToken, 'sEcReTkEy');
+    req.obj = {
+      id: data.id,
+    };
+
+    console.log('Middleware', data);
 
     next();
   } catch (err) {
