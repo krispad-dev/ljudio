@@ -33,7 +33,7 @@ const SearchBarWrapper = styled.div`
   align-items: center;
   background-color: #fff;
   width: auto;
-  height: 2.5rem;
+  height: 2rem;
   border-radius: 50px;
   margin-right: 1rem;
 

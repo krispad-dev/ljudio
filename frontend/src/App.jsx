@@ -18,13 +18,9 @@ import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 
-
-
 function App() {
 
 	const { data: auth } = useAuth();
-
-  console.log(auth);
 
 	return (
 		<div className='App'>

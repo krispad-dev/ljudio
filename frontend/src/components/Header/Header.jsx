@@ -12,8 +12,10 @@ function Header() {
 		<StyledHeader>
 			<div className='header-container'>
 				<Logo />
-				<SearchBar />
-				<GuestOptions />
+				<div>
+					<SearchBar />
+					<GuestOptions />
+				</div>
 			</div>
 		</StyledHeader>
 	);
@@ -30,5 +32,11 @@ const StyledHeader = styled.header`
 		justify-content: space-between;
 		align-items: center;
 		width: 95%;
+
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}		
 	}
 `;
