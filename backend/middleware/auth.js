@@ -1,26 +1,28 @@
 import jwt from 'jsonwebtoken';
 
 export async function verifyToken(req, res, next) {
-  try {
-    const { authToken } = req.cookies;
 
-    if(authToken === undefined) {
-      console.log('no token!');
-      return res.json({ loggedIn: false });
-    }
+	try {
 
-    const data = await jwt.verify(authToken, 'sEcReTkEy');
+		const { authToken } = req.cookies;
 
-    req.obj = {
-      id: data.id,
-    };
+		if (authToken === undefined) {
+			console.log('no token!');
+			return res.json({ loggedIn: false });
+		}
 
-    console.log('Middleware', data);
+		const data = await jwt.verify(authToken, 'sEcReTkEy');
 
-    next();
-  } catch (err) {
-    console.log(err);
+		req.obj = {
+			id: data.id,
+		};
 
-    return res.status(403).json({ success: false, message: 'Unauthorized' });
-  }
+		console.log('Middleware', data);
+		next();
+	} catch (err) {
+
+		console.log(err);
+		return res.status(403).json({ success: false, message: 'Unauthorized' });
+    
+	}
 }

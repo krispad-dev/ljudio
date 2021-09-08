@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
-import { UiContext } from '../context/UiState';
+import { UiContext } from '../../context/UiState';
 
 function SearchBar() {
   const { dispatch, state } = useContext(UiContext);

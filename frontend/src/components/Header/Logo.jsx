@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import styled from 'styled-components';
 
 function Logo() {
@@ -14,6 +14,5 @@ function Logo() {
 export default Logo;
 
 const LogoWrapper = styled.div`
-	margin: 1rem;
 	position: relative;
 `;
