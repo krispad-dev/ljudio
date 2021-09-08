@@ -18,14 +18,16 @@ function MusicPage() {
 				<SongsList />
 			</div>
 
-			<div className='artists-list'>
-				{data && state.searchString && <h1>ARTISTS</h1>}
-				<ArtiststList />
-			</div>
+			<div className="album-artists-container">
+				<div className='artists-list'>
+					{data && state.searchString && <h1>ARTISTS</h1>}
+					<ArtiststList />
+				</div>
 
-			<div className='albums-list'>
-				{data && state.searchString && <h1>ALBUMS</h1>}
-				<AlbumsList />
+				<div className='albums-list'>
+					{data && state.searchString && <h1>ALBUMS</h1>}
+					<AlbumsList />
+				</div>
 			</div>
 		</MusicPageWrapper>
 	);
@@ -34,13 +36,28 @@ function MusicPage() {
 export default MusicPage;
 
 const MusicPageWrapper = styled.div`
-	margin-top: 60rem;
+	justify-content: space-between;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	h1 {
 		background-color: rgba(255, 255, 255, 0.05);
 		font-weight: 400;
+		margin-top: 1rem;
+		font-size: 1.5rem;
+	}
+
+	.album-artists-container {
+		::-webkit-scrollbar {
+		display: none;
+	}
 		margin-top: 2rem;
+		overflow-y: scroll;
+		height: 18rem;
+		overflow-y: scroll;
+
+		@media only screen and (max-width: 1000px) {
+			height: 15rem;
+		}
 	}
 `;

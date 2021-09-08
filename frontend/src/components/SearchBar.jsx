@@ -32,9 +32,10 @@ const SearchBarWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  min-width: 250px;
+  width: auto;
   height: 2.5rem;
   border-radius: 50px;
+  margin-right: 1rem;
 
   .searchInputs form {
     display: flex;
@@ -46,6 +47,7 @@ const SearchBarWrapper = styled.div`
 
   .searchIcon {
     background-color: #fff;
+    margin-left: 0.5rem;
   }
 `;
 

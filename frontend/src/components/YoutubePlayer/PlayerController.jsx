@@ -17,7 +17,9 @@ function Controller() {
 	return (
 		<PlayerControllerWrapper>
 			<div className={'optionsContainer'}>
-				<CgScreen onClick={() => dispatch({type: PLAYER_ACTIONS.SET_SHOW_VIDEO })} className={'showVideo'} />
+				<CgScreen 
+				onClick={() => dispatch({type: PLAYER_ACTIONS.SET_SHOW_VIDEO })} 
+				className={'showVideo'} />
 			</div>
 
 			<div className={'volumeContainer'}>

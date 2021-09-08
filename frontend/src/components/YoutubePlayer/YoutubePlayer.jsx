@@ -43,6 +43,7 @@ function YouTubePlayer() {
 		return playerRef.current.internalPlayer.setSize(windowWidth);
 	}
 
+
 	useEffect(() => {
 
 		setSize(windowWidth, windowHeight);

@@ -12,20 +12,23 @@ import Logo from './components/Logo';
 import './App.css';
 
 function App() {
-
 	return (
 		<div className='App'>
 			<BrowserRouter>
 				<header>
-					<Logo />
-					<SearchBar />
-					<Link to='/register'>REGISTER</Link>
+				<Logo />
+					<div>
+						<SearchBar />
+{/* 						<Link to='/register'>REGISTER</Link> */}
+					</div>
+		
 				</header>
 
 				<aside></aside>
 
+				<YouTubePlayer />
+
 				<main>
-					<YouTubePlayer />
 					<Route exact path='/' component={MusicPage} />
 					<Route exact path='/register' component={RegisterPage} />
 				</main>
