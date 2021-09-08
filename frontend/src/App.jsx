@@ -6,6 +6,7 @@ import useGetSongs from './hooks/useGetSongs';
 
 // Components
 import SearchBar from './components/SearchBar';
+import AsideMenu from './components/DesktopMenu/AsideMenu';
 import PlayerController from './components/YoutubePlayer/PlayerController';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import Logo from './components/Logo';
@@ -13,42 +14,38 @@ import Logo from './components/Logo';
 import './App.css';
 
 function App() {
-  
-    const { state } = useContext(UiContext);
-  
-    console.log(state.searchString);
-  
-    const { data } = useGetSongs(state.searchString);
-  
-    console.log(data);
+  const { state } = useContext(UiContext);
+
+  console.log(state.searchString);
+
+  const { data } = useGetSongs(state.searchString);
+
+  console.log(data);
 
   return (
     <div className='App'>
       <BrowserRouter>
         <header>
-      <Logo />
-       
-      <SearchBar />
+          <Logo />
+
+          <SearchBar />
           <Link to='/register'>REGISTER</Link>
         </header>
 
-        <aside></aside>
+        <aside>
+          <AsideMenu />
+        </aside>
+
         <main>
-      <YouTubePlayer />
+          <YouTubePlayer />
           <Route exact path='/register' component={RegisterPage} />
         </main>
         <footer>
-
-      <PlayerController />
-
+          <PlayerController />
         </footer>
       </BrowserRouter>
     </div>
   );
-
-
-
-	
 }
 
 export default App;
