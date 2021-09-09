@@ -1,7 +1,12 @@
 import React from 'react';
+import DesktopMenu from './DesktopMenu/DesktopMenu';
 
 function Aside() {
-	return <aside></aside>;
+  return (
+    <aside>
+      <DesktopMenu />
+    </aside>
+  );
 }
 
 export default Aside;

@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { Route, Redirect } from 'react-router-dom';
-import { useLocation } from 'react-router';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 
 //hooks
 import useAuth from './hooks/useAuth';
@@ -19,6 +18,7 @@ import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 
 function App() {
+	
 	const { data: auth } = useAuth();
 	const { pathname } = useLocation();
 

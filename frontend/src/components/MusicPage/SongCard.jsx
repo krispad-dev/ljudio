@@ -8,6 +8,7 @@ import { BsHeart, BsPlusCircle } from 'react-icons/bs';
 import useAuth from '../../hooks/useAuth';
 
 function SongCard({ videoId, name, artist, thumbnails }) {
+	
 	const { data: auth } = useAuth();
 	const [{ currentSong }, dispatch] = useContext(playerControllerStateContext);
 
