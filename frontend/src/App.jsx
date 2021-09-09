@@ -18,7 +18,6 @@ import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 
 function App() {
-	
 	const { data: auth } = useAuth();
 	const { pathname } = useLocation();
 
