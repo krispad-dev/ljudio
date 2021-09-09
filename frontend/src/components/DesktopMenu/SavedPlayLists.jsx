@@ -1,7 +1,6 @@
 import React from 'react';
-import PlayListCard from './PlayListCard';
+import PlayListCardItem from './PlayListCardItem';
 import styled from 'styled-components';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 function SavedPlayLists() {
   // PLACEHOLDER HERE WILL WE INMPORT DATA WITH React query
@@ -9,27 +8,13 @@ function SavedPlayLists() {
     { playlistName: 'BestTracks', song: 10 },
     { playlistName: 'Hits', song: 30 },
     { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
   ];
 
   return (
     <SavedPlayListsWrapper>
       {mockData.map((playlists) => {
         return (
-          <PlayListCard
+          <PlayListCardItem
             url={'/'}
             playlistName={playlists.playlistName}
             song={playlists.song}
@@ -40,7 +25,7 @@ function SavedPlayLists() {
   );
 }
 
-const SavedPlayListsWrapper = styled.div`
+const SavedPlayListsWrapper = styled.ul`
   color: #c4c4c4;
   height: 10rem;
   overflow: scroll;

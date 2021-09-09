@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayListCard from './PlayListCard';
+import PlayListCardItem from './PlayListCardItem';
 import styled from 'styled-components';
 
 function FollowingPlayList() {
@@ -8,77 +8,24 @@ function FollowingPlayList() {
     { playlistName: 'Calm Piano', song: 17 },
     { playlistName: 'Hard Drums', song: 30 },
     { playlistName: 'Solo Guitar', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Calm Piano', song: 17 },
-    { playlistName: 'Hard Drums', song: 30 },
-    { playlistName: 'Solo Guitar', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Calm Piano', song: 17 },
-    { playlistName: 'Hard Drums', song: 30 },
-    { playlistName: 'Solo Guitar', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Calm Piano', song: 17 },
-    { playlistName: 'Hard Drums', song: 30 },
-    { playlistName: 'Solo Guitar', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Calm Piano', song: 17 },
-    { playlistName: 'Hard Drums', song: 30 },
-    { playlistName: 'Solo Guitar', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Calm Piano', song: 17 },
-    { playlistName: 'Hard Drums', song: 30 },
-    { playlistName: 'Solo Guitar', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
-    { playlistName: 'Blues', song: 25 },
   ];
 
   return (
     <FollowingPlayListWrapper>
       {mockData.map((playlist) => {
         return (
-          <>
-            <PlayListCard
-              url={'/'}
-              playlistName={playlist.playlistName}
-              song={playlist.song}
-            />
-          </>
+          <PlayListCardItem
+            url={'/'}
+            playlistName={playlist.playlistName}
+            song={playlist.song}
+          />
         );
       })}
     </FollowingPlayListWrapper>
   );
 }
 
-const FollowingPlayListWrapper = styled.div`
+const FollowingPlayListWrapper = styled.ul`
   color: #c4c4c4;
   height: 10rem;
   overflow: scroll;

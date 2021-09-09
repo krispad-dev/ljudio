@@ -2,23 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function PlayListCard({ playlistName, song, url }) {
+function PlayListCardItem({ playlistName, song, url }) {
   return (
-    <PlayListCardWrapper>
+    <PlayListCardItemWrapper>
       <Link to={url}>
-        <ul>
-          <li>{playlistName}</li>
-          <li>{song} songs</li>
-        </ul>
+        <p>{playlistName}</p>
+        <p>{song} songs</p>
       </Link>
-    </PlayListCardWrapper>
+    </PlayListCardItemWrapper>
   );
 }
 
-const PlayListCardWrapper = styled.div`
+const PlayListCardItemWrapper = styled.li`
   height: 3rem;
   background-color: #212121;
-  border: 2px solid black;
+  border: 3px solid black;
   display: flex;
   align-items: center;
   a {
@@ -29,4 +27,4 @@ const PlayListCardWrapper = styled.div`
   }
 `;
 
-export default PlayListCard;
+export default PlayListCardItem;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 //Components
 import MenuItems from './MenuItems';
-import UserPlayListsSection from './UserPlayListsSection';
+import PlaylistSection from './PlaylistSection';
 
 function DesktopMenu() {
   return (
@@ -11,7 +11,7 @@ function DesktopMenu() {
       <MenuItems />
       <details>
         <summary className='summary-playList'>MY PLAYLIST</summary>
-        <UserPlayListsSection />
+        <PlaylistSection />
       </details>
     </AsideMenuWrapper>
   );

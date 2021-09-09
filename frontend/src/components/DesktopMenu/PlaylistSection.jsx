@@ -7,9 +7,9 @@ import SavedPlayLists from './SavedPlayLists';
 import FollowingPlayList from './FollowingPlayList';
 import AddPlayListButton from './AddPlayListButton';
 
-function UserPlayListsSection() {
+function PlaylistSection() {
   return (
-    <UserPlayListSectionWrapper>
+    <PlayListSectionWrapper>
       <FavoritePlayList />
       <details>
         <summary>Saved Playlists</summary>
@@ -20,11 +20,11 @@ function UserPlayListsSection() {
         <FollowingPlayList />
       </details>
       <AddPlayListButton />
-    </UserPlayListSectionWrapper>
+    </PlayListSectionWrapper>
   );
 }
 
-const UserPlayListSectionWrapper = styled.div`
+const PlayListSectionWrapper = styled.div`
   top: 0;
   left: 0;
   height: 40rem;
@@ -34,4 +34,4 @@ const UserPlayListSectionWrapper = styled.div`
   scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
 `;
 
-export default UserPlayListsSection;
+export default PlaylistSection;
