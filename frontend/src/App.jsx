@@ -32,6 +32,8 @@ function App() {
 
           <SearchBar />
           {auth && !auth.loggedIn && <Link to='/register'>REGISTER</Link>}
+         {/*  <Link to='/register'>REGISTER</Link> */}
+         {/*  <Link to='/login'>Login</Link> */}
           {auth && !auth.loggedIn && <Link to='/login'>Login</Link>}
         
         </header>
