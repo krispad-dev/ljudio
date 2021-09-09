@@ -13,8 +13,16 @@ function FavoritePlayList() {
 
 const FavoritePlayListWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  color: #fff;
+  align-items: center;
+  color: #c4c4c4;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+  h1 {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #c4c4c4;
+  }
 `;
 
 export default FavoritePlayList;

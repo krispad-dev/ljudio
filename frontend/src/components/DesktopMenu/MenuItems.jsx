@@ -17,6 +17,8 @@ function MenuItems() {
 }
 
 const MenuItemsWrapper = styled.div`
+  height: 10rem;
+  margin-bottom: 10px;
   .divider {
     border-top: 1px solid #8c8b8b;
   }

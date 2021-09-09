@@ -6,7 +6,7 @@ import useGetSongs from './hooks/useGetSongs';
 
 // Components
 import SearchBar from './components/SearchBar';
-import AsideMenu from './components/DesktopMenu/AsideMenu';
+import DesktopMenu from './components/DesktopMenu/DesktopMenu';
 import PlayerController from './components/YoutubePlayer/PlayerController';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import Logo from './components/Logo';
@@ -33,7 +33,7 @@ function App() {
         </header>
 
         <aside>
-          <AsideMenu />
+          <DesktopMenu />
         </aside>
 
         <main>

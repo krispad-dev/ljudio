@@ -1,19 +1,37 @@
 import React from 'react';
+import styled from 'styled-components';
 
 // Compontents
 import FavoritePlayList from './FavoritePlayList';
 import SavedPlayLists from './SavedPlayLists';
 import FollowingPlayList from './FollowingPlayList';
+import AddPlayListButton from './AddPlayListButton';
 
 function UserPlayListsSection() {
   return (
-    <div>
-      <h1>MY PLAYLIST</h1>
+    <UserPlayListSectionWrapper>
       <FavoritePlayList />
-      <SavedPlayLists />
-      <FollowingPlayList />
-    </div>
+      <details>
+        <summary>Saved Playlists</summary>
+        <SavedPlayLists />
+      </details>
+      <details>
+        <summary>Following</summary>
+        <FollowingPlayList />
+      </details>
+      <AddPlayListButton />
+    </UserPlayListSectionWrapper>
   );
 }
+
+const UserPlayListSectionWrapper = styled.div`
+  top: 0;
+  left: 0;
+  height: 40rem;
+  width: 15rem;
+  margin: 1rem 1rem 1rem 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+`;
 
 export default UserPlayListsSection;

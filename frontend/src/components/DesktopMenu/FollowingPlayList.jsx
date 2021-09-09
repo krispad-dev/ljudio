@@ -8,15 +8,66 @@ function FollowingPlayList() {
     { playlistName: 'Calm Piano', song: 17 },
     { playlistName: 'Hard Drums', song: 30 },
     { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Calm Piano', song: 17 },
+    { playlistName: 'Hard Drums', song: 30 },
+    { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Calm Piano', song: 17 },
+    { playlistName: 'Hard Drums', song: 30 },
+    { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Calm Piano', song: 17 },
+    { playlistName: 'Hard Drums', song: 30 },
+    { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Calm Piano', song: 17 },
+    { playlistName: 'Hard Drums', song: 30 },
+    { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Calm Piano', song: 17 },
+    { playlistName: 'Hard Drums', song: 30 },
+    { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
+    { playlistName: 'Blues', song: 25 },
   ];
 
   return (
     <FollowingPlayListWrapper>
-      <h1>Following:</h1>
       {mockData.map((playlist) => {
         return (
           <>
             <PlayListCard
+              url={'/'}
               playlistName={playlist.playlistName}
               song={playlist.song}
             />
@@ -29,6 +80,10 @@ function FollowingPlayList() {
 
 const FollowingPlayListWrapper = styled.div`
   color: #c4c4c4;
+  height: 10rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-bottom: 10px;
 `;
 
 export default FollowingPlayList;
