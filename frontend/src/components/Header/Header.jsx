@@ -2,11 +2,16 @@ import React from 'react';
 import Logo from './Logo';
 import SearchBar from './SearchBar';
 import useAuth from '../../hooks/useAuth';
-import GuestOptions from './GuestOptions';
 import styled from 'styled-components';
 
+import GuestUserOptions from './GuestUserOptions';
+import LoggedInUserOptions from './LoggedInUserOptions';
+
 function Header() {
+
 	const { data: auth } = useAuth();
+
+	console.log(auth);
 
 	return (
 		<StyledHeader>
@@ -14,7 +19,8 @@ function Header() {
 				<Logo />
 				<div>
 					<SearchBar />
-					<GuestOptions />
+					{auth && !auth.loggedIn && <GuestUserOptions />}
+					{auth && auth.loggedIn && <LoggedInUserOptions />}
 				</div>
 			</div>
 		</StyledHeader>
@@ -33,10 +39,10 @@ const StyledHeader = styled.header`
 		align-items: center;
 		width: 95%;
 
-	div {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}		
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 	}
 `;

@@ -19,6 +19,6 @@ musicRouter.get('/albums', searchAlbums);
 
 userRouter.post('/create-user', createUser);
 userRouter.post('/login', loginUser);
-userRouter.get('/logout', logoutUser);
+userRouter.put('/logout', logoutUser);
 
 authRouter.get('/', verifyToken, authCheck);

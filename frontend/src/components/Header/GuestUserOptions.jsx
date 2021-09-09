@@ -3,9 +3,9 @@ import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-function GuestOptions() {
+function GuestUserOptions() {
 	return (
-		<GuestOptionsWrapper>
+		<GuestUserOptionsWrapper>
 			<Link to='/register'>
 				<Button variant='outlined' color='primary' href='#outlined-buttons'>
 					REGISTER
@@ -16,13 +16,13 @@ function GuestOptions() {
 					LOGIN
 				</Button>
 			</Link>
-		</GuestOptionsWrapper>
+		</GuestUserOptionsWrapper>
 	);
 }
 
-export default GuestOptions;
+export default GuestUserOptions;
 
-const GuestOptionsWrapper = styled.div`
+const GuestUserOptionsWrapper = styled.div`
 
 a {
 	margin: 0.2rem

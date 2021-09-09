@@ -9,7 +9,7 @@ import ProgressSlider from './ProgressSlider';
 import styled from 'styled-components';
 
 function Controller() {
-	const [ { playVideo, pauseVideo, setVolume, 
+	const [ { playVideo, pauseVideo, 
 		durationInMinutes, playerIsPaused }, dispatch ] = useContext(
 		playerControllerStateContext
 	);

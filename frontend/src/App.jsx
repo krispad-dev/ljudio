@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import { Route, Redirect } from 'react-router-dom';
-
+import { useLocation } from 'react-router';
 
 //hooks
 import useAuth from './hooks/useAuth';
@@ -19,33 +19,31 @@ import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 
 function App() {
-
 	const { data: auth } = useAuth();
+	const { pathname } = useLocation();
 
 	return (
 		<div className='App'>
+			{pathname !== '/register' && pathname !== '/login' && <Header />}
 
-        <Header />
+			<Aside />
 
-				<Aside />
+			<main>
+				<Route exact path='/' component={MusicPage} />
+				<Route exact path='/register' component={RegisterPage} />
 
-				<main>
-					<Route exact path='/' component={MusicPage} />
-					<Route exact path='/register' component={RegisterPage} />
+				<Route exact path='/login' component={LoginPage}>
+					{auth && auth.loggedIn && <Redirect to='/' />}
+				</Route>
 
-					<Route exact path='/login' component={LoginPage}>
-						{auth && auth.loggedIn && <Redirect to='/test' />}
-					</Route>
+				<Route exact path='/test' component={Test}>
+					{auth && !auth.loggedIn && <Redirect to='/' />}
+				</Route>
+			</main>
 
-					<Route exact path='/test' component={Test}>
-						{auth && !auth.loggedIn && <Redirect to='/login' />}
-					</Route>
+			{pathname !== '/register' && pathname !== '/login' && <Footer />}
 
-				</main>
-
-        <Footer />
-
-        <YouTubePlayer />
+			<YouTubePlayer />
 		</div>
 	);
 }

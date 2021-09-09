@@ -5,9 +5,11 @@ import styled from 'styled-components';
 import { MdPlayCircleOutline } from 'react-icons/md';
 import { BsHeart, BsPlusCircle } from 'react-icons/bs';
 
-function SongCard({ videoId, name, artist, thumbnails }) {
-	const [{ currentSong }, dispatch] = useContext(playerControllerStateContext);
+import useAuth from '../../hooks/useAuth';
 
+function SongCard({ videoId, name, artist, thumbnails }) {
+	const { data: auth } = useAuth();
+	const [{ currentSong }, dispatch] = useContext(playerControllerStateContext);
 
 	return (
 		<SongCardWrapper>
@@ -21,8 +23,9 @@ function SongCard({ videoId, name, artist, thumbnails }) {
 			</div>
 
 			<div className='play-symbol-container'>
-				<BsPlusCircle style={{ marginRight: '1rem' }} />
-				<BsHeart />
+				{auth && auth.loggedIn && <BsPlusCircle style={{ marginRight: '1rem' }} />}
+				{auth && auth.loggedIn && <BsHeart />}
+
 				<MdPlayCircleOutline
 					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_CURRENT_SONG, payload: videoId })}
 					className='play-btn'
@@ -31,7 +34,6 @@ function SongCard({ videoId, name, artist, thumbnails }) {
 		</SongCardWrapper>
 	);
 }
-
 
 export default SongCard;
 
@@ -85,4 +87,3 @@ const SongCardWrapper = styled.div`
 		}
 	}
 `;
-

@@ -19,7 +19,7 @@ function SearchBar() {
     <SearchBarWrapper>
       <div className='searchInputs'>
         <form>
-          <SearchIcon />
+          <SearchIcon style={{marginLeft: '1rem' }}/>
           <input type='text' onChange={searchMusic} />
         </form>
       </div>
@@ -45,10 +45,6 @@ const SearchBarWrapper = styled.div`
     all: unset;
   }
 
-  .searchIcon {
-    background-color: #fff;
-    margin-left: 0.5rem;
-  }
 `;
 
 export default SearchBar;

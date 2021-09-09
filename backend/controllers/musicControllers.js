@@ -1,5 +1,6 @@
 import { Music } from '../models/Music.js';
 
+
 export async function searchMusic(req, res) {
 	try {
 		const searchString = req.query;
