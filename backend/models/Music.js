@@ -25,4 +25,28 @@ export const Music = {
       return error;
     }
   },
+
+  SearchArtists: async ({ searchString } = {}) => {
+    try {
+      const res = await fetch(
+        `https://yt-music-api.herokuapp.com/api/yt/artists/${searchString}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  },
+
+  SearchAlbums: async ({ searchString } = {}) => {
+    try {
+      const res = await fetch(
+        `https://yt-music-api.herokuapp.com/api/yt/albums/${searchString}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  },
 };

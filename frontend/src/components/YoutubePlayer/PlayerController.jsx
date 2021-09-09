@@ -9,14 +9,17 @@ import ProgressSlider from './ProgressSlider';
 import styled from 'styled-components';
 
 function Controller() {
-	const [ { playVideo, pauseVideo, setVolume, durationInMinutes, playerIsPaused }, dispatch ] = useContext(
+	const [ { playVideo, pauseVideo, setVolume, 
+		durationInMinutes, playerIsPaused }, dispatch ] = useContext(
 		playerControllerStateContext
 	);
 
 	return (
 		<PlayerControllerWrapper>
 			<div className={'optionsContainer'}>
-				<CgScreen onClick={() => dispatch({type: PLAYER_ACTIONS.SET_SHOW_VIDEO })} className={'showVideo'} />
+				<CgScreen 
+				onClick={() => dispatch({type: PLAYER_ACTIONS.SET_SHOW_VIDEO })} 
+				className={'showVideo'} />
 			</div>
 
 			<div className={'volumeContainer'}>
@@ -45,7 +48,6 @@ const PlayerControllerWrapper = styled.div`
 	flex-direction: row;
 	padding: 0.5rem;
 	border-radius: 50px;
-	margin-bottom: 6rem;
 
 	@media (max-width: 1000px) {
 		flex-direction: column;

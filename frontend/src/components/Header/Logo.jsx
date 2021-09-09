@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import styled from 'styled-components';
 
 function Logo() {
 	return (
 		<LogoWrapper>
-            <div className={'circle'}></div>
+			<div className={'circle'}></div>
 			<img src={logo} alt='' />
 		</LogoWrapper>
 	);
@@ -14,9 +14,5 @@ function Logo() {
 export default Logo;
 
 const LogoWrapper = styled.div`
-
-	margin: 1rem;
-    position: relative;
-    
-
+	position: relative;
 `;

@@ -1,49 +1,47 @@
-import React, { useState, useContext } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import RegisterPage from './pages/RegisterPage';
-import { UiContext } from './context/UiState';
-import useGetSongs from './hooks/useGetSongs';
-
-// Components
-import SearchBar from './components/SearchBar';
-import DesktopMenu from './components/DesktopMenu/DesktopMenu';
-import PlayerController from './components/YoutubePlayer/PlayerController';
-import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
-import Logo from './components/Logo';
-
+import React from 'react';
 import './App.css';
 
+import { Route, Redirect } from 'react-router-dom';
+
+//hooks
+import useAuth from './hooks/useAuth';
+
+// Components
+import Test from './components/Test';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
+import MusicPage from './pages/MusicPage';
+
+import Header from './components/Header/Header';
+import Aside from './components/Aside/Aside';
+import Footer from './components/Footer/Footer';
+
 function App() {
-  const { state } = useContext(UiContext);
-
-  console.log(state.searchString);
-
-  const { data } = useGetSongs(state.searchString);
-
-  console.log(data);
+  const { data: auth } = useAuth();
 
   return (
     <div className='App'>
-      <BrowserRouter>
-        <header>
-          <Logo />
+      <Header />
 
-          <SearchBar />
-          <Link to='/register'>REGISTER</Link>
-        </header>
+      <Aside />
 
-        <aside>
-          <DesktopMenu />
-        </aside>
+      <main>
+        <Route exact path='/' component={MusicPage} />
+        <Route exact path='/register' component={RegisterPage} />
 
-        <main>
-          <YouTubePlayer />
-          <Route exact path='/register' component={RegisterPage} />
-        </main>
-        <footer>
-          <PlayerController />
-        </footer>
-      </BrowserRouter>
+        <Route exact path='/login' component={LoginPage}>
+          {auth && auth.loggedIn && <Redirect to='/test' />}
+        </Route>
+
+        <Route exact path='/test' component={Test}>
+          {auth && !auth.loggedIn && <Redirect to='/login' />}
+        </Route>
+      </main>
+
+      <Footer />
+
+      <YouTubePlayer />
     </div>
   );
 }
