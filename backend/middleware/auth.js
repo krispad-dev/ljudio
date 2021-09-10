@@ -1,23 +1,26 @@
 import jwt from 'jsonwebtoken';
 
 export async function verifyToken(req, res, next) {
-  try {
-    const { authToken } = req.cookies;
 
-    if (authToken === undefined) {
-      return res.json({ loggedIn: false });
-    }
+	try {
 
-    const data = await jwt.verify(authToken, 'sEcReTkEy');
+		const { authToken } = req.cookies;
 
-    req.obj = {
-      id: data.id,
-      userName: data.userName,
-    };
+		if (authToken === undefined) {
+			return res.json({ loggedIn: false });
+		}
 
-    next();
-  } catch (err) {
-    console.log(err);
-    return res.status(403).json({ success: false, message: 'Unauthorized' });
-  }
+		const data = await jwt.verify(authToken, 'sEcReTkEy');
+
+		req.obj = {
+			id: data.id,
+			userName: data.userName,
+		};
+
+    	next();
+
+	} catch (err) {
+		console.log(err);
+		return res.status(401).json({ success: false, message: 'Unauthorized' });
+	}
 }
