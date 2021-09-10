@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 async function fetchFunction(query) {
   const getFetch = await fetch(
-    `http://localhost:7000/api/music/songs/?searchString=${query}`
+    `/api/music/songs/?searchString=${query}`
   );
 
   const data = await getFetch.json();

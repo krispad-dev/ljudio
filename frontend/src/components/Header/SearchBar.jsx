@@ -6,21 +6,27 @@ import { UiContext } from '../../context/UiState';
 function SearchBar() {
   const { dispatch, state } = useContext(UiContext);
 
+  let timeout = 0;
+
   async function searchMusic(e) {
     let musicSearchString = e.target.value;
 
-    dispatch({
-      type: 'SEARCH_STRING',
-      payload: { searchString: musicSearchString },
-    });
+    // Delay function kommer lyftas ut till helpers.js
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      dispatch({
+        type: 'SEARCH_STRING',
+        payload: { searchString: musicSearchString },
+      });
+    }, 500);
   }
 
   return (
     <SearchBarWrapper>
       <div className='searchInputs'>
         <form>
-          <SearchIcon />
-          <input type='text' onChange={searchMusic} />
+          <SearchIcon style={{ marginLeft: '1rem' }} />
+          <input type='text' onKeyUp={searchMusic} />
         </form>
       </div>
     </SearchBarWrapper>
@@ -43,11 +49,6 @@ const SearchBarWrapper = styled.div`
 
   .searchInputs input {
     all: unset;
-  }
-
-  .searchIcon {
-    background-color: #fff;
-    margin-left: 0.5rem;
   }
 `;
 

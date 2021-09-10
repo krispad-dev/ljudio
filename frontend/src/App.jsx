@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
 
-import { Route, Redirect } from 'react-router-dom';
-
+import { Route, Redirect, useLocation } from 'react-router-dom';
 
 //hooks
 import useAuth from './hooks/useAuth';
 
 // Components
-import Test from './components/Test';
+
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
@@ -19,35 +18,29 @@ import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 
 function App() {
+  const { data: auth } = useAuth();
+  const { pathname } = useLocation();
 
-	const { data: auth } = useAuth();
+  return (
+    <div className='App'>
+      {pathname !== '/register' && pathname !== '/login' && <Header />}
 
-	return (
-		<div className='App'>
+      <Aside />
 
-        <Header />
+      <main>
+        <Route exact path='/' component={MusicPage} />
+        <Route exact path='/register' component={RegisterPage} />
 
-				<Aside />
+        <Route exact path='/login' component={LoginPage}>
+          {auth && auth.loggedIn && <Redirect to='/' />}
+        </Route>
+      </main>
 
-				<main>
-					<Route exact path='/' component={MusicPage} />
-					<Route exact path='/register' component={RegisterPage} />
+      {pathname !== '/register' && pathname !== '/login' && <Footer />}
 
-					<Route exact path='/login' component={LoginPage}>
-						{auth && auth.loggedIn && <Redirect to='/test' />}
-					</Route>
-
-					<Route exact path='/test' component={Test}>
-						{auth && !auth.loggedIn && <Redirect to='/login' />}
-					</Route>
-
-				</main>
-
-        <Footer />
-
-        <YouTubePlayer />
-		</div>
-	);
+      <YouTubePlayer />
+    </div>
+  );
 }
 
 export default App;
