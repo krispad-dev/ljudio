@@ -14,7 +14,8 @@ const initialState = {
     durationInMinutes: 0,
     seekTo: 0,
     currentTime: 0,
-    playerIsPaused: true
+    playerIsPaused: true,
+    isPlaying: false,
 
 }
 

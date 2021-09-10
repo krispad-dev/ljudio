@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import styled from 'styled-components';
 import { MdPlayCircleOutline } from 'react-icons/md';
 import { BsHeart, BsPlusCircle } from 'react-icons/bs';
+import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
 
 import useAuth from '../../hooks/useAuth';
 
 function SongCard({ videoId, name, artist, thumbnails }) {
 	
 	const { data: auth } = useAuth();
-	const [{ currentSong }, dispatch] = useContext(playerControllerStateContext);
+	const [{ currentSong, isPlaying }, dispatch] = useContext(playerControllerStateContext);
+	const [ addToPlaylistsBoxIsOpen, setAddToPlaylistsBoxIsOpen ] = useState(false)
 
 	return (
 		<SongCardWrapper>
@@ -22,12 +24,18 @@ function SongCard({ videoId, name, artist, thumbnails }) {
 					<p>{name}</p>
 				</div>
 			</div>
+			{ addToPlaylistsBoxIsOpen && <AddMusicToPlayListList /> }
 
 			<div className='play-symbol-container'>
-				{auth && auth.loggedIn && <BsPlusCircle style={{ marginRight: '1rem' }} />}
+				{auth && auth.loggedIn && <BsPlusCircle 
+				style={{ marginRight: '1rem', cursor: 'pointer', color: `${addToPlaylistsBoxIsOpen ?'#33408C' : '' }`}} 
+				onClick={() => setAddToPlaylistsBoxIsOpen(!addToPlaylistsBoxIsOpen)}
+				
+				/>}
 				{auth && auth.loggedIn && <BsHeart />}
 
 				<MdPlayCircleOutline
+					style={ currentSong === videoId && isPlaying ? { color: '#2ecc71', transition: 'ease-in-out 0.2s' } : {}}
 					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_CURRENT_SONG, payload: videoId })}
 					className='play-btn'
 				/>

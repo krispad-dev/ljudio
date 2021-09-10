@@ -4,7 +4,7 @@ import DesktopMenu from './DesktopMenu/DesktopMenu';
 function Aside() {
   return (
     <aside>
-      <DesktopMenu />
+       <DesktopMenu /> 
     </aside>
   );
 }

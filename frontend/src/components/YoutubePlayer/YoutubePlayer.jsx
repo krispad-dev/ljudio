@@ -48,7 +48,7 @@ function YouTubePlayer() {
 
 		setSize(windowWidth, windowHeight);
 		
-	}, [windowWidth]);
+	}, [ windowWidth ]);
 
 
 	useEffect(() => {
@@ -77,6 +77,19 @@ function YouTubePlayer() {
 	function onEndHandler() {
 		dispatch({ type: PLAYER_ACTIONS.SET_SHOW_VIDEO });
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
+		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING , playload: false })
+	}
+
+	function onPlayHandler() {
+		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false })
+		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: true })
+	}
+
+
+	function onPauseHandler() {
+		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true })
+		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false })
+
 	}
 
 
@@ -90,9 +103,9 @@ function YouTubePlayer() {
 				containerClassName={'ytplayer'}
 				opts={opts}
 				ref={playerRef}
-				onPause={() => dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true })}
-				onPlay={() => dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false })}
-				onEnd={() => onEndHandler()}
+				onPause={onPauseHandler}
+				onPlay={onPlayHandler}
+				onEnd={onEndHandler}
 				videoId={currentSong}  // Change to currentSong var.
 			/>
 			;

@@ -7,11 +7,14 @@ export const PLAYER_ACTIONS = {
 	SET_DURATION: 'SET_DURATION',
 	SEEK_TO: 'SEEK_TO',
 	SET_CURRENT_TIME: 'SET_CURRENT_TIME',
-	SET_PLAYER_IS_PAUSED: 'SET_PLAYER_IS_PAUSED'
+	SET_PLAYER_IS_PAUSED: 'SET_PLAYER_IS_PAUSED',
+	SET_IS_PLAYING: 'SET_IS_PLAYING'
 };
 
 export function playerControllerReducer(state, action) {
+
 	switch (action.type) {
+
 		case PLAYER_ACTIONS.PLAY_VIDEO:
 			return {
 				...state,
@@ -64,5 +67,11 @@ export function playerControllerReducer(state, action) {
 				...state,
 				playerIsPaused: action.payload,
 			};
+		case PLAYER_ACTIONS.SET_IS_PLAYING:
+			return {
+				...state,
+				isPlaying: !state.isPlaying,
+			};
+			
 	}
 }

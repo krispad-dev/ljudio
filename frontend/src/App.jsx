@@ -1,13 +1,17 @@
 import React from 'react';
-import './App.css';
+
 
 import { Route, Redirect, useLocation } from 'react-router-dom';
+
+import styled from 'styled-components';
+import GlobalStyle from './GlobalStyles';
+
+import { useWindowSize } from '@react-hook/window-size';
 
 //hooks
 import useAuth from './hooks/useAuth';
 
 // Components
-import Test from './components/Test';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
@@ -17,15 +21,28 @@ import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 
+
+const notLoggedInStyles = {
+	gridTemplateAreas: "'header header' 'main main' 'footer footer'"
+}
+
+
 function App() {
+
 	const { data: auth } = useAuth();
 	const { pathname } = useLocation();
+	const [windowWidth, windowHeight] = useWindowSize();
 
 	return (
-		<div className='App'>
+		<div style={auth && !auth.loggedIn ? notLoggedInStyles : {}} className='App'>
+
+			<GlobalStyle  />
+
 			{pathname !== '/register' && pathname !== '/login' && <Header />}
 
-			<Aside />
+			<Aside /> 
+
+			
 
 			<main>
 				<Route exact path='/' component={MusicPage} />
@@ -34,16 +51,14 @@ function App() {
 				<Route exact path='/login' component={LoginPage}>
 					{auth && auth.loggedIn && <Redirect to='/' />}
 				</Route>
-
-				<Route exact path='/test' component={Test}>
-					{auth && !auth.loggedIn && <Redirect to='/' />}
-				</Route>
 			</main>
 
 			{pathname !== '/register' && pathname !== '/login' && <Footer />}
 
-			<YouTubePlayer />
+			<YouTubePlayer /> 
+
 		</div>
+		
 	);
 }
 

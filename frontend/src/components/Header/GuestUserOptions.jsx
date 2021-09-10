@@ -12,7 +12,7 @@ function GuestUserOptions() {
 				</Button>
 			</Link>
 			<Link to='/login'>
-				<Button variant='outlined' color='primary' href='#outlined-buttons'>
+				<Button style={{color: 'green'}} variant='outlined' color='primary' href='#outlined-buttons'>
 					LOGIN
 				</Button>
 			</Link>

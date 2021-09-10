@@ -1,3 +1,8 @@
+import { createGlobalStyle } from 'styled-components';
+import useAuth from './hooks/useAuth';
+
+const GlobalStyle = createGlobalStyle`
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
@@ -68,12 +73,16 @@ h6 {
 		height: 100vh;
 		overflow: hidden;
 		display: grid;
-		grid-template-columns: 1fr;
+		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 10vh 70vh 20vh;
 		grid-template-areas:
 			'header header'
 			'main main'
 			'footer footer';
+	}
+
+	aside {
+		display: none;
 	}
 }
 
@@ -110,3 +119,8 @@ ul {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+`;
+
+
+export default GlobalStyle
