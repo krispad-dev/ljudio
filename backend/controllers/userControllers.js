@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { Bcrypt, generateToken } from '../helpers/helpers.js';
-import { Users } from '../models/Users.js';
+import { Users } from '../models/User.js';
 
 export async function createUser(req, res) {
   try {
@@ -12,8 +12,6 @@ export async function createUser(req, res) {
     user.password = hashedPassword;
 
     const emailExist = Users.getUserByEmail(user);
-    console.log(Boolean(emailExist));
-    console.log('FROM CONTROLLER', emailExist);
 
     if (emailExist) {
       return res
@@ -23,45 +21,56 @@ export async function createUser(req, res) {
 
     Users.createUser(user);
 
-    res.status(200).json({ success: true, user });
+    res
+      .status(200)
+      .json({ success: true, message: 'User Created Succedfully!' });
   } catch (error) {
     res.status(400).json({ success: false, message: error });
   }
 }
 
 export async function loginUser(req, res) {
-  const userInfo = req.body;
+  try {
+    const userInfo = req.body;
 
-  const user = Users.getUserByEmail(userInfo);
+    const user = Users.getUserByEmail(userInfo);
 
-  if (!user) {
-    console.log('No user');
+    if (!user) {
+      console.log('No user');
 
-    return res
-      .status(400)
-      .json({ success: false, message: 'Wrong password or username' });
+      return res
+        .status(400)
+        .json({ success: false, message: 'Wrong password or username' });
+    }
+    const match = await Bcrypt.comparePassword(
+      userInfo.password,
+      user.password
+    );
+
+    if (!match) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Wrong password or username' });
+    }
+    const token = await generateToken({ id: user.id, userName: user.userName });
+
+    user.token = token;
+
+    res
+      .status(200)
+      .cookie('authToken', token, {
+        httpOnly: true,
+      })
+      .json({ success: true });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error });
   }
-
-  const match = await Bcrypt.comparePassword(userInfo.password, user.password);
-
-  if (!match) {
-    return res
-      .status(400)
-      .json({ success: false, message: 'Wrong password or username' });
-  }
-
-  const token = await generateToken({ id: user.id, userName: user.userName });
-
-  user.token = token;
-
-  res
-    .cookie('authToken', token, {
-      httpOnly: true,
-    })
-    .json({ success: true });
 }
 
-
 export function logoutUser(req, res) {
-  res.clearCookie('authToken').json({ loggedIn: false });
+  try {
+    res.clearCookie('authToken').json({ success: true });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error });
+  }
 }

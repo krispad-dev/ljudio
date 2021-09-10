@@ -4,8 +4,7 @@ export async function verifyToken(req, res, next) {
   try {
     const { authToken } = req.cookies;
 
-    if(authToken === undefined) {
-      console.log('no token!');
+    if (authToken === undefined) {
       return res.json({ loggedIn: false });
     }
 
@@ -13,14 +12,12 @@ export async function verifyToken(req, res, next) {
 
     req.obj = {
       id: data.id,
+      userName: data.userName,
     };
-
-    console.log('Middleware', data);
 
     next();
   } catch (err) {
     console.log(err);
-
     return res.status(403).json({ success: false, message: 'Unauthorized' });
   }
 }

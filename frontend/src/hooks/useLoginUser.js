@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 
 async function loginUser(userInfo) {
-  const res = await fetch('http://localhost:7000/api/users/login/', {
+  const res = await fetch('/api/users/login/', {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -25,7 +25,7 @@ export default function useLoginUser() {
     onSuccess: (data) => {
       console.log('from mutation', data);
       if (data.success) {
-        queryClient.setQueryData('auth', {
+        queryClient.invalidateQueries('auth', {
           loggedIn: true,
         });
       }

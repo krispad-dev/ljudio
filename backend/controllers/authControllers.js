@@ -1,5 +1,9 @@
 export async function authCheck(req, res) {
-  console.log('Auth Check', req.obj);
+  try {
+    const user = req.obj;
 
-  res.json({ loggedIn: true });
+    res.json({ loggedIn: true, user, message: 'You are loggged in!' });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error });
+  }
 }

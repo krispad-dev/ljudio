@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 async function fetchFunction() {
-  const res = await fetch('http://localhost:7000/api/auth', {
+  const res = await fetch('/api/auth', {
     credentials: 'include',
   });
 

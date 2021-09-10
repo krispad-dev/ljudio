@@ -1,25 +1,32 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
-import { UiContext } from '../context/UiState';
+import { UiContext } from '../../context/UiState';
 
 function SearchBar() {
   const { dispatch, state } = useContext(UiContext);
 
+  let timeout = 0;
+
   async function searchMusic(e) {
     let musicSearchString = e.target.value;
-    dispatch({
-      type: 'SEARCH_STRING',
-      payload: { searchString: musicSearchString },
-    });
+
+    // Delay function kommer lyftas ut till helpers.js
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      dispatch({
+        type: 'SEARCH_STRING',
+        payload: { searchString: musicSearchString },
+      });
+    }, 500);
   }
 
   return (
     <SearchBarWrapper>
       <div className='searchInputs'>
         <form>
-          <SearchIcon />
-          <input type='text' onChange={searchMusic} />
+          <SearchIcon style={{ marginLeft: '1rem' }} />
+          <input type='text' onKeyUp={searchMusic} />
         </form>
       </div>
     </SearchBarWrapper>
@@ -31,9 +38,10 @@ const SearchBarWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  min-width: 250px;
+  width: auto;
   height: 2rem;
-  border-radius: 10px;
+  border-radius: 50px;
+  margin-right: 1rem;
 
   .searchInputs form {
     display: flex;
@@ -41,10 +49,6 @@ const SearchBarWrapper = styled.div`
 
   .searchInputs input {
     all: unset;
-  }
-
-  .searchIcon {
-    background-color: #fff;
   }
 `;
 

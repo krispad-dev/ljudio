@@ -1,8 +1,14 @@
 import { useMutation, useQueryClient } from "react-query";
 
 export async function fetchFunction() {
-    const res = await fetch('http://localhost:7000/api/users/logout/', {
-      credentials: 'include',
+
+    console.log('hello world');
+    const res = await fetch('/api/users/logout/', {
+        headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT',
+          credentials: 'include',
     });
   
     const data = await res.json();
@@ -22,7 +28,7 @@ export default function useLogoutUser() {
             console.log('From logout-mutate', data);
 
             if(data.success) {
-                queryClient.setQueryData('auth', { loggedIn: false });
+                queryClient.invalidateQueries('auth');
             }
 
         }

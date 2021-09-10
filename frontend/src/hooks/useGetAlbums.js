@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 async function fetchFunction(query) {
   const getFetch = await fetch(
-    `/api/music/songs/?searchString=${query}`
+    `/api/music/albums/?searchString=${query}`
   );
 
   const data = await getFetch.json();
@@ -14,6 +14,6 @@ async function fetchFunction(query) {
   return data;
 }
 
-export default function useGetSongs(searchString) {
-  return useQuery(['songs', searchString], () => fetchFunction(searchString));
+export default function useGetAlbums(searchString) {
+  return useQuery(['albums', searchString], () => fetchFunction(searchString));
 }

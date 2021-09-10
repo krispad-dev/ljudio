@@ -10,7 +10,7 @@ const initialState = {
     pauseVideo: {},
     videoIsShowing: false,
     setVolume: 50,
-    currentSong: 'qOVmlTBX-t0',
+    currentSong: '',
     durationInMinutes: 0,
     seekTo: 0,
     currentTime: 0,
