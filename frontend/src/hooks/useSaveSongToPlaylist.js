@@ -1,19 +1,11 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { Fetch } from '../helpers/api';
 
-async function fetchFunction(query) {
-  const getFetch = await fetch(
-    `/api/music/albums/?searchString=${query}`
-  );
+export default function useGetAlbums() {
 
-  const data = await getFetch.json();
+  const queryClient = useQueryClient();
 
-  if (!getFetch.ok) {
-    return { error: 'Error while fetching!' };
-  }
-
-  return data;
-}
-
-export default function useGetAlbums(searchString) {
-  return useQuery(['albums', searchString], () => fetchFunction(searchString));
+  return useMutation(data => Fetch.POST(data, '/api/users/playlists/user-playlists/songs'), {
+      onSuccess: queryClient.invalidateQueries(['songsSavedInUserPlaylists'])
+    })
 }

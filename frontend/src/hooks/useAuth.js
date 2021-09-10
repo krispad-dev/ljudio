@@ -1,15 +1,7 @@
 import { useQuery } from 'react-query';
+import { Fetch } from '../helpers/api.js'
 
-async function fetchFunction() {
-  const res = await fetch('/api/auth', {
-    credentials: 'include',
-  });
-
-  const data = await res.json();
-  console.log('From useAuth', data);
-  return data;
-}
 
 export default function useAuth() {
-  return useQuery(['auth'], fetchFunction);
+  return useQuery(['auth'], () => Fetch.GET('/api/auth'));
 }

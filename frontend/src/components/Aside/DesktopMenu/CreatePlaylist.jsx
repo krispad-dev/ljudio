@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import styled from 'styled-components';
 
-/* import useCreatePlaylist from '../../../hooks/useCreatePlaylist' */
+import useCreatePlaylist from '../../../hooks/useCreatePlaylist'
 
 export default function CreatePlaylist() {
-	const [textFieldInput, setTextFieldInput] = useState('');
-	/* 	const { mutate } = useCreatePlaylist() */
 
-	console.log(textFieldInput);
+	const [ textFieldInput, setTextFieldInput]  = useState('');
+	const { mutate } = useCreatePlaylist()
 
 	return (
-		<CreatePalyListWrpapper>
+		<CreatePlayListWrapapper>
 			<TextField
 				value={textFieldInput}
 				onChange={e => setTextFieldInput(e.target.value)}
@@ -22,14 +21,14 @@ export default function CreatePlaylist() {
 				style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
 			/>
 
-			<Button onClick={() => mutate(textFieldInput)} size={'small'} color={'primary'}>
+			<Button onClick={() => mutate({ title: textFieldInput })} size={'small'} color={'primary'}>
 				SAVE
 			</Button>
-		</CreatePalyListWrpapper>
+		</CreatePlayListWrapapper>
 	);
 }
 
-const CreatePalyListWrpapper = styled.div`
+const CreatePlayListWrapapper = styled.div`
 	display: flex;
 	width: 100%;
 	input,

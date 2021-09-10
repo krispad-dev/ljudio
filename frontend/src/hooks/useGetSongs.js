@@ -1,19 +1,6 @@
 import { useQuery } from 'react-query';
-
-async function fetchFunction(query) {
-  const getFetch = await fetch(
-    `/api/music/songs/?searchString=${query}`
-  );
-
-  const data = await getFetch.json();
-
-  if (!getFetch.ok) {
-    return { error: 'Error while fetching!' };
-  }
-
-  return data;
-}
+import { Fetch } from '../helpers/api';
 
 export default function useGetSongs(searchString) {
-  return useQuery(['songs', searchString], () => fetchFunction(searchString));
+  return useQuery(['songs', searchString], () => Fetch.GET(`/api/music/songs/?searchString=${searchString}`));
 }
