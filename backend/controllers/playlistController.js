@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { Playlists } from '../models/Playlist.js';
 
 export async function createPlaylist(req, res) {
   try {
@@ -15,7 +16,7 @@ export async function createPlaylist(req, res) {
     const playList = { id, userId, title };
 
     // Store playlist in database
-    await PlayLists.createPlaylist(playList);
+    await Playlists.createPlaylist(playList);
 
     return res.status(201).json({ success: true });
   } catch (err) {
