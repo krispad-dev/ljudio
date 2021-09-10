@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
-import { fetchFunction } from './hooks/useLogoutUser';
+import './App.css';
+
+import { Route, Redirect } from 'react-router-dom';
+
 
 //hooks
 import useAuth from './hooks/useAuth';
@@ -9,53 +11,43 @@ import useAuth from './hooks/useAuth';
 import Test from './components/Test';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import SearchBar from './components/SearchBar';
-import PlayerController from './components/YoutubePlayer/PlayerController';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
-import Logo from './components/Logo';
+import MusicPage from './pages/MusicPage';
 
-import './App.css';
+import Header from './components/Header/Header';
+import Aside from './components/Aside/Aside';
+import Footer from './components/Footer/Footer';
 
 function App() {
-  
-  const { data: auth } = useAuth();
-  
-  if(auth) {
-    console.log(auth);
-  }
 
-  return (
-    <div className='App'>
-      <BrowserRouter>
-        <header>
-          <Logo />
+	const { data: auth } = useAuth();
 
-          <SearchBar />
-          {auth && !auth.loggedIn && <Link to='/register'>REGISTER</Link>}
-         {/*  <Link to='/register'>REGISTER</Link> */}
-         {/*  <Link to='/login'>Login</Link> */}
-          {auth && !auth.loggedIn && <Link to='/login'>Login</Link>}
-        
-        </header>
+	return (
+		<div className='App'>
 
-        <aside></aside>
-        <main>
-          <YouTubePlayer />
+        <Header />
 
-          <Route exact path='/register' component={RegisterPage} />
-          <Route exact path='/login' component={LoginPage}>
-            {auth && auth.loggedIn && <Redirect to='/test' />}
-          </Route>
-          <Route exact path='/test' component={Test}>
-            {auth && !auth.loggedIn && <Redirect to='/login' />}
-          </Route>
-        </main>
-        <footer>
-          <PlayerController />
-        </footer>
-      </BrowserRouter>
-    </div>
-  );
+				<Aside />
+
+				<main>
+					<Route exact path='/' component={MusicPage} />
+					<Route exact path='/register' component={RegisterPage} />
+
+					<Route exact path='/login' component={LoginPage}>
+						{auth && auth.loggedIn && <Redirect to='/test' />}
+					</Route>
+
+					<Route exact path='/test' component={Test}>
+						{auth && !auth.loggedIn && <Redirect to='/login' />}
+					</Route>
+
+				</main>
+
+        <Footer />
+
+        <YouTubePlayer />
+		</div>
+	);
 }
 
 export default App;

@@ -2,7 +2,8 @@ import { useMutation, useQueryClient } from 'react-query';
 
 
 async function fetchFunction(data) {
-    const res = await fetch('http://localhost:7000/api/?', {
+    
+    const res = await fetch('/api/users/playlists/user-playlists', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         credentials: 'include',
@@ -19,13 +20,13 @@ async function fetchFunction(data) {
 }
 
 
-export default function useAddPlaylist() {
+export default function useCreatePlaylist() {
 
     const queryClient = useQueryClient();
 
     return useMutation(data => fetchFunction(data), {
         onSuccess: () => {
-            queryClient.invalidateQueries('playlists');
+            queryClient.invalidateQueries('user-playlists');
         }
     });
 }
