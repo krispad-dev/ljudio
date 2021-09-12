@@ -14,6 +14,7 @@ body {
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
+	background-color: #000;
 }
 
 .App {
@@ -44,7 +45,7 @@ main {
 	grid-area: main;
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 	background-color: black;
 }
 

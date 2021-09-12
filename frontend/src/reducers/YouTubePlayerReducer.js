@@ -1,8 +1,7 @@
 export const PLAYER_ACTIONS = {
-
 	PLAY_VIDEO: 'PLAY_VIDEO',
 	PAUSE_VIDEO: 'PAUSE_VIDEO',
-	SET_SHOW_VIDEO: 'SET_HOW_VIDEO',
+	SET_FULLSCREEN_VIDEO_MODE: 'SET_FULLSCREEN_VIDEO_MODE',
 	SET_VOLUME: 'SET_VOLUME',
 	SET_CURRENT_SONG: 'SET_CURRENT_SONG',
 	SET_DURATION: 'SET_DURATION',
@@ -10,7 +9,6 @@ export const PLAYER_ACTIONS = {
 	SET_CURRENT_TIME: 'SET_CURRENT_TIME',
 	SET_PLAYER_IS_PAUSED: 'SET_PLAYER_IS_PAUSED',
 	SET_IS_PLAYING: 'SET_IS_PLAYING',
-	
 };
 
 export function playerControllerReducer(state, action) {
@@ -27,10 +25,10 @@ export function playerControllerReducer(state, action) {
 				pauseVideo: action.payload,
 			};
 
-		case PLAYER_ACTIONS.SET_SHOW_VIDEO:
+		case PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE:
 			return {
 				...state,
-				videoIsShowing: !state.videoIsShowing,
+				fullscreenVideoMode: !state.fullscreenVideoMode,
 			};
 
 		case PLAYER_ACTIONS.SET_VOLUME:
