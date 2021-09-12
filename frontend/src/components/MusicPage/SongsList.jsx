@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 function SongsList() {
 	const { state } = useContext(UiContext);
-	const { data, isLoading } = useGetSongs(state.searchString);
+	const { data, isLoading } = useGetSongs(state.headerSearchString);
 
 	return (
 		<>

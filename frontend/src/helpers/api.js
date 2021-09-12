@@ -2,7 +2,6 @@ export const Fetch = {
 
 
 	GET: async url => {
-		console.log('test fetch' + url);
 		const res = await fetch(url, {
 			credentials: 'include',
 		});
@@ -14,6 +13,7 @@ export const Fetch = {
 
 
 	POST: async (dataObject, url) => {
+		console.log(dataObject);
 		const res = await fetch(url, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },

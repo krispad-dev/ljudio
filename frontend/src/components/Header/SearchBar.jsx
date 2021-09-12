@@ -3,53 +3,59 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import { UiContext } from '../../context/UiState';
 
+import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
+
 function SearchBar() {
-  const { dispatch, state } = useContext(UiContext);
+  
+	const { state, dispatch } = useContext(UiContext);
 
-  let timeout = 0;
+	console.log(state.headerSearchString);
 
-  async function searchMusic(e) {
-    let musicSearchString = e.target.value;
+	let timeout = 0;
 
-    // Delay function kommer lyftas ut till helpers.js
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      dispatch({
-        type: 'SEARCH_STRING',
-        payload: { searchString: musicSearchString },
-      });
-    }, 500);
-  }
+	async function searchMusic(e) {
+		let musicSearchString = e.target.value;
 
-  return (
-    <SearchBarWrapper>
-      <div className='searchInputs'>
-        <form>
-          <SearchIcon style={{ marginLeft: '1rem' }} />
-          <input type='text' onKeyUp={searchMusic} />
-        </form>
-      </div>
-    </SearchBarWrapper>
-  );
+		// Delay function kommer lyftas ut till helpers.js
+		if (timeout) clearTimeout(timeout);
+
+		timeout = setTimeout(() => {
+			dispatch({
+				type: UI_STATE_ACTIONS.SET_HEADER_SEARCH_STRING,
+				payload: { headerSearchString: musicSearchString },
+			});
+		}, 500);
+	}
+
+	return (
+		<SearchBarWrapper>
+			<div className='searchInputs'>
+				<form>
+					<SearchIcon style={{ marginLeft: '1rem' }} />
+					<input type='text' onKeyUp={searchMusic} />
+				</form>
+			</div>
+		</SearchBarWrapper>
+	);
 }
 
 const SearchBarWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  width: auto;
-  height: 2rem;
-  border-radius: 50px;
-  margin-right: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #fff;
+	width: auto;
+	height: 2rem;
+	border-radius: 50px;
+	margin-right: 1rem;
 
-  .searchInputs form {
-    display: flex;
-  }
+	.searchInputs form {
+		display: flex;
+	}
 
-  .searchInputs input {
-    all: unset;
-  }
+	.searchInputs input {
+		all: unset;
+	}
 `;
 
 export default SearchBar;

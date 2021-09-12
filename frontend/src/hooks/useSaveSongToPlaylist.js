@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { Fetch } from '../helpers/api';
 
-export default function useGetAlbums() {
+export default function useSaveSongToPlaylist() {
 
   const queryClient = useQueryClient();
 

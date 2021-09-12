@@ -7,7 +7,7 @@ import SkeletonLoader from '../Loaders/SkeletonLoader';
 
 function AlbumsList() {
 	const { state, isLoading } = useContext(UiContext);
-	const { data } = useAlbums(state.searchString);
+	const { data } = useAlbums(state.headerSearchString);
 
 	return (
 		<>

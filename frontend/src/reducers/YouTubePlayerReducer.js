@@ -1,4 +1,5 @@
 export const PLAYER_ACTIONS = {
+
 	PLAY_VIDEO: 'PLAY_VIDEO',
 	PAUSE_VIDEO: 'PAUSE_VIDEO',
 	SET_SHOW_VIDEO: 'SET_HOW_VIDEO',
@@ -8,13 +9,12 @@ export const PLAYER_ACTIONS = {
 	SEEK_TO: 'SEEK_TO',
 	SET_CURRENT_TIME: 'SET_CURRENT_TIME',
 	SET_PLAYER_IS_PAUSED: 'SET_PLAYER_IS_PAUSED',
-	SET_IS_PLAYING: 'SET_IS_PLAYING'
+	SET_IS_PLAYING: 'SET_IS_PLAYING',
+	
 };
 
 export function playerControllerReducer(state, action) {
-
 	switch (action.type) {
-
 		case PLAYER_ACTIONS.PLAY_VIDEO:
 			return {
 				...state,
@@ -72,6 +72,8 @@ export function playerControllerReducer(state, action) {
 				...state,
 				isPlaying: !state.isPlaying,
 			};
-			
+
+		default:
+			return state;
 	}
 }

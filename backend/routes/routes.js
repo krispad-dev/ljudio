@@ -20,3 +20,4 @@ userRouter.post('/login', UserController.loginUser);
 userRouter.put('/logout', UserController.logoutUser);
 
 authRouter.get('/', verifyToken, authCheck);
+
