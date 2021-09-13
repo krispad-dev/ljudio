@@ -18,7 +18,7 @@ musicRouter.get('/albums', MusicController.searchAlbums);
 userRouter.get('/playlists/user-playlists', verifyToken, PlaylistController.getAllUserPlaylists);
 
 //Gets one playlist from database
-userRouter.get('/playlists/user-playlists/1/:id', PlaylistController.getOneUserPlaylist);
+userRouter.get('/playlists/user-playlists/1/:id', verifyToken, PlaylistController.getOneUserPlaylist);
 
 //Creates a playlist
 userRouter.post('/playlists/user-playlists', verifyToken, PlaylistController.createPlaylist);

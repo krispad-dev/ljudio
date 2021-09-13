@@ -60,8 +60,12 @@ export async function getOneUserPlaylist(req, res) {
     //PlaylistID from url params
     const playlistId = req.params.id;
 
+    console.log('From Controller' + playlistId);
+
     //Get one playlist from database
     const playlist = await Playlists.GetOneUserPlaylist(playlistId)[0];
+
+    console.log(playlist);
 
     // const formattedPlaylist = formatPlaylists(playlist);
 
