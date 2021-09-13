@@ -68,7 +68,7 @@ export function playerControllerReducer(state, action) {
 		case PLAYER_ACTIONS.SET_IS_PLAYING:
 			return {
 				...state,
-				isPlaying: !state.isPlaying,
+				isPlaying: action.payload,
 			};
 
 		default:

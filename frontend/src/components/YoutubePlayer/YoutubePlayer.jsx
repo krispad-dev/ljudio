@@ -8,10 +8,11 @@ import { useWindowSize } from '@react-hook/window-size';
 
 
 function YouTubePlayer() {
-	
-	const [{ fullscreenVideoMode, currentSong, currentTime }, dispatch] = useContext(playerControllerStateContext);
+
 	const playerRef = useRef();
-	const [windowWidth, windowHeight] = useWindowSize();
+	
+	const [ { fullscreenVideoMode, currentSong, currentTime }, dispatch ] = useContext(playerControllerStateContext);
+	const [ windowWidth, windowHeight ] = useWindowSize();
 
 
 	const opts = {
@@ -47,7 +48,7 @@ function YouTubePlayer() {
 	useEffect(() => {
 
 		setSize(windowWidth, windowHeight);
-		
+	
 	}, [ windowWidth ]);
 
 
@@ -80,6 +81,7 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING , playload: false })
 	}
 
+
 	function onPlayHandler() {
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false })
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: true })
@@ -89,8 +91,8 @@ function YouTubePlayer() {
 	function onPauseHandler() {
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true })
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false })
-
 	}
+
 
 
 	return (
@@ -106,7 +108,7 @@ function YouTubePlayer() {
 				onPause={onPauseHandler}
 				onPlay={onPlayHandler}
 				onEnd={onEndHandler}
-				videoId={currentSong}  // Change to currentSong var.
+				videoId={currentSong.videoId} 
 			/>
 			;
 			<div className={'mask-top'}>

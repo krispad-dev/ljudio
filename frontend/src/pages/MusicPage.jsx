@@ -14,18 +14,18 @@ function MusicPage() {
 	return (
 		<MusicPageWrapper>
 			<div className='songs-list'>
-				{data && state.searchString && <h1>SONGS</h1>}
+				{data && state.headerSearchString && <h1>SONGS</h1>}
 				<SongsList />
 			</div>
 
 			<div className="album-artists-container">
 				<div className='artists-list'>
-					{data && state.searchString && <h1>ARTISTS</h1>}
+					{data && state.headerSearchString && <h1>ARTISTS</h1>}
 					<ArtiststList />
 				</div>
 
 				<div className='albums-list'>
-					{data && state.searchString && <h1>ALBUMS</h1>}
+					{data && state.headerSearchString && <h1>ALBUMS</h1>}
 					<AlbumsList />
 				</div>
 			</div>
@@ -53,11 +53,11 @@ const MusicPageWrapper = styled.div`
 	}
 		margin-top: 2rem;
 		overflow-y: scroll;
-		height: 18rem;
+		height: 15rem;
 		overflow-y: scroll;
 
 		@media only screen and (max-width: 1000px) {
-			height: 15rem;
+			height: 10rem;
 		}
 	}
 `;

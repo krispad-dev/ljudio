@@ -6,7 +6,7 @@ import { UiContext } from '../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 
-import { MdPlayCircleOutline } from 'react-icons/md';
+import { MdNearMe, MdPlayCircleOutline } from 'react-icons/md';
 import { BsHeart, BsPlusCircle } from 'react-icons/bs';
 
 import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
@@ -62,11 +62,18 @@ function SongCard({ videoId, name, artist, thumbnails }) {
 				{auth && auth.loggedIn && <BsHeart />}
 
 				<MdPlayCircleOutline
-					style={ currentSong === videoId && isPlaying ? { color: '#2ecc71', transition: 'ease-in-out 0.2s' } : {} }
+					style={ currentSong.videoId === videoId && isPlaying ? { color: '#2ecc71', transition: 'ease-in-out 0.2s' } : {} }
 					onClick={() =>
 						dispatchPlayerControllerStateContext({
 							type: PLAYER_ACTIONS.SET_CURRENT_SONG,
-							payload: videoId,
+
+							payload: { 
+								videoId: videoId,
+								name: name,
+								artist: artist,
+								thimbnails: thumbnails,
+							}
+							
 						})
 					}
 					className='play-btn'

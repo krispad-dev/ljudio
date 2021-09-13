@@ -28,8 +28,8 @@ const notLoggedInStyles = {
 function App() {
 	const { data: auth } = useAuth();
 	const { pathname } = useLocation();
-	const [{ fullscreenVideoMode }, dispatch] = useContext(playerControllerStateContext);
-	const [windowWidth, windowHeight] = useWindowSize();
+	const [ { fullscreenVideoMode }, dispatch ] = useContext(playerControllerStateContext);
+	const [ windowWidth, windowHeight ] = useWindowSize();
 
 	return (
 		<div style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>

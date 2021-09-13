@@ -20,7 +20,7 @@ body {
 .App {
 	display: grid;
 	grid-template-columns: 20% 80%;
-	grid-template-rows: 10vh 75vh 15vh;
+	grid-template-rows: 10vh auto 20vh;
 	grid-template-areas:
 		'header header'
 		'aside main'
@@ -50,11 +50,13 @@ main {
 }
 
 footer {
+	position: relative;
 	grid-area: footer;
 	background-color: black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
 h1,
@@ -71,11 +73,12 @@ h6 {
 
 @media only screen and (max-width: 1000px) {
 	.App {
+		justify-content: space-between;
 		height: 100vh;
 		overflow: hidden;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 10vh 70vh 20vh;
+		grid-template-rows: 10vh auto 25vh;
 		grid-template-areas:
 			'header header'
 			'main main'

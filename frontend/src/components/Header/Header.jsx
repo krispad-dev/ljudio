@@ -8,7 +8,6 @@ import GuestUserOptions from './GuestUserOptions';
 import LoggedInUserOptions from './LoggedInUserOptions';
 
 function Header() {
-
 	const { data: auth } = useAuth();
 
 	console.log(auth);
