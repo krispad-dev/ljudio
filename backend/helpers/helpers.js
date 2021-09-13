@@ -21,3 +21,14 @@ export async function generateToken(data) {
   const token = await jwt.sign(data, 'sEcReTkEy', { expiresIn: '1hr' });
   return token;
 }
+
+// export function formatPlaylists(arr) {
+//   return arr.map(({ title, songs, playlistId, followCount }) => {
+//     return {
+//       title: title,
+//       playlistId: playlistId,
+//       followCount: followCount,
+//       songs: songs.split(','),
+//     };
+//   });
+// }
