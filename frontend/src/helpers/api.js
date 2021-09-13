@@ -71,3 +71,39 @@ export const Fetch = {
 
 
 };
+
+
+const users = '/api/users';
+const playlists = '/api/users/playlists';
+const songs = '/api/music/songs';
+const music = '/api/music/';
+
+
+'/api/users/playlists/user-playlists/songs'
+
+
+export const API = {
+
+	USER: {
+		LOGIN: `${users}/login/`,
+		LOGOUT: `${users}/logout/`,
+		AUTH: `/api/auth`
+	},
+
+	PLAYLIST: {
+		ALL_SAVED_USER_PLAYLISTS: `${playlists}/user-playlists`,
+		ONE_SAVED_USER_PLAYLIST: `${playlists}/user-playlists/1`,
+		CREATE: `${playlists}/user-playlists`,
+		SAVE_SONG_TO_PLAYLIST: `${playlists}/user-playlists/songs`
+	},
+
+	SONGS: {
+		ALL: `${songs}`
+	},
+
+	MUSIC: {
+		ARTISTS: `${music}/artists`,
+		ALBUMS: `${music}/albums`
+	}
+
+}

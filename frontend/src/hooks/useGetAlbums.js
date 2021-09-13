@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
-import { Fetch } from '../helpers/api'
+import { Fetch, API } from '../helpers/api'
 
 
 export default function useGetAlbums(searchString) {
-  return useQuery(['albums', searchString], () => Fetch.GET(`/api/music/albums/?searchString=${searchString}`));
+  return useQuery(['albums', searchString], () => Fetch.GET(`${API.MUSIC.ALBUMS}/?searchString=${searchString}`));
 }

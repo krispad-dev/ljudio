@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { Fetch } from '../helpers/api.js'
+import { Fetch, API } from '../helpers/api.js'
 
 
 export default function useLoginUser() {
   const queryClient = useQueryClient();
-  return useMutation((data) => Fetch.POST(data, '/api/users/login/'), {
+  return useMutation((data) => Fetch.POST(data, API.USER.LOGIN), {
     onSuccess: () => { queryClient.invalidateQueries('auth')}
-
   });
 }

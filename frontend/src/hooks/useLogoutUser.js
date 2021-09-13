@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "react-query";
-import { Fetch } from '../helpers/api.js'
+import { Fetch, API } from '../helpers/api.js'
 
 export default function useLogoutUser() {
 
     const queryClient = useQueryClient();
     
-    return useMutation(() => Fetch.PUT({}, '/api/users/logout/'), {
+    return useMutation(() => Fetch.PUT({}, API.USER.LOGOUT), {
         onSuccess: (data) => { queryClient.invalidateQueries('auth') }
     });
 
