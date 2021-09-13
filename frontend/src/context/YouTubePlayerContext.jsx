@@ -8,9 +8,9 @@ const initialState = {
 
     playVideo: {},
     pauseVideo: {},
-    videoIsShowing: false,
+    fullscreenVideoMode: false,
     setVolume: 50,
-    currentSong: '',
+    currentSong: {},
     durationInMinutes: 0,
     seekTo: 0,
     currentTime: 0,

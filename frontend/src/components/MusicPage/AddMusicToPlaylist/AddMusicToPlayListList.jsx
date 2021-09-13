@@ -2,13 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import AddMusicToPlaylistItem from './AddMusicToPlaylistItem';
 
+
+let playlistMockData = [
+
+	{
+		id: 6644,
+		title: 'Rock', 
+	},
+	{
+		id: 6645,
+		title: 'Dansband', 
+	},
+	{
+		id: 6646,
+		title: 'Indie', 
+	}
+
+
+]
+
 function AddMusicToPlayListList() {
 	return (
 		<AddMusicToPlayListListWrapper>
-			<AddMusicToPlaylistItem />
-			<AddMusicToPlaylistItem />
-			<AddMusicToPlaylistItem />
-			<AddMusicToPlaylistItem />
+			{ playlistMockData.map((playlist) =>  <AddMusicToPlaylistItem {...playlist}  />  )}
 		</AddMusicToPlayListListWrapper>
 	);
 }

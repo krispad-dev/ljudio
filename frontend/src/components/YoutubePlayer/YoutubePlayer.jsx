@@ -8,10 +8,11 @@ import { useWindowSize } from '@react-hook/window-size';
 
 
 function YouTubePlayer() {
-	
-	const [{ videoIsShowing, currentSong, currentTime }, dispatch] = useContext(playerControllerStateContext);
+
 	const playerRef = useRef();
-	const [windowWidth, windowHeight] = useWindowSize();
+	
+	const [ { fullscreenVideoMode, currentSong, currentTime }, dispatch ] = useContext(playerControllerStateContext);
+	const [ windowWidth, windowHeight ] = useWindowSize();
 
 
 	const opts = {
@@ -47,7 +48,7 @@ function YouTubePlayer() {
 	useEffect(() => {
 
 		setSize(windowWidth, windowHeight);
-		
+	
 	}, [ windowWidth ]);
 
 
@@ -75,10 +76,11 @@ function YouTubePlayer() {
 
 
 	function onEndHandler() {
-		dispatch({ type: PLAYER_ACTIONS.SET_SHOW_VIDEO });
+		dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE });
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING , playload: false })
 	}
+
 
 	function onPlayHandler() {
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false })
@@ -89,13 +91,13 @@ function YouTubePlayer() {
 	function onPauseHandler() {
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true })
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false })
-
 	}
+
 
 
 	return (
 		<IframeWrapper
-			style={{ visibility: `${videoIsShowing ? 'visible' : 'hidden'}` }}
+			style={{ visibility: `${fullscreenVideoMode ? 'visible' : 'hidden'}` }}
 			className={'ytPlayerContainer'}
 		>
 			;
@@ -106,13 +108,10 @@ function YouTubePlayer() {
 				onPause={onPauseHandler}
 				onPlay={onPlayHandler}
 				onEnd={onEndHandler}
-				videoId={currentSong}  // Change to currentSong var.
+				videoId={currentSong.videoId} 
 			/>
 			;
 			<div className={'mask-top'}>
-			</div>
-			<div className={'mask-bottom'}>
-				<h2>SONG NAME</h2>
 			</div>
 		</IframeWrapper>
 	);
@@ -134,17 +133,6 @@ const IframeWrapper = styled.div`
 		height: 5rem;
 		position: absolute;
 		bottom:0rem;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		letter-spacing: 6px;
-	}
-
-	.mask-bottom {
-		background-color: black;
-		height: 2rem;
-		position: absolute;
-		bottom: 8rem;
 		width: 100%;
 		display: flex;
 		justify-content: center;

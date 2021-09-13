@@ -1,28 +1,13 @@
 import { useMutation, useQueryClient } from 'react-query';
+import { Fetch, API } from '../helpers/api.js';
 
-async function fetchFunction(dataObj) {
-  const res = await fetch('/api/users/playlists/user-playlists', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    body: JSON.stringify(dataObj),
-  });
-
-  const data = await res.json();
-
-  if (!res.ok) {
-    return { error: 'Error!' };
-  }
-
-  return data;
-}
 
 export default function useCreatePlaylist() {
-  const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 
-  return useMutation((data) => fetchFunction(data), {
-    onSuccess: () => {
-      queryClient.invalidateQueries('user-playlists');
-    },
-  });
+	return useMutation(data => Fetch.POST(data, API.PLAYLIST.CREATE), {
+		onSuccess: () => {
+			queryClient.invalidateQueries('user-playlists');
+		},
+	});
 }

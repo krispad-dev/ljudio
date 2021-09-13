@@ -28,4 +28,18 @@ export const Playlists = {
       return error;
     }
   },
+
+  GetOneUserPlaylist: (playlistId) => {
+    try {
+      const query = `SELECT title, playlistId, followCount, GROUP_CONCAT(videoId, ',') 
+      AS songs
+      FROM playlist_song
+      JOIN playlists
+      ON playlists.id = playlist_song.playlistId
+      WHERE playlists.id = ?`;
+      return all(query, playlistId);
+    } catch (error) {
+      return error;
+    }
+  },
 };

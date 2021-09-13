@@ -7,7 +7,8 @@ function GuestOptions() {
 	return (
 		<GuestOptionsWrapper>
 			<Link to='/register'>
-				<Button variant='outlined' color='primary' href='#outlined-buttons'>
+				<Button variant='outlined' color='primary' href='#outlined-buttons' >
+
 					REGISTER
 				</Button>
 			</Link>

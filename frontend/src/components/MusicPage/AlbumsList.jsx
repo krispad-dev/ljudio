@@ -7,7 +7,7 @@ import SkeletonLoader from '../Loaders/SkeletonLoader';
 
 function AlbumsList() {
 	const { state, isLoading } = useContext(UiContext);
-	const { data } = useAlbums(state.searchString);
+	const { data } = useAlbums(state.headerSearchString);
 
 	return (
 		<>
@@ -17,7 +17,7 @@ function AlbumsList() {
 					data.searchResults &&
 					data.searchResults.content &&
 					data.searchResults.content.map(item => {
-						return <AlbumCard key={item.videoId} {...item} />;
+						return <AlbumCard key={item.playlistId} {...item} />;
 					})}
 			</AlbumsListWrapper>
 		</>

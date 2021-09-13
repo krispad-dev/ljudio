@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { playerControllerStateContext } from './context/YouTubePlayerContext';
 
 import { Route, Redirect, useLocation } from 'react-router-dom';
 
@@ -28,30 +29,35 @@ const notLoggedInStyles = {
 function App() {
   const { data: auth } = useAuth();
   const { pathname } = useLocation();
+  const [{ fullscreenVideoMode }, dispatch] = useContext(playerControllerStateContext);
   const [windowWidth, windowHeight] = useWindowSize();
 
   return (
-    <div style={auth && !auth.loggedIn ? notLoggedInStyles : {}} className='App'>
+    <div style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
       <GlobalStyle />
 
-      {pathname !== '/register' && pathname !== '/login' && <Header />}
+      {pathname !== '/register' && pathname !== '/login' && !fullscreenVideoMode && <Header />}
 
       <Aside />
 
       <main>
-        <Route exact path='/login' component={LoginPage}>
-          {auth && auth.loggedIn && <Redirect to='/' />}
-        </Route>
-
-        <Route exact path='/playlist/:id' component={PlaylistsPage}></Route>
-
-        <Route exact path='/' component={MusicPage} />
-        <Route exact path='/register' component={RegisterPage} />
+        <YouTubePlayer />
       </main>
 
-      {pathname !== '/register' && pathname !== '/login' && <Footer />}
+      {!fullscreenVideoMode && (
+        <main>
+          <Route exact path='/login' component={LoginPage}>
+            {auth && auth.loggedIn && <Redirect to='/' />}
+          </Route>
 
-      <YouTubePlayer />
+          <Route exact path='/playlist/:id' component={PlaylistsPage}></Route>
+
+          <Route exact path='/' component={MusicPage} />
+          <Route exact path='/register' component={RegisterPage} />
+        </main>
+      )}
+
+      {pathname !== '/register' && pathname !== '/login' && <Footer />}
     </div>
   );
 }

@@ -1,19 +1,15 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { Fetch, API } from '../helpers/api';
 
-async function fetchFunction(query) {
-  const getFetch = await fetch(
-    `/api/music/albums/?searchString=${query}`
-  );
+export default function useSaveSongToPlaylist() {
 
-  const data = await getFetch.json();
+  const queryClient = useQueryClient();
 
-  if (!getFetch.ok) {
-    return { error: 'Error while fetching!' };
-  }
+    return useMutation(data => Fetch.POST(data, API.PLAYLIST.SAVE_SONG_TO_PLAYLIST), {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['playlist']);
+      }
 
-  return data;
+    });
 }
 
-export default function useGetAlbums(searchString) {
-  return useQuery(['albums', searchString], () => fetchFunction(searchString));
-}

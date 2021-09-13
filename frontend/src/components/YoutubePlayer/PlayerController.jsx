@@ -18,7 +18,7 @@ function Controller() {
 		<PlayerControllerWrapper>
 			<div className={'optionsContainer'}>
 				<CgScreen 
-				onClick={() => dispatch({type: PLAYER_ACTIONS.SET_SHOW_VIDEO })} 
+				onClick={() => dispatch({type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE})} 
 				className={'showVideo'} />
 			</div>
 
@@ -33,7 +33,12 @@ function Controller() {
 			</div>
 
 			<div>
-				<ProgressSlider durationInMinutes={durationInMinutes} className={'progressContainer'} />
+				<ProgressSlider 
+
+				durationInMinutes={durationInMinutes} 
+				className={'progressContainer'}
+
+				/>
 			</div>
 		</PlayerControllerWrapper>
 	);

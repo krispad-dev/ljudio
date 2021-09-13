@@ -21,6 +21,7 @@ export default function VolumeSlider() {
 				value={value}
 				onChange={handleChange}
 				aria-labelledby='continuous-slider'
+				style={{color: '#2ecc71'}}
 			/>
 			<h6>{value}%</h6>
 		</VolumeSliderContainer>

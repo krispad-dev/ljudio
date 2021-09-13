@@ -1,18 +1,37 @@
 import React, { useContext, useState } from 'react';
-import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
-import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
-import styled from 'styled-components';
-import { MdPlayCircleOutline } from 'react-icons/md';
-import { BsHeart, BsPlusCircle } from 'react-icons/bs';
-import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
 
+import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
+import { UiContext } from '../../context/UiState';
+
+import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
+import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
+
+import { MdNearMe, MdPlayCircleOutline } from 'react-icons/md';
+import { BsHeart, BsPlusCircle } from 'react-icons/bs';
+
+import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
+import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
 
 function SongCard({ videoId, name, artist, thumbnails }) {
-	
+
 	const { data: auth } = useAuth();
-	const [{ currentSong, isPlaying }, dispatch] = useContext(playerControllerStateContext);
-	const [ addToPlaylistsBoxIsOpen, setAddToPlaylistsBoxIsOpen ] = useState(false)
+	const [ { currentSong, isPlaying }, dispatchPlayerControllerStateContext ] = useContext(playerControllerStateContext);
+	const { state, dispatch } = useContext(UiContext);
+	const [ addToPlaylistsBoxIsOpen, setAddToPlaylistsBoxIsOpen ] = useState(false);
+
+
+	function selectSongToAddToPlaylistHandler() {
+		setAddToPlaylistsBoxIsOpen(!addToPlaylistsBoxIsOpen)
+		dispatch({ 
+			type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN, 
+		})
+		dispatch({ 
+			type: UI_STATE_ACTIONS.SET_SONG_TO_SAVE_TO_USER_PLAYLIST, 
+			payload: { songToSaveToUserPlaylist: videoId }
+		})
+
+	}
 
 	return (
 		<SongCardWrapper>
@@ -24,19 +43,39 @@ function SongCard({ videoId, name, artist, thumbnails }) {
 					<p>{name}</p>
 				</div>
 			</div>
-			{ addToPlaylistsBoxIsOpen && <AddMusicToPlayListList /> }
+
+			{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
 
 			<div className='play-symbol-container'>
-				{auth && auth.loggedIn && <BsPlusCircle 
-				style={{ marginRight: '1rem', cursor: 'pointer', color: `${addToPlaylistsBoxIsOpen ?'#33408C' : '' }`}} 
-				onClick={() => setAddToPlaylistsBoxIsOpen(!addToPlaylistsBoxIsOpen)}
-				
-				/>}
+				{auth && auth.loggedIn && (
+					<BsPlusCircle
+						style={{
+							marginRight: '1rem',
+							cursor: 'pointer',
+							color: `${state.saveSongToPlaylistSelectorSectionIsOpen 
+								&& videoId 
+								===  state.songToSaveToUserPlaylist ? '#33408C' : ''}`,
+						}}
+						onClick={selectSongToAddToPlaylistHandler}
+					/>
+				)}
 				{auth && auth.loggedIn && <BsHeart />}
 
 				<MdPlayCircleOutline
-					style={ currentSong === videoId && isPlaying ? { color: '#2ecc71', transition: 'ease-in-out 0.2s' } : {}}
-					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_CURRENT_SONG, payload: videoId })}
+					style={ currentSong.videoId === videoId && isPlaying ? { color: '#2ecc71', transition: 'ease-in-out 0.2s' } : {} }
+					onClick={() =>
+						dispatchPlayerControllerStateContext({
+							type: PLAYER_ACTIONS.SET_CURRENT_SONG,
+
+							payload: { 
+								videoId: videoId,
+								name: name,
+								artist: artist,
+								thimbnails: thumbnails,
+							}
+							
+						})
+					}
 					className='play-btn'
 				/>
 			</div>
