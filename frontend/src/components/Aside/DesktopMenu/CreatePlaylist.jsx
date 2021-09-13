@@ -3,11 +3,11 @@ import { TextField } from '@material-ui/core';
 import styled from 'styled-components';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
-/* import useCreatePlaylist from '../../../hooks/useCreatePlaylist' */
+import useCreatePlaylist from '../../../hooks/useCreatePlaylist';
 
 export default function CreatePlaylist() {
   const [textFieldInput, setTextFieldInput] = useState('');
-  /* 	const { mutate } = useCreatePlaylist() */
+  const { mutate } = useCreatePlaylist();
 
   console.log(textFieldInput);
 
@@ -22,7 +22,7 @@ export default function CreatePlaylist() {
         placeholder={'title'}
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
       />
-      <button className='createPlaylist-btn' onClick={() => mutate(textFieldInput)}>
+      <button className='createPlaylist-btn' onClick={() => mutate({ title: textFieldInput })}>
         Save Playlist
       </button>
     </CreatePalyListWrpapper>

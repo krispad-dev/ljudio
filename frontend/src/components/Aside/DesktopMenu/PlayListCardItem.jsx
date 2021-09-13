@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function PlayListCardItem({ playlistName, song, url }) {
+function PlayListCardItem({ title, id }) {
   return (
     <PlayListCardItemWrapper>
-      <Link to={url}>
-        <p>{playlistName}</p>
-        <p>{song} songs</p>
+      <Link to={`/playlist/${id}`}>
+        <p>{title}</p>
       </Link>
     </PlayListCardItemWrapper>
   );

@@ -1,20 +1,18 @@
 import React from 'react';
 import PlayListCardItem from './PlayListCardItem';
 import styled from 'styled-components';
+import useGetSavedUserPlaylists from '../../../hooks/useGetSavedUserPlaylists';
 
 function SavedPlayLists() {
-  // PLACEHOLDER HERE WILL WE INMPORT DATA WITH React query
-  const mockData = [
-    { playlistName: 'BestTracks', song: 10 },
-    { playlistName: 'Hits', song: 30 },
-    { playlistName: 'Blues', song: 25 },
-  ];
+  const { data } = useGetSavedUserPlaylists();
 
   return (
     <SavedPlayListsWrapper>
-      {mockData.map((playlists) => {
-        return <PlayListCardItem url={'/'} playlistName={playlists.playlistName} song={playlists.song} />;
-      })}
+      {data &&
+        data.userPlaylists &&
+        data.userPlaylists.map((playlist) => {
+          return <PlayListCardItem key={playlist.id} {...playlist} />;
+        })}
     </SavedPlayListsWrapper>
   );
 }

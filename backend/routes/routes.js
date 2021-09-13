@@ -14,9 +14,9 @@ musicRouter.get('/songs', MusicController.searchSongs);
 musicRouter.get('/artists', MusicController.searchArtists);
 musicRouter.get('/albums', MusicController.searchAlbums);
 
-userRouter.get('/playlists/user-playlists', PlaylistController.getAllUserPlaylists);
+userRouter.get('/playlists/user-playlists', verifyToken, PlaylistController.getAllUserPlaylists);
 
-userRouter.post('/playlists/user-playlists/songs', PlaylistController.saveSongToUserPlaylist);
+userRouter.post('/playlists/user-playlists/songs', verifyToken, PlaylistController.saveSongToUserPlaylist);
 
 userRouter.post('/', UserController.createUser);
 userRouter.post('/playlists/user-playlists', verifyToken, PlaylistController.createPlaylist);
