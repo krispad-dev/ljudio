@@ -1,32 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 //Components
 import MenuItems from './MenuItems';
 import PlaylistSection from './PlaylistSection';
 
 function DesktopMenu() {
+  const [myPlaylistMenuIsOpen, setMyPlaylistMenuIsOpen] = useState(false);
+
   return (
     <AsideMenuWrapper>
       <MenuItems />
-      <details>
-        <summary className='summary-playList'>MY PLAYLIST</summary>
-        <PlaylistSection />
-      </details>
+      <Button
+        className='myPlaylist-btn'
+        onClick={() => setMyPlaylistMenuIsOpen(!myPlaylistMenuIsOpen)}
+        color='primary'
+        endIcon={<KeyboardArrowDownIcon />}
+      >
+        MY PLAYLIST
+      </Button>
+      {myPlaylistMenuIsOpen && <PlaylistSection />}
     </AsideMenuWrapper>
   );
 }
 
 const AsideMenuWrapper = styled.div`
-  .summary-playList {
-    color: #c4c4c4;
-    font-size: 25px;
-  }
-
-  summary {
-    color: #c4c4c4;
-    font-size: 16px;
-    margin-bottom: 10px;
+  button {
+    padding: 0;
     font-weight: bold;
   }
 
@@ -39,6 +41,11 @@ const AsideMenuWrapper = styled.div`
   p {
     color: #c4c4c4;
     margin: 0;
+  }
+
+  .myPlaylist-btn {
+    font-size: 1.5rem;
+    color: #c4c4c4;
   }
 `;
 
