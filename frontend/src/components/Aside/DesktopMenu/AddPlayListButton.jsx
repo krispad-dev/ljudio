@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-
+import CreatePlaylist from './CreatePlaylist';
 
 function AddPlayListButton() {
   return (
     <AddPlayListButtonWrapper>
-      <button startIcon>{<AddBoxIcon className='icon' />}</button>
       <h1>Add Playlist</h1>
+      <CreatePlaylist />
     </AddPlayListButtonWrapper>
   );
 }
 
 const AddPlayListButtonWrapper = styled.div`
   margin-top: 10px;
-  display: flex;
   align-items: center;
 
   h1 {

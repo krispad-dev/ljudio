@@ -13,13 +13,7 @@ function SavedPlayLists() {
   return (
     <SavedPlayListsWrapper>
       {mockData.map((playlists) => {
-        return (
-          <PlayListCardItem
-            url={'/'}
-            playlistName={playlists.playlistName}
-            song={playlists.song}
-          />
-        );
+        return <PlayListCardItem url={'/'} playlistName={playlists.playlistName} song={playlists.song} />;
       })}
     </SavedPlayListsWrapper>
   );
@@ -31,6 +25,7 @@ const SavedPlayListsWrapper = styled.ul`
   overflow: scroll;
   overflow-x: hidden;
   margin-bottom: 1rem;
+  width: 200px;
 `;
 
 export default SavedPlayLists;

@@ -24,10 +24,8 @@ function SearchBar() {
   return (
     <SearchBarWrapper>
       <div className='searchInputs'>
-        <form>
-          <SearchIcon style={{ marginLeft: '1rem' }} />
-          <input type='text' onKeyUp={searchMusic} />
-        </form>
+        <SearchIcon style={{ marginLeft: '1rem' }} />
+        <input type='text' onKeyUp={searchMusic} />
       </div>
     </SearchBarWrapper>
   );

@@ -20,7 +20,7 @@ const FavoritePlayListWrapper = styled.div`
 
   h1 {
     margin-right: 10px;
-    font-size: 16px;
+    font-size: 20px;
     color: #c4c4c4;
   }
 `;

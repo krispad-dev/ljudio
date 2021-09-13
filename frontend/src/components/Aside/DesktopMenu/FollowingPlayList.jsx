@@ -8,18 +8,18 @@ function FollowingPlayList() {
     { playlistName: 'Calm Piano', song: 17 },
     { playlistName: 'Hard Drums', song: 30 },
     { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Calm Piano', song: 17 },
+    { playlistName: 'Hard Drums', song: 30 },
+    { playlistName: 'Solo Guitar', song: 25 },
+    { playlistName: 'Calm Piano', song: 17 },
+    { playlistName: 'Hard Drums', song: 30 },
+    { playlistName: 'Solo Guitar', song: 25 },
   ];
 
   return (
     <FollowingPlayListWrapper>
       {mockData.map((playlist) => {
-        return (
-          <PlayListCardItem
-            url={'/'}
-            playlistName={playlist.playlistName}
-            song={playlist.song}
-          />
-        );
+        return <PlayListCardItem url={'/'} playlistName={playlist.playlistName} song={playlist.song} />;
       })}
     </FollowingPlayListWrapper>
   );
@@ -31,6 +31,7 @@ const FollowingPlayListWrapper = styled.ul`
   overflow: scroll;
   overflow-x: hidden;
   margin-bottom: 10px;
+  width: 200px;
 `;
 
 export default FollowingPlayList;
