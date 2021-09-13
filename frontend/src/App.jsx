@@ -46,11 +46,11 @@ function App() {
 
       {!fullscreenVideoMode && (
         <main>
-          <Route exact path='/login' component={LoginPage}>
+          <Route exact path='/login' component={LoginPage} >
             {auth && auth.loggedIn && <Redirect to='/' />}
           </Route>
 
-          <Route exact path='/playlist/:id' component={PlaylistsPage}></Route>
+          <Route exact path='/playlist/:id' component={PlaylistsPage} />
 
           <Route exact path='/' component={MusicPage} />
           <Route exact path='/register' component={RegisterPage} />

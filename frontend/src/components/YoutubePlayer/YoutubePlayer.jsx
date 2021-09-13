@@ -52,14 +52,14 @@ function YouTubePlayer() {
 	}, [ windowWidth ]);
 
 
-	useEffect(() => {
+/* 	useEffect(() => {
 		const interval = setInterval(async () => {
 			const currentTime = await playerRef.current.internalPlayer.getCurrentTime();
 			dispatch({ type: PLAYER_ACTIONS.SET_CURRENT_TIME, payload: currentTime });
 		}, 1000);
 		return () => clearInterval(interval);
 	}, []);
-
+ */
 
 	useEffect(async () => {
 		const durationInMinutes = await playerRef.current.internalPlayer.getDuration();

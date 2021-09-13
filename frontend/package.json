@@ -12,6 +12,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@react-hook/window-size": "^3.0.7",
+    "esbuild": "^0.12.27",
     "react": "^17.0.0",
     "react-content-loader": "^6.0.3",
     "react-dom": "^17.0.0",

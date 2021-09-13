@@ -70,8 +70,9 @@ export async function getOneUserPlaylist(req, res) {
     // const formattedPlaylist = formatPlaylists(playlist);
 
     playlist.songs = playlist.songs.split(',');
+    const songs = playlist.songs;
 
-    return res.status(200).json({ success: true, playlist });
+    return res.status(200).json({ success: true, playlist, songs });
   } catch (error) {
     return res.status(400).json({ success: false });
   }

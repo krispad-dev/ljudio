@@ -1,21 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import SongCardItem from '../components/PlaylistsPage/SongCardItem';
-import PlaylistCard from '../components/PlaylistsPage/PlaylistCard';
-import useGetOneSavedUserPlaylist from '../hooks/useGetOneSavedUserPlaylist';
+import PlaylistList from '../components/PlaylistsPage/PlaylistList';
 
-function PlaylistsPage() {
-  let { id } = useParams();
-
-  const { data } = useGetOneSavedUserPlaylist(id);
+function PlaylistsPage({ match }) {
 
   return (
     <PlaylistsPageWrapper>
-      <PlaylistCard />
-      {/* {mockData.map((item) => {
-        return <SongCardItem {...item} />;
-      })} */}
+        <PlaylistList match={match} />
     </PlaylistsPageWrapper>
   );
 }
