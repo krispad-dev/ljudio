@@ -16,11 +16,41 @@ export async function createPlaylist(req, res) {
     const playList = { id, userId, title };
 
     // Store playlist in database
-    await Playlists.createPlaylist(playList);
+    await Playlists.CreatePlaylist(playList);
 
     return res.status(201).json({ success: true });
   } catch (err) {
     console.log(err);
+    return res.status(400).json({ success: false });
+  }
+}
+
+export async function getAllUserPlaylists(req, res) {
+  try {
+    // User id from middleware
+    const userId = req.obj.id;
+
+    //Gets all playlists from one user
+    const userPlaylists = await Playlists.GetAllUserPlaylists(userId);
+
+    return res.status(200).json({ success: true, userPlaylists });
+  } catch (error) {
+    return res.status(400).json({ success: false });
+  }
+}
+
+export async function saveSongToUserPlaylist(req, res) {
+  try {
+    // videoId and playlistId from frontend
+    const songInfo = req.body;
+
+    songInfo.id = nanoid();
+
+    // Saves the song to playlist.
+    await Playlists.SaveSongToPlaylist(songInfo);
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
     return res.status(400).json({ success: false });
   }
 }
