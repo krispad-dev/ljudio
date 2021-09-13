@@ -6,7 +6,6 @@ import Marquee from 'react-fast-marquee';
 function CurrentSongSideScroller() {
 	const [{ currentSong, isPlaying }, dispatch] = useContext(playerControllerStateContext);
 
-	console.log(currentSong);
 
 	return (
 		<CurrentSongDisplayerWrapper>
@@ -15,7 +14,7 @@ function CurrentSongSideScroller() {
 					<strong>&nbsp;{currentSong && currentSong.name}</strong>
 				</h4>
 				{currentSong  && <p> ///&nbsp;&nbsp;</p>}
-				<p>&nbsp;{currentSong  && currentSong.artist.name}</p>
+				<p>&nbsp;{currentSong && currentSong.artist && currentSong.artist.name && currentSong.artist.name}</p>
 			</Marquee>
 		</CurrentSongDisplayerWrapper>
 	);

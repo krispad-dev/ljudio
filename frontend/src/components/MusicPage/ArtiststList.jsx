@@ -18,7 +18,7 @@ function ArtiststList() {
 					data.searchResults &&
 					data.searchResults.content &&
 					data.searchResults.content.map(item => {
-						return <ArtistCard key={item.videoId} {...item} />;
+						return <ArtistCard key={item.browseId} {...item} />;
 					})}
 			</ArtistsListWrapper>
 		</>

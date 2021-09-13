@@ -17,7 +17,7 @@ function AlbumsList() {
 					data.searchResults &&
 					data.searchResults.content &&
 					data.searchResults.content.map(item => {
-						return <AlbumCard key={item.videoId} {...item} />;
+						return <AlbumCard key={item.playlistId} {...item} />;
 					})}
 			</AlbumsListWrapper>
 		</>

@@ -9,8 +9,6 @@ function SearchBar() {
   
 	const { state, dispatch } = useContext(UiContext);
 
-	console.log(state.headerSearchString);
-
 	let timeout = 0;
 
 	async function searchMusic(e) {
