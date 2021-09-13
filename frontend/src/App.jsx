@@ -15,42 +15,45 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import MusicPage from './pages/MusicPage';
+import PlaylistsPage from './pages/PlaylistsPage';
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 
 const notLoggedInStyles = {
-	gridTemplateAreas: "'header header' 'main main' 'footer footer'",
+  gridTemplateAreas: "'header header' 'main main' 'footer footer'",
 };
 
 function App() {
-	const { data: auth } = useAuth();
-	const { pathname } = useLocation();
-	const [windowWidth, windowHeight] = useWindowSize();
+  const { data: auth } = useAuth();
+  const { pathname } = useLocation();
+  const [windowWidth, windowHeight] = useWindowSize();
 
-	return (
-		<div style={auth && !auth.loggedIn ? notLoggedInStyles : {}} className='App'>
-			<GlobalStyle />
+  return (
+    <div style={auth && !auth.loggedIn ? notLoggedInStyles : {}} className='App'>
+      <GlobalStyle />
 
-			{pathname !== '/register' && pathname !== '/login' && <Header />}
+      {pathname !== '/register' && pathname !== '/login' && <Header />}
 
-			<Aside />
+      <Aside />
 
-			<main>
-				<Route exact path='/login' component={LoginPage}>
-					{auth && auth.loggedIn && <Redirect to='/' />}
-				</Route>
+      <main>
+        <Route exact path='/login' component={LoginPage}>
+          {auth && auth.loggedIn && <Redirect to='/' />}
+        </Route>
 
-				<Route exact path='/' component={MusicPage} />
-				<Route exact path='/register' component={RegisterPage} />
-			</main>
+        <Route exact path='/playlist/:id' component={PlaylistsPage}></Route>
 
-			{pathname !== '/register' && pathname !== '/login' && <Footer />}
+        <Route exact path='/' component={MusicPage} />
+        <Route exact path='/register' component={RegisterPage} />
+      </main>
 
-			<YouTubePlayer />
-		</div>
-	);
+      {pathname !== '/register' && pathname !== '/login' && <Footer />}
+
+      <YouTubePlayer />
+    </div>
+  );
 }
 
 export default App;
