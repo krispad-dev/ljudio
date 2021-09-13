@@ -31,8 +31,12 @@ export const Playlists = {
 
   GetOneUserPlaylist: (playlistId) => {
     try {
-      console.log(playlistId);
-      const query = `SELECT * FROM playlists WHERE id = ?`;
+      const query = `SELECT title, playlistId, followCount, GROUP_CONCAT(videoId, ',') 
+      AS songs
+      FROM playlist_song
+      JOIN playlists
+      ON playlists.id = playlist_song.playlistId
+      WHERE playlists.id = ?`;
       return all(query, playlistId);
     } catch (error) {
       return error;

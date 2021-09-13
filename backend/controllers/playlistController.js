@@ -61,7 +61,11 @@ export async function getOneUserPlaylist(req, res) {
     const playlistId = req.params.id;
 
     //Get one playlist from database
-    const playlist = await Playlists.GetOneUserPlaylist(playlistId);
+    const playlist = await Playlists.GetOneUserPlaylist(playlistId)[0];
+
+    // const formattedPlaylist = formatPlaylists(playlist);
+
+    playlist.songs = playlist.songs.split(',');
 
     return res.status(200).json({ success: true, playlist });
   } catch (error) {
