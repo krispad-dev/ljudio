@@ -28,4 +28,14 @@ export const Playlists = {
       return error;
     }
   },
+
+  GetOneUserPlaylist: (playlistId) => {
+    try {
+      console.log(playlistId);
+      const query = `SELECT * FROM playlists WHERE id = ?`;
+      return all(query, playlistId);
+    } catch (error) {
+      return error;
+    }
+  },
 };

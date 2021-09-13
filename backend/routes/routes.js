@@ -14,14 +14,20 @@ musicRouter.get('/songs', MusicController.searchSongs);
 musicRouter.get('/artists', MusicController.searchArtists);
 musicRouter.get('/albums', MusicController.searchAlbums);
 
+//Gets all playlists connected to logged in user from databse.
 userRouter.get('/playlists/user-playlists', verifyToken, PlaylistController.getAllUserPlaylists);
 
+//Gets one playlist from database
+userRouter.get('/playlists/user-playlists/1/:id', PlaylistController.getOneUserPlaylist);
+
+//Creates a playlist
+userRouter.post('/playlists/user-playlists', verifyToken, PlaylistController.createPlaylist);
+
+//Saves a song to playlist.
 userRouter.post('/playlists/user-playlists/songs', verifyToken, PlaylistController.saveSongToUserPlaylist);
 
 userRouter.post('/', UserController.createUser);
-userRouter.post('/playlists/user-playlists', verifyToken, PlaylistController.createPlaylist);
 userRouter.post('/login', UserController.loginUser);
 userRouter.put('/logout', UserController.logoutUser);
 
 authRouter.get('/', verifyToken, authCheck);
-

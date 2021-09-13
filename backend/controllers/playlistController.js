@@ -54,3 +54,17 @@ export async function saveSongToUserPlaylist(req, res) {
     return res.status(400).json({ success: false });
   }
 }
+
+export async function getOneUserPlaylist(req, res) {
+  try {
+    //PlaylistID from url params
+    const playlistId = req.params.id;
+
+    //Get one playlist from database
+    const playlist = await Playlists.GetOneUserPlaylist(playlistId);
+
+    return res.status(200).json({ success: true, playlist });
+  } catch (error) {
+    return res.status(400).json({ success: false });
+  }
+}
