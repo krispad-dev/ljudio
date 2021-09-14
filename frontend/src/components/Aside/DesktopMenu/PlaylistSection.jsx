@@ -6,16 +6,16 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 // Compontents
 import FavoritePlayList from './FavoritePlayList';
 import SavedPlayLists from './SavedPlayLists';
-import FollowingPlayList from './FollowingPlayList';
+import FollowedPlaylists from './FollowedPlayLists';
 import AddPlayListButton from './AddPlayListButton';
 
 function PlaylistSection() {
   const [savedPlaylistIsOpen, setSavedPlaylistIsOpen] = useState(false);
-  const [followingPlaylistIsOpen, setFollowingPlaylistIsOpen] = useState(false);
+  const [followedPlaylistsIsOpen, setFollowedPlaylistsIsOpen] = useState(false);
 
   return (
     <PlayListSectionWrapper>
-{/*       <FavoritePlayList /> */}
+      {/*       <FavoritePlayList /> */}
 
       <Button
         className='savedPlaylist-btn'
@@ -28,15 +28,15 @@ function PlaylistSection() {
       {savedPlaylistIsOpen && <SavedPlayLists />}
 
       <Button
-        className='followingPlaylist-btn'
+        className='followedPlaylists-btn'
         color='primary'
         endIcon={<KeyboardArrowDownIcon />}
-        onClick={() => setFollowingPlaylistIsOpen(!followingPlaylistIsOpen)}
+        onClick={() => setFollowedPlaylistsIsOpen(!followedPlaylistsIsOpen)}
       >
         Following
       </Button>
 
-      {followingPlaylistIsOpen && <FollowingPlayList />}
+      {followedPlaylistsIsOpen && <FollowedPlaylists />}
 
       <AddPlayListButton />
     </PlayListSectionWrapper>
@@ -54,7 +54,7 @@ const PlayListSectionWrapper = styled.div`
   align-items: flex-start;
 
   .savedPlaylist-btn,
-  .followingPlaylist-btn {
+  .followedPlaylists-btn {
     color: #c4c4c4;
     padding: 0;
   }
