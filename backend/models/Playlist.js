@@ -51,6 +51,7 @@ export const Playlists = {
         FROM playlists
         JOIN users ON playlists.userId = users.id
         ORDER BY followCount DESC
+        LIMIT 50
       `;
 
       return all(query);
