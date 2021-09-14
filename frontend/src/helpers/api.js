@@ -82,6 +82,8 @@ export const API = {
     ONE_SAVED_USER_PLAYLIST: `${playlists}/user-playlists/1`,
     CREATE: `${playlists}/user-playlists`,
     SAVE_SONG_TO_PLAYLIST: `${playlists}/user-playlists/songs`,
+    FOLLOW_PLAYLIST: `${playlists}/followed-playlists`,
+    GET_FOLLOWED_PLAYLISTS: `${playlists}/followed-playlists`,
   },
 
   SONGS: {
@@ -91,6 +93,6 @@ export const API = {
   MUSIC: {
     ARTISTS: `${music}/artists`,
     ALBUMS: `${music}/albums`,
+    PLAYLISTS: `${music}/playlists`,
   },
 };
-
