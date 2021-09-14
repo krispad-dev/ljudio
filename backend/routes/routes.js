@@ -15,12 +15,14 @@ musicRouter.get('/artists', MusicController.searchArtists);
 musicRouter.get('/albums', MusicController.searchAlbums);
 musicRouter.get('/playlists', verifyToken, MusicController.getAllPlaylists);
 
-
 //Gets all playlists connected to logged in user from databse.
 userRouter.get('/playlists/user-playlists', verifyToken, PlaylistController.getAllUserPlaylists);
 
 // Follow playlist
 userRouter.post('/playlists/followed-playlists', verifyToken, UserController.followPlaylist);
+
+//Unfollow Playlist
+userRouter.delete('/playlists/followed-playlists', verifyToken, UserController.unFollowPlaylist);
 
 // Followed playlists
 userRouter.get('/playlists/followed-playlists', verifyToken, UserController.getFollowedPlaylists);
@@ -31,8 +33,14 @@ userRouter.get('/playlists/user-playlists/1/:id', verifyToken, PlaylistControlle
 //Creates a playlist
 userRouter.post('/playlists/user-playlists', verifyToken, PlaylistController.createPlaylist);
 
+//Remove Playlist
+userRouter.delete('/playlists/user-playlists', PlaylistController.removePlaylist);
+
 //Saves a song to playlist.
 userRouter.post('/playlists/user-playlists/songs', verifyToken, PlaylistController.saveSongToUserPlaylist);
+
+//Remove song from playlist
+userRouter.delete('/playlists/user-playlists/songs', verifyToken, PlaylistController.removeSongFromPlaylist);
 
 userRouter.post('/', UserController.createUser);
 userRouter.post('/login', UserController.loginUser);

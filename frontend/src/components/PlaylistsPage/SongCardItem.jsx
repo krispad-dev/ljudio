@@ -12,7 +12,7 @@ function SongCardItem({ song }) {
 	console.log(data);
 
 	return (
-		<PlaylistsCardWrapper>
+		<PlaylistsCardWrapper >
 			<div className='artist-song-container'>
 				<h2>{data && data.searchResults.content[0].name}</h2>
 				<h3>{data && data.searchResults.content[0].artist.name}</h3>

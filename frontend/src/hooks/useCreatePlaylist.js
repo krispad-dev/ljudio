@@ -7,7 +7,7 @@ export default function useCreatePlaylist() {
 
 	return useMutation(data => Fetch.POST(data, API.PLAYLIST.CREATE), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('user-playlists');
+			queryClient.invalidateQueries(['playlists']);
 		},
 	});
 }

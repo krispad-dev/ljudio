@@ -5,6 +5,7 @@ export default function useFollowPlaylist() {
   const queryClient = useQueryClient();
 
   return useMutation((data) => Fetch.POST(data, API.PLAYLIST.FOLLOW_PLAYLIST), {
+    
     onSuccess: () => {
       queryClient.invalidateQueries(['playlists']);
     },

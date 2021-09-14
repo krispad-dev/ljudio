@@ -7,7 +7,7 @@ export default function useSaveSongToPlaylist() {
 
     return useMutation(data => Fetch.POST(data, API.PLAYLIST.SAVE_SONG_TO_PLAYLIST), {
       onSuccess: () => {
-        queryClient.invalidateQueries(['playlist']);
+        queryClient.invalidateQueries(['playlist', 'playlists']);
       }
 
     });

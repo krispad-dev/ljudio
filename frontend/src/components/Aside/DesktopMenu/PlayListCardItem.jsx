@@ -3,10 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function PlayListCardItem({ title, id }) {
+function PlayListCardItem({ title, playlistId, id }) {
   return (
     <PlayListCardItemWrapper>
-      <Link to={`/playlist/${id}`}>
+      <Link to={`/playlist/${playlistId ? playlistId : id}`}>
         <p>{title}</p>
       </Link>
     </PlayListCardItemWrapper>

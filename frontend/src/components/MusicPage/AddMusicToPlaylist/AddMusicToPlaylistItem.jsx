@@ -9,6 +9,7 @@ function AddMusicToPlaylistItem({ title, id }) {
 
 	const { mutate } = useSaveSongToPlaylist()
 	const { state, dispatch } = useContext(UiContext)
+	console.log(state.songToSaveToUserPlaylist);
 
 
 
