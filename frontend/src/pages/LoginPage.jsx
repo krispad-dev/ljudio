@@ -1,9 +1,16 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import styled from 'styled-components';
+
+import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { Link, useHistory } from 'react-router-dom';
+
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import { IoIosArrowRoundBack } from 'react-icons/io';
 import useLoginUser from '../hooks/useLoginUser';
 
 const schema = yup.object().shape({
@@ -16,41 +23,56 @@ function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  const history = useHistory();
   const { mutate, data } = useLoginUser();
 
-  console.log('loginpage data', data);
-
   const onSubmitHandler = (data) => {
-    console.log('submit', data);
-    
     mutate(data);
   };
 
   return (
     <LoginPageWrapper>
+      <IoIosArrowRoundBack
+        onClick={() => history.goBack()}
+        style={{ color: 'white', fontSize: '4rem', position: 'absolute', right: '1rem', top: '1rem' }}
+      />
+
       <div className='login-page-contentWrapper'>
-        <h1 className='login-heading'>Login</h1>
+        <h1 className='login-heading'>SIGN IN</h1>
+
         <form onSubmit={handleSubmit(onSubmitHandler)} className='login-form'>
-          <input
-            {...register('email')}
-            type='email'
-            name='email'
-            placeholder='Email'
-          />
+          <TextField fullWidth={true} label='Email' variant='filled' {...register('email')} type='email' name='email' />
+
           <p>{errors.email?.message}</p>
-          <input
+
+          <TextField
+            fullWidth={true}
+            variant={'filled'}
+            label={'Password'}
             {...register('password')}
             type='password'
             name='password'
-            placeholder='Password'
           />
-          <p>{errors.password?.message} {data && data.error && data.error}</p>
-          <button type='submit'>SUBMIT</button>
+
+          <p>
+            {' '}
+            {errors.password?.message} {data && data.error && data.error}{' '}
+          </p>
+
+          <Button fullWidth={true} variant='outlined' color={'primary'} type='submit'>
+            SUBMIT
+          </Button>
+
+          <p>Don't have an account yet?</p>
+
+          <Link style={{ textDecoration: 'underline' }} to='/register'>
+            {' '}
+            Sign up here
+          </Link>
         </form>
       </div>
     </LoginPageWrapper>
@@ -66,7 +88,7 @@ const LoginPageWrapper = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: #131313;
+  background-color: #000000;
 
   .login-page-contentWrapper {
     max-width: 700px;
@@ -95,21 +117,11 @@ const LoginPageWrapper = styled.div`
     align-items: center;
 
     input {
-      width: 100%;
       text-align: center;
       padding-top: 14px;
       padding-bottom: 14px;
       border-radius: 5px;
-    }
-
-    button {
-      width: 100%;
-      color: white;
-      background-color: black;
-      border: 1px solid rgb(207, 203, 203);
-      padding: 14px;
-      font-size: 0.6rem;
-      font-weight: lighter;
+      background-color: white;
       border-radius: 5px;
     }
 
