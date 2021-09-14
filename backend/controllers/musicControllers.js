@@ -1,4 +1,5 @@
 import { Music } from '../models/Music.js';
+import { Playlists } from '../models/Playlist.js';
 
 
 export async function searchMusic(req, res) {
@@ -43,5 +44,19 @@ export async function searchArtists(req, res) {
 		res.status(200).json({ success: true, searchResults });
 	} catch (error) {
 		res.status(400).json({ success: false, message: error });
+	}
+}
+
+export async function getAllPlaylists(req, res) {
+
+	try {
+		
+		const playlists = await Playlists.GetAllPlaylists();
+
+		return res.json({ success: true, playlists });
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).json({ success: false, message: err.message });
 	}
 }

@@ -42,4 +42,21 @@ export const Playlists = {
       return error;
     }
   },
+
+  GetAllPlaylists: () => {
+    try {
+      
+      const query = `
+        SELECT username, title, playlists.id AS playlistId, followCount 
+        FROM playlists
+        JOIN users ON playlists.userId = users.id
+        ORDER BY followCount DESC
+      `;
+
+      return all(query);
+
+    } catch (error) {
+      return error;
+    }
+  }
 };
