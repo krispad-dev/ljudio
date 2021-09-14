@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { Bcrypt, generateToken } from '../helpers/helpers.js';
+import { Playlists } from '../models/Playlist.js';
 import { Users } from '../models/User.js';
 
 export async function createUser(req, res) {
@@ -72,5 +73,42 @@ export function logoutUser(req, res) {
     res.clearCookie('authToken').json({ success: true });
   } catch (error) {
     res.status(400).json({ success: false, message: error });
+  }
+}
+
+export async function followPlaylist(req, res) {
+
+  try {
+
+    const userId = req.obj.id;
+    const playlistId = req.body.playlistId;
+
+    const obj = {
+      userId,
+      playlistId
+    };
+
+    await Playlists.FollowPlaylist(obj);
+
+    return res.json({ success: true });
+    
+  } catch (error) {
+      return res.json({ success: false });
+  }
+
+}
+
+export async function getFollowedPlaylists(req, res) {
+  
+  try {
+
+    const userId = req.obj.id;
+
+    const followedPlaylists = await Playlists.GetFollowedPlaylists({ userId });
+
+    return res.json({ success: true, followedPlaylists });
+    
+  } catch (error) {
+    console.log(error);
   }
 }

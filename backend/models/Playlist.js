@@ -45,7 +45,6 @@ export const Playlists = {
 
   GetAllPlaylists: () => {
     try {
-      
       const query = `
         SELECT username, title, playlists.id AS playlistId, followCount 
         FROM playlists
@@ -55,9 +54,45 @@ export const Playlists = {
       `;
 
       return all(query);
-
     } catch (error) {
       return error;
     }
+  },
+
+  FollowPlaylist: (data) => {
+    try {
+
+      const query = `
+        INSERT INTO followers (userId, playlistId)
+        VALUES (:userId, :playlistId)
+      `;
+
+      return run(query, data);
+      
+    } catch (error) {
+      return error;
+    }
+  },
+
+  GetFollowedPlaylists(data) {
+
+    try {
+
+      const query = `
+        SELECT userId, playlists.id AS playlistId, username, title, followCount
+        FROM playlists
+        JOIN users
+        ON users.id = playlists.userId
+        JOIN followers 
+        ON followers.playlistId = playlists.id
+        WHERE followers.userId = :userId
+      `;
+
+      return all(query, data);
+      
+    } catch (error) {
+      return error;
+    }
+
   }
 };

@@ -15,8 +15,15 @@ musicRouter.get('/artists', MusicController.searchArtists);
 musicRouter.get('/albums', MusicController.searchAlbums);
 musicRouter.get('/playlists', verifyToken, MusicController.getAllPlaylists);
 
+
 //Gets all playlists connected to logged in user from databse.
 userRouter.get('/playlists/user-playlists', verifyToken, PlaylistController.getAllUserPlaylists);
+
+// Follow playlist
+userRouter.post('/playlists/followed-playlists', verifyToken, UserController.followPlaylist);
+
+// Followed playlists
+userRouter.get('/playlists/followed-playlists', verifyToken, UserController.getFollowedPlaylists);
 
 //Gets one playlist from database
 userRouter.get('/playlists/user-playlists/1/:id', verifyToken, PlaylistController.getOneUserPlaylist);
