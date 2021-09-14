@@ -31,7 +31,8 @@ export default function CreatePlaylist() {
 
 const CreatePalyListWrpapper = styled.div`
   display: flex;
-  width: 100%;
+
+  flex-wrap: wrap;
 
   .createPlaylist-btn {
     display: flex;

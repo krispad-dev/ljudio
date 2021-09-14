@@ -15,7 +15,7 @@ function PlaylistSection() {
 
   return (
     <PlayListSectionWrapper>
-      <FavoritePlayList />
+{/*       <FavoritePlayList /> */}
 
       <Button
         className='savedPlaylist-btn'
@@ -44,9 +44,7 @@ function PlaylistSection() {
 }
 
 const PlayListSectionWrapper = styled.div`
-  top: 0;
-  left: 0;
-  height: 1000px;
+  height: auto;
   width: auto;
   margin-left: 1rem;
   scrollbar-width: thin;

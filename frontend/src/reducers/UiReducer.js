@@ -4,7 +4,8 @@ export const UI_STATE_ACTIONS = {
   SET_HEADER_SEARCH_STRING: 'SET_HEADER_SEARCH_STRING',
   SET_SONG_TO_SAVE_TO_USER_PLAYLIST: 'SET_SONG_TO_SAVE_TO_USER_PLAYLIST',
   SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN: 'SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN',
-  SET_FULLSCREEN_VIDEO_MODE: 'SET_FULLSCREEN_VIDEO_MODE' 
+  SET_FULLSCREEN_VIDEO_MODE: 'SET_FULLSCREEN_VIDEO_MODE',
+  SET_PLAYLIST_ID_TO_SAVE: 'SET_PLAYLIST_ID_TO_SAVE'
   
 }
 
@@ -40,6 +41,12 @@ export function UiReducer(state, action) {
        return {
         ...state,
         saveSongToPlaylistSelectorSectionIsOpen: !state.saveSongToPlaylistSelectorSectionIsOpen,
+      };
+
+    case UI_STATE_ACTIONS.SET_PLAYLIST_ID_TO_SAVE:
+       return {
+        ...state,
+        playlistIdToSave: action.payload.playlistIdToSave,
       };
 
     default:

@@ -5,9 +5,10 @@ export const UiContext = createContext();
 
 const initialState = {
 
-  headerSearchString: '',
+  headerSearchString: 'home',
   songToSaveToUserPlaylist: '',
   saveSongToPlaylistSelectorSectionIsOpen: false,
+  playlistIdToSave: '',
 
 };
 

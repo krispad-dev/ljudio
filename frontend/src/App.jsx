@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { playerControllerStateContext } from './context/YouTubePlayerContext';
 
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Route, Redirect, useLocation, Switch } from 'react-router-dom';
 
 import GlobalStyle from './GlobalStyles';
 
@@ -46,12 +46,18 @@ function App() {
 
       {!fullscreenVideoMode && (
         <main>
+
+    
+          
           <Route exact path='/login' component={LoginPage} >
             {auth && auth.loggedIn && <Redirect to='/' />}
           </Route>
 
-          <Route exact path='/playlist/:id' component={PlaylistsPage} />
-
+{/*           <Route exact path='/playlist/' component={PlaylistsPage} />  */}
+          <Route exact path='/playlist/:id' component={PlaylistsPage} /> 
+{/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
+          
+          
           <Route exact path='/' component={MusicPage} />
           <Route exact path='/register' component={RegisterPage} />
         </main>

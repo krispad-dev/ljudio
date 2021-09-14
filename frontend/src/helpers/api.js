@@ -93,3 +93,4 @@ export const API = {
     ALBUMS: `${music}/albums`,
   },
 };
+

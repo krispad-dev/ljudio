@@ -60,19 +60,18 @@ export async function getOneUserPlaylist(req, res) {
     //PlaylistID from url params
     const playlistId = req.params.id;
 
-    console.log('From Controller' + playlistId);
-
     //Get one playlist from database
     const playlist = await Playlists.GetOneUserPlaylist(playlistId)[0];
 
-    console.log(playlist);
 
     // const formattedPlaylist = formatPlaylists(playlist);
 
     playlist.songs = playlist.songs.split(',');
-    const songs = playlist.songs;
 
-    return res.status(200).json({ success: true, playlist, songs });
+
+    console.log(playlist);
+
+    return res.status(200).json({ success: true, playlist });
   } catch (error) {
     return res.status(400).json({ success: false });
   }

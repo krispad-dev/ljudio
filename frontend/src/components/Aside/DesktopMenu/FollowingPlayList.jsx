@@ -26,6 +26,9 @@ function FollowingPlayList() {
 }
 
 const FollowingPlayListWrapper = styled.ul`
+	::-webkit-scrollbar {
+		display: none;
+	}
   color: #c4c4c4;
   height: 10rem;
   overflow: scroll;

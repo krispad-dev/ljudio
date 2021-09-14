@@ -30,7 +30,9 @@ const StyledHeader = styled.header`
 	display: flex;
 	justify-content: center;
 
+
 	.header-container {
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;

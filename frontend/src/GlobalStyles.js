@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+
 body {
 	font-family: 'Roboto', sans-serif;
 	margin: 0;
@@ -18,8 +19,11 @@ body {
 }
 
 .App {
+	overflow: hidden;
 	display: grid;
 	grid-template-columns: 20% 80%;
+	height: 100vh;
+	width: 100vw;
 	grid-template-rows: 10vh auto 20vh;
 	grid-template-areas:
 		'header header'
@@ -28,12 +32,13 @@ body {
 }
 
 header {
+	width: 100%;
 	grid-area: header;
 	background-color: #111;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	box-shadow: 15px 15px 25px rgba(255, 255, 255, 1);
+
 }
 
 aside {
@@ -45,7 +50,7 @@ main {
 	grid-area: main;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	background-color: black;
 }
 
@@ -74,6 +79,7 @@ h6 {
 @media only screen and (max-width: 1000px) {
 	.App {
 		justify-content: space-between;
+		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
 		display: grid;
