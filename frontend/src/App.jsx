@@ -21,6 +21,7 @@ import PlaylistsPage from './pages/PlaylistsPage';
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
+import AllPlaylistsPage from './pages/AllPlaylistsPage';
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -53,7 +54,7 @@ function App() {
             {auth && auth.loggedIn && <Redirect to='/' />}
           </Route>
 
-{/*           <Route exact path='/playlist/' component={PlaylistsPage} />  */}
+          <Route exact path='/playlists' component={AllPlaylistsPage} />  
           <Route exact path='/playlist/:id' component={PlaylistsPage} /> 
 {/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
           

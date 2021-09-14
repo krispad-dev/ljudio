@@ -47,6 +47,10 @@ aside {
 }
 
 main {
+	::-webkit-scrollbar {
+	display: none;
+}
+	overflow: scroll;
 	grid-area: main;
 	display: flex;
 	justify-content: center;
