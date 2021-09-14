@@ -25,6 +25,18 @@ export async function createPlaylist(req, res) {
   }
 }
 
+export async function removePlaylist(req, res) {
+  try {
+    const id = req.body.id;
+
+    await Playlists.RemovePlaylist(id);
+
+    return res.status(201).json({ success: true });
+  } catch (err) {
+    return res.status(400).json({ success: false });
+  }
+}
+
 export async function getAllUserPlaylists(req, res) {
   try {
     // User id from middleware
@@ -54,6 +66,18 @@ export async function saveSongToUserPlaylist(req, res) {
     return res.status(400).json({ success: false });
   }
 }
+export async function removeSongFromPlaylist(req, res) {
+  try {
+    // videoId and playlistId from frontend
+    const songInfo = req.body;
+
+    await Playlists.RemoveSongFromPlaylist(songInfo);
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    return res.status(400).json({ success: false });
+  }
+}
 
 export async function getOneUserPlaylist(req, res) {
   try {
@@ -63,11 +87,9 @@ export async function getOneUserPlaylist(req, res) {
     //Get one playlist from database
     const playlist = await Playlists.GetOneUserPlaylist(playlistId)[0];
 
-
     // const formattedPlaylist = formatPlaylists(playlist);
 
     playlist.songs = playlist.songs.split(',');
-
 
     console.log(playlist);
 

@@ -9,6 +9,14 @@ export const Playlists = {
       return error;
     }
   },
+  RemovePlaylist: (id) => {
+    try {
+      const query = `DELETE FROM playlists WHERE id = ?`;
+      return run(query, id);
+    } catch (error) {
+      return error;
+    }
+  },
 
   GetAllUserPlaylists: (userId) => {
     try {
@@ -24,6 +32,16 @@ export const Playlists = {
     try {
       const query = `INSERT INTO playlist_song(id, playlistId, videoId) VALUES(:id, :playlistId, :videoId)`;
       return run(query, songInfo);
+    } catch (error) {
+      return error;
+    }
+  },
+
+  RemoveSongFromPlaylist: (data) => {
+    try {
+      console.log('MODEL', data);
+      const query = `DELETE FROM playlist_song WHERE videoId = ? AND playlistId = ?`;
+      return run(query, [data.videoId, data.playlistId]);
     } catch (error) {
       return error;
     }
@@ -61,23 +79,31 @@ export const Playlists = {
 
   FollowPlaylist: (data) => {
     try {
-
       const query = `
         INSERT INTO followers (userId, playlistId)
         VALUES (:userId, :playlistId)
       `;
 
       return run(query, data);
-      
+    } catch (error) {
+      return error;
+    }
+  },
+
+  UnFollowPlaylist: (data) => {
+    try {
+      const query = `
+       DELETE FROM followers WHERE userId = ? AND playlistId = ?
+      `;
+
+      return run(query, [data.userId, data.playlistId]);
     } catch (error) {
       return error;
     }
   },
 
   GetFollowedPlaylists(data) {
-
     try {
-
       const query = `
         SELECT playlists.userId, playlists.id AS playlistId, username, title, followCount
         FROM playlists
@@ -89,10 +115,8 @@ export const Playlists = {
       `;
 
       return all(query, data);
-      
     } catch (error) {
       return error;
     }
-
-  }
+  },
 };
