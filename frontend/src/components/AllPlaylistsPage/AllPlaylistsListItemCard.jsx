@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FollowBtn from '../FollowBtn';
 
-function AllPlaylistsListItemCard({ title, username, id }) {
+function AllPlaylistsListItemCard({ title, userName, playlistId }) {
+
 	return (
 		<AllPlaylistsListItemCardWrapper>
 			<div>
-				<Link to={`/playlists/${id}`}>
+				<Link to={`/playlists/${playlistId}`}>
 					<div
 						className='bg-image'
 						style={{
@@ -21,10 +22,10 @@ function AllPlaylistsListItemCard({ title, username, id }) {
 			<div className='info-container'>
 				<div>
 					<h2>{title}</h2>
-					<h4>By:{username}</h4>
+					<h4>By: &nbsp; {userName}</h4>
 				</div>
 
-				<FollowBtn />
+				<FollowBtn playlistId={playlistId} />
 			</div>
 		</AllPlaylistsListItemCardWrapper>
 	);

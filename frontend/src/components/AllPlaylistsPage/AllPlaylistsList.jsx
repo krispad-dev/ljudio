@@ -1,79 +1,16 @@
 import React from 'react';
 import AllPlaylistsListItemCard from './AllPlaylistsListItemCard';
 import styled from 'styled-components';
-/* import useGetAllPlaylists from '../../hooksuseGetAllPlaylists.js' */
+import useGetAllPlaylists from '../../hooks/useGetAllPlaylists' 
 
-const mockData = [
-	{
-		title: 'Skojfrisk',
-		username: 'KalleKula',
-	},
-	{
-		title: 'Rock',
-		username: 'KalleKula',
-	},
-	{
-		title: 'SmoothJazz',
-		username: 'KalleKula',
-	},
-	{
-		title: 'Creepy',
-		username: 'Roger',
-	},
-	{
-		title: 'Soul',
-		username: 'Erik',
-	},
-    {
-		title: 'Skojfrisk',
-		username: 'KalleKula',
-	},
-	{
-		title: 'Rock',
-		username: 'KalleKula',
-	},
-	{
-		title: 'SmoothJazz',
-		username: 'KalleKula',
-	},
-	{
-		title: 'Creepy',
-		username: 'Roger',
-	},
-	{
-		title: 'Soul',
-		username: 'Erik',
-	},
-    {
-		title: 'Skojfrisk',
-		username: 'KalleKula',
-	},
-	{
-		title: 'Rock',
-		username: 'KalleKula',
-	},
-	{
-		title: 'SmoothJazz',
-		username: 'KalleKula',
-	},
-	{
-		title: 'Creepy',
-		username: 'Roger',
-	},
-	{
-		title: 'Soul',
-		username: 'Erik',
-	},
-];
 
 function AllPlaylistsList() {
-/* 
-    const { data } = useGetAllPlaylists() */
+
+    const { data } = useGetAllPlaylists() 
+
 	return (
 		<AllPlaylistsListWrapper>
-
-			{mockData.map((playlist) => <AllPlaylistsListItemCard {...playlist} /> )}
-
+			{data && data.playlists && data.playlists.map((playlist) => <AllPlaylistsListItemCard {...playlist} /> )}
 		</AllPlaylistsListWrapper>
 	);
 }

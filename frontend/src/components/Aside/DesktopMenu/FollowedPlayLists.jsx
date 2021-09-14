@@ -6,23 +6,14 @@ import useGetFollowedPlaylists from '../../../hooks/useGetFollowedPlaylists';
 function FollowedPlaylists() {
   // PLACEHOLDER HERE WILL WE INMPORT DATA WITH React query
 
-  // const { data } = useGetFollowedPlaylists();
+   const { data } = useGetFollowedPlaylists();
 
-  const mockData = [
-    { title: 'Hard Drums', id: 1 },
-    { title: 'Solo Guitar', id: 2 },
-    { title: 'Calm Piano', id: 3 },
-    { title: 'Calm Piano', id: 4 },
-    { title: 'Hard Drums', id: 5 },
-    { title: 'Solo Guitar', id: 6 },
-    { title: 'Calm Piano', id: 7 },
-    { title: 'Hard Drums', id: 8 },
-    { title: 'Solo Guitar', id: 9 },
-  ];
+   console.log(data);
+
 
   return (
     <FollowingPlayListWrapper>
-      {mockData.map((playlist) => {
+      {data && data.followedPlaylists && data.followedPlaylists.map((playlist) => {
         return <PlayListCardItem {...playlist} />;
       })}
     </FollowingPlayListWrapper>

@@ -79,7 +79,7 @@ export const Playlists = {
     try {
 
       const query = `
-        SELECT userId, playlists.id AS playlistId, username, title, followCount
+        SELECT playlists.userId, playlists.id AS playlistId, username, title, followCount
         FROM playlists
         JOIN users
         ON users.id = playlists.userId

@@ -83,6 +83,8 @@ export async function followPlaylist(req, res) {
     const userId = req.obj.id;
     const playlistId = req.body.playlistId;
 
+    console.log(playlistId);
+
     const obj = {
       userId,
       playlistId
