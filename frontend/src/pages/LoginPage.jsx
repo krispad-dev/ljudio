@@ -37,7 +37,7 @@ function LoginPage() {
   return (
     <LoginPageWrapper>
       <IoIosArrowRoundBack
-        onClick={() => history.goBack()}
+        onClick={() => history.push('/')}
         style={{ color: 'white', fontSize: '4rem', position: 'absolute', right: '1rem', top: '1rem' }}
       />
 
