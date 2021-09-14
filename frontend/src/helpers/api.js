@@ -68,7 +68,6 @@ const playlists = '/api/users/playlists';
 const songs = '/api/music/songs';
 const music = '/api/music/';
 
-('/api/users/playlists/user-playlists/songs');
 
 export const API = {
   USER: {
@@ -81,9 +80,12 @@ export const API = {
     ALL_SAVED_USER_PLAYLISTS: `${playlists}/user-playlists`,
     ONE_SAVED_USER_PLAYLIST: `${playlists}/user-playlists/1`,
     CREATE: `${playlists}/user-playlists`,
+    REMOVE_PLAYLIST: `${playlists}/user-playlists`,
     SAVE_SONG_TO_PLAYLIST: `${playlists}/user-playlists/songs`,
+    REMOVE_SONG_FROM_PLAYLIST: `${playlists}/user-playlists/songs`,
     FOLLOW_PLAYLIST: `${playlists}/followed-playlists`,
     GET_FOLLOWED_PLAYLISTS: `${playlists}/followed-playlists`,
+    UNFOLLOW_PLAYLIST: `${playlists}/followed-playlists`
   },
 
   SONGS: {
