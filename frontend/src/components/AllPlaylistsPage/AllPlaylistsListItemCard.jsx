@@ -4,16 +4,21 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FollowBtn from '../FollowBtn';
 
+
+
+
 function AllPlaylistsListItemCard({ title, userName, playlistId }) {
+
+
 
 	return (
 		<AllPlaylistsListItemCardWrapper>
 			<div>
-				<Link to={`/playlists/${playlistId}`}>
+				<Link to={`/playlist/${playlistId}`}>
 					<div
 						className='bg-image'
 						style={{
-							backgroundImage: `url(https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80)`,
+							backgroundImage: `url(https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&=crop&w=1050&q=80)`,
 						}}
 					></div>
 				</Link>

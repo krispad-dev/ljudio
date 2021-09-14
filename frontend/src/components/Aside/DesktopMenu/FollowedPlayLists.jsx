@@ -8,8 +8,6 @@ function FollowedPlaylists() {
 
    const { data } = useGetFollowedPlaylists();
 
-   console.log(data);
-
 
   return (
     <FollowingPlayListWrapper>

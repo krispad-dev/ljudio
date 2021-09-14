@@ -8,9 +8,10 @@ function AllPlaylistsList() {
 
     const { data } = useGetAllPlaylists() 
 
+
 	return (
 		<AllPlaylistsListWrapper>
-			{data && data.playlists && data.playlists.map((playlist) => <AllPlaylistsListItemCard {...playlist} /> )}
+			{data && data.playlists && data.playlists.map((playlist) => <AllPlaylistsListItemCard key={playlist.playlistId} {...playlist} /> )}
 		</AllPlaylistsListWrapper>
 	);
 }
