@@ -10,7 +10,7 @@ function MenuItems() {
     <MenuItemsWrapper>
       <MenuItem url={'/'} icon={<HomeIcon />} text={'HOME'} />
       <MenuItem url={'/'} icon={<LibraryMusicIcon />} text={'MUSIC'} />
-      <MenuItem url={'/'} icon={<AddBoxIcon />} text={'PLAYLISTS'} />
+      <MenuItem url={'/playlists'} icon={<AddBoxIcon />} text={'PLAYLISTS'} />
       <div className='divider'></div>
     </MenuItemsWrapper>
   );
