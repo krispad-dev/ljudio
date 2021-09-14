@@ -28,7 +28,7 @@ function SongCard({ videoId, name, artist, thumbnails }) {
 		})
 		dispatch({ 
 			type: UI_STATE_ACTIONS.SET_SONG_TO_SAVE_TO_USER_PLAYLIST, 
-			payload: { songToSaveToUserPlaylist: videoId }
+			payload: { songToSaveToUserPlaylist: videoId ? videoId : '' }
 		})
 
 	}

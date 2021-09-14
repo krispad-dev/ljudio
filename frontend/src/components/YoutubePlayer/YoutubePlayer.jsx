@@ -76,7 +76,7 @@ function YouTubePlayer() {
 
 
 	function onEndHandler() {
-		dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE });
+/* 		dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE }); */
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING , playload: false })
 	}
