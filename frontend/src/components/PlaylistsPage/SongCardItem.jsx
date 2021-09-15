@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
 import useGetSongs from '../../hooks/useGetSongs';
+import { useParams } from 'react-router';
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
@@ -12,6 +14,8 @@ function SongCardItem({ song }) {
   //Video ID får göra en förfågan till Youtbe-api.
 
   const { data } = useGetSongs(song);
+  const { id } = useParams();
+
 
   return (
     <PlaylistsCardWrapper>
@@ -33,6 +37,7 @@ function SongCardItem({ song }) {
         <button className='play-btn'>{<PlayCircleOutlineIcon />}</button>
         <button className='add-btn'>{<AddCircleIcon />}</button>
         <button className='favorite-btn'>{<FavoriteIcon />}</button>
+        <RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
       </div>
     </PlaylistsCardWrapper>
   );

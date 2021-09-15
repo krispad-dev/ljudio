@@ -25,7 +25,7 @@ function PlaylistList() {
 			&& data.success 
 			&& data.playlist.songs 
 			&& data.playlist.songs.length > 0 
-			&& data.playlist.songs.map(song => <SongCardItem playlistId={data.playlist.playlistId} song={song} />)}
+			&& data.playlist.songs.map(song => <SongCardItem key={song} playlistId={data.playlist.playlistId} song={song} />)}
 			{data && !data.success && <h2>No songs here - add some :)</h2>}
 		</PlayListCaPlaylistListWrapper>
 	)
