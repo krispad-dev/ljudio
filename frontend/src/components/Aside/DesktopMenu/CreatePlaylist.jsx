@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import styled from 'styled-components';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import AddIcon from '@material-ui/icons/Add';
 
 import useCreatePlaylist from '../../../hooks/useCreatePlaylist';
 
@@ -11,20 +11,25 @@ export default function CreatePlaylist() {
 
   console.log(textFieldInput);
 
+  const savePlaylist = (e) => {
+    e.preventDefault();
+    mutate({ title: textFieldInput });
+    setTextFieldInput('');
+  };
+
   return (
     <CreatePalyListWrpapper>
-      <TextField
-        value={textFieldInput}
-        onChange={(e) => setTextFieldInput(e.target.value)}
-        size={'small'}
-        variant={'filled'}
-        color='primary'
-        placeholder={'title'}
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
-      />
-      <button className='createPlaylist-btn' onClick={() => mutate({ title: textFieldInput })}>
-        Save Playlist
-      </button>
+      <form onSubmit={savePlaylist}>
+        <AddIcon className='add-icon' onClick={savePlaylist} />
+        <TextField
+          value={textFieldInput}
+          onChange={(e) => setTextFieldInput(e.target.value)}
+          size={'small'}
+          variant={'filled'}
+          color='primary'
+          placeholder={'Title'}
+        />
+      </form>
     </CreatePalyListWrpapper>
   );
 }
@@ -34,21 +39,23 @@ const CreatePalyListWrpapper = styled.div`
 
   flex-wrap: wrap;
 
-  .createPlaylist-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #c4c4c4;
-    border: 1px solid #c4c4c4;
-    width: 100px;
-    text-align: center;
-  }
-
   input,
   select,
   textarea {
     color: #fff;
     font-weight: 200;
-    height: 1rem;
+    height: 0.5rem;
+    width: 8rem;
+  }
+
+  form {
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+  }
+
+  .add-icon {
+    color: #c4c4c4;
+    cursor: pointer;
   }
 `;

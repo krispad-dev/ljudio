@@ -18,18 +18,22 @@ const PlayListCardItemWrapper = styled.li`
     opacity: 60%;
     transition: 0.2s ease-in-out;
   }
+
   height: 3rem;
   background-color: #212121;
   border: 3px solid black;
   display: flex;
   align-items: center;
+  justify-content: center;
+
   a {
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 100%;
     text-decoration: none;
     color: #fff;
     cursor: pointer;
-    font-size: 14px;
   }
 `;
 

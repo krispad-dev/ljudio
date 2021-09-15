@@ -5,7 +5,7 @@ import CreatePlaylist from './CreatePlaylist';
 function AddPlayListButton() {
   return (
     <AddPlayListButtonWrapper>
-      <h1>Add Playlist</h1>
+      <h1>Add Playlist:</h1>
       <CreatePlaylist />
     </AddPlayListButtonWrapper>
   );
@@ -16,19 +16,10 @@ const AddPlayListButtonWrapper = styled.div`
   align-items: center;
 
   h1 {
-    font-size: 20px;
-  }
-
-  button {
-    all: unset;
-    cursor: pointer;
-    width: 2rem;
-    padding-right: 0.5rem;
-  }
-
-  .icon {
     color: #c4c4c4;
-    font-size: 2rem;
+    font-size: 1.1rem;
+    font-weight: lighter;
+    margin-bottom: 1rem;
   }
 `;
 

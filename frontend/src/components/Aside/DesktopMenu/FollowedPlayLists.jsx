@@ -6,14 +6,15 @@ import useGetFollowedPlaylists from '../../../hooks/useGetFollowedPlaylists';
 function FollowedPlaylists() {
   // PLACEHOLDER HERE WILL WE INMPORT DATA WITH React query
 
-   const { data } = useGetFollowedPlaylists();
-
+  const { data } = useGetFollowedPlaylists();
 
   return (
     <FollowingPlayListWrapper>
-      {data && data.followedPlaylists && data.followedPlaylists.map((playlist) => {
-        return <PlayListCardItem {...playlist} />;
-      })}
+      {data &&
+        data.followedPlaylists &&
+        data.followedPlaylists.map((playlist) => {
+          return <PlayListCardItem key={playlist.id} {...playlist} />;
+        })}
     </FollowingPlayListWrapper>
   );
 }
@@ -23,11 +24,10 @@ const FollowingPlayListWrapper = styled.ul`
     display: none;
   }
   color: #c4c4c4;
-  height: 10rem;
+  height: 5rem;
   overflow: scroll;
   overflow-x: hidden;
-  margin-bottom: 10px;
-  width: 200px;
+  width: 10rem;
 `;
 
 export default FollowedPlaylists;

@@ -22,6 +22,10 @@ const MenuItemsWrapper = styled.div`
   .divider {
     border-top: 1px solid #8c8b8b;
   }
+  h1 {
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+  }
 `;
 
 export default MenuItems;
