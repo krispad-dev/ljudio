@@ -57,6 +57,10 @@ const PlayListSectionWrapper = styled.div`
   .followedPlaylists-btn {
     color: #c4c4c4;
     padding: 0;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: lighter;
   }
 `;
 

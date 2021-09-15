@@ -1,24 +1,37 @@
 import React from 'react';
 import { BsHeart } from 'react-icons/bs';
 import styled from 'styled-components';
-
-/* import useGetFollowedPlaylists from '../hooks/useGetFollowedPlaylists'
- */
+import { isInPlaylist } from '../helpers/helpers'
 
 import useFollowPlaylist from '../hooks/useFollowPlaylist'
+import useGetFollowedPlaylists from '../hooks/useGetFollowedPlaylists'
+import useUnfollowPlaylist from '../hooks/useUnfollowPlaylist' 
 
 function FollowBtn({ playlistId }) {
 
-	const { mutate } = useFollowPlaylist() 
-/* 	const { data } = useGetFollowedPlaylists()
- */
+	const { mutate: follow } = useFollowPlaylist();
+	const { mutate: unFollow } = useUnfollowPlaylist();
+
+	const { data } = useGetFollowedPlaylists();
+
+
+
+	if (data && data.followedPlaylists) {
+		console.log();	
+	}
+
+	function onClickHandler() {
+		if (isInPlaylist(playlistId, data.followedPlaylists)) unFollow({ playlistId }) 
+		if (!isInPlaylist(playlistId, data.followedPlaylists)) 	follow({ playlistId }) 
+	}
 
 
 	return (
-		<FollowBtnWrapper onClick={() => mutate({ playlistId })} >
+		<FollowBtnWrapper onClick={onClickHandler} >
 			<BsHeart 
 			className={'follow-playlist-btn'} 
-			style={{ margin: '0.5rem', fontSize: ' 1.5rem' }} />
+			style={{ margin: '0.5rem', fontSize: ' 1.5rem', 
+			color: `${data && data.followedPlaylists && isInPlaylist(playlistId, data.followedPlaylists) ? 'red' : 'white'}` }} />
 		</FollowBtnWrapper>
 	);
 }
