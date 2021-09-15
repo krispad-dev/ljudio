@@ -12,7 +12,6 @@ function SongCardItem({ song }) {
   //Video ID får göra en förfågan till Youtbe-api.
 
   const { data } = useGetSongs(song);
-  console.log(data);
 
   return (
     <PlaylistsCardWrapper>
