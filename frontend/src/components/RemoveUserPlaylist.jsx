@@ -5,8 +5,6 @@ import useRemoveUserPlayList from '../hooks/useRemoveUserPlaylist';
 
 function RemoveUserPlaylist({ playlistId }) {
 
-    console.log(playlistId);
-
     const { mutate } = useRemoveUserPlayList();
 
     return (
