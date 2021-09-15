@@ -1,7 +1,7 @@
 import React from 'react';
-
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import RemoveUserPlaylist from '../../RemoveUserPlaylist';
 
 function PlayListCardItem({ title, playlistId, id }) {
   return (
@@ -9,6 +9,7 @@ function PlayListCardItem({ title, playlistId, id }) {
       <Link to={`/playlist/${playlistId ? playlistId : id}`}>
         <p>{title}</p>
       </Link>
+      <RemoveUserPlaylist playlistId={id} />
     </PlayListCardItemWrapper>
   );
 }
