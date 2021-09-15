@@ -2,14 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import RemoveUserPlaylist from '../../RemoveUserPlaylist';
+import useGetFollowedPlaylists from '../../../hooks/useGetFollowedPlaylists';
+import FollowBtn from '../../FollowBtn';
+
 
 function PlayListCardItem({ title, playlistId, id }) {
+
+  const { data } = useGetFollowedPlaylists();
+
   return (
     <PlayListCardItemWrapper>
       <Link to={`/playlist/${playlistId ? playlistId : id}`}>
         <p>{title}</p>
       </Link>
-      <RemoveUserPlaylist playlistId={id} />
+      {data && !data.followedPlaylists.find((item => item.playlistId === playlistId)) && <RemoveUserPlaylist playlistId={id} />}
+      {data && data.followedPlaylists.find((item => item.playlistId === playlistId)) && <FollowBtn playlistId={playlistId} />}
     </PlayListCardItemWrapper>
   );
 }
