@@ -1,17 +1,22 @@
 import React from 'react';
-import AllPlaylistsListItemCard from './AllPlaylistsListItemCard';
+
 import styled from 'styled-components';
-import useGetAllPlaylists from '../../hooks/useGetAllPlaylists' 
+
+import AllPlaylistsListItemCard from './AllPlaylistsListItemCard';
+import useGetAllPlaylists from '../../hooks/useGetAllPlaylists'
+
+
+
 
 
 function AllPlaylistsList() {
 
-    const { data } = useGetAllPlaylists() 
+    const { data: allPlaylists } = useGetAllPlaylists();
 
 
 	return (
 		<AllPlaylistsListWrapper>
-			{data && data.playlists && data.playlists.map((playlist) => <AllPlaylistsListItemCard key={playlist.playlistId} {...playlist} /> )}
+			{allPlaylists && allPlaylists.playlists && allPlaylists.playlists.map((playlist) => <AllPlaylistsListItemCard key={playlist.playlistId} {...playlist} /> )}
 		</AllPlaylistsListWrapper>
 	);
 }

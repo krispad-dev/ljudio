@@ -1,3 +1,3 @@
-export function isInPlaylist(arr, playlistId) {
-    arr.some((id) => id === playlistId )
+export function isInPlaylist(playlistId, arr) {
+    return arr.some((playlist) => playlist.playlistId === playlistId )
   }
