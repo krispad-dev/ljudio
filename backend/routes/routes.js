@@ -28,7 +28,7 @@ userRouter.delete('/playlists/followed-playlists', verifyToken, UserController.u
 userRouter.get('/playlists/followed-playlists', verifyToken, UserController.getFollowedPlaylists);
 
 //Gets one playlist from database
-userRouter.get('/playlists/user-playlists/1/:id', verifyToken, PlaylistController.getOneUserPlaylist);
+userRouter.get('/playlists/user-playlists/1/:id', PlaylistController.getOneUserPlaylist);
 
 //Creates a playlist
 userRouter.post('/playlists/user-playlists', verifyToken, PlaylistController.createPlaylist);

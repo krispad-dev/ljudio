@@ -47,18 +47,16 @@ function App() {
 
       {!fullscreenVideoMode && (
         <main>
-
-    
-          
-          <Route exact path='/login' component={LoginPage} >
+          <Route exact path='/login' component={LoginPage}>
             {auth && auth.loggedIn && <Redirect to='/' />}
           </Route>
 
-          <Route exact path='/playlists' component={AllPlaylistsPage} />  
-          <Route exact path='/playlist/:id' component={PlaylistsPage} /> 
-{/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
-          
-          
+          <Route exact path='/playlists' component={AllPlaylistsPage}>
+            {auth && !auth.loggedIn && <Redirect to='/' />}
+          </Route>
+          <Route exact path='/playlist/:id' component={PlaylistsPage} />
+          {/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
+
           <Route exact path='/' component={MusicPage} />
           <Route exact path='/register' component={RegisterPage} />
         </main>
