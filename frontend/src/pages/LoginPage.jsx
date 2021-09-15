@@ -64,7 +64,7 @@ function LoginPage() {
           </p>
 
           <Button fullWidth={true} variant='outlined' color={'primary'} type='submit'>
-            SUBMIT
+            SIGN IN
           </Button>
 
           <p>Don't have an account yet?</p>

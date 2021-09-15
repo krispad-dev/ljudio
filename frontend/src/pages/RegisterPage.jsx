@@ -103,7 +103,7 @@ function RegisterPage() {
           />
           <p>{errors.confirmPassword?.message}</p>
           <Button variant='outlined' color='primary' fullWidth={true} type='submit'>
-            SUBMIT
+            REGISTER
           </Button>
           <p>Already have an account ?</p>
 
