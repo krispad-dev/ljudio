@@ -36,13 +36,12 @@ function SearchBar() {
 
 const SearchBarWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   background-color: #fff;
   width: auto;
   height: 2rem;
   border-radius: 50px;
-  margin-right: 1rem;
+
 
   .searchInputs form {
     display: flex;

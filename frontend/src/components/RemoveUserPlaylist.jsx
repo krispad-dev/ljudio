@@ -9,7 +9,7 @@ function RemoveUserPlaylist({ playlistId }) {
 
     return (
         <TiDeleteOutline 
-        style={{ color: 'red', fontSize: '1.6rem' }}
+        style={{ color: '#fff', fontSize: '1.6rem', cursor: 'pointer' }}
         onClick={() => mutate({ id: playlistId })} />
     );
 

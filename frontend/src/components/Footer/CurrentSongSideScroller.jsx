@@ -3,8 +3,10 @@ import { playerControllerStateContext } from '../../context/YouTubePlayerContext
 import styled from 'styled-components';
 import Marquee from 'react-fast-marquee';
 
+
 function CurrentSongSideScroller() {
 	const [{ currentSong, isPlaying }, dispatch] = useContext(playerControllerStateContext);
+
 
 
 	return (
