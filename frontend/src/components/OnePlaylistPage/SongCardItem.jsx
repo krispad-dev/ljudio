@@ -14,7 +14,7 @@ function SongCardItem({ song, playlistId }) {
   //Video ID får göra en förfågan till Youtbe-api.
 
   const { data } = useGetSongs(song);
-  const { data: auth } = useAuth()
+  const { data: auth } = useAuth();
 
   const { data: userPlaylists } = useGetSavedUserPlaylists();
 
