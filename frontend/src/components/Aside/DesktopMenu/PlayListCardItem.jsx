@@ -7,7 +7,7 @@ function PlayListCardItem({ title, playlistId, id }) {
   return (
     <PlayListCardItemWrapper>
       <Link to={`/playlist/${playlistId ? playlistId : id}`}>
-        <p>{title}</p>
+        <p className='songTitle'>{title}</p>
       </Link>
     </PlayListCardItemWrapper>
   );
@@ -25,6 +25,12 @@ const PlayListCardItemWrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 2px;
+
+  .songTitle {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
 
   a {
     display: flex;
