@@ -68,6 +68,7 @@ export async function saveSongToUserPlaylist(req, res) {
     return res.status(400).json({ success: false });
   }
 }
+
 export async function removeSongFromPlaylist(req, res) {
   try {
     // videoId and playlistId from frontend
@@ -81,19 +82,27 @@ export async function removeSongFromPlaylist(req, res) {
   }
 }
 
+
 export async function getOneUserPlaylist(req, res) {
   try {
     //PlaylistID from url params
     const playlistId = req.params.id;
 
     //Get one playlist from database
-    const playlist = await Playlists.GetOneUserPlaylist(playlistId)[0];
+    let playlist = await Playlists.GetOneUserPlaylist(playlistId)[0];
 
-    // const formattedPlaylist = formatPlaylists(playlist);
+    // If the requested playlist doesn't contain any songs, return an empty array
+    if(Object.values(playlist).every(val => val === null)) {
+
+        const playlistInfo = await Playlists.GetPlaylistInfo(playlistId);
+
+        playlist = { ...playlistInfo, songs: [] };
+        
+        return res.status(200).json({ success: true, playlist });
+
+    }
 
     playlist.songs = playlist.songs.split(',');
-
-    console.log(playlist);
 
     return res.status(200).json({ success: true, playlist });
   } catch (error) {

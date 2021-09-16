@@ -12,9 +12,15 @@ function FollowedPlaylists() {
     <FollowingPlayListWrapper>
       {data &&
         data.followedPlaylists &&
+        data.followedPlaylists.length > 0 &&
         data.followedPlaylists.map((playlist) => {
-          return <PlayListCardItem key={playlist.id} {...playlist} />;
+          return <PlayListCardItem key={playlist.id} {...playlist} followItem={true} />;
         })}
+        {data &&
+          data.followedPlaylists &&
+          data.followedPlaylists.length === 0 &&
+          <p>No followed lists yet =/</p>
+        }
     </FollowingPlayListWrapper>
   );
 }

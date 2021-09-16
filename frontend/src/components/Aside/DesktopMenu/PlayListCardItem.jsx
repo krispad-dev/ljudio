@@ -3,21 +3,21 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import RemoveUserPlaylist from '../../RemoveUserPlaylist';
 import useGetFollowedPlaylists from '../../../hooks/useGetFollowedPlaylists';
-import FollowBtn from '../../FollowBtn';
 import { isInPlaylist } from '../../../helpers/helpers';
 
 
-function PlayListCardItem({ title, playlistId, id }) {
+function PlayListCardItem({ title, playlistId, id, followItem }) {
 
-  const { data } = useGetFollowedPlaylists();
-
+  const { data: followed } = useGetFollowedPlaylists();
+  
   return (
     <PlayListCardItemWrapper>
       <Link to={`/playlist/${playlistId ? playlistId : id}`}>
         <p>{title}</p>
+        
       </Link>
-      {data && !isInPlaylist(playlistId, data.followedPlaylists) && <RemoveUserPlaylist playlistId={id} />}
-      {data && isInPlaylist(playlistId, data.followedPlaylists) && <FollowBtn playlistId={playlistId} />}
+      {followed && !isInPlaylist(playlistId, followed.followedPlaylists) && <RemoveUserPlaylist playlistId={id} />}
+
     </PlayListCardItemWrapper>
   );
 }
