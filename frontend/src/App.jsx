@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { playerControllerStateContext } from './context/YouTubePlayerContext';
+import { UiContext } from './context/UiState'
+import { UI_STATE_ACTIONS } from './reducers/UiReducer'
 
-import { Route, Redirect, useLocation, Switch } from 'react-router-dom';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 
 import GlobalStyle from './GlobalStyles';
 
@@ -16,12 +18,13 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import MusicPage from './pages/MusicPage';
-import PlaylistsPage from './pages/PlaylistsPage';
+import OnePlaylistPage from './pages/OnePlaylistPage';
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 import AllPlaylistsPage from './pages/AllPlaylistsPage';
+import MobileMenu from './components/MobileMenu/MobileMenu';
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -32,6 +35,7 @@ function App() {
   const { pathname } = useLocation();
   const [{ fullscreenVideoMode }, dispatch] = useContext(playerControllerStateContext);
   const [windowWidth, windowHeight] = useWindowSize();
+  const { state } = useContext(UiContext)
 
   return (
     <div style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
@@ -47,6 +51,9 @@ function App() {
 
       {!fullscreenVideoMode && (
         <main>
+
+         {state.mobileMenuIsOpen && windowWidth < 980 && auth.loggedIn && <MobileMenu />}
+
           <Route exact path='/login' component={LoginPage}>
             {auth && auth.loggedIn && <Redirect to='/' />}
           </Route>
@@ -54,7 +61,8 @@ function App() {
           <Route exact path='/playlists' component={AllPlaylistsPage}>
             {auth && !auth.loggedIn && <Redirect to='/' />}
           </Route>
-          <Route exact path='/playlist/:id' component={PlaylistsPage} />
+          
+          <Route exact path='/playlist/:id' component={OnePlaylistPage} />
           {/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
 
           <Route exact path='/' component={MusicPage} />

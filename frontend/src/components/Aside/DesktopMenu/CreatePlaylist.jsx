@@ -13,6 +13,9 @@ export default function CreatePlaylist() {
 
   const savePlaylist = (e) => {
     e.preventDefault();
+    if (textFieldInput.length === 0) {
+      return;
+    }
     mutate({ title: textFieldInput });
     setTextFieldInput('');
   };
@@ -51,7 +54,7 @@ const CreatePalyListWrpapper = styled.div`
   form {
     background-color: rgba(255, 255, 255, 0.1);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
   }
 
   .add-icon {

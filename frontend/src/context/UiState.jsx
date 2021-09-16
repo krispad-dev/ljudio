@@ -9,10 +9,12 @@ const initialState = {
   songToSaveToUserPlaylist: '',
   saveSongToPlaylistSelectorSectionIsOpen: false,
   playlistIdToSave: '',
+  mobileMenuIsOpen: false,
 
 };
 
 function UiState({ children }) {
+
   const [ state, dispatch ] = useReducer(UiReducer, initialState);
 
   return (

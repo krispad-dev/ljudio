@@ -6,18 +6,16 @@ import useGetFollowedPlaylists from '../../../hooks/useGetFollowedPlaylists';
 import { isInPlaylist } from '../../../helpers/helpers';
 
 
-function PlayListCardItem({ title, playlistId, id, followItem }) {
+function PlayListCardItem({ title, playlistId, id }) {
 
-  const { data: followed } = useGetFollowedPlaylists();
+  const { data } = useGetFollowedPlaylists();
   
   return (
     <PlayListCardItemWrapper>
       <Link to={`/playlist/${playlistId ? playlistId : id}`}>
-        <p>{title}</p>
-        
+        <p className='songTitle'>{title}</p>
       </Link>
-      {followed && !isInPlaylist(playlistId, followed.followedPlaylists) && <RemoveUserPlaylist playlistId={id} />}
-
+      {data && !isInPlaylist(playlistId, data.followedPlaylists) && <RemoveUserPlaylist playlistId={id} />}
     </PlayListCardItemWrapper>
   );
 }
@@ -34,6 +32,12 @@ const PlayListCardItemWrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 2px;
+
+  .songTitle {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
 
   a {
     display: flex;
@@ -47,3 +51,4 @@ const PlayListCardItemWrapper = styled.li`
 `;
 
 export default PlayListCardItem;
+
