@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ShareUrlBtn from '../ShareUrlBtn';
 import FollowBtn from '../FollowBtn';
+import { useParams } from 'react-router';
 
-function PlaylistTitleHeader({ title, playlistId }) {
+function PlaylistTitleHeader({ title }) {
+
+  const { id } = useParams()
+
+
   return (
     <PlaylistTitleHeaderWrapper>
       <div className='playlist-title-container'>
@@ -16,7 +21,7 @@ function PlaylistTitleHeader({ title, playlistId }) {
         <div className='playlist-info'>
           <h4>PLAYLIST</h4>
           <h1>{title}</h1>
-          <FollowBtn playlistId={playlistId} />
+          <FollowBtn playlistId={id} />
         </div>
       </div>
       <div className='share-container'>
