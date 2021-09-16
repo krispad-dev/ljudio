@@ -70,7 +70,7 @@ function App() {
         </main>
       )}
 
-    {/*   {pathname !== '/register' && pathname !== '/login' && <Footer />} */}
+      {pathname !== '/register' && pathname !== '/login' && <Footer />}
     </div>
   );
 }
