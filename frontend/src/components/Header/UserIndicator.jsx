@@ -11,7 +11,7 @@ function UserIndicator() {
 	return (
 		<UserIndicatorWrappe>
 			<h4>{data && data.user && data.user.userName}</h4>
-            <FaRegUserCircle style={{color: '#202a5d', fontSize: '1.2rem'}} />
+            <FaRegUserCircle style={{color: '#fff', fontSize: '1rem'}} />
 		
 		</UserIndicatorWrappe>
 	);

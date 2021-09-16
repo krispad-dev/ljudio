@@ -4,6 +4,7 @@ import useGetSongs from '../../hooks/useGetSongs';
 import MusicPlayBtn from '../MusicPlayBtn';
 import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
 import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
+import useAuth from '../../hooks/useAuth';
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
@@ -13,6 +14,7 @@ function SongCardItem({ song, playlistId }) {
   //Video ID får göra en förfågan till Youtbe-api.
 
   const { data } = useGetSongs(song);
+  const { data: auth } = useAuth()
 
   const { data: userPlaylists } = useGetSavedUserPlaylists();
 
@@ -43,7 +45,7 @@ function SongCardItem({ song, playlistId }) {
             artist={data && data.searchResults.content[0].artist.name}
             thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
           />
-          {isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
+          {userPlaylists && auth.loggedIn && isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
             <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
           )}
         </div>

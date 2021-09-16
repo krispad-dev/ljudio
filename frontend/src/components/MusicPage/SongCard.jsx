@@ -47,6 +47,7 @@ function SongCard({ videoId, name, artist, thumbnails }) {
           <BsPlusCircle
             style={{
               marginRight: '1rem',
+              fontSize: '1.2rem',
               cursor: 'pointer',
               color: `${
                 state.saveSongToPlaylistSelectorSectionIsOpen && videoId === state.songToSaveToUserPlaylist
@@ -76,7 +77,7 @@ const SongCardWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 
   .thumbnail-title-container {
     display: flex;
@@ -100,6 +101,7 @@ const SongCardWrapper = styled.div`
   }
 
   .play-symbol-container {
+    margin-right: 0.5rem;
     height: auto;
     display: flex;
     justify-content: center;

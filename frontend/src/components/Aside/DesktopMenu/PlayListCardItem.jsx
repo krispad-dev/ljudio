@@ -17,7 +17,6 @@ function PlayListCardItem({ title, playlistId, id }) {
         <p className='songTitle'>{title}</p>
       </Link>
       {data && !isInPlaylist(playlistId, data.followedPlaylists) && <RemoveUserPlaylist playlistId={id} />}
-      {data && isInPlaylist(playlistId, data.followedPlaylists) && <FollowBtn playlistId={playlistId} />}
     </PlayListCardItemWrapper>
   );
 }
