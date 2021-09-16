@@ -54,7 +54,7 @@ const CreatePalyListWrpapper = styled.div`
   form {
     background-color: rgba(255, 255, 255, 0.1);
     display: flex;
-    align-items: center;
+    align-items: flex-end;
   }
 
   .add-icon {

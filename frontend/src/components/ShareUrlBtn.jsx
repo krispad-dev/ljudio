@@ -37,8 +37,8 @@ function ShareUrlBtn({ iconFontSize }) {
   );
 }
 
-export default ShareUrlBtn;
-
 const ShareUrlBtnWrapper = styled.div`
   cursor: pointer;
 `;
+
+export default ShareUrlBtn;

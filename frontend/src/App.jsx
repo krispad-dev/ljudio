@@ -16,7 +16,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import MusicPage from './pages/MusicPage';
-import PlaylistsPage from './pages/PlaylistsPage';
+import OnePlaylistPage from './pages/OnePlaylistPage';
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
@@ -54,7 +54,7 @@ function App() {
           <Route exact path='/playlists' component={AllPlaylistsPage}>
             {auth && !auth.loggedIn && <Redirect to='/' />}
           </Route>
-          <Route exact path='/playlist/:id' component={PlaylistsPage} />
+          <Route exact path='/playlist/:id' component={OnePlaylistPage} />
           {/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
 
           <Route exact path='/' component={MusicPage} />

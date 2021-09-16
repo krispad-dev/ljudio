@@ -7,3 +7,7 @@ export const durationConverter = (duration) => {
 export function isInPlaylist(playlistId, arr) {
   return arr.some((playlist) => playlist.playlistId === playlistId);
 }
+
+export function isInUserPlaylist(playlistId, arr) {
+  return arr.some((playlist) => playlist.id === playlistId);
+}

@@ -8,7 +8,8 @@ import MenuItem from './MenuItem';
 function MenuItems() {
   return (
     <MenuItemsWrapper>
-      <MenuItem url={'/'} icon={<HomeIcon />} text={'HOME'} />
+      {/*       <MenuItem url={'/'} icon={<HomeIcon />} text={'HOME'} />
+       */}
       <MenuItem url={'/'} icon={<LibraryMusicIcon />} text={'MUSIC'} />
       <MenuItem url={'/playlists'} icon={<AddBoxIcon />} text={'PLAYLISTS'} />
       <div className='divider'></div>
