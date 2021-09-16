@@ -9,7 +9,8 @@ import UserIndicator from '../../Header/UserIndicator';
 function MenuItems() {
   return (
     <MenuItemsWrapper>
-      <MenuItem url={'/'} icon={<HomeIcon />} text={'HOME'} />
+      {/*       <MenuItem url={'/'} icon={<HomeIcon />} text={'HOME'} />
+       */}
       <MenuItem url={'/'} icon={<LibraryMusicIcon />} text={'MUSIC'} />
       <MenuItem url={'/playlists'} icon={<AddBoxIcon />} text={'PLAYLISTS'} />
       <UserIndicator />
