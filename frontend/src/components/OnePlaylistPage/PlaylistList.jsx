@@ -22,7 +22,7 @@ function PlaylistList() {
       <PlaylistTitleHeader
         title={data && data.success && data.playlist && data.playlist.title}
         playlistId={data && data.success && data.playlist && data.playlist.playlistId}
-        thumbnail={data && data.success && data.playlist.songs}
+        playlist={data && data.success && data.playlist}
       />
       {data &&
         data.success &&

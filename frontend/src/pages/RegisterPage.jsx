@@ -47,8 +47,6 @@ function RegisterPage() {
       });
 
       const res = await req.json();
-
-      console.log(res);
     };
     createUser();
 
