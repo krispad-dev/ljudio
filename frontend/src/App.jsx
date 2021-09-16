@@ -45,7 +45,7 @@ function App() {
 
       <Aside />
 
-      <main>
+      <main className={'yt-player-main'}>
         <YouTubePlayer />
       </main>
 

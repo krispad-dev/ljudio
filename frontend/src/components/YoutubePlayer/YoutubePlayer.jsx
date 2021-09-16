@@ -16,7 +16,7 @@ function YouTubePlayer() {
 	const [ { fullscreenVideoMode, currentSong, currentTime, isPlaying }, dispatch ] = useContext(playerControllerStateContext);
 	const [ windowWidth, windowHeight ] = useWindowSize();
 
-	console.log(isPlaying);
+
 
 
 	const opts = {
@@ -45,13 +45,13 @@ function YouTubePlayer() {
 	}
 
 	function setSize(windowWidth) {
-		return playerRef.current.internalPlayer.setSize(windowWidth);
+		return playerRef.current.internalPlayer.setSize(windowWidth, windowHeight - 200);
 	}
 
 
 	useEffect(() => {
 
-		setSize(windowWidth, windowHeight);
+		setSize(windowWidth);
 	
 	}, [ windowWidth ]);
 
@@ -127,9 +127,8 @@ export default YouTubePlayer;
 const IframeWrapper = styled.div`
 
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
+	justify-content: flex-start;
+	align-items: flex-start;
 
 
 	.mask-top {

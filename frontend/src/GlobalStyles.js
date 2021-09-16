@@ -139,6 +139,12 @@ ul {
 	scrollbar-width: none; /* Firefox */
 }
 
+
+.yt-player-main  {
+	overflow: hidden;
+}
+
+
 `;
 
 export default GlobalStyle;
