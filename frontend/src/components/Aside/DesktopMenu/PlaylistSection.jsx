@@ -45,7 +45,7 @@ function PlaylistSection() {
 
 const PlayListSectionWrapper = styled.div`
   height: auto;
-  width: auto;
+  width: 100%;
   margin-left: 1rem;
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.5) transparent;

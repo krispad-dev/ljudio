@@ -26,7 +26,8 @@ const SavedPlayListsWrapper = styled.ul`
   overflow: scroll;
   overflow-x: hidden;
   margin-bottom: 10px;
-  width: 10rem;
+  width: auto;
+  min-width: 10rem;
 `;
 
 export default SavedPlayLists;

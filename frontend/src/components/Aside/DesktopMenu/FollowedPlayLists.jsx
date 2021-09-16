@@ -27,7 +27,8 @@ const FollowingPlayListWrapper = styled.ul`
   height: 5rem;
   overflow: scroll;
   overflow-x: hidden;
-  width: 10rem;
+  width: auto;
+  min-width: 10rem;
 `;
 
 export default FollowedPlaylists;

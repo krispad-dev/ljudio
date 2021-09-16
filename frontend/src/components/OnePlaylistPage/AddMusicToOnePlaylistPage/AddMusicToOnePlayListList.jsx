@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import AddMusicToPlaylistItem from './AddMusicToPlaylistItem';
+import AddMusicToOnePlaylistItem from './AddMusicToOnePlaylistItem';
 import useGetSavedUserPlaylists from '../../../hooks/useGetSavedUserPlaylists';
 
-function AddMusicToPlayListList() {
+function AddMusicToOnePlayListList() {
   const { data } = useGetSavedUserPlaylists();
 
+  console.log(data);
+
   return (
-    <AddMusicToPlayListListWrapper>
-      {data && data.userPlaylists && data.userPlaylists.map((playlist) => <AddMusicToPlaylistItem {...playlist} />)}
-    </AddMusicToPlayListListWrapper>
+    <AddMusicToOnePlayListListWrapper>
+      {data && data.userPlaylists && data.userPlaylists.map((playlist) => <AddMusicToOnePlaylistItem {...playlist} />)}
+    </AddMusicToOnePlayListListWrapper>
   );
 }
 
-export default AddMusicToPlayListList;
-
-const AddMusicToPlayListListWrapper = styled.ul`
+const AddMusicToOnePlayListListWrapper = styled.div`
   animation: grow ease-in-out 0.1s;
 
   @keyframes grow {
@@ -32,7 +32,9 @@ const AddMusicToPlayListListWrapper = styled.ul`
   height: auto;
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
-  right: 7rem;
-  top: 7rem;
+  right: 20rem;
+  top: 25rem;
   border-radius: 5px;
 `;
+
+export default AddMusicToOnePlayListList;
