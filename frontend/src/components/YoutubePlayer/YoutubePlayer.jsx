@@ -9,10 +9,14 @@ import { useWindowSize } from '@react-hook/window-size';
 
 function YouTubePlayer() {
 
+
+
 	const playerRef = useRef();
 	
-	const [ { fullscreenVideoMode, currentSong, currentTime }, dispatch ] = useContext(playerControllerStateContext);
+	const [ { fullscreenVideoMode, currentSong, currentTime, isPlaying }, dispatch ] = useContext(playerControllerStateContext);
 	const [ windowWidth, windowHeight ] = useWindowSize();
+
+	console.log(isPlaying);
 
 
 	const opts = {
@@ -93,7 +97,7 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false })
 	}
 
-
+/* 	console.log(playerRef.current.internalPlayer); */
 
 	return (
 		<IframeWrapper
