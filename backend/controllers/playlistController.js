@@ -26,7 +26,9 @@ export async function createPlaylist(req, res) {
 }
 
 export async function removePlaylist(req, res) {
+
   try {
+    console.log(req.body);
     const id = req.body.id;
 
     await Playlists.RemovePlaylist(id);

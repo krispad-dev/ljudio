@@ -59,7 +59,7 @@ function SongCard({ videoId, name, artist, thumbnails }) {
         )}
         {/* {auth && auth.loggedIn && <BsHeart />}
          */}
-        <MusicPlayBtn videoId={videoId} name={name} artist={artist} />
+        <MusicPlayBtn videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
       </div>
     </SongCardWrapper>
   );

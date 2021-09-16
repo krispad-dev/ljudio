@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import PublishIcon from '@material-ui/icons/Publish';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ShareUrlBtn from '../ShareUrlBtn';
+import FollowBtn from '../FollowBtn';
 
-function PlaylistTitleHeader({ title }) {
+function PlaylistTitleHeader({ title, playlistId }) {
   return (
     <PlaylistTitleHeaderWrapper>
       <div className='playlist-title-container'>
@@ -15,11 +16,12 @@ function PlaylistTitleHeader({ title }) {
         <div className='playlist-info'>
           <h4>PLAYLIST</h4>
           <h1>{title}</h1>
-          <p>{<AddCircleIcon />}</p>
+          <FollowBtn playlistId={playlistId} />
         </div>
       </div>
       <div className='share-container'>
-        <h3>SHARE PLAYLIST {<PublishIcon />}</h3>
+        <h3>SHARE PLAYLIST</h3>
+        <ShareUrlBtn iconFontSize={'2rem'} />
       </div>
     </PlaylistTitleHeaderWrapper>
   );
@@ -27,49 +29,50 @@ function PlaylistTitleHeader({ title }) {
 
 const PlaylistTitleHeaderWrapper = styled.div`
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'playlist share';
   justify-items: flex-start;
 
   .playlist-title-container {
-    width: 100%;
-    margin: 1rem 1rem 1rem 1rem;
+    width: 90%;
     display: flex;
     align-items: center;
     grid-area: 'playlist';
+
+    .playlist-info {
+      margin-left: 10px;
+      h4 {
+        font-size: 0.8rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        cursor: pointer;
+      }
+    }
   }
 
   .share-container {
     grid-area: 'share';
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    align-items: center;
+
     h3 {
-      cursor: pointer;
-      margin: 1rem 1rem 2rem 1rem;
-    }
-  }
-
-  .playlist-info {
-    margin-left: 1rem;
-
-    h4 {
-      font-size: 0.8rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-    }
-
-    p {
-      cursor: pointer;
+      margin-right: 10px;
     }
   }
 
   .playlist-title-img {
-    width: 240px;
-    height: 200px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
   }
 `;
 

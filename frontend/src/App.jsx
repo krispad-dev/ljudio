@@ -51,7 +51,9 @@ function App() {
             {auth && auth.loggedIn && <Redirect to='/' />}
           </Route>
 
-          <Route exact path='/playlists' component={AllPlaylistsPage} />
+          <Route exact path='/playlists' component={AllPlaylistsPage}>
+            {auth && !auth.loggedIn && <Redirect to='/' />}
+          </Route>
           <Route exact path='/playlist/:id' component={OnePlaylistPage} />
           {/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
 

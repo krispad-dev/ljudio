@@ -19,7 +19,10 @@ function PlaylistList() {
 
   return (
     <PlayListCaPlaylistListWrapper>
-      <PlaylistTitleHeader title={data && data.success && data.playlist && data.playlist.title} />
+      <PlaylistTitleHeader
+        title={data && data.success && data.playlist && data.playlist.title}
+        playlistId={data && data.success && data.playlist && data.playlist.playlistId}
+      />
       {data &&
         data.success &&
         data.playlist.songs &&

@@ -14,8 +14,6 @@ function FollowBtn({ playlistId }) {
 
 	const { data } = useGetFollowedPlaylists();
 
-
-
 	if (data && data.followedPlaylists) {
 		console.log();	
 	}

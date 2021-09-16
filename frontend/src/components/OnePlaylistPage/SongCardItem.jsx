@@ -2,82 +2,101 @@ import React from 'react';
 import styled from 'styled-components';
 import useGetSongs from '../../hooks/useGetSongs';
 import MusicPlayBtn from '../MusicPlayBtn';
+import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
+import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
+import { isInUserPlaylist } from '../../helpers/helpers';
 
-function SongCardItem({ song }) {
+function SongCardItem({ song, playlistId }) {
   //Video ID får göra en förfågan till Youtbe-api.
 
   const { data } = useGetSongs(song);
 
+  const { data: userPlaylists } = useGetSavedUserPlaylists();
+
   return (
     <PlaylistsCardWrapper>
-      <div className='artist-song-container'>
-        <h2>{data && data.searchResults.content[0].name}</h2>
-        <h3>{data && data.searchResults.content[0].artist.name}</h3>
-      </div>
+      <div className='song-container'>
+        <div className='song-img-container'>
+          <img src={data && data.searchResults.content[0].thumbnails[1].url} alt='song-cover' />
+        </div>
+        <div className='song-artist-container'>
+          <h2>{data && data.searchResults.content[0].name}</h2>
+          <h3>{data && data.searchResults.content[0].artist.name}</h3>
+        </div>
 
-      <div className='album-container'>
-        <h2>Album</h2>
-        <h3>{data && data.searchResults.content[0].album.name}</h3>
-      </div>
+        <div className='song-album-container'>
+          <h2>Album</h2>
+          <h3>{data && data.searchResults.content[0].album.name}</h3>
+        </div>
 
-      <div className='duration-container'>
-        <h2>Duration</h2>
-        <h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
-      </div>
-      <div className='icon-container'>
-        <MusicPlayBtn
-          videoId={data && data.searchResults.content[0].videoId}
-          name={data && data.searchResults.content[0].name}
-          artist={data && data.searchResults.content[0].artist.name}
-        />
+        <div className='song-duration-container'>
+          <h2>Duration</h2>
+          <h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
+        </div>
+        <div className='song-icon-container'>
+          <MusicPlayBtn
+            videoId={song}
+            name={data && data.searchResults.content[0].name}
+            artist={data && data.searchResults.content[0].artist.name}
+            thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
+          />
+          {isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
+            <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
+          )}
+        </div>
       </div>
     </PlaylistsCardWrapper>
   );
 }
 
 const PlaylistsCardWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
 
-  .artist-song-container,
-  .album-container,
-  .duration-container {
-    margin: 1rem;
-    width: 250px;
+  .song-container {
+    margin-top: 10px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .song-img-container,
+  .song-artist-container,
+  .song-album-container,
+  .song-duration-container {
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
   }
 
-  .artist-song-container h2,
-  .album-container h2,
-  .duration-container h2 {
+  .song-icon-container {
+    width: 80%;
+    display: flex;
+  }
+
+  .song-img-container {
+    img {
+      border-radius: 2px;
+    }
+  }
+
+  .song-artist-container h2,
+  .song-album-container h2,
+  .song-duration-container h2 {
     color: c4c4c4;
   }
 
-  .artist-song-container h3,
-  .album-container h3,
-  .duration-container h3 {
+  .song-artist-container h3,
+  .song-album-container h3,
+  .song-duration-container h3 {
     font-weight: lighter;
     color: rgba(255, 255, 255, 0.5);
-  }
-
-  .icon-container {
-    width: 100px;
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .add-btn,
-  .favorite-btn {
-    all: unset;
-    color: #c4c4c4;
-    cursor: pointer;
   }
 `;
 

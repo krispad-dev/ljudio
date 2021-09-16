@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
 import { playerControllerStateContext } from '../context/YouTubePlayerContext';
 
-function MusicPlayBtn({ videoId, name, artist }) {
+function MusicPlayBtn({ videoId, name, artist, thumbails }) {
   const [{ currentSong, isPlaying }, dispatchPlayerControllerStateContext] = useContext(playerControllerStateContext);
 
   return (
@@ -19,6 +19,7 @@ function MusicPlayBtn({ videoId, name, artist }) {
               videoId: videoId,
               name: name,
               artist: artist,
+              tumbnails: thumbails,
             },
           })
         }

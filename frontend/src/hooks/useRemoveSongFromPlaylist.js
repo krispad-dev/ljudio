@@ -6,7 +6,9 @@ export default function useRemoveSongFromPlaylist() {
 
   return useMutation((data) => Fetch.DELETE(data, API.PLAYLIST.REMOVE_SONG_FROM_PLAYLIST), {
     onSuccess: () => {
-      queryClient.invalidateQueries('playlists');
+      queryClient.invalidateQueries(['playlist']);
+      queryClient.invalidateQueries(['playlists']);
+      queryClient.invalidateQueries(['user-playlists']);
     }
   });
 }
