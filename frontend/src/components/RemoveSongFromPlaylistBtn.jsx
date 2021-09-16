@@ -6,7 +6,7 @@ function RemoveSongFromPlaylistBtn({ videoId, playlistId }) {
   const { mutate } = useRemoveSongFromPlaylist();
 
   return (
-    <TiDeleteOutline style={{ color: '#fff', fontSize: '1.6rem' }} onClick={() => mutate({ videoId, playlistId })} />
+    <TiDeleteOutline style={{ color: '#fff', fontSize: '1.6rem', cursor: 'pointer' }} onClick={() => mutate({ videoId, playlistId })} />
   );
 }
 

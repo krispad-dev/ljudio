@@ -20,7 +20,7 @@ body {
 	grid-template-columns: 20% 80%;
 	height: 100vh;
 	width: 100vw;
-	grid-template-rows: 10vh auto 20vh;
+	grid-template-rows: 10vh 70vh 20vh;
 	grid-template-areas:
 		'header header'
 		'aside main'
@@ -138,6 +138,12 @@ ul {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+
+.yt-player-main  {
+	overflow: hidden;
+}
+
 
 `;
 
