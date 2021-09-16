@@ -10,11 +10,16 @@ import LoggedInUserOptions from './LoggedInUserOptions';
 function Header() {
 	const { data: auth } = useAuth();
 
+	console.log(auth);
+
 	return (
 		<StyledHeader>
 			<div className='header-container'>
-				<Logo />
-				<div>
+				<div className={'logo-container'}>
+					<Logo />
+				</div>
+
+				<div className={'search-bar-user-options-container'}>
 					<SearchBar />
 					{auth && !auth.loggedIn && <GuestUserOptions />}
 					{auth && auth.loggedIn && <LoggedInUserOptions />}
@@ -29,7 +34,7 @@ export default Header;
 const StyledHeader = styled.header`
 	display: flex;
 	justify-content: center;
-
+	width: 100%;
 
 	.header-container {
 		width: 100%;
@@ -42,6 +47,27 @@ const StyledHeader = styled.header`
 			display: flex;
 			justify-content: center;
 			align-items: center;
+		}
+		@media only screen and (max-width: 648px) {
+			flex-direction: column;
+			width: 100%;
+			.search-bar-user-options-container {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 648px) {
+		flex-direction: column;
+		.logo-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			margin: 1rem;
 		}
 	}
 `;

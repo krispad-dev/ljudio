@@ -11,7 +11,7 @@ body {
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
-	background-color: #000;
+	background-color: black;
 }
 
 .App {
@@ -34,7 +34,6 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-
 }
 
 aside {
@@ -49,7 +48,7 @@ main {
 	overflow: scroll;
 	grid-area: main;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: flex-start;
 	background-color: black;
 }
@@ -95,6 +94,16 @@ h6 {
 		display: none;
 	}
 }
+
+
+@media only screen and (max-width: 648px) {
+	.App {
+		grid-template-rows: auto auto 25vh;
+	}
+
+}
+
+
 
 a {
 	color: #fff;

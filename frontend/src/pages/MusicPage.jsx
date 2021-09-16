@@ -13,6 +13,7 @@ function MusicPage() {
 
 	return (
 		<MusicPageWrapper>
+
 			<div className='songs-list'>
 				{data && state.headerSearchString && <h1>SONGS</h1>}
 				<SongsList />
@@ -53,11 +54,7 @@ const MusicPageWrapper = styled.div`
 	}
 		margin-top: 2rem;
 		overflow-y: scroll;
-		height: 15rem;
 		overflow-y: scroll;
 
-		@media only screen and (max-width: 1000px) {
-			height: 10rem;
-		}
 	}
 `;

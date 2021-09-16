@@ -6,7 +6,6 @@ import ArtistCard from './ArtistCard';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 
 function ArtiststList() {
-	
 	const { state } = useContext(UiContext);
 	const { data, isLoading } = useGetArtists(state.headerSearchString);
 
@@ -28,9 +27,14 @@ function ArtiststList() {
 export default ArtiststList;
 
 const ArtistsListWrapper = styled.div`
+
 	width: 100%;
 	display: grid;
 	gap: 0.5rem;
-	grid-template-rows: 10rem 10rem;
+	grid-auto-rows: 12rem;
 	grid-template-columns: 20% 20% auto 20% 20%;
+	@media only screen and (max-width: 1000px) {
+		grid-template-columns: 50% 50%
+
+	}
 `;
