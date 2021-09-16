@@ -6,9 +6,7 @@ import FollowBtn from '../FollowBtn';
 import { useParams } from 'react-router';
 
 function PlaylistTitleHeader({ title }) {
-
-  const { id } = useParams()
-
+  const { id } = useParams();
 
   return (
     <PlaylistTitleHeaderWrapper>
@@ -25,7 +23,6 @@ function PlaylistTitleHeader({ title }) {
         </div>
       </div>
       <div className='share-container'>
-        <h3>SHARE PLAYLIST</h3>
         <ShareUrlBtn iconFontSize={'2rem'} />
       </div>
     </PlaylistTitleHeaderWrapper>
@@ -68,10 +65,6 @@ const PlaylistTitleHeaderWrapper = styled.div`
     justify-content: flex-end;
     align-items: flex-end;
     align-items: center;
-
-    h3 {
-      margin-right: 10px;
-    }
   }
 
   .playlist-title-img {
