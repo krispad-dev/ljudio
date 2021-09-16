@@ -4,73 +4,75 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ShareUrlBtn from '../ShareUrlBtn';
 import FollowBtn from '../FollowBtn';
 import { useParams } from 'react-router';
+import useGetSongs from '../../hooks/useGetSongs';
 
-function PlaylistTitleHeader({ title }) {
+function PlaylistTitleHeader({ title, thumbnail }) {
   const { id } = useParams();
+
+  // console.log('THUMBNAIL', thumbnail[0]);
+
+  // const { data } = useGetSongs(thumbnail[0]);
+
+  // console.log('THUMBNAIL', data);
 
   return (
     <PlaylistTitleHeaderWrapper>
-      <div className='playlist-title-container'>
-        <img
-          className='playlist-title-img'
-          src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
-          alt=''
-        />
-        <div className='playlist-info'>
-          <h4>PLAYLIST</h4>
-          <h1>{title}</h1>
-          <FollowBtn playlistId={id} />
-        </div>
-      </div>
-      <div className='share-container'>
-        <ShareUrlBtn iconFontSize={'2rem'} />
+      <img
+        className='playlist-title-img'
+        // src={
+        //   data && data.searchResults.content[0].thumbnails[1].url
+        //     ? data && data.searchResults.content[0].thumbnails[1].url
+        //     : 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+        // }
+        src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+        alt=''
+      />
+      <div className='playlist-info'>
+        <h2>{title}</h2>
+        <h3>by: {'user'}</h3>
+        <FollowBtn playlistId={id} />
+        <ShareUrlBtn />
       </div>
     </PlaylistTitleHeaderWrapper>
   );
 }
 
 const PlaylistTitleHeaderWrapper = styled.div`
-  display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 'playlist share';
-  justify-items: flex-start;
+  display: flex;
 
-  .playlist-title-container {
-    width: 90%;
+  img {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .playlist-info {
     display: flex;
-    align-items: center;
-    grid-area: 'playlist';
+    flex-direction: column;
+    justify-content: space-around;
 
-    .playlist-info {
-      margin-left: 10px;
-      h4 {
-        font-size: 0.8rem;
-      }
+    margin-left: 1rem;
 
-      h1 {
-        font-size: 2rem;
-      }
+    h2 {
+      font-size: 1.5rem;
+    }
 
-      p {
-        cursor: pointer;
-      }
+    h3 {
+      font-size: 1rem;
     }
   }
+  @media (min-width: 600px) {
+    img {
+      max-width: 350px;
+    }
+    .playlist-info {
+      h2 {
+        font-size: 2.2rem;
+      }
 
-  .share-container {
-    grid-area: 'share';
-    width: 90%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    align-items: center;
-  }
-
-  .playlist-title-img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
   }
 `;
 

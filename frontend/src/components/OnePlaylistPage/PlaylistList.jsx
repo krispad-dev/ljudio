@@ -12,7 +12,6 @@ function PlaylistList() {
   let { id } = useParams();
 
   const { data } = useGetOneSavedUserPlaylist(id);
- 
 
   useEffect(() => {
     queryClient.fetchQuery(['playlist']);
@@ -23,6 +22,7 @@ function PlaylistList() {
       <PlaylistTitleHeader
         title={data && data.success && data.playlist && data.playlist.title}
         playlistId={data && data.success && data.playlist && data.playlist.playlistId}
+        thumbnail={data && data.success && data.playlist.songs}
       />
       {data &&
         data.success &&
