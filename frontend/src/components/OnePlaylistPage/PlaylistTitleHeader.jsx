@@ -30,7 +30,6 @@ function PlaylistTitleHeader({ title, playlist }) {
       />
       <div className='playlist-info'>
         <h2>{title}</h2>
-        <h3>by: {'user'}</h3>
         <div className='follow-container'>
           <FollowBtn playlistId={id} />
         </div>
