@@ -9,7 +9,7 @@ function AddMusicToOnePlaylistItem({ title, id }) {
   const { mutate } = useSaveSongToPlaylist();
   const { state, dispatch } = useContext(UiContext);
 
-  function testHandler() {
+  function addSongToOnePlaylistHandler() {
     setTimeout(() => {
       dispatch({ type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN });
     }, 300);
@@ -18,7 +18,7 @@ function AddMusicToOnePlaylistItem({ title, id }) {
 
   return (
     <AddMusicToOnePlaylistItemWrapper>
-      <Button className='confirm-add-music-to-playlist-btn' onClick={testHandler}>
+      <Button className='confirm-add-music-to-playlist-btn' onClick={addSongToOnePlaylistHandler}>
         {title}
       </Button>
     </AddMusicToOnePlaylistItemWrapper>

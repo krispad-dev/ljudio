@@ -26,11 +26,37 @@ const AddMusicToOnePlayListListWrapper = styled.div`
     }
   }
 
-  background-color: rgba(0, 0, 0, 0.6);
+  width: auto;
+  background-color: #000;
   position: absolute;
-  right: 2rem;
-  top: 25rem;
+  right: 9rem;
+  top: 20rem;
   border-radius: 5px;
+  max-height: 25vh;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 600px) {
+    right: 9.5rem;
+    top: 30rem;
+  }
+
+  @media (min-width: 650px) {
+    right: 9.5rem;
+    top: 30rem;
+  }
+
+  @media (min-width: 1300px) {
+    right: 12rem;
+    top: 22rem;
+  }
+
+  @media (min-width: 1800px) {
+    right: 18rem;
+    top: 30rem;
+  }
 `;
 
 export default AddMusicToOnePlayListList;

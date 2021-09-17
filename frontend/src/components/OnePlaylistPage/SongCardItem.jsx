@@ -19,7 +19,6 @@ function SongCardItem({ song, playlistId }) {
   const { data } = useGetSongs(song);
   const { data: auth } = useAuth();
   const { state } = useContext(UiContext);
-
   const { data: userPlaylists } = useGetSavedUserPlaylists();
 
   return (
@@ -51,7 +50,7 @@ function SongCardItem({ song, playlistId }) {
           {userPlaylists && auth.loggedIn && isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
             <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
           )}
-          <AddToPlaylistBtn videoId={song} name={data && data.searchResults.content[0].name} />
+          <AddToPlaylistBtn videoId={song} />
         </div>
         {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
       </div>

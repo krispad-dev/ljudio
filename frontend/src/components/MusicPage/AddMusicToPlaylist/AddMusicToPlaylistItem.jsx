@@ -8,7 +8,6 @@ import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
 function AddMusicToPlaylistItem({ title, id }) {
   const { mutate } = useSaveSongToPlaylist();
   const { state, dispatch } = useContext(UiContext);
-  console.log(state.songToSaveToUserPlaylist);
 
   function onClickHandler() {
     setTimeout(() => {

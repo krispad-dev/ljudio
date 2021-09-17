@@ -21,9 +21,7 @@ function SongCard({ videoId, name, artist, thumbnails }) {
           <p>{name}</p>
         </div>
       </div>
-
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
-
       <div className='play-symbol-container'>
         {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
         {/* {auth && auth.loggedIn && <BsHeart />}
