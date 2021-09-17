@@ -1,33 +1,15 @@
-import React, { useContext, useState } from 'react';
-
+import React, { useContext } from 'react';
 import { UiContext } from '../../context/UiState';
-
-import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
-
-import { BsPlusCircle } from 'react-icons/bs';
-
 import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
 import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
 
 import MusicPlayBtn from '../MusicPlayBtn';
+import AddToPlaylistBtn from '../AddToPlaylistBtn';
 
 function SongCard({ videoId, name, artist, thumbnails }) {
   const { data: auth } = useAuth();
-
-  const { state, dispatch } = useContext(UiContext);
-  const [addToPlaylistsBoxIsOpen, setAddToPlaylistsBoxIsOpen] = useState(false);
-
-  function selectSongToAddToPlaylistHandler() {
-    setAddToPlaylistsBoxIsOpen(!addToPlaylistsBoxIsOpen);
-    dispatch({
-      type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN,
-    });
-    dispatch({
-      type: UI_STATE_ACTIONS.SET_SONG_TO_SAVE_TO_USER_PLAYLIST,
-      payload: { songToSaveToUserPlaylist: videoId ? videoId : '' },
-    });
-  }
+  const { state } = useContext(UiContext);
 
   return (
     <SongCardWrapper>
@@ -39,25 +21,9 @@ function SongCard({ videoId, name, artist, thumbnails }) {
           <p>{name}</p>
         </div>
       </div>
-
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
-
       <div className='play-symbol-container'>
-        {auth && auth.loggedIn && (
-          <BsPlusCircle
-            style={{
-              marginRight: '1rem',
-              fontSize: '1.2rem',
-              cursor: 'pointer',
-              color: `${
-                state.saveSongToPlaylistSelectorSectionIsOpen && videoId === state.songToSaveToUserPlaylist
-                  ? '#33408C'
-                  : ''
-              }`,
-            }}
-            onClick={selectSongToAddToPlaylistHandler}
-          />
-        )}
+        {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
         {/* {auth && auth.loggedIn && <BsHeart />}
          */}
         <MusicPlayBtn videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />

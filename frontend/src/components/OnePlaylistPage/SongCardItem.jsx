@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UiContext } from '../../context/UiState';
 import styled from 'styled-components';
 import useGetSongs from '../../hooks/useGetSongs';
 import MusicPlayBtn from '../MusicPlayBtn';
 import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
 import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 import useAuth from '../../hooks/useAuth';
+import AddMusicToOnePlayListList from './AddMusicToOnePlaylistPage/AddMusicToOnePlayListList';
+import AddToPlaylistBtn from '../AddToPlaylistBtn';
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
@@ -15,7 +18,7 @@ function SongCardItem({ song, playlistId }) {
 
   const { data } = useGetSongs(song);
   const { data: auth } = useAuth();
-
+  const { state } = useContext(UiContext);
   const { data: userPlaylists } = useGetSavedUserPlaylists();
 
   return (
@@ -33,7 +36,6 @@ function SongCardItem({ song, playlistId }) {
           <h2>Album</h2>
           <h3>{data && data.searchResults.content[0].album.name}</h3>
         </div>
-
         <div className='song-duration-container'>
           <h2>Duration</h2>
           <h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
@@ -45,10 +47,15 @@ function SongCardItem({ song, playlistId }) {
             artist={data && data.searchResults.content[0].artist.name}
             thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
           />
-          {userPlaylists && auth.loggedIn && isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
-            <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
-          )}
+          {userPlaylists &&
+            userPlaylists.usePlaylists &&
+            auth.loggedIn &&
+            isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
+              <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
+            )}
+          <AddToPlaylistBtn videoId={song} />
         </div>
+        {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
       </div>
     </PlaylistsCardWrapper>
   );
@@ -86,8 +93,10 @@ const PlaylistsCardWrapper = styled.div`
   }
 
   .song-icon-container {
-    width: 80%;
+    width: 40%;
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
 
   .song-img-container {

@@ -5,11 +5,11 @@ import useSaveSongToPlaylist from '../../../hooks/useSaveSongToPlaylist';
 import { UiContext } from '../../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
 
-function AddMusicToPlaylistItem({ title, id }) {
+function AddMusicToOnePlaylistItem({ title, id }) {
   const { mutate } = useSaveSongToPlaylist();
   const { state, dispatch } = useContext(UiContext);
 
-  function onClickHandler() {
+  function addSongToOnePlaylistHandler() {
     setTimeout(() => {
       dispatch({ type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN });
     }, 300);
@@ -17,28 +17,27 @@ function AddMusicToPlaylistItem({ title, id }) {
   }
 
   return (
-    <AddMusicToPlaylistItemWrapper>
-      <Button className='confirm-music-btn' onClick={onClickHandler}>
+    <AddMusicToOnePlaylistItemWrapper>
+      <Button className='confirm-add-music-to-playlist-btn' onClick={addSongToOnePlaylistHandler}>
         {title}
       </Button>
-    </AddMusicToPlaylistItemWrapper>
+    </AddMusicToOnePlaylistItemWrapper>
   );
 }
 
-const AddMusicToPlaylistItemWrapper = styled.li`
+const AddMusicToOnePlaylistItemWrapper = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.1);
   padding: 0.5rem;
   &:hover {
     opacity: 60%;
     cursor: pointer;
   }
 
-  .confirm-music-btn {
+  .confirm-add-music-to-playlist-btn {
     color: #2ecc71;
   }
 `;
 
-export default AddMusicToPlaylistItem;
+export default AddMusicToOnePlaylistItem;
