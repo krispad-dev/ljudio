@@ -6,6 +6,7 @@ import MenuItems from './MenuItems';
 import PlaylistSection from './PlaylistSection';
 import LogOutBtn from '../../LogOutBtn';
 import { useWindowSize } from '@react-hook/window-size';
+import AddPlayListButton from './AddPlayListButton';
 
 function DesktopMenu() {
 	const [windowWidth, windowHeight] = useWindowSize();
@@ -14,12 +15,15 @@ function DesktopMenu() {
 		<AsideMenuWrapper>
 			<MenuItems />
 			<h1 className='myPlaylist-h1'>MY PLAYLISTS</h1>
+			<AddPlayListButton />
 			<PlaylistSection />
+
 			{windowWidth < 980 && (
 				<div className='logout-btn-container'>
 					<LogOutBtn />
 				</div>
 			)}
+
 		</AsideMenuWrapper>
 	);
 }

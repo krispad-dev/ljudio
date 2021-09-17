@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UiContext } from '../../../context/UiState'
+import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import RemoveUserPlaylist from '../../RemoveUserPlaylist';
@@ -7,9 +9,10 @@ import { isInPlaylist } from '../../../helpers/helpers';
 
 function PlayListCardItem({ title, playlistId, id }) {
 	const { data } = useGetFollowedPlaylists();
+	const { state, dispatch } = useContext(UiContext)
 
 	return (
-		<PlayListCardItemWrapper>
+		<PlayListCardItemWrapper onClick={()=> dispatch({type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE})}>
 			<Link to={`/playlist/${playlistId ? playlistId : id}`}>
 				<p className='songTitle'>{title}</p>
 			</Link>
@@ -21,7 +24,7 @@ function PlayListCardItem({ title, playlistId, id }) {
 }
 
 const PlayListCardItemWrapper = styled.li`
-width: 2rem;
+	width: 2rem;
 	div {
 		display: flex;
 		justify-content: center;

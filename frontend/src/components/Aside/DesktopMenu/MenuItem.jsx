@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UiContext } from '../../../context/UiState'
+import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function MenuItem({ url, icon, text }) {
+
+	const { state, dispatch } = useContext(UiContext)
 	return (
-		<MenuItemWrapper>
+		<MenuItemWrapper onClick={()=> dispatch({type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE})}>
 			<Link to={url}>
 				<h1>{icon}</h1>
 				<h1>{text}</h1>

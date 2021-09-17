@@ -15,7 +15,7 @@ function PlaylistSection() {
 
   return (
     <PlayListSectionWrapper>
-          <AddPlayListButton />
+{/*           <AddPlayListButton /> */}
       {/*       <FavoritePlayList /> */}
 
       <Button
@@ -45,16 +45,18 @@ function PlaylistSection() {
 }
 
 const PlayListSectionWrapper = styled.div`
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
-  height: auto;
-  height: 100%;
+  overflow-y: scroll;
+  height: 60vh;
   width: 100%;
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   .savedPlaylist-btn,
   .followedPlaylists-btn {
     color: #c4c4c4;

@@ -46,6 +46,7 @@ const AllPlaylistsListItemCardWrapper = styled.div`
 		display: flex;
 		justify-content: space-between;
         align-items: flex-start;
+		margin-bottom: 1rem;
 	}
 	.bg-image {
 		border-radius: 2px ;

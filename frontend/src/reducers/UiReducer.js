@@ -6,6 +6,7 @@ export const UI_STATE_ACTIONS = {
 	SET_FULLSCREEN_VIDEO_MODE: 'SET_FULLSCREEN_VIDEO_MODE',
 	SET_PLAYLIST_ID_TO_SAVE: 'SET_PLAYLIST_ID_TO_SAVE',
 	SET_MOBILE_MENU_IS_OPEN: 'SET_MOBILE_MENU_IS_OPEN',
+	SET_CLOSE_MENU_MOBILE: 'SET_CLOSE_MENU_MOBILE'
 };
 
 export function UiReducer(state, action) {
@@ -50,6 +51,12 @@ export function UiReducer(state, action) {
 			return {
 				...state,
 				mobileMenuIsOpen: !state.mobileMenuIsOpen,
+			};
+
+		case UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE:
+			return {
+				...state,
+				mobileMenuIsOpen: false,
 			};
 
 		default:
