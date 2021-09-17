@@ -10,9 +10,15 @@ function SavedPlayLists() {
     <SavedPlayListsWrapper>
       {data &&
         data.userPlaylists &&
+        data.userPlaylists.length > 0 &&
         data.userPlaylists.map((playlist) => {
           return <PlayListCardItem key={playlist.id} {...playlist} />;
         })}
+        {data &&
+          data.userPlaylists &&
+          data.userPlaylists.length === 0 &&
+          <p>No playlists yet =/</p>
+        }
     </SavedPlayListsWrapper>
   );
 }

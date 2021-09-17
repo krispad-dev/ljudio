@@ -1,16 +1,20 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router';
 import SearchIcon from '@material-ui/icons/Search';
 import { UiContext } from '../../context/UiState';
-
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 
+
 function SearchBar() {
-  const { state, dispatch } = useContext(UiContext);
+  const { dispatch } = useContext(UiContext);
+  const { push } = useHistory();
 
   let timeout = 0;
 
   async function searchMusic(e) {
+    push('/');
+    
     let musicSearchString = e.target.value;
 
     // Delay function kommer lyftas ut till helpers.js

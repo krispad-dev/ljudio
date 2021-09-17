@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import { IoMdShare } from 'react-icons/io';
+import Button from '@material-ui/core/Button';
 
 function ShareUrlBtn({ iconFontSize }) {
   const copyUrl = () => {
@@ -15,7 +16,8 @@ function ShareUrlBtn({ iconFontSize }) {
       closeButton: false,
       hideProgressBar: true,
       style: {
-        color: '#2ecc71',
+        color: 'white',
+        backgroundColor: '#2ecc71',
       },
     });
   };
@@ -23,7 +25,14 @@ function ShareUrlBtn({ iconFontSize }) {
   return (
     <ShareUrlBtnWrapper>
       <ToastContainer />
-      <IoMdShare style={{ color: 'white', fontSize: `${iconFontSize}` }} onClick={() => copyUrl()} />
+      <Button
+        variant='outlined'
+        color='primary'
+        onClick={() => copyUrl()}
+        endIcon={<IoMdShare style={{ fontSize: `${iconFontSize}` }} />}
+      >
+        Share
+      </Button>
     </ShareUrlBtnWrapper>
   );
 }

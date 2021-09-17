@@ -13,6 +13,9 @@ export default function CreatePlaylist() {
 
   const savePlaylist = (e) => {
     e.preventDefault();
+    if (textFieldInput.length === 0) {
+      return;
+    }
     mutate({ title: textFieldInput });
     setTextFieldInput('');
   };

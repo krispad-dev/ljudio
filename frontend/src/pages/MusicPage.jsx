@@ -25,10 +25,10 @@ function MusicPage() {
 					<ArtiststList />
 				</div>
 
-				<div className='albums-list'>
+{/* 				<div className='albums-list'>
 					{data && state.headerSearchString && <h1>ALBUMS</h1>}
 					<AlbumsList />
-				</div>
+				</div> */}
 			</div>
 		</MusicPageWrapper>
 	);

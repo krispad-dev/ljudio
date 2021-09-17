@@ -1,4 +1,4 @@
-import { run, all } from '../database/sqLiteFunctions.js';
+import { run, all, get } from '../database/sqLiteFunctions.js';
 
 export const Playlists = {
   CreatePlaylist: (playlist) => {
@@ -47,9 +47,25 @@ export const Playlists = {
     }
   },
 
+  GetPlaylistInfo(playlistId) {
+    try {
+
+      const query = `
+        SELECT title, id AS playlistId, followCount
+        FROM playlists WHERE id = ?
+      `;
+
+      return get(query, playlistId);
+      
+    } catch (error) {
+      return error;
+    }
+  },
+
   GetOneUserPlaylist: (playlistId) => {
     try {
-      const query = `SELECT title, playlistId, followCount, GROUP_CONCAT(videoId, ',') 
+      const query = `
+      SELECT title, playlistId, followCount, GROUP_CONCAT(videoId, ',') 
       AS songs
       FROM playlist_song
       JOIN playlists
@@ -66,7 +82,8 @@ export const Playlists = {
       const query = `
         SELECT username, title, playlists.id AS playlistId, followCount 
         FROM playlists
-        JOIN users ON playlists.userId = users.id
+        JOIN users 
+        ON playlists.userId = users.id
         ORDER BY followCount DESC
         LIMIT 50
       `;
@@ -102,6 +119,26 @@ export const Playlists = {
     }
   },
 
+  GetFollowedPlaylistInfo(data) {
+    try {
+
+      const query = `
+        SELECT playlists.userId, playlists.id AS playlistId, username, title, followCount
+        FROM playlists
+        JOIN users
+        ON users.id = playlists.userId
+        JOIN followers 
+        ON followers.playlistId = playlists.id
+        WHERE followers.userId = :userId
+      `;
+
+      return all(query, data);
+      
+    } catch (error) {
+        return error;
+    }
+  },
+
   GetFollowedPlaylists(data) {
     try {
       const query = `
@@ -114,9 +151,37 @@ export const Playlists = {
         WHERE followers.userId = :userId
       `;
 
+      /* const query = `
+        SELECT playlists.userId, playlists.id AS playlistId, username, title, followCount,
+        GROUP_CONCAT(videoId, ',') 
+        AS songs
+        FROM playlists
+        JOIN users
+        ON users.id = playlists.userId
+        JOIN followers 
+        ON followers.playlistId = playlists.id
+        JOIN playlist_song 
+        ON playlist_song.playlistId = playlists.id
+        WHERE followers.playlistId = :id
+      `; */
+
       return all(query, data);
     } catch (error) {
       return error;
     }
   },
+
+  GetPlaylistSongs(data) {
+      try {
+       
+        const query = `
+          SELECT GROUP_CONCAT(videoId, ',') AS songs
+          FROM playlist_song WHERE playlistId = :id
+        `;
+  
+        return all(query, data);
+      } catch (error) {
+        return error;
+      }
+  }
 };

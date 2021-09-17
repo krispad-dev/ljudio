@@ -61,6 +61,7 @@ function SongCardItem({ song, playlistId }) {
 
 const PlaylistsCardWrapper = styled.div`
   width: 100%;
+  display: flex;
 
   .song-container {
     margin-top: 10px;
@@ -69,13 +70,20 @@ const PlaylistsCardWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 0.1);
+
+    h2 {
+      font-size: 12px;
+    }
+    h3 {
+      font-size: 10px;
+    }
   }
 
   .song-img-container,
   .song-artist-container,
   .song-album-container,
   .song-duration-container {
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -92,6 +100,7 @@ const PlaylistsCardWrapper = styled.div`
   .song-img-container {
     img {
       border-radius: 2px;
+      max-width: 50px;
     }
   }
 
@@ -106,6 +115,22 @@ const PlaylistsCardWrapper = styled.div`
   .song-duration-container h3 {
     font-weight: lighter;
     color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (min-width: 650px) {
+    .song-img-container {
+      img {
+        max-width: 100px;
+      }
+    }
+    .song-container {
+      h2 {
+        font-size: 20px;
+      }
+      h3 {
+        font-size: 15px;
+      }
+    }
   }
 `;
 

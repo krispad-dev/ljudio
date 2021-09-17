@@ -114,6 +114,7 @@ export async function getFollowedPlaylists(req, res) {
     const followedPlaylists = await Playlists.GetFollowedPlaylists({ userId });
 
     return res.json({ success: true, followedPlaylists });
+    
   } catch (error) {
     console.log(error);
   }

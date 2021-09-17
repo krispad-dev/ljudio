@@ -9,10 +9,14 @@ import { useWindowSize } from '@react-hook/window-size';
 
 function YouTubePlayer() {
 
+
+
 	const playerRef = useRef();
 	
-	const [ { fullscreenVideoMode, currentSong, currentTime }, dispatch ] = useContext(playerControllerStateContext);
+	const [ { fullscreenVideoMode, currentSong, currentTime, isPlaying }, dispatch ] = useContext(playerControllerStateContext);
 	const [ windowWidth, windowHeight ] = useWindowSize();
+
+
 
 
 	const opts = {
@@ -41,13 +45,13 @@ function YouTubePlayer() {
 	}
 
 	function setSize(windowWidth) {
-		return playerRef.current.internalPlayer.setSize(windowWidth);
+		return playerRef.current.internalPlayer.setSize(windowWidth, windowHeight - 200);
 	}
 
 
 	useEffect(() => {
 
-		setSize(windowWidth, windowHeight);
+		setSize(windowWidth);
 	
 	}, [ windowWidth ]);
 
@@ -93,7 +97,7 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false })
 	}
 
-
+/* 	console.log(playerRef.current.internalPlayer); */
 
 	return (
 		<IframeWrapper
@@ -123,9 +127,8 @@ export default YouTubePlayer;
 const IframeWrapper = styled.div`
 
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
+	justify-content: flex-start;
+	align-items: flex-start;
 
 
 	.mask-top {
