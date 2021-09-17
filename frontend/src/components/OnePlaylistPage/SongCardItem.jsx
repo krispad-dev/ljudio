@@ -47,9 +47,12 @@ function SongCardItem({ song, playlistId }) {
             artist={data && data.searchResults.content[0].artist.name}
             thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
           />
-          {userPlaylists && auth.loggedIn && isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
-            <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
-          )}
+          {userPlaylists &&
+            userPlaylists.usePlaylists &&
+            auth.loggedIn &&
+            isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
+              <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
+            )}
           <AddToPlaylistBtn videoId={song} />
         </div>
         {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
