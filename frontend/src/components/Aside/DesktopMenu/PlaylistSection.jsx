@@ -15,6 +15,7 @@ function PlaylistSection() {
 
   return (
     <PlayListSectionWrapper>
+          <AddPlayListButton />
       {/*       <FavoritePlayList /> */}
 
       <Button
@@ -38,15 +39,15 @@ function PlaylistSection() {
 
       {followedPlaylistsIsOpen && <FollowedPlaylists />}
 
-      <AddPlayListButton />
+  
     </PlayListSectionWrapper>
   );
 }
 
 const PlayListSectionWrapper = styled.div`
   height: auto;
-  width: auto;
-  margin-left: 1rem;
+  height: 100%;
+  width: 100%;
   scrollbar-width: thin;
   scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
   display: flex;

@@ -39,6 +39,7 @@ header {
 aside {
 	grid-area: aside;
 	background-color: black;
+	
 }
 
 main {
@@ -48,9 +49,10 @@ main {
 	overflow: scroll;
 	grid-area: main;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	align-items: flex-start;
 	background-color: black;
+	
 }
 
 footer {

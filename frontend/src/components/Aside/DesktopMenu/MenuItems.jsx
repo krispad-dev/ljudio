@@ -20,6 +20,7 @@ function MenuItems() {
 }
 
 const MenuItemsWrapper = styled.div`
+width: 100%;
   height: auto;
   margin-bottom: 10px;
   .divider {

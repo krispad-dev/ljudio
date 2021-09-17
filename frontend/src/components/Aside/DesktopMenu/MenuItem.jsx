@@ -14,6 +14,7 @@ function MenuItem({ url, icon, text }) {
 }
 
 const MenuItemWrapper = styled.div`
+  width: 100%;
   margin: 0.5rem 0rem 0.5rem 0.5rem;
 
   a {

@@ -25,6 +25,8 @@ function DesktopMenu() {
 }
 
 const AsideMenuWrapper = styled.div`
+
+	width: 95%;
 	.logout-btn-container {
 		margin-left: 1rem;
 		margin-top: 1rem;

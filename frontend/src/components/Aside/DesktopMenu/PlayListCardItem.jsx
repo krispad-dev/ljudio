@@ -15,12 +15,23 @@ function PlayListCardItem({ title, playlistId, id }) {
       <Link to={`/playlist/${playlistId ? playlistId : id}`}>
         <p className='songTitle'>{title}</p>
       </Link>
+      <div>
       {data && !isInPlaylist(playlistId, data.followedPlaylists) && <RemoveUserPlaylist playlistId={id} />}
+      </div>
+
     </PlayListCardItemWrapper>
   );
 }
 
 const PlayListCardItemWrapper = styled.li`
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+width: 100%;
   &:hover {
     opacity: 60%;
     transition: 0.2s ease-in-out;
@@ -32,7 +43,7 @@ const PlayListCardItemWrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 2px;
+  border-radius: 5px;
 
   .songTitle {
     font-size: 0.9rem;
