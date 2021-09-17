@@ -20,11 +20,10 @@ function MenuItems() {
 }
 
 const MenuItemsWrapper = styled.div`
-width: 100%;
   height: auto;
   margin-bottom: 10px;
   .divider {
-    border-top: 1px solid #8c8b8b;
+/*     border-top: 1px solid #8c8b8b; */
   }
   h1 {
     font-size: 1.5rem;

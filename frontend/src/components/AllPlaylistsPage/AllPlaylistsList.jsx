@@ -28,8 +28,8 @@ const AllPlaylistsListWrapper = styled.div`
 	overflow-y: scroll;
 	width: 100%;
 	display: grid;
-	gap: 0.5rem;
-	grid-template-columns: 15vw 15vw 15vw 15vw;
+	gap: 0.3rem;
+	grid-template-columns: 25% 25% 25% 25%;
 
 	@media only screen and (max-width: 1000px) {
 		grid-template-columns: 33vw auto 33vw;

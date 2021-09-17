@@ -45,6 +45,7 @@ function PlaylistSection() {
 }
 
 const PlayListSectionWrapper = styled.div`
+
   height: auto;
   height: 100%;
   width: 100%;
@@ -61,7 +62,7 @@ const PlayListSectionWrapper = styled.div`
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
     font-size: 0.9rem;
-    font-weight: lighter;
+    font-weight: 300;
   }
 `;
 

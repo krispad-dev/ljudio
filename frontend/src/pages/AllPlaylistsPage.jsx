@@ -14,10 +14,16 @@ function AllPlaylistsPage() {
 export default AllPlaylistsPage
 
 const AllPlaylistsPageWrapper = styled.div`
+margin-top: 1rem ;
 display: flex;
 justify-content: center;
 align-items: flex-start;
 flex-direction: column;
-
+h1{
+    margin-bottom: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #eee;
+}
 
 `
