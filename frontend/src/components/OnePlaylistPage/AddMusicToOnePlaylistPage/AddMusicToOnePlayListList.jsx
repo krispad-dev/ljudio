@@ -6,8 +6,6 @@ import useGetSavedUserPlaylists from '../../../hooks/useGetSavedUserPlaylists';
 function AddMusicToOnePlayListList() {
   const { data } = useGetSavedUserPlaylists();
 
-  console.log(data);
-
   return (
     <AddMusicToOnePlayListListWrapper>
       {data && data.userPlaylists && data.userPlaylists.map((playlist) => <AddMusicToOnePlaylistItem {...playlist} />)}
@@ -28,11 +26,9 @@ const AddMusicToOnePlayListListWrapper = styled.div`
     }
   }
 
-  width: auto;
-  height: auto;
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
-  right: 20rem;
+  right: 2rem;
   top: 25rem;
   border-radius: 5px;
 `;

@@ -18,7 +18,7 @@ function AddMusicToOnePlaylistItem({ title, id }) {
 
   return (
     <AddMusicToOnePlaylistItemWrapper>
-      <Button className='confirm-music-btn' onClick={testHandler}>
+      <Button className='confirm-add-music-to-playlist-btn' onClick={testHandler}>
         {title}
       </Button>
     </AddMusicToOnePlaylistItemWrapper>
@@ -35,7 +35,7 @@ const AddMusicToOnePlaylistItemWrapper = styled.li`
     cursor: pointer;
   }
 
-  .confirm-music-btn {
+  .confirm-add-music-to-playlist-btn {
     color: #2ecc71;
   }
 `;

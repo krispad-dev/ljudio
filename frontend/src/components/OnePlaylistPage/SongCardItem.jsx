@@ -51,11 +51,9 @@ function SongCardItem({ song, playlistId }) {
           {userPlaylists && auth.loggedIn && isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
             <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
           )}
-          <div className='test'>
-            <AddToPlaylistBtn videoId={song} />
-            {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
-          </div>
+          <AddToPlaylistBtn videoId={song} name={data && data.searchResults.content[0].name} />
         </div>
+        {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
       </div>
     </PlaylistsCardWrapper>
   );
@@ -85,8 +83,10 @@ const PlaylistsCardWrapper = styled.div`
   }
 
   .song-icon-container {
-    width: 80%;
+    width: 40%;
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
 
   .song-img-container {

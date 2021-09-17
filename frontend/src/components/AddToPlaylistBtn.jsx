@@ -1,15 +1,16 @@
 import React, { useContext, useState } from 'react';
+import styled from 'styled-components';
 import { UiContext } from '../context/UiState';
 import { UI_STATE_ACTIONS } from '.././reducers/UiReducer';
 import { BsPlusCircle } from 'react-icons/bs';
 
 function AddToPlaylistBtn({ videoId }) {
   const { state, dispatch } = useContext(UiContext);
-
   const [addToPlaylistsBoxIsOpen, setAddToPlaylistsBoxIsOpen] = useState(false);
 
   function selectSongToAddToPlaylistHandler() {
     setAddToPlaylistsBoxIsOpen(!addToPlaylistsBoxIsOpen);
+
     dispatch({
       type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN,
     });
@@ -20,8 +21,9 @@ function AddToPlaylistBtn({ videoId }) {
   }
 
   return (
-    <div>
+    <AddToPlaylistBtnWrapper>
       <BsPlusCircle
+        className='add-btn'
         style={{
           marginRight: '1rem',
           fontSize: '1.2rem',
@@ -32,8 +34,24 @@ function AddToPlaylistBtn({ videoId }) {
         }}
         onClick={selectSongToAddToPlaylistHandler}
       />
-    </div>
+    </AddToPlaylistBtnWrapper>
   );
 }
+
+const AddToPlaylistBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  .add-btn {
+    font-size: 1.5rem;
+    color: #c4c4c4;
+
+    &:hover {
+      color: #2ecc71;
+      transition: ease-in-out 0.2s;
+      cursor: pointer;
+    }
+  }
+`;
 
 export default AddToPlaylistBtn;
