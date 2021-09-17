@@ -53,7 +53,7 @@ function SongCardItem({ song, playlistId }) {
             isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
               <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
             )}
-          <AddToPlaylistBtn videoId={song} />
+           {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
         </div>
         {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
       </div>
