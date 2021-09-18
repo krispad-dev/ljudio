@@ -28,8 +28,8 @@ const SavedPlayListsWrapper = styled.ul`
     display: none;
   }
   color: #c4c4c4;
-  height: auto;
-/*   overflow: scroll; */
+  height: 15rem;
+  overflow: scroll;
   margin-bottom: 10px;
   width: 100%;
 `;

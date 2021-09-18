@@ -25,8 +25,8 @@ const FollowingPlayListWrapper = styled.ul`
 	::-webkit-scrollbar {
 		display: none;
 	}
-	height: auto;
-/*   overflow: scroll; */
+height: 15rem;
+  overflow: scroll;
   margin-bottom: 10px;
   width: 100%;
 `;
