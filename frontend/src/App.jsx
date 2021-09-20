@@ -25,6 +25,7 @@ import Aside from './components/Aside/Aside';
 import Footer from './components/Footer/Footer';
 import AllPlaylistsPage from './pages/AllPlaylistsPage';
 import MobileMenu from './components/MobileMenu/MobileMenu';
+import ConfirmModal from './components/ConfirmModal';
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -44,6 +45,8 @@ function App() {
       {pathname !== '/register' && pathname !== '/login' && !fullscreenVideoMode && <Header />}
 
       <Aside />
+
+      <ConfirmModal />
 
       <main className={'yt-player-main'}>
         <YouTubePlayer />
