@@ -2,9 +2,6 @@ import { Playlist } from '../models/Playlist.js';
 
 export async function createPlaylist(req, res) {
   try {
-
-    console.log(req.body);
-   
     // ID of the currently logged in user
     const userId = req.obj.id;
 
@@ -25,9 +22,7 @@ export async function createPlaylist(req, res) {
 }
 
 export async function removePlaylist(req, res) {
-
   try {
-    
     const id = req.body.id;
 
     await Playlist.RemovePlaylist(id);
@@ -56,9 +51,9 @@ export async function saveSongToUserPlaylist(req, res) {
   try {
     // videoId and playlistId from frontend
     const songInfo = {
-        videoId: req.body.videoId,
-        playlistId: req.body.playlistId
-    }
+      videoId: req.body.videoId,
+      playlistId: req.body.playlistId,
+    };
 
     // Saves the song to playlist.
     await Playlist.SaveSongToPlaylist(songInfo);
@@ -71,7 +66,6 @@ export async function saveSongToUserPlaylist(req, res) {
 
 export async function removeSongFromPlaylist(req, res) {
   try {
-      
     // videoId and playlistId from frontend
     const songInfo = req.body;
 
@@ -83,12 +77,11 @@ export async function removeSongFromPlaylist(req, res) {
   }
 }
 
-
 export async function getOneUserPlaylist(req, res) {
   try {
     //PlaylistID from url params
     const playlistId = req.params.id;
-    console.log('Here!');
+
     //Get one playlist from database
     let playlist = await Playlist.GetOneUserPlaylist(playlistId);
 
@@ -98,17 +91,13 @@ export async function getOneUserPlaylist(req, res) {
   }
 }
 
-
 export async function getAllPlaylists(req, res) {
+  try {
+    const playlists = await Playlist.GetAllPlaylists();
 
-	try {
-		
-		const playlists = await Playlist.GetAllPlaylists();
-
-		return res.json({ success: true, playlists });
-
-	} catch (err) {
-		console.log(err.message);
-		return res.status(500).json({ success: false, message: err.message });
-	}
+    return res.json({ success: true, playlists });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ success: false, message: err.message });
+  }
 }
