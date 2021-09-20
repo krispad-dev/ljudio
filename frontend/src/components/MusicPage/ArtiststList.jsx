@@ -59,7 +59,7 @@ const ArtistsListWrapper = styled.div`
 	display: grid;
 	gap: 1rem;
 	grid-auto-rows: 12rem;
-	grid-template-columns: 20% 20% 20% 20% 20% ;
+	grid-template-columns: auto auto auto auto auto ;
 
 	@media only screen and (max-width: 1000px) {
 		grid-template-columns: 50% 50%
