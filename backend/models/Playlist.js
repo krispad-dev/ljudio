@@ -1,4 +1,5 @@
 import { setDB } from '../database/dbConn.js';
+import format from 'pg-format'
 
 const db = setDB('rtawvmwp');
 
@@ -116,7 +117,7 @@ export const Playlist = {
               LIMIT 50
             `;
     
-            const { rows } = await db.query(sql);
+            const { rows } = await db.query(sql,);
     
             return rows;
     
@@ -124,6 +125,24 @@ export const Playlist = {
             return error;
         }
     },
+
+
+    SearchPlaylists: async (searchString) => {
+        try {
+            const sql = `SELECT "userName", title, playlists.id AS "playlistId", "followCount"
+            FROM playlists
+            JOIN users on playlists."userId" = users.id
+            WHERE title ILIKE $1
+            ORDER BY "followCount" DESC 
+            LIMIT 50`
+
+            const {rows} = await db.query(sql, [`%${searchString}%`]);
+            return rows
+        }catch(error) {
+            return error
+        }
+    },
+
 
     FollowPlaylist: async (data) => {
         try {

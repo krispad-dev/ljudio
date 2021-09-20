@@ -101,3 +101,16 @@ export async function getAllPlaylists(req, res) {
     return res.status(500).json({ success: false, message: err.message });
   }
 }
+export async function searchPlaylists(req, res) {
+  try {
+
+    const {searchString} = req.query 
+
+    const playlists = await Playlist.SearchPlaylists(searchString);
+   
+    return res.json({ success: true, playlists });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({ success: false, message: err.message });
+  }
+}
