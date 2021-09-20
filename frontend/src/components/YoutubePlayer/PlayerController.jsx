@@ -30,11 +30,11 @@ function Controller() {
 				{playerIsPaused ? (
 					<MdPlayCircleOutline
 						onClick={() => playVideo()}
-						style={{ color: '#2ecc71' }}
+						style={{ color: '#fff' }}
 						className={'playPauseBtn'}
 					/>
 				) : (
-					<MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} style={{ color: 'FF9F1C' }} />
+					<MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} style={{ color: '#1dd1a1' }} />
 				)}
 			</div>
 

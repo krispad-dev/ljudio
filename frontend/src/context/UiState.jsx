@@ -10,6 +10,11 @@ const initialState = {
   saveSongToPlaylistSelectorSectionIsOpen: false,
   playlistIdToSave: '',
   mobileMenuIsOpen: false,
+  modalOpen: false,
+  modalText: '',
+  confirmAction: '',
+  pushDir: '',
+  isDeletingPlaylist: false
 
 };
 

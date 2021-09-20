@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ShareUrlBtn from '../ShareUrlBtn';
+import RemoveUserPlaylist from '../RemoveUserPlaylist';
 import FollowBtn from '../FollowBtn';
 import { useParams } from 'react-router';
 import useGetSongs from '../../hooks/useGetSongs';
@@ -34,6 +34,7 @@ function PlaylistTitleHeader({ title, playlist }) {
         <div className='follow-container'>
          {auth && auth.loggedIn && <FollowBtn playlistId={id} />}
         </div>
+        <RemoveUserPlaylist playlistId={id} />
         <ShareUrlBtn />
       </div>
     </PlaylistTitleHeaderWrapper>
