@@ -17,65 +17,6 @@ import { isInUserPlaylist } from '../../helpers/helpers';
 function SongCardItem({ song, playlistId }) {
 	//Video ID får göra en förfågan till Youtbe-api.
 
-<<<<<<< HEAD
-	const { data } = useGetSongs(song);
-	const { data: auth } = useAuth();
-	const { state } = useContext(UiContext);
-	const { data: userPlaylists } = useGetSavedUserPlaylists();
-
-	return (
-		<>
-			{ data 
-      && data.searchResults 
-      && data.searchResults.content[0] 
-      && <PlaylistsCardWrapper>
-				<div className='song-container'>
-					<div className='song-img-container'>
-						<img
-							src={
-								data &&
-								data.searchResults &&
-								data.searchResults.content[0] &&
-								data.searchResults.content[0].thumbnails[1] &&
-								data.searchResults.content[0].thumbnails[1].url
-							}
-							alt='song-cover'
-						/>
-					</div>
-					<div className='song-artist-container'>
-						<h2>{data && data.searchResults.content[0].name}</h2>
-						<h3>{data && data.searchResults.content[0].artist.name}</h3>
-					</div>
-
-					<div className='song-album-container'>
-						<h2>Album</h2>
-						<h3>{data && data.searchResults.content[0].album.name}</h3>
-					</div>
-					<div className='song-duration-container'>
-						<h2>Duration</h2>
-						<h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
-					</div>
-					<div className='song-icon-container'>
-						<MusicPlayBtn
-							videoId={song}
-							name={data && data.searchResults.content[0].name}
-							artist={data && data.searchResults.content[0].artist.name}
-							thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
-						/>
-						{userPlaylists &&
-							userPlaylists.userPlaylists &&
-							auth.loggedIn &&
-							isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
-								<RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
-							)}
-						{auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
-					</div>
-					{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
-				</div>
-			</PlaylistsCardWrapper>}
-		</>
-	);
-=======
   const { data, isLoading } = useGetSongs(song);
   const { data: auth } = useAuth();
   const { state } = useContext(UiContext);
@@ -131,7 +72,6 @@ function SongCardItem({ song, playlistId }) {
     }
     </>
   );
->>>>>>> dev
 }
 
 const PlaylistsCardWrapper = styled.div`
