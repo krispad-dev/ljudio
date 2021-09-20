@@ -5,10 +5,36 @@ import useGetArtists from '../../hooks/useGetArtists';
 import ArtistCard from './ArtistCard';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 
+const colors = [
+	'#ff9ff3',
+	'#feca57',
+	'#ff6b6b',
+	'#48dbfb',
+	'#1dd1a1',
+	'#f368e0',
+	'#ff9f43',
+	'#ff9ff3',
+	'#feca57',
+	'#ff6b6b',
+	'#48dbfb',
+	'#1dd1a1',
+	'#f368e0',
+	'#ff9f43',
+	'#ff9ff3',
+	'#feca57',
+	'#ff6b6b',
+	'#48dbfb',
+	'#1dd1a1',
+	'#f368e0',
+	'#ff9f43'
+
+]
+
 function ArtiststList() {
 	const { state } = useContext(UiContext);
 	const { data, isLoading } = useGetArtists(state.headerSearchString);
-	console.log(data);
+
+	
 
 	return (
 		<>
@@ -17,8 +43,8 @@ function ArtiststList() {
 				{data &&
 					data.searchResults &&
 					data.searchResults.content &&
-					data.searchResults.content.map(item => {
-						return <ArtistCard key={item.browseId} {...item} />;
+					data.searchResults.content.map((item, i) => {
+						return <ArtistCard key={item.browseId} bgColor={colors[i]} {...item} />;
 					})}
 			</ArtistsListWrapper>
 		</>
@@ -31,9 +57,10 @@ const ArtistsListWrapper = styled.div`
 
 	width: 100%;
 	display: grid;
-	gap: 0.5rem;
+	gap: 1rem;
 	grid-auto-rows: 12rem;
-	grid-template-columns: 20% 20% auto 20% 20%;
+	grid-template-columns: 20% 20% 20% 20% 20% ;
+
 	@media only screen and (max-width: 1000px) {
 		grid-template-columns: 50% 50%
 
