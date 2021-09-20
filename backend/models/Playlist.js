@@ -1,187 +1,182 @@
-import { run, all, get } from '../database/sqLiteFunctions.js';
+import { setDB } from '../database/dbConn.js';
 
-export const Playlists = {
-  CreatePlaylist: (playlist) => {
-    try {
-      const query = `INSERT INTO playlists(id, userId, title) VALUES(:id, :userId, :title)`;
-      return run(query, playlist);
-    } catch (error) {
-      return error;
-    }
-  },
-  RemovePlaylist: (id) => {
-    try {
-      const query = `DELETE FROM playlists WHERE id = ?`;
-      return run(query, id);
-    } catch (error) {
-      return error;
-    }
-  },
+const db = setDB('rtawvmwp');
 
-  GetAllUserPlaylists: (userId) => {
-    try {
-      console.log(userId);
-      const query = `SELECT * FROM playlists WHERE userId = ?`;
-      return all(query, userId);
-    } catch (error) {
-      return error;
-    }
-  },
 
-  SaveSongToPlaylist: (songInfo) => {
-    try {
-      const query = `INSERT INTO playlist_song(id, playlistId, videoId) VALUES(:id, :playlistId, :videoId)`;
-      return run(query, songInfo);
-    } catch (error) {
-      return error;
-    }
-  },
+export const Playlist = {
 
-  RemoveSongFromPlaylist: (data) => {
-    try {
-      console.log('MODEL', data);
-      const query = `DELETE FROM playlist_song WHERE videoId = ? AND playlistId = ?`;
-      return run(query, [data.videoId, data.playlistId]);
-    } catch (error) {
-      return error;
-    }
-  },
+    CreatePlaylist: async (playlist) => {
+        try {
+            const sql = 'INSERT INTO playlists ("userId", title) VALUES ($1, $2)';
+            const values = [playlist.userId, playlist.title];
+    
+            await db.query(sql, values);
+    
+        } catch (error) {
+          return error;
+        }
+    },
 
-  GetPlaylistInfo(playlistId) {
-    try {
+    RemovePlaylist: async (id) => {
+        try {
+            const sql = 'DELETE FROM playlists WHERE id = $1';
+            await db.query(sql, [id]);
+        } catch (error) {
+          return error;
+        }
+    },
 
-      const query = `
-        SELECT title, id AS playlistId, followCount
-        FROM playlists WHERE id = ?
-      `;
+    GetAllUserPlaylists: async (userId) => {
+        try {
+            const sql = 'SELECT * FROM playlists WHERE "userId" = $1';
+            const { rows } = await db.query(sql, [userId]);
+            
+            return rows;
+        } catch (error) {
+          return error;
+        }
+    },
 
-      return get(query, playlistId);
+    SaveSongToPlaylist: async (songInfo) => {
+        try {
+            const sql = 'INSERT INTO playlist_songs("playlistId", "videoId") VALUES($1, $2)';
+            const values = [songInfo.playlistId, songInfo.videoId];
+    
+            await db.query(sql, values);
+    
+        } catch (error) {
+          return error;
+        }
+    },
+
+    RemoveSongFromPlaylist: async (data) => {
+        try {
+            const sql = 'DELETE FROM playlist_songs WHERE "videoId" = $1 AND "playlistId" = $2';
+            const values = [data.videoId, data.playlistId];
+            
+            await db.query(sql, values);
+    
+        } catch (error) {
+            return error;
+        }
+    },
+
+    GetOneUserPlaylist: async (playlistId) => {
+        try {
+            const sql = `
+                SELECT title, playlists.id AS id, "followCount", "userName"
+                FROM playlists
+                JOIN users 
+                ON users.id = playlists."userId"
+                WHERE playlists.id = $1
+            `;
       
-    } catch (error) {
-      return error;
-    }
-  },
-
-  GetOneUserPlaylist: (playlistId) => {
-    try {
-      const query = `
-      SELECT title, playlistId, followCount, GROUP_CONCAT(videoId, ',') 
-      AS songs
-      FROM playlist_song
-      JOIN playlists
-      ON playlists.id = playlist_song.playlistId
-      WHERE playlists.id = ?`;
-      return all(query, playlistId);
-    } catch (error) {
-      return error;
-    }
-  },
-
-  GetAllPlaylists: () => {
-    try {
-      const query = `
-        SELECT username, title, playlists.id AS playlistId, followCount 
-        FROM playlists
-        JOIN users 
-        ON playlists.userId = users.id
-        ORDER BY followCount DESC
-        LIMIT 50
-      `;
-
-      return all(query);
-    } catch (error) {
-      return error;
-    }
-  },
-
-  FollowPlaylist: (data) => {
-    try {
-      const query = `
-        INSERT INTO followers (userId, playlistId)
-        VALUES (:userId, :playlistId)
-      `;
-
-      return run(query, data);
-    } catch (error) {
-      return error;
-    }
-  },
-
-  UnFollowPlaylist: (data) => {
-    try {
-      const query = `
-       DELETE FROM followers WHERE userId = ? AND playlistId = ?
-      `;
-
-      return run(query, [data.userId, data.playlistId]);
-    } catch (error) {
-      return error;
-    }
-  },
-
-  GetFollowedPlaylistInfo(data) {
-    try {
-
-      const query = `
-        SELECT playlists.userId, playlists.id AS playlistId, username, title, followCount
-        FROM playlists
-        JOIN users
-        ON users.id = playlists.userId
-        JOIN followers 
-        ON followers.playlistId = playlists.id
-        WHERE followers.userId = :userId
-      `;
-
-      return all(query, data);
+            const sql2 = `
+                SELECT STRING_AGG("videoId", ',') 
+                AS songs
+                FROM playlist_songs 
+                WHERE "playlistId" = $1; 
+            `;
       
-    } catch (error) {
-        return error;
+            const list = await db.query(sql, [playlistId]);
+            const songs = await db.query(sql2, [playlistId]);
+      
+            let playlist;
+      
+            if(songs.rows[0].songs === null) {
+      
+                playlist = {
+                    ...list.rows[0],
+                    songs: []
+                }
+      
+                return playlist;
+            }       
+          
+            playlist = {
+                ...list.rows[0],
+                songs: songs.rows[0].songs.split(',')
+            }
+              
+            return playlist;
+              
+        } catch (error) {
+            return error;
+        }
+    },
+
+    GetAllPlaylists: async () => {
+        try {
+            const sql = `
+              SELECT "userName", title, playlists.id AS "playlistId", "followCount"
+              FROM playlists
+              JOIN users 
+              ON playlists."userId" = users.id
+              ORDER BY "followCount" DESC
+              LIMIT 50
+            `;
+    
+            const { rows } = await db.query(sql);
+    
+            return rows;
+    
+        } catch (error) {
+            return error;
+        }
+    },
+
+    FollowPlaylist: async (data) => {
+        try {
+            const sql = 'INSERT INTO followers ("userId", "playlistId") VALUES ($1, $2)';
+            const values = [data.userId, data.playlistId];
+            await db.query(sql, values);
+    
+            const sql2 = 'UPDATE playlists SET "followCount" = "followCount" + 1 WHERE id = $1';
+            await db.query(sql2, [data.playlistId]);
+    
+        } catch (error) {
+            return error;
+        }
+    },
+
+    UnFollowPlaylist: async (data) => {
+        try {
+            const sql = 'DELETE FROM followers WHERE "userId" = $1 AND "playlistId" = $2';
+      
+            return await db.query(sql, [data.userId, data.playlistId]);
+    
+        } catch (error) {
+            return error;
+        }
+    },
+
+    GetFollowedPlaylists: async (userId) => {
+        try {
+            const sql = `
+              SELECT playlists."userId", playlists.id AS "playlistId", "userName", title, "followCount"
+              FROM playlists
+              JOIN users
+              ON users.id = playlists."userId"
+              JOIN followers 
+              ON followers."playlistId" = playlists.id
+              WHERE followers."userId" = $1
+            `;
+      
+            const { rows } = await db.query(sql, [ userId ]);
+    
+            return rows;
+    
+        } catch (error) {
+            return error;
+        }
     }
-  },
+}
 
-  GetFollowedPlaylists(data) {
-    try {
-      const query = `
-        SELECT playlists.userId, playlists.id AS playlistId, username, title, followCount
-        FROM playlists
-        JOIN users
-        ON users.id = playlists.userId
-        JOIN followers 
-        ON followers.playlistId = playlists.id
-        WHERE followers.userId = :userId
-      `;
 
-      /* const query = `
-        SELECT playlists.userId, playlists.id AS playlistId, username, title, followCount,
-        GROUP_CONCAT(videoId, ',') 
-        AS songs
-        FROM playlists
-        JOIN users
-        ON users.id = playlists.userId
-        JOIN followers 
-        ON followers.playlistId = playlists.id
-        JOIN playlist_song 
-        ON playlist_song.playlistId = playlists.id
-        WHERE followers.playlistId = :id
-      `; */
 
-      return all(query, data);
-    } catch (error) {
-      return error;
-    }
-  },
 
-  GetPlaylistSongs(data) {
-      try {
-       
-        const query = `
-          SELECT GROUP_CONCAT(videoId, ',') AS songs
-          FROM playlist_song WHERE playlistId = :id
-        `;
-  
-        return all(query, data);
-      } catch (error) {
-        return error;
-      }
-  }
-};
+
+
+
+
+

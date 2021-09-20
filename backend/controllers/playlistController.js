@@ -1,11 +1,10 @@
-import { nanoid } from 'nanoid';
-import { Playlists } from '../models/Playlist.js';
+import { Playlist } from '../models/Playlist.js';
 
 export async function createPlaylist(req, res) {
   try {
-    // Each playlist getting an unique ID
-    const id = nanoid();
 
+    console.log(req.body);
+   
     // ID of the currently logged in user
     const userId = req.obj.id;
 
@@ -13,10 +12,10 @@ export async function createPlaylist(req, res) {
     const title = req.body.title;
 
     // Complete playlist object to store in database
-    const playList = { id, userId, title };
+    const playList = { userId, title };
 
     // Store playlist in database
-    await Playlists.CreatePlaylist(playList);
+    await Playlist.CreatePlaylist(playList);
 
     return res.status(201).json({ success: true });
   } catch (err) {
@@ -28,10 +27,10 @@ export async function createPlaylist(req, res) {
 export async function removePlaylist(req, res) {
 
   try {
-    console.log(req.body);
+    
     const id = req.body.id;
 
-    await Playlists.RemovePlaylist(id);
+    await Playlist.RemovePlaylist(id);
 
     return res.status(201).json({ success: true });
   } catch (err) {
@@ -45,7 +44,7 @@ export async function getAllUserPlaylists(req, res) {
     const userId = req.obj.id;
 
     //Gets all playlists from one user
-    const userPlaylists = await Playlists.GetAllUserPlaylists(userId);
+    const userPlaylists = await Playlist.GetAllUserPlaylists(userId);
 
     return res.status(200).json({ success: true, userPlaylists });
   } catch (error) {
@@ -56,12 +55,13 @@ export async function getAllUserPlaylists(req, res) {
 export async function saveSongToUserPlaylist(req, res) {
   try {
     // videoId and playlistId from frontend
-    const songInfo = req.body;
-
-    songInfo.id = nanoid();
+    const songInfo = {
+        videoId: req.body.videoId,
+        playlistId: req.body.playlistId
+    }
 
     // Saves the song to playlist.
-    await Playlists.SaveSongToPlaylist(songInfo);
+    await Playlist.SaveSongToPlaylist(songInfo);
 
     return res.status(200).json({ success: true });
   } catch (error) {
@@ -71,10 +71,11 @@ export async function saveSongToUserPlaylist(req, res) {
 
 export async function removeSongFromPlaylist(req, res) {
   try {
+      
     // videoId and playlistId from frontend
     const songInfo = req.body;
 
-    await Playlists.RemoveSongFromPlaylist(songInfo);
+    await Playlist.RemoveSongFromPlaylist(songInfo);
 
     return res.status(200).json({ success: true });
   } catch (error) {
@@ -87,25 +88,27 @@ export async function getOneUserPlaylist(req, res) {
   try {
     //PlaylistID from url params
     const playlistId = req.params.id;
-
+    console.log('Here!');
     //Get one playlist from database
-    let playlist = await Playlists.GetOneUserPlaylist(playlistId)[0];
-
-    // If the requested playlist doesn't contain any songs, return an empty array
-    if(Object.values(playlist).every(val => val === null)) {
-
-        const playlistInfo = await Playlists.GetPlaylistInfo(playlistId);
-
-        playlist = { ...playlistInfo, songs: [] };
-        
-        return res.status(200).json({ success: true, playlist });
-
-    }
-
-    playlist.songs = playlist.songs.split(',');
+    let playlist = await Playlist.GetOneUserPlaylist(playlistId);
 
     return res.status(200).json({ success: true, playlist });
   } catch (error) {
     return res.status(400).json({ success: false });
   }
+}
+
+
+export async function getAllPlaylists(req, res) {
+
+	try {
+		
+		const playlists = await Playlist.GetAllPlaylists();
+
+		return res.json({ success: true, playlists });
+
+	} catch (err) {
+		console.log(err.message);
+		return res.status(500).json({ success: false, message: err.message });
+	}
 }
