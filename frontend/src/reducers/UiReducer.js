@@ -6,7 +6,12 @@ export const UI_STATE_ACTIONS = {
 	SET_FULLSCREEN_VIDEO_MODE: 'SET_FULLSCREEN_VIDEO_MODE',
 	SET_PLAYLIST_ID_TO_SAVE: 'SET_PLAYLIST_ID_TO_SAVE',
 	SET_MOBILE_MENU_IS_OPEN: 'SET_MOBILE_MENU_IS_OPEN',
-	SET_CLOSE_MENU_MOBILE: 'SET_CLOSE_MENU_MOBILE'
+	SET_CLOSE_MENU_MOBILE: 'SET_CLOSE_MENU_MOBILE',
+	SET_MODAL_IS_OPEN: 'SET_MODAL_IS_OPEN',
+	SET_MODAL_IS_CLOSED: 'SET_MODAL_IS_CLOSED',
+	SET_PLAYLIST_ID_TO_REMOVE: 'SET_PLAYLIST_ID_TO_REMOVE',
+	DELETE_PLAYLIST: 'DELETE_PLAYLIST',
+	RESET_DELETING_PLAYLIST: 'RESET_DELETING_PLAYLIST'
 };
 
 export function UiReducer(state, action) {
@@ -57,6 +62,42 @@ export function UiReducer(state, action) {
 			return {
 				...state,
 				mobileMenuIsOpen: false,
+			};
+
+		case UI_STATE_ACTIONS.SET_MODAL_IS_OPEN:
+			return {
+				...state,
+				modalOpen: true,
+				modalText: action.payload.modalText,
+				confirmAction: action.payload.confirmAction,
+				pushDir: action.payload.pushDir
+			};
+	
+		case UI_STATE_ACTIONS.SET_PLAYLIST_ID_TO_REMOVE:
+			return {
+				...state,
+				playlistIdToRemove: action.payload.playlistId
+			};
+	
+		case UI_STATE_ACTIONS.DELETE_PLAYLIST:
+			return {
+				...state,
+				isDeletingPlaylist: true,
+				modalOpen: false
+			};
+	
+		case UI_STATE_ACTIONS.SET_MODAL_IS_CLOSED:
+			return {
+				...state,
+				playlistIdToRemove: '',
+				modalOpen: false
+			};
+	
+		case UI_STATE_ACTIONS.RESET_DELETING_PLAYLIST:
+			return {
+				...state,
+				playlistIdToRemove: '',
+				isDeletingPlaylist: false
 			};
 
 		default:
