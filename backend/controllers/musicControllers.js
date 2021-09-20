@@ -1,5 +1,5 @@
 import { Music } from '../models/Music.js';
-import { Playlists } from '../models/Playlist.js';
+import { Playlist } from '../models/Playlist.js';
 
 
 export async function searchMusic(req, res) {
@@ -51,7 +51,7 @@ export async function getAllPlaylists(req, res) {
 
 	try {
 		
-		const playlists = await Playlists.GetAllPlaylists();
+		const playlists = await Playlist.GetAllPlaylists();
 
 		return res.json({ success: true, playlists });
 

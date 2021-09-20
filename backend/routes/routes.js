@@ -1,6 +1,6 @@
 import express from 'express';
 import * as MusicController from '../controllers/musicControllers.js';
-import * as UserController from '../controllers/userControllers.js';
+import * as UserController from '../controllers/userController.js';
 import * as PlaylistController from '../controllers/playlistController.js';
 import { authCheck } from '../controllers/authControllers.js';
 import { verifyToken } from '../middleware/auth.js';
@@ -13,7 +13,7 @@ musicRouter.get('/', MusicController.searchMusic);
 musicRouter.get('/songs', MusicController.searchSongs);
 musicRouter.get('/artists', MusicController.searchArtists);
 musicRouter.get('/albums', MusicController.searchAlbums);
-musicRouter.get('/playlists', verifyToken, MusicController.getAllPlaylists);
+musicRouter.get('/playlists', verifyToken, PlaylistController.getAllPlaylists);
 
 //Gets all playlists connected to logged in user from databse.
 userRouter.get('/playlists/user-playlists', verifyToken, PlaylistController.getAllUserPlaylists);
