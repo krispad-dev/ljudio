@@ -11,9 +11,10 @@ function AddMusicToOnePlaylistItem({ title, id }) {
 
   function addSongToOnePlaylistHandler() {
     setTimeout(() => {
-      dispatch({ type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN });
+      dispatch({ 
+        type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION, 
+        payload: { saveSongToPlaylistSelectorSectionIsOpen: false } });
     }, 300);
-    mutate({ playlistId: id, videoId: state.songToSaveToUserPlaylist });
   }
 
   return (

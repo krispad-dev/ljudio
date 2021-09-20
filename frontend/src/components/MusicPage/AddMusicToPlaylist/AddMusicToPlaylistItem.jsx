@@ -11,13 +11,14 @@ function AddMusicToPlaylistItem({ title, id }) {
 
   function onClickHandler() {
 
+  
+    mutate({ playlistId: id, videoId: state.songToSaveToUserPlaylist });
     setTimeout(() => {
       dispatch({ 
         type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION, 
         payload: { saveSongToPlaylistSelectorSectionIsOpen: false } });
     }, 300);
 
-    mutate({ playlistId: id, videoId: state.songToSaveToUserPlaylist });
   }
 
   return (

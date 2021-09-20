@@ -8,11 +8,9 @@ import useOutsideClick from '../hooks/uiHooks/useOutsideClick';
 import { useLocation } from 'react-router-dom';
 
 function AddToPlaylistBtn({ videoId }) {
-
 	const ref = useRef();
 	const { state, dispatch } = useContext(UiContext);
 	const { pathname } = useLocation();
-
 
 	function selectSongToAddToPlaylistHandler() {
 		dispatch({ type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN });
@@ -32,14 +30,11 @@ function AddToPlaylistBtn({ videoId }) {
 	});
 
 	useEffect(() => {
-    dispatch({
-      type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
-      payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
-    });
-
-  }, 
-  
-  [ pathname ]);
+		dispatch({
+			type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
+			payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
+		});
+	}, [pathname]);
 
 	return (
 		<AddToPlaylistBtnWrapper ref={ref} onClick={e => console.log(ref)}>
