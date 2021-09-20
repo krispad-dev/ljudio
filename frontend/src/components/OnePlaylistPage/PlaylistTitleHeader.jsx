@@ -2,55 +2,54 @@ import React from 'react';
 import styled from 'styled-components';
 import ShareUrlBtn from '../ShareUrlBtn';
 import RemoveUserPlaylist from '../RemoveUserPlaylist';
+import SkeletonLoader from '../Loaders/SkeletonLoader';
 import FollowBtn from '../FollowBtn';
 
 import { useParams } from 'react-router';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
 import useGetSongs from '../../hooks/useGetSongs';
-import useAuth from '../../hooks/useAuth';
-import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
+import useGetOneSavedUserPlaylist from '../../hooks/useGetOneSavedUserPlaylist';
+import useAuth from '../../hooks/useAuth'
 
 function PlaylistTitleHeader({ title, playlist }) {
-	let playlistImg = null;
+  let playlistImg = null;
 
-	const { id } = useParams();
-	const { data: auth } = useAuth();
-	const { data: userPlaylists } = useGetSavedUserPlaylists();
+  const { id } = useParams();
+  const { data: auth } = useAuth();
+  const { data: userPlaylist } = useGetOneSavedUserPlaylist(id);
 
-	const UserPlaylistsArray = userPlaylists && userPlaylists.userPlaylists && userPlaylists.userPlaylists;
- 	const playlistId = playlist && playlist.id && playlist.id;  
+  const { data, isLoading } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
+  playlistImg = data && data.searchResults && data.searchResults.content[0].thumbnails[1].url;
+  
 
-
-	const { data } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
-	playlistImg = data && data.searchResults && data.searchResults.content[0].thumbnails[1].url;
-
-	return (
-		<PlaylistTitleHeaderWrapper>
-			<img
-				className='playlist-title-img'
-				src={
-					!playlistImg
-						? 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
-						: playlistImg
-				}
-				alt=''
-			/>
-			<div className='playlist-info'>
-
-				<h2>{title}</h2>
-
-				<div className='follow-container'>
-					{auth && auth.loggedIn && <FollowBtn playlistId={id} />}
-				</div>
-
-			      { playlist && isInUserPlaylist(playlistId, UserPlaylistsArray) && auth && auth.loggedIn && <RemoveUserPlaylist playlistId={id} /> }
-
-				<ShareUrlBtn />
-
-			</div>
-		</PlaylistTitleHeaderWrapper>
-	);
+  return (
+    <PlaylistTitleHeaderWrapper>
+      {isLoading && <SkeletonLoader />}
+      {!isLoading &&
+      <>
+      <img
+        className='playlist-title-img'
+        src={
+          !playlistImg
+            ? 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+            : playlistImg
+        }
+        alt=''
+      />
+      <div className='playlist-info'>
+        <h2>{title}</h2>
+        {userPlaylist && <h4>Songs: {userPlaylist.playlist.songs.length}</h4>}
+        <div className='follow-container'>
+         {auth && auth.loggedIn && <FollowBtn playlistId={id} />}
+        </div>
+		{ playlist && isInUserPlaylist(playlistId, UserPlaylistsArray) && auth && auth.loggedIn && <RemoveUserPlaylist playlistId={id} /> }
+        <ShareUrlBtn />
+      </div>
+      </>
+      }
+    </PlaylistTitleHeaderWrapper>
+  );
 }
 
 const PlaylistTitleHeaderWrapper = styled.div`
