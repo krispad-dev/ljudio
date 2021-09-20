@@ -15,12 +15,14 @@ function ArtistCard({ artist, thumbnails, name, bgColor }) {
 export default ArtistCard;
 
 const ArtistAcrdWrapper = styled.div`
+
 	&:hover {
 		transform: scale(1.01);
 		opacity: 80%;
 		transition: ease-in-out 0.2s;
 		cursor: pointer;
 	}
+    
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
