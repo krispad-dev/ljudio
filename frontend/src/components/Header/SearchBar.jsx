@@ -30,7 +30,12 @@ function SearchBar() {
 
 	return (
 		<SearchBarWrapper>
-			<Input className={'search-Input'} type={'text'} endAdornment={<SearchIcon />} onChange={searchMusic}>
+			<Input 
+			placeholder="Search music..."
+			className={'search-Input'} 
+			type={'text'} 
+			endAdornment={<SearchIcon />} 
+			onChange={searchMusic}>
 				{' '}
 			</Input>
 		</SearchBarWrapper>

@@ -1,5 +1,4 @@
 import { setDB } from '../database/dbConn.js';
-import format from 'pg-format'
 
 const db = setDB('rtawvmwp');
 
@@ -161,8 +160,10 @@ export const Playlist = {
     UnFollowPlaylist: async (data) => {
         try {
             const sql = 'DELETE FROM followers WHERE "userId" = $1 AND "playlistId" = $2';
+            const sql2 = 'UPDATE playlists SET "followCount" = "followCount" - 1 WHERE id = $1';
       
-            return await db.query(sql, [data.userId, data.playlistId]);
+            await db.query(sql, [data.userId, data.playlistId]);
+            await db.query(sql2, [data.playlistId]);
     
         } catch (error) {
             return error;

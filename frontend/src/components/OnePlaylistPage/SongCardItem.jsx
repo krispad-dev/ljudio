@@ -8,6 +8,7 @@ import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 import useAuth from '../../hooks/useAuth';
 import AddMusicToOnePlayListList from './AddMusicToOnePlaylistPage/AddMusicToOnePlayListList';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
+import SkeletonLoader from '../Loaders/SkeletonLoader';
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
@@ -16,13 +17,21 @@ import { isInUserPlaylist } from '../../helpers/helpers';
 function SongCardItem({ song, playlistId }) {
   //Video ID får göra en förfågan till Youtbe-api.
 
-  const { data } = useGetSongs(song);
+  const { data, isLoading } = useGetSongs(song);
   const { data: auth } = useAuth();
   const { state } = useContext(UiContext);
   const { data: userPlaylists } = useGetSavedUserPlaylists();
 
+  
   return (
+    <>
+    {data && 
+    data.searchResults && 
+    data.searchResults.content[0] &&
     <PlaylistsCardWrapper>
+      {isLoading && <SkeletonLoader />}
+      {!isLoading && 
+      <>
       <div className='song-container'>
         <div className='song-img-container'>
           <img src={data && data.searchResults.content[0].thumbnails[1].url} alt='song-cover' />
@@ -57,7 +66,11 @@ function SongCardItem({ song, playlistId }) {
         </div>
         {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
       </div>
+      </>
+      }
     </PlaylistsCardWrapper>
+    }
+    </>
   );
 }
 
