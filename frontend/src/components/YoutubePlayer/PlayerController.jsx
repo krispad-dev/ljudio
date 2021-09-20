@@ -9,17 +9,17 @@ import ProgressSlider from './ProgressSlider';
 import styled from 'styled-components';
 
 function Controller() {
-	const [ { playVideo, pauseVideo, 
-		durationInMinutes, playerIsPaused }, dispatch ] = useContext(
+	const [{ playVideo, pauseVideo, durationInMinutes, playerIsPaused }, dispatch] = useContext(
 		playerControllerStateContext
 	);
 
 	return (
 		<PlayerControllerWrapper>
 			<div className={'optionsContainer'}>
-				<CgScreen 
-				onClick={() => dispatch({type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE})} 
-				className={'showVideo'} />
+				<CgScreen
+					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE })}
+					className={'showVideo'}
+				/>
 			</div>
 
 			<div className={'volumeContainer'}>
@@ -27,18 +27,19 @@ function Controller() {
 			</div>
 
 			<div className={'buttonsContainer'}>
-				{playerIsPaused 
-				? <MdPlayCircleOutline onClick={() => playVideo()} className={'playPauseBtn'} />
-				: <MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} />}
+				{playerIsPaused ? (
+					<MdPlayCircleOutline
+						onClick={() => playVideo()}
+						style={{ color: '#2ecc71' }}
+						className={'playPauseBtn'}
+					/>
+				) : (
+					<MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} style={{ color: 'FF9F1C' }} />
+				)}
 			</div>
 
 			<div>
-				<ProgressSlider 
-
-				durationInMinutes={durationInMinutes} 
-				className={'progressContainer'}
-
-				/>
+				<ProgressSlider durationInMinutes={durationInMinutes} className={'progressContainer'} />
 			</div>
 		</PlayerControllerWrapper>
 	);
@@ -47,8 +48,9 @@ function Controller() {
 export default Controller;
 
 const PlayerControllerWrapper = styled.div`
+
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	flex-direction: row;
 	padding: 0.5rem;
@@ -66,12 +68,12 @@ const PlayerControllerWrapper = styled.div`
 			cursor: pointer;
 			&:hover {
 				color: blueviolet;
-			} 
+			}
 		}
 	}
 
 	.buttonsContainer {
-		color: #fff;
+
 
 		.playPauseBtn {
 			transition: ease-in-out 1s;

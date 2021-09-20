@@ -4,68 +4,86 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 // Compontents
-import FavoritePlayList from './FavoritePlayList';
 import SavedPlayLists from './SavedPlayLists';
 import FollowedPlaylists from './FollowedPlayLists';
-import AddPlayListButton from './AddPlayListButton';
 
 function PlaylistSection() {
-  const [savedPlaylistIsOpen, setSavedPlaylistIsOpen] = useState(false);
-  const [followedPlaylistsIsOpen, setFollowedPlaylistsIsOpen] = useState(false);
+	const [savedPlaylistIsOpen, setSavedPlaylistIsOpen] = useState(true);
+	const [followedPlaylistsIsOpen, setFollowedPlaylistsIsOpen] = useState(false);
 
-  return (
-    <PlayListSectionWrapper>
-{/*           <AddPlayListButton /> */}
-      {/*       <FavoritePlayList /> */}
+	function savedPlaylistsOnClickHandler() {
+		setFollowedPlaylistsIsOpen(false);
+		setSavedPlaylistIsOpen(!savedPlaylistIsOpen);
+	}
 
-      <Button
-        className='savedPlaylist-btn'
-        color='primary'
-        endIcon={<KeyboardArrowDownIcon />}
-        onClick={() => setSavedPlaylistIsOpen(!savedPlaylistIsOpen)}
-      >
-        Saved Playlist
-      </Button>
-      {savedPlaylistIsOpen && <SavedPlayLists />}
+	function followedPlaylistsOnClickHandler() {
+		setSavedPlaylistIsOpen(false);
+		setFollowedPlaylistsIsOpen(!followedPlaylistsIsOpen);
+	}
 
-      <Button
-        className='followedPlaylists-btn'
-        color='primary'
-        endIcon={<KeyboardArrowDownIcon />}
-        onClick={() => setFollowedPlaylistsIsOpen(!followedPlaylistsIsOpen)}
-      >
-        Following
-      </Button>
+	return (
+		<PlayListSectionWrapper>
+			{!followedPlaylistsIsOpen && (
+				<Button
+					className='savedPlaylist-btn'
+					color='primary'
+					endIcon={
+						<KeyboardArrowDownIcon
+							style={{
+								transform: `${savedPlaylistIsOpen ? 'rotate(0)' : 'rotate(-90deg)'}`,
+								transition: '0.2s ease-in-out',
+							}}
+						/>
+					}
+					onClick={savedPlaylistsOnClickHandler}
+				>
+					Saved Playlist
+				</Button>
+			)}
 
-      {followedPlaylistsIsOpen && <FollowedPlaylists />}
+			{savedPlaylistIsOpen && <SavedPlayLists />}
 
-  
-    </PlayListSectionWrapper>
-  );
+			{!savedPlaylistIsOpen && (
+				<Button
+					className='followedPlaylists-btn'
+					color='primary'
+					endIcon={
+						<KeyboardArrowDownIcon
+							style={{
+								transform: `${followedPlaylistsIsOpen ? 'rotate(0)' : 'rotate(-90deg)'}`,
+								transition: '0.2s ease-in-out',
+							}}
+						/>
+					}
+					onClick={followedPlaylistsOnClickHandler}
+				>
+					Following
+				</Button>
+			)}
+
+			{followedPlaylistsIsOpen && <FollowedPlaylists />}
+		</PlayListSectionWrapper>
+	);
 }
 
 const PlayListSectionWrapper = styled.div`
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  overflow-y: scroll;
-  height: 60vh;
-  width: 100%;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  .savedPlaylist-btn,
-  .followedPlaylists-btn {
-    color: #c4c4c4;
-    padding: 0;
-    margin-top: 0.3rem;
-    margin-bottom: 0.3rem;
-    font-size: 0.9rem;
-    font-weight: 300;
-  }
+	z-index: 999;
+	height: 84vh;
+	width: 100%;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	.savedPlaylist-btn,
+	.followedPlaylists-btn {
+		color: #c4c4c4;
+		padding: 0;
+		margin-top: 0.3rem;
+		margin-bottom: 0.3rem;
+		font-size: 0.9rem;
+		font-weight: 300;
+	}
 `;
 
 export default PlaylistSection;

@@ -14,7 +14,7 @@ function SongsList() {
 	return (
 		<>
 			{isLoading && <SkeletonLoader />}
-
+	
 			<SongListWrapper>
 				{data &&
 					data.searchResults &&
@@ -30,6 +30,7 @@ function SongsList() {
 export default SongsList;
 
 const SongListWrapper = styled.div`
+    box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05);
 	::-webkit-scrollbar {
 		display: none;
 	}

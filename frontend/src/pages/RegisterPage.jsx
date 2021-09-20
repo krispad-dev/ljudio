@@ -124,7 +124,7 @@ const RegisterPageWrapper = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: #000000;
+  background-color: #1e272e;
 
   .register-page-contentWrapper {
     max-width: 700px;

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { UiContext } from '../../../context/UiState'
+import { UiContext } from '../../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -9,12 +9,12 @@ import { isInPlaylist } from '../../../helpers/helpers';
 
 function PlayListCardItem({ title, playlistId, id }) {
 	const { data } = useGetFollowedPlaylists();
-	const { state, dispatch } = useContext(UiContext)
+	const { state, dispatch } = useContext(UiContext);
 
 	return (
-		<PlayListCardItemWrapper onClick={()=> dispatch({type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE})}>
+		<PlayListCardItemWrapper onClick={() => dispatch({ type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE })}>
 			<Link to={`/playlist/${playlistId ? playlistId : id}`}>
-				<p className='songTitle'>{title}</p>
+				<p className='songTitle' style={{fontSize: '1rem'}}>{title}</p>
 			</Link>
 			<div>
 				{data && !isInPlaylist(playlistId, data.followedPlaylists) && <RemoveUserPlaylist playlistId={id} />}
@@ -24,21 +24,22 @@ function PlayListCardItem({ title, playlistId, id }) {
 }
 
 const PlayListCardItemWrapper = styled.li`
-	width: 2rem;
+
+
 	div {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		margin-right: 1rem;
 	}
-	width: 100%;
+	width: 99%;
 	&:hover {
 		opacity: 60%;
 		transition: 0.2s ease-in-out;
 	}
 
 	height: 3rem;
-	background-color: #212121;
+	background-color: rgba(255, 255, 255, 0.08);
 	border: 3px solid black;
 	display: flex;
 	align-items: center;
@@ -58,6 +59,8 @@ const PlayListCardItemWrapper = styled.li`
 		text-decoration: none;
 		color: #fff;
 		cursor: pointer;
+
+	
 	}
 `;
 

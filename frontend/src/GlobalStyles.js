@@ -1,6 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
+
 const GlobalStyle = createGlobalStyle`
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+
 
 body {
 	font-family: 'Roboto', sans-serif;
@@ -12,19 +19,20 @@ body {
 	height: 100vh;
 	overflow: hidden;
 	background-color: black;
+	color: #111;
 }
 
 .App {
 	overflow: hidden;
 	display: grid;
-	grid-template-columns: 20% 80%;
+	grid-template-columns: 15% 85%;
 	height: 100vh;
-	width: 100vw;
+
 	grid-template-rows: 10vh 70vh 20vh;
 	grid-template-areas:
-		'header header'
+		'aside header'
 		'aside main'
-		'footer footer';
+		'aside footer';
 }
 
 header {
@@ -38,7 +46,7 @@ header {
 
 aside {
 	grid-area: aside;
-	background-color: black;
+	background-color: #111;
 	
 }
 
@@ -51,14 +59,13 @@ main {
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
-	background-color: black;
-	
+	background-color: #111;
 }
 
 footer {
 	position: relative;
 	grid-area: footer;
-	background-color: black;
+	background-color: #111;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -71,10 +78,12 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: 200;
+	font-weight: 00;
 	margin: 0;
 	padding: 0;
-	color: #fff;
+	color: #bbb;
+	font-weight: 200;
+
 }
 
 @media only screen and (max-width: 1000px) {

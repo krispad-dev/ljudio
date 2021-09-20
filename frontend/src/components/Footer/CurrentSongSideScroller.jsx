@@ -32,6 +32,6 @@ const CurrentSongDisplayerWrapper = styled.div`
 	font-weight: 200;
 
 	h4 {
-		margin: 1rem;
+		margin: rem;
 	}
 `;

@@ -15,6 +15,7 @@ const ArtistAcrdWrapper = styled.div`
     background-color: pink;
     background-position: center;
     background-size: cover;
+    border-radius: 10px;
 
 h3 {
     background-color: #000;

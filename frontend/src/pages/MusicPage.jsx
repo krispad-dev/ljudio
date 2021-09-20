@@ -15,13 +15,12 @@ function MusicPage() {
 		<MusicPageWrapper>
 
 			<div className='songs-list'>
-				{data && state.headerSearchString && <h1>SONGS</h1>}
 				<SongsList />
 			</div>
 
 			<div className="album-artists-container">
 				<div className='artists-list'>
-					{data && state.headerSearchString && <h1>ARTISTS</h1>}
+					{data && state.headerSearchString && <h1>artists</h1>}
 					<ArtiststList />
 				</div>
 
@@ -42,9 +41,9 @@ const MusicPageWrapper = styled.div`
 	flex-direction: column;
 	width: 100%;
 	h1 {
-		background-color: rgba(255, 255, 255, 0.05);
-		font-weight: 400;
-		margin-top: 1rem;
+
+		font-weight: 300;
+		margin-top: rem;
 		font-size: 1.5rem;
 	}
 

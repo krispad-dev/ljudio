@@ -1,34 +1,31 @@
 import React from 'react';
-import HomeIcon from '@material-ui/icons/Home';
-import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import Headset from '@material-ui/icons/Headset';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import styled from 'styled-components';
 import MenuItem from './MenuItem';
 import UserIndicator from '../../Header/UserIndicator';
 
 function MenuItems() {
-  return (
-    <MenuItemsWrapper>
-      {/*       <MenuItem url={'/'} icon={<HomeIcon />} text={'HOME'} />
-       */}
-      <MenuItem url={'/'} icon={<LibraryMusicIcon />} text={'MUSIC'} />
-      <MenuItem url={'/playlists'} icon={<AddBoxIcon />} text={'PLAYLISTS'} />
+	return (
+		<MenuItemsWrapper>
+			<MenuItem url={'/'} icon={<Headset style={{ fontSize: '1.3rem' }}   />} text={'MUSIC'} />
+			<MenuItem url={'/playlists'} icon={<QueueMusicIcon style={{ fontSize: '1.3rem' }} />} text={'PLAYLISTS'} />
+
+			<div className='divider'></div>
       <UserIndicator />
-      <div className='divider'></div>
-    </MenuItemsWrapper>
-  );
+		</MenuItemsWrapper>
+	);
 }
 
 const MenuItemsWrapper = styled.div`
-  height: auto;
-  margin-bottom: 10px;
-  .divider {
-/*     border-top: 1px solid #8c8b8b; */
-  }
-  h1 {
-    font-size: 1.5rem;
-    font-family: 'Roboto', sans-serif;
-  }
+	height: auto;
+	margin-bottom: 10px;
+	.divider {
+	}
+	h1 {
+		font-size: 1rem;
+		font-family: 'Roboto', sans-serif;
+	}
 `;
 
 export default MenuItems;

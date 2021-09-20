@@ -22,13 +22,25 @@ function FollowedPlaylists() {
 }
 
 const FollowingPlayListWrapper = styled.ul`
+	animation: dropDown ease-in-out 0.2s;
+	@keyframes dropDown {
+		from {
+			height: 0%;
+		}
+
+		to {
+			height: 100%;
+		}
+	}
+
+	height: 100%;
 	::-webkit-scrollbar {
 		display: none;
 	}
-height: 15rem;
-  overflow: scroll;
-  margin-bottom: 10px;
-  width: 100%;
+	overflow-y: scroll;
+	color: #c4c4c4;
+	margin-bottom: 10px;
+	width: 100%;
 `;
 
 export default FollowedPlaylists;
