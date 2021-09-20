@@ -21,8 +21,9 @@ export default function CreatePlaylist() {
 	return (
 		<CreatePalyListWrpapper>
 			<form onSubmit={savePlaylist}>
-				<AddIcon className='add-icon' onClick={savePlaylist} />
+
 				<TextField
+					fullWidth={true}
 					value={textFieldInput}
 					onChange={e => setTextFieldInput(e.target.value)}
 					size={'small'}
@@ -30,13 +31,15 @@ export default function CreatePlaylist() {
 					color='primary'
 					placeholder={'Add Playlist'}
 				/>
+								<AddIcon className='add-icon' onClick={savePlaylist} />
 			</form>
 		</CreatePalyListWrpapper>
 	);
 }
 
 const CreatePalyListWrpapper = styled.div`
-margin-bottom: 2rem ;
+	background-color: rgba(255, 255, 255, 0.02);
+	margin-bottom: 0.1rem;
 	width: 100%;
 	display: flex;
 
@@ -47,14 +50,13 @@ margin-bottom: 2rem ;
 	textarea {
 		color: #fff;
 		font-weight: 200;
-		height: 0.5rem;
 		width: 100%;
 	}
 
 	form {
-		background-color: rgba(255, 255, 255, 0.1);
+		width: 100%;
 		display: flex;
-		align-items: flex-end;
+		align-items: center;
 	}
 
 	.add-icon {

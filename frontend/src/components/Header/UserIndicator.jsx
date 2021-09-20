@@ -20,7 +20,7 @@ function UserIndicator() {
 export default UserIndicator;
 
 const UserIndicatorWrappe = styled.div`
-background-color: #222;
+background-color: #111;
 font-size: 1rem;
 
 	display: flex;

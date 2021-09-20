@@ -14,8 +14,7 @@ function DesktopMenu() {
 	return (
 		<AsideMenuWrapper>
 			<MenuItems />
-			<h1 className='myPlaylist-h1'>MY PLAYLISTS</h1>
-			<AddPlayListButton />
+
 			<PlaylistSection />
 
 			{windowWidth < 980 && (
@@ -31,21 +30,15 @@ function DesktopMenu() {
 const AsideMenuWrapper = styled.div`
 margin-top: 1rem;
 
+	height: 100%;
 	width: 95%;
 	.logout-btn-container {
 		margin-left: 1rem;
 		margin-top: 1rem;
 	}
 
-	ul {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-
 	p {
-		color: #c4c4c4;
-		margin: 0;
+		color:#999;
 	}
 
 	.myPlaylist-h1 {

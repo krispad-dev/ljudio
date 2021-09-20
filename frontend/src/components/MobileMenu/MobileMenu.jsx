@@ -22,7 +22,7 @@ function MobileMenu() {
 export default MobileMenu;
 
 const MobileMenuContainer = styled.div`
-	z-index: 200;
+	z-index: 0;
 	display: flex;
 	position: absolute;
 	background-color: #000;
@@ -49,7 +49,7 @@ const MobileMenuContainer = styled.div`
 		}
 	}
 
-	@media only screen and (max-width: 500px) {
+	@media only screen and (max-width: 1000px) {
 		width: 100vw;
 	}
 `;

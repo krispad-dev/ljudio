@@ -35,8 +35,9 @@ function SongCard({ videoId, name, artist, thumbnails }) {
 export default SongCard;
 
 const SongCardWrapper = styled.div`
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
+
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
   margin: 0.2rem 0rem;
   height: 3rem;
   width: 100%;
@@ -46,6 +47,7 @@ const SongCardWrapper = styled.div`
   align-items: center;
 
   .thumbnail-title-container {
+    border-radius: 10px;
     display: flex;
     background-position: center;
     background-size: cover;
@@ -61,6 +63,8 @@ const SongCardWrapper = styled.div`
   }
 
   .album-cover {
+    border-radius: 10px;
+    box-shadow: 10px 10px 25px rgba(255, 255, 255, 0.05);
     height: 3rem;
     width: 3rem;
     border-radius: 2px;

@@ -8,6 +8,7 @@ import SkeletonLoader from '../Loaders/SkeletonLoader';
 function ArtiststList() {
 	const { state } = useContext(UiContext);
 	const { data, isLoading } = useGetArtists(state.headerSearchString);
+	console.log(data);
 
 	return (
 		<>
