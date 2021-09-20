@@ -14,126 +14,140 @@ import { durationConverter } from '../../helpers/helpers';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
 function SongCardItem({ song, playlistId }) {
-  //Video ID får göra en förfågan till Youtbe-api.
+	//Video ID får göra en förfågan till Youtbe-api.
 
-  const { data } = useGetSongs(song);
-  const { data: auth } = useAuth();
-  const { state } = useContext(UiContext);
-  const { data: userPlaylists } = useGetSavedUserPlaylists();
+	const { data } = useGetSongs(song);
+	const { data: auth } = useAuth();
+	const { state } = useContext(UiContext);
+	const { data: userPlaylists } = useGetSavedUserPlaylists();
 
-  return (
-    <PlaylistsCardWrapper>
-      <div className='song-container'>
-        <div className='song-img-container'>
-          <img src={data && data.searchResults.content[0].thumbnails[1].url} alt='song-cover' />
-        </div>
-        <div className='song-artist-container'>
-          <h2>{data && data.searchResults.content[0].name}</h2>
-          <h3>{data && data.searchResults.content[0].artist.name}</h3>
-        </div>
+	return (
+		<>
+			{ data 
+      && data.searchResults 
+      && data.searchResults.content[0] 
+      && <PlaylistsCardWrapper>
+				<div className='song-container'>
+					<div className='song-img-container'>
+						<img
+							src={
+								data &&
+								data.searchResults &&
+								data.searchResults.content[0] &&
+								data.searchResults.content[0].thumbnails[1] &&
+								data.searchResults.content[0].thumbnails[1].url
+							}
+							alt='song-cover'
+						/>
+					</div>
+					<div className='song-artist-container'>
+						<h2>{data && data.searchResults.content[0].name}</h2>
+						<h3>{data && data.searchResults.content[0].artist.name}</h3>
+					</div>
 
-        <div className='song-album-container'>
-          <h2>Album</h2>
-          <h3>{data && data.searchResults.content[0].album.name}</h3>
-        </div>
-        <div className='song-duration-container'>
-          <h2>Duration</h2>
-          <h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
-        </div>
-        <div className='song-icon-container'>
-          <MusicPlayBtn
-            videoId={song}
-            name={data && data.searchResults.content[0].name}
-            artist={data && data.searchResults.content[0].artist.name}
-            thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
-          />
-          {userPlaylists &&
-            userPlaylists.userPlaylists &&
-            auth.loggedIn &&
-            isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
-              <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
-            )}
-           {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
-        </div>
-        {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
-      </div>
-    </PlaylistsCardWrapper>
-  );
+					<div className='song-album-container'>
+						<h2>Album</h2>
+						<h3>{data && data.searchResults.content[0].album.name}</h3>
+					</div>
+					<div className='song-duration-container'>
+						<h2>Duration</h2>
+						<h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
+					</div>
+					<div className='song-icon-container'>
+						<MusicPlayBtn
+							videoId={song}
+							name={data && data.searchResults.content[0].name}
+							artist={data && data.searchResults.content[0].artist.name}
+							thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
+						/>
+						{userPlaylists &&
+							userPlaylists.userPlaylists &&
+							auth.loggedIn &&
+							isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
+								<RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
+							)}
+						{auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
+					</div>
+					{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
+				</div>
+			</PlaylistsCardWrapper>}
+		</>
+	);
 }
 
 const PlaylistsCardWrapper = styled.div`
-  width: 100%;
-  display: flex;
+	width: 100%;
+	display: flex;
 
-  .song-container {
-    margin-top: 10px;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(255, 255, 255, 0.1);
+	.song-container {
+		margin-top: 10px;
+		width: 90%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: rgba(255, 255, 255, 0.1);
 
-    h2 {
-      font-size: 12px;
-    }
-    h3 {
-      font-size: 10px;
-    }
-  }
+		h2 {
+			font-size: 12px;
+		}
+		h3 {
+			font-size: 10px;
+		}
+	}
 
-  .song-img-container,
-  .song-artist-container,
-  .song-album-container,
-  .song-duration-container {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
+	.song-img-container,
+	.song-artist-container,
+	.song-album-container,
+	.song-duration-container {
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
 
-  .song-icon-container {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
+	.song-icon-container {
+		width: 40%;
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+	}
 
-  .song-img-container {
-    img {
-      border-radius: 2px;
-      max-width: 50px;
-    }
-  }
+	.song-img-container {
+		img {
+			border-radius: 2px;
+			max-width: 50px;
+		}
+	}
 
-  .song-artist-container h2,
-  .song-album-container h2,
-  .song-duration-container h2 {
-    color: c4c4c4;
-  }
+	.song-artist-container h2,
+	.song-album-container h2,
+	.song-duration-container h2 {
+		color: c4c4c4;
+	}
 
-  .song-artist-container h3,
-  .song-album-container h3,
-  .song-duration-container h3 {
-    font-weight: lighter;
-    color: rgba(255, 255, 255, 0.5);
-  }
+	.song-artist-container h3,
+	.song-album-container h3,
+	.song-duration-container h3 {
+		font-weight: lighter;
+		color: rgba(255, 255, 255, 0.5);
+	}
 
-  @media (min-width: 650px) {
-    .song-img-container {
-      img {
-        max-width: 100px;
-      }
-    }
-    .song-container {
-      h2 {
-        font-size: 20px;
-      }
-      h3 {
-        font-size: 15px;
-      }
-    }
-  }
+	@media (min-width: 650px) {
+		.song-img-container {
+			img {
+				max-width: 100px;
+			}
+		}
+		.song-container {
+			h2 {
+				font-size: 20px;
+			}
+			h3 {
+				font-size: 15px;
+			}
+		}
+	}
 `;
 
 export default SongCardItem;

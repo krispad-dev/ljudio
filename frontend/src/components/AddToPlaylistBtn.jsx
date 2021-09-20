@@ -1,57 +1,80 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { UiContext } from '../context/UiState';
 import { UI_STATE_ACTIONS } from '.././reducers/UiReducer';
 import { BsPlusCircle } from 'react-icons/bs';
 
+import useOutsideClick from '../hooks/uiHooks/useOutsideClick';
+import { useLocation } from 'react-router-dom';
+
 function AddToPlaylistBtn({ videoId }) {
-  const { state, dispatch } = useContext(UiContext);
-  const [addToPlaylistsBoxIsOpen, setAddToPlaylistsBoxIsOpen] = useState(false);
 
-  function selectSongToAddToPlaylistHandler() {
-    setAddToPlaylistsBoxIsOpen(!addToPlaylistsBoxIsOpen);
+	const ref = useRef();
+	const { state, dispatch } = useContext(UiContext);
+	const { pathname } = useLocation();
 
+
+	function selectSongToAddToPlaylistHandler() {
+		dispatch({ type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN });
+		dispatch({
+			type: UI_STATE_ACTIONS.SET_SONG_TO_SAVE_TO_USER_PLAYLIST,
+			payload: { songToSaveToUserPlaylist: videoId ? videoId : '' },
+		});
+	}
+
+	useOutsideClick(ref, e => {
+		if (state.saveSongToPlaylistSelectorSectionIsOpen) {
+			dispatch({
+				type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
+				payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
+			});
+		}
+	});
+
+	useEffect(() => {
     dispatch({
-      type: UI_STATE_ACTIONS.SET_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION_IS_OPEN,
+      type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
+      payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
     });
-    dispatch({
-      type: UI_STATE_ACTIONS.SET_SONG_TO_SAVE_TO_USER_PLAYLIST,
-      payload: { songToSaveToUserPlaylist: videoId ? videoId : '' },
-    });
-  }
 
-  return (
-    <AddToPlaylistBtnWrapper>
-      <BsPlusCircle
-        className='add-btn'
-        style={{
-          marginRight: '1rem',
-          fontSize: '1.2rem',
-          cursor: 'pointer',
-          color: `${
-            state.saveSongToPlaylistSelectorSectionIsOpen && videoId === state.songToSaveToUserPlaylist ? '#2ecc71' : ''
-          }`,
-        }}
-        onClick={selectSongToAddToPlaylistHandler}
-      />
-    </AddToPlaylistBtnWrapper>
-  );
+  }, 
+  
+  [ pathname ]);
+
+	return (
+		<AddToPlaylistBtnWrapper ref={ref} onClick={e => console.log(ref)}>
+			<BsPlusCircle
+				className='add-btn'
+				style={{
+					marginRight: '1rem',
+					fontSize: '1.2rem',
+					cursor: 'pointer',
+					color: `${
+						state.saveSongToPlaylistSelectorSectionIsOpen && videoId === state.songToSaveToUserPlaylist
+							? '#2ecc71'
+							: ''
+					}`,
+				}}
+				onClick={selectSongToAddToPlaylistHandler}
+			/>
+		</AddToPlaylistBtnWrapper>
+	);
 }
 
 const AddToPlaylistBtnWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 
-  .add-btn {
-    font-size: 1.5rem;
-    color: #c4c4c4;
+	.add-btn {
+		font-size: 1.5rem;
+		color: #c4c4c4;
 
-    &:hover {
-      color: #2ecc71;
-      transition: ease-in-out 0.2s;
-      cursor: pointer;
-    }
-  }
+		&:hover {
+			color: #2ecc71;
+			transition: ease-in-out 0.2s;
+			cursor: pointer;
+		}
+	}
 `;
 
 export default AddToPlaylistBtn;

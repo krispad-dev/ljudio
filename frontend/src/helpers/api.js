@@ -4,14 +4,11 @@ export const Fetch = {
       credentials: 'include',
     });
 
-    console.log('From Fetch' + url);
-
     const data = await res.json();
     return data;
   },
 
   POST: async (dataObject, url) => {
-    console.log(dataObject);
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

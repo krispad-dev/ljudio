@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { playerControllerStateContext } from './context/YouTubePlayerContext';
 import { UiContext } from './context/UiState'
-import { UI_STATE_ACTIONS } from './reducers/UiReducer'
 
 import { Route, Redirect, useLocation } from 'react-router-dom';
 
@@ -32,6 +31,9 @@ const notLoggedInStyles = {
 };
 
 function App() {
+
+  const appRef = useRef()
+
   const { data: auth } = useAuth();
   const { pathname } = useLocation();
   const [{ fullscreenVideoMode }, dispatch] = useContext(playerControllerStateContext);
@@ -39,7 +41,7 @@ function App() {
   const { state } = useContext(UiContext)
 
   return (
-    <div style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
+    <div ref={appRef} style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
       <GlobalStyle />
 
       {pathname !== '/register' && pathname !== '/login' && !fullscreenVideoMode && <Header />}
@@ -66,7 +68,6 @@ function App() {
           </Route>
           
           <Route exact path='/playlist/:id' component={OnePlaylistPage} />
-          {/*           <Route exact path='/playlist/following' component={PlaylistsPageFollowing} />  */}
 
           <Route exact path='/' component={MusicPage} />
           <Route exact path='/register' component={RegisterPage} />

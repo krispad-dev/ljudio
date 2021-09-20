@@ -8,6 +8,7 @@ import SavedPlayLists from './SavedPlayLists';
 import FollowedPlaylists from './FollowedPlayLists';
 
 function PlaylistSection() {
+	
 	const [savedPlaylistIsOpen, setSavedPlaylistIsOpen] = useState(true);
 	const [followedPlaylistsIsOpen, setFollowedPlaylistsIsOpen] = useState(false);
 
@@ -20,6 +21,8 @@ function PlaylistSection() {
 		setSavedPlaylistIsOpen(false);
 		setFollowedPlaylistsIsOpen(!followedPlaylistsIsOpen);
 	}
+
+
 
 	return (
 		<PlayListSectionWrapper>
