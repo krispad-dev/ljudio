@@ -16,6 +16,9 @@ const initialState = {
     currentTime: 0,
     playerIsPaused: true,
     isPlaying: false,
+    pendingCue: [],
+    activeCue: [],
+    cuePosition: 0
 
 }
 

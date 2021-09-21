@@ -6,14 +6,13 @@ import styled from 'styled-components';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import { useWindowSize } from '@react-hook/window-size';
 
-
 function YouTubePlayer() {
-
 	const playerRef = useRef();
-	
-	const [ { fullscreenVideoMode, currentSong, currentTime, isPlaying }, dispatch ] = useContext(playerControllerStateContext);
-	const [ windowWidth, windowHeight ] = useWindowSize();
 
+	const [{ fullscreenVideoMode, currentTime, cuePosition, activeCue }, dispatch] = useContext(
+		playerControllerStateContext
+	);
+	const [windowWidth, windowHeight] = useWindowSize();
 
 	const opts = {
 		controls: 0,
@@ -22,7 +21,6 @@ function YouTubePlayer() {
 			autoplay: 1,
 		},
 	};
-
 
 	function playVideo(event) {
 		return playerRef.current.internalPlayer.playVideo();
@@ -44,13 +42,9 @@ function YouTubePlayer() {
 		return playerRef.current.internalPlayer.setSize(windowWidth, windowHeight - 200);
 	}
 
-
 	useEffect(() => {
-
 		setSize(windowWidth);
-	
-	}, [ windowWidth ]);
-
+	}, [windowWidth]);
 
 	useEffect(() => {
 		const interval = setInterval(async () => {
@@ -60,12 +54,10 @@ function YouTubePlayer() {
 		return () => clearInterval(interval);
 	}, []);
 
-
 	useEffect(async () => {
 		const durationInMinutes = await playerRef.current.internalPlayer.getDuration();
 		dispatch({ type: PLAYER_ACTIONS.SET_DURATION, payload: durationInMinutes });
-	}, [ currentTime ]);
-
+	}, [currentTime]);
 
 	useEffect(() => {
 		dispatch({ type: PLAYER_ACTIONS.PLAY_VIDEO, payload: playVideo });
@@ -74,26 +66,21 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SEEK_TO, payload: seekTo });
 	}, []);
 
-
 	function onEndHandler() {
-/* 		dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE }); */
+		/* 		dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE }); */
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
-		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING , playload: false })
+		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, playload: false });
 	}
-
 
 	function onPlayHandler() {
-		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false })
-		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: true })
+		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
+		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: true });
 	}
-
 
 	function onPauseHandler() {
-		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true })
-		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false })
+		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true });
+		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false });
 	}
-
-
 
 	return (
 		<IframeWrapper
@@ -108,34 +95,28 @@ function YouTubePlayer() {
 				onPause={onPauseHandler}
 				onPlay={onPlayHandler}
 				onEnd={onEndHandler}
-				videoId={currentSong.videoId} 
+				videoId={activeCue[cuePosition]}
 			/>
-			;
-			<div className={'mask-top'}>
-			</div>
+			;<div className={'mask-top'}></div>
 		</IframeWrapper>
 	);
 }
 
-
 export default YouTubePlayer;
 
 const IframeWrapper = styled.div`
-
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
-
 
 	.mask-top {
 		background-color: black;
 		height: 5rem;
 		position: absolute;
-		bottom:0rem;
+		bottom: 0rem;
 		width: 100%;
 		display: flex;
 		justify-content: center;
 		letter-spacing: 6px;
 	}
-
 `;
