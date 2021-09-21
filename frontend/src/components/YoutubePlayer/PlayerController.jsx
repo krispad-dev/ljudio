@@ -100,8 +100,6 @@ const PlayerControllerWrapper = styled.div`
 				border-radius: 5px;
 			}
 
-			}
-
 		}
 
 
@@ -119,4 +117,4 @@ const PlayerControllerWrapper = styled.div`
 			}
 		}
 	}
-`;
+`
