@@ -14,6 +14,14 @@ function Controller() {
 		playerControllerStateContext
 	);
 
+	function setNextInCueHandler() {
+		dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE })
+	}
+
+	function setPreviousInCueHandler() {
+		dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE })
+	}
+
 	return (
 		<PlayerControllerWrapper>
 			<div className={'optionsContainer'}>
@@ -31,6 +39,7 @@ function Controller() {
 				<MdSkipNext
 					className={'next-prevBtn'}
 					style={{ color: '#fff', fontSize: '3rem', transform: 'rotate(-180deg)' }}
+					onClick={setPreviousInCueHandler}
 				/>
 				{playerIsPaused ? (
 					<MdPlayCircleOutline
@@ -41,7 +50,7 @@ function Controller() {
 				) : (
 					<MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} style={{ color: '#1dd1a1' }} />
 				)}
-				<MdSkipNext className={'next-prevBtn'} style={{ color: '#fff', fontSize: '3rem' }} />
+				<MdSkipNext onClick={setNextInCueHandler} className={'next-prevBtn'} style={{ color: '#fff', fontSize: '3rem' }} />
 			</div>
 
 			<div>
