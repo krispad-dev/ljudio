@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ShareUrlBtn from '../ShareUrlBtn';
 import RemoveUserPlaylist from '../RemoveUserPlaylist';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 import FollowBtn from '../FollowBtn';
+import { FaEdit } from 'react-icons/fa';
+import EditPlaylistTitle from './EditPlaylistTitle';
+import { useQueryClient } from 'react-query';
 
 import { useParams } from 'react-router';
 import { isInUserPlaylist } from '../../helpers/helpers';
@@ -14,6 +17,10 @@ import useAuth from '../../hooks/useAuth';
 import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 
 function PlaylistTitleHeader({ title, playlist }) {
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
+  const queryClient = useQueryClient();
+
   let playlistImg = null;
 
   const { id } = useParams();
@@ -26,6 +33,13 @@ function PlaylistTitleHeader({ title, playlist }) {
 
   const playlistId = playlist && playlist.id && playlist.id;
   const playlistArray = userPlaylists && userPlaylists.userPlaylists;
+
+  useEffect(() => {
+    setTimeout(() => {
+      queryClient.fetchQuery(['playlist']);
+      queryClient.fetchQuery(['user-playlists']);
+    }, 1000);
+  }, [isChanged, isEditingTitle]);
 
   return (
     <PlaylistTitleHeaderWrapper>
@@ -42,9 +56,30 @@ function PlaylistTitleHeader({ title, playlist }) {
             alt=''
           />
           <div className='playlist-info'>
-            <h2>{title}</h2>
-            {userPlaylist && <h4>Songs: {userPlaylist.playlist.songs.length}</h4>}
+            {!isEditingTitle && <h2>{title}</h2>}
+
+            {!isEditingTitle && (
+              <FaEdit
+                onClick={() => setIsEditingTitle(true)}
+                style={{ color: '#FFF', fontSize: '1.5rem', margin: '1rem' }}
+              />
+            )}
+
+            {isEditingTitle && (
+              <EditPlaylistTitle
+                title={title}
+                playlistId={id}
+                isChanged={isChanged}
+                setIsChanged={setIsChanged}
+                isEditingTitle={isEditingTitle}
+                setIsEditingTitle={setIsEditingTitle}
+              />
+            )}
+
+            {userPlaylist && userPlaylist.playlist && <h4>Songs: {userPlaylist.playlist.songs.length}</h4>}
+
             <div className='follow-container'>{auth && auth.loggedIn && <FollowBtn playlistId={id} />}</div>
+
             {playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
               <RemoveUserPlaylist playlistId={id} />
             )}

@@ -78,6 +78,7 @@ export const API = {
     ONE_SAVED_USER_PLAYLIST: `${playlists}/user-playlists/1`,
     CREATE: `${playlists}/user-playlists`,
     REMOVE_PLAYLIST: `${playlists}/user-playlists`,
+    UPDATE_PLAYLIST_TITLE: `${playlists}/user-playlists/title`,
     SAVE_SONG_TO_PLAYLIST: `${playlists}/user-playlists/songs`,
     REMOVE_SONG_FROM_PLAYLIST: `${playlists}/user-playlists/songs`,
     FOLLOW_PLAYLIST: `${playlists}/followed-playlists`,

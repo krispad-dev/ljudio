@@ -3,6 +3,7 @@ import { playerControllerStateContext } from '../../context/YouTubePlayerContext
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import { MdPlayCircleOutline, MdPause } from 'react-icons/md';
 import { CgScreen } from 'react-icons/cg';
+import { MdSkipNext } from 'react-icons/md';
 
 import VolumeSlider from './VolumeSlider';
 import ProgressSlider from './ProgressSlider';
@@ -12,6 +13,14 @@ function Controller() {
 	const [{ playVideo, pauseVideo, durationInMinutes, playerIsPaused }, dispatch] = useContext(
 		playerControllerStateContext
 	);
+
+	function setNextInCueHandler() {
+		dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE })
+	}
+
+	function setPreviousInCueHandler() {
+		dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE })
+	}
 
 	return (
 		<PlayerControllerWrapper>
@@ -27,6 +36,11 @@ function Controller() {
 			</div>
 
 			<div className={'buttonsContainer'}>
+				<MdSkipNext
+					className={'next-prevBtn'}
+					style={{ color: '#fff', fontSize: '3rem', transform: 'rotate(-180deg)' }}
+					onClick={setPreviousInCueHandler}
+				/>
 				{playerIsPaused ? (
 					<MdPlayCircleOutline
 						onClick={() => playVideo()}
@@ -36,6 +50,7 @@ function Controller() {
 				) : (
 					<MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} style={{ color: '#1dd1a1' }} />
 				)}
+				<MdSkipNext onClick={setNextInCueHandler} className={'next-prevBtn'} style={{ color: '#fff', fontSize: '3rem' }} />
 			</div>
 
 			<div>
@@ -73,6 +88,19 @@ const PlayerControllerWrapper = styled.div`
 	}
 
 	.buttonsContainer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.next-prevBtn {
+			&:hover {
+				opacity: 80%;
+				transition: 0.2s ease-in-out;
+				color: #fff;
+				cursor: pointer;
+				border-radius: 5px;
+			}
+
+		}
 
 
 		.playPauseBtn {
@@ -89,4 +117,4 @@ const PlayerControllerWrapper = styled.div`
 			}
 		}
 	}
-`;
+`
