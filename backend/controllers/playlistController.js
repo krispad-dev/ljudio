@@ -33,6 +33,24 @@ export async function removePlaylist(req, res) {
   }
 }
 
+
+export async function updatePlaylistTitle(req, res) {
+  try {
+
+    console.log('Body for title: ', req.body);
+
+    const title = req.body.title;
+    const playlistId = req.body.playlistId;
+
+    const data = { title, playlistId };
+
+    await Playlist.UpdateUserPlaylistTitle(data);
+    
+  } catch (error) {
+    return res.status(400).json({ success: false });
+  }
+}
+
 export async function getAllUserPlaylists(req, res) {
   try {
     // User id from middleware

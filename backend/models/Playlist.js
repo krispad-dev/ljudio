@@ -26,6 +26,18 @@ export const Playlist = {
         }
     },
 
+    UpdateUserPlaylistTitle: async (data) => {
+        try {
+            const sql = 'UPDATE playlists SET title = $1 WHERE id = $2';
+            const values = [data.title, data.playlistId];
+
+            await db.query(sql, values);
+
+        } catch (error) {
+            return error;
+        }
+    },
+
     GetAllUserPlaylists: async (userId) => {
         try {
             const sql = 'SELECT * FROM playlists WHERE "userId" = $1';

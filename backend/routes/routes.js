@@ -35,7 +35,10 @@ userRouter.get('/playlists/user-playlists/1/:id', PlaylistController.getOneUserP
 userRouter.post('/playlists/user-playlists', verifyToken, PlaylistController.createPlaylist);
 
 //Remove Playlist
-userRouter.delete('/playlists/user-playlists', PlaylistController.removePlaylist);
+userRouter.delete('/playlists/user-playlists', verifyToken, PlaylistController.removePlaylist);
+
+//Update playlist title
+userRouter.post('/playlists/user-playlists/title', verifyToken, PlaylistController.updatePlaylistTitle);
 
 //Saves a song to playlist.
 userRouter.post('/playlists/user-playlists/songs', verifyToken, PlaylistController.saveSongToUserPlaylist);
