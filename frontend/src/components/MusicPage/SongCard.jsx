@@ -7,7 +7,7 @@ import useAuth from '../../hooks/useAuth';
 import MusicPlayBtn from '../MusicPlayBtn';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
 
-function SongCard({ videoId, name, artist, thumbnails }) {
+function SongCard({ videoId, name, artist, thumbnails, index }) {
   const { data: auth } = useAuth();
   const { state } = useContext(UiContext);
 
@@ -26,7 +26,7 @@ function SongCard({ videoId, name, artist, thumbnails }) {
         {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
         {/* {auth && auth.loggedIn && <BsHeart />}
          */}
-        <MusicPlayBtn videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
+        <MusicPlayBtn index={index} videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
       </div>
     </SongCardWrapper>
   );

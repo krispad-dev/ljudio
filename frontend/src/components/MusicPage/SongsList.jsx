@@ -1,5 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UiContext } from '../../context/UiState';
+
+import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
+import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
+
 import useGetSongs from '../../hooks/useGetSongs';
 import SongCard from './SongCard';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
@@ -9,7 +13,21 @@ import styled from 'styled-components';
 function SongsList() {
 	
 	const { state } = useContext(UiContext);
+	const [ playerState, dispatch ] = useContext(playerControllerStateContext)
+
 	const { data, isLoading } = useGetSongs(state.headerSearchString);
+
+	const musicArrayToFilter = data && data.searchResults && data.searchResults.content && data.searchResults.content;
+
+	const filteredOutSongsArray = musicArrayToFilter && [...musicArrayToFilter].map((song)=> {
+		return song.videoId
+	})
+
+	useEffect(() => {
+		dispatch({type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutSongsArray })
+	}, [data])
+	
+
 
 	return (
 		<>
@@ -19,13 +37,16 @@ function SongsList() {
 				{data &&
 					data.searchResults &&
 					data.searchResults.content &&
-					data.searchResults.content.map(item => {
-						return <SongCard key={item.videoId} {...item} />;
+					data.searchResults.content.map((item, index) => {
+						return <SongCard index={index} key={item.videoId} {...item} />;
 					})}
 			</SongListWrapper>
 		</>
 	);
 }
+
+
+
 
 export default SongsList;
 

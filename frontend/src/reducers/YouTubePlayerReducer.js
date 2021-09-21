@@ -9,6 +9,15 @@ export const PLAYER_ACTIONS = {
 	SET_CURRENT_TIME: 'SET_CURRENT_TIME',
 	SET_PLAYER_IS_PAUSED: 'SET_PLAYER_IS_PAUSED',
 	SET_IS_PLAYING: 'SET_IS_PLAYING',
+
+	SET_PENDING_CUE: 'SET_PENDING_CUE',
+	SET_ACTIVE_CUE: 'SET_ACTIVE_CUE',
+	SET_ACTIVE_CUE_POSITION: 'SET_ACTIVE_CUE_POSITION',
+
+	SET_NEXT_IN_CUE: 'SET_NEXT_IN_CUE',
+	SET_PREVIOUS_IN_CUE: 'SET_PREVIOUS_IN_CUE',
+
+
 };
 
 export function playerControllerReducer(state, action) {
@@ -70,6 +79,44 @@ export function playerControllerReducer(state, action) {
 				...state,
 				isPlaying: action.payload,
 			};
+
+
+		/// PLAYER CUE 
+			
+		case PLAYER_ACTIONS.SET_PENDING_CUE:
+			return {
+				...state,
+				pendingCue: action.payload,
+			};
+		case PLAYER_ACTIONS.SET_ACTIVE_CUE:
+			return {
+				...state,
+				activeCue: action.payload,
+			};
+		case PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION:
+			return {
+				...state,
+				cuePosition: action.payload,
+			};
+
+		case PLAYER_ACTIONS.SET_NEXT_IN_CUE:
+			return {
+				...state,
+				cuePosition: state.cuePosition + 1,
+			};
+
+		case PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE:
+			return {
+				...state,
+				cuePosition: state.cuePosition - 1,
+			};
+
+			
+
+
+
+
+
 
 		default:
 			return state;

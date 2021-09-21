@@ -14,7 +14,7 @@ import SkeletonLoader from '../Loaders/SkeletonLoader';
 import { durationConverter } from '../../helpers/helpers';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
-function SongCardItem({ song, playlistId }) {
+function SongCardItem({ song, playlistId, index }) {
 	//Video ID får göra en förfågan till Youtbe-api.
 
   const { data, isLoading } = useGetSongs(song);
@@ -51,6 +51,7 @@ function SongCardItem({ song, playlistId }) {
         </div>
         <div className='song-icon-container'>
           <MusicPlayBtn
+		  	index={index}
             videoId={song}
             name={data && data.searchResults.content[0].name}
             artist={data && data.searchResults.content[0].artist.name}
