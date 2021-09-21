@@ -4,7 +4,6 @@ import { UiReducer } from '../reducers/UiReducer';
 export const UiContext = createContext();
 
 const initialState = {
-
   headerSearchString: 'home',
   songToSaveToUserPlaylist: '',
   saveSongToPlaylistSelectorSectionIsOpen: false,
@@ -14,19 +13,13 @@ const initialState = {
   modalText: '',
   confirmAction: '',
   pushDir: '',
-  isDeletingPlaylist: false
-
+  isDeletingPlaylist: false,
 };
 
 function UiState({ children }) {
+  const [state, dispatch] = useReducer(UiReducer, initialState);
 
-  const [ state, dispatch ] = useReducer(UiReducer, initialState);
-
-  return (
-    <UiContext.Provider value={{ state, dispatch }}>
-      {children}
-    </UiContext.Provider>
-  );
+  return <UiContext.Provider value={{ state, dispatch }}>{children}</UiContext.Provider>;
 }
 
 export default UiState;
