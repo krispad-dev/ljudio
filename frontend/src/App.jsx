@@ -40,6 +40,7 @@ function App() {
   const [windowWidth, windowHeight] = useWindowSize();
   const { state } = useContext(UiContext)
 
+  
   return (
     <div ref={appRef} style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
       <GlobalStyle />

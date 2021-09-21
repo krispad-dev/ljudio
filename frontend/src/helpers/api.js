@@ -92,6 +92,7 @@ export const API = {
 
   MUSIC: {
     ARTISTS: `${music}/artists`,
+    ONE_ARTIST: `${music}/artists/1/`,
     ALBUMS: `${music}/albums`,
     PLAYLISTS: `${music}/playlists`,
   },

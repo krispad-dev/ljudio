@@ -60,3 +60,18 @@ export async function getAllPlaylists(req, res) {
 		return res.status(500).json({ success: false, message: err.message });
 	}
 }
+
+export async function getOneArtist(req, res) {
+
+	try {
+		const { browseId } = req.query;
+
+		const artist = await Music.GetOneArtist(browseId);
+
+		console.log(artist);
+		return res.json({ success: true, artist });
+		
+	} catch (error) {
+		console.log(error);
+	}
+}

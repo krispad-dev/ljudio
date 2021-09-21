@@ -48,4 +48,17 @@ export const Music = {
       return error;
     }
   },
+
+  GetOneArtist: async (browseId) => {
+    try {
+      const res = await fetch(
+        `https://yt-music-api.herokuapp.com/api/yt/artist/${browseId}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+
 };
