@@ -17,6 +17,8 @@ musicRouter.get('/playlists', verifyToken, PlaylistController.getAllPlaylists);
 musicRouter.get('/playlists/search/', verifyToken, PlaylistController.searchPlaylists);
 musicRouter.get('/artists/1/', MusicController.getOneArtist);
 
+musicRouter.get('/videos', MusicController.getMusicVideos);
+
 //Gets all playlists connected to logged in user from databse.
 userRouter.get('/playlists/user-playlists', verifyToken, PlaylistController.getAllUserPlaylists);
 
