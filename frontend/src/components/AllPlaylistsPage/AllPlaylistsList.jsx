@@ -1,42 +1,89 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import styled from 'styled-components';
 
 import AllPlaylistsListItemCard from './AllPlaylistsListItemCard';
 import useGetAllPlaylists from '../../hooks/useGetAllPlaylists';
+import useSearchPlaylists from '../../hooks/useSearchPlaylists';
+
+import { UiContext } from '../../context/UiState';
+import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
+
+const colors = [
+  '#ff9ff3',
+  '#feca57',
+  '#ff6b6b',
+  '#48dbfb',
+  '#1dd1a1',
+  '#f368e0',
+  '#ff9f43',
+  '#ff9ff3',
+  '#feca57',
+  '#ff6b6b',
+  '#48dbfb',
+  '#1dd1a1',
+  '#f368e0',
+  '#ff9f43',
+  '#ff9ff3',
+  '#feca57',
+  '#ff6b6b',
+  '#48dbfb',
+  '#1dd1a1',
+  '#f368e0',
+  '#ff9f43',
+];
 
 function AllPlaylistsList() {
-	const { data: allPlaylists } = useGetAllPlaylists();
+  // const { data: allPlaylists } = useGetAllPlaylists();
+  const { state, dispatch } = useContext(UiContext);
 
-	return (
-		<AllPlaylistsListWrapper>
-			{allPlaylists &&
-				allPlaylists.playlists &&
-				allPlaylists.playlists.map(playlist => (
-					<AllPlaylistsListItemCard key={playlist.playlistId} {...playlist} />
-				))}
-		</AllPlaylistsListWrapper>
-	);
+  const { data: allPlaylists } = useSearchPlaylists(state.headerSearchString);
+
+  useEffect(() => {
+    dispatch({
+      type: UI_STATE_ACTIONS.SET_HEADER_SEARCH_STRING,
+      payload: { headerSearchString: '' },
+    });
+  }, []);
+
+  return (
+    <AllPlaylistsListWrapper>
+      {allPlaylists &&
+        allPlaylists.playlists &&
+        allPlaylists.playlists.map((playlist, i) => (
+          <AllPlaylistsListItemCard key={playlist.playlistId} {...playlist} bgColor={colors[i]} />
+        ))}
+    </AllPlaylistsListWrapper>
+  );
 }
 
 export default AllPlaylistsList;
 
 const AllPlaylistsListWrapper = styled.div`
-	::-webkit-scrollbar {
-		display: none;
-	}
-	overflow-y: scroll;
-	width: 100%;
-	display: grid;
-	gap: 0.3rem;
-	grid-template-columns: 15vw 15vw 15vw 15vw;
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-auto-rows: 12rem;
+  grid-template-columns: auto auto auto auto auto;
 
-	@media only screen and (max-width: 1000px) {
-		grid-template-columns: 33vw auto 33vw;
-
-	}
-	@media only screen and (max-width: 500px) {
-		grid-template-columns: 50% 50%;
-
-	}
+  @media only screen and (max-width: 1000px) {
+    grid-template-columns: 50% 50%;
+  }
 `;
+// const AllPlaylistsListWrapper = styled.div`
+/* ::-webkit-scrollbar {
+    display: none;
+  }
+  overflow-y: scroll;
+  width: 100%;
+  display: grid;
+  gap: 0.3rem;
+  grid-template-columns: 15vw 15vw 15vw 15vw;
+
+  @media only screen and (max-width: 1000px) {
+    grid-template-columns: 33vw auto 33vw;
+  }
+  @media only screen and (max-width: 500px) {
+    grid-template-columns: 50% 50%;
+  } */
+// `;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UiContext } from '../context/UiState';
 import useGetSongs from '../hooks/useGetSongs';
 import styled from 'styled-components';
@@ -6,54 +6,65 @@ import styled from 'styled-components';
 import SongsList from '../components/MusicPage/SongsList';
 import ArtiststList from '../components/MusicPage/ArtiststList';
 import AlbumsList from '../components/MusicPage/AlbumsList';
+import AllPlaylistsList from '../components/AllPlaylistsPage/AllPlaylistsList';
+import { UI_STATE_ACTIONS } from '../reducers/UiReducer';
 
 function MusicPage() {
-	const { state } = useContext(UiContext);
-	const { data, isLoading } = useGetSongs(state.searchString);
+  const { state, dispatch } = useContext(UiContext);
+  const { data, isLoading } = useGetSongs(state.searchString);
 
-	return (
-		<MusicPageWrapper>
+  useEffect(() => {
+    dispatch({
+      type: UI_STATE_ACTIONS.SET_HEADER_SEARCH_STRING,
+      payload: { headerSearchString: 'home' },
+    });
+  }, []);
 
-			<div className='songs-list'>
-				<SongsList />
-			</div>
+  return (
+    <MusicPageWrapper>
+      <div className='songs-list'>
+        <SongsList />
+      </div>
 
-			<div className="album-artists-container">
-				<div className='artists-list'>
-					{data && state.headerSearchString && <h1>artists</h1>}
-					<ArtiststList />
-				</div>
+      <div className='album-artists-container'>
+        <div className='artists-list'>
+          {data && state.headerSearchString && <h1>Artists</h1>}
+          <ArtiststList />
+        </div>
 
-{/* 				<div className='albums-list'>
+        <div className='playlists-list'>
+          <h1>Playlists</h1>
+          <AllPlaylistsList />
+        </div>
+
+        {/* 				<div className='albums-list'>
 					{data && state.headerSearchString && <h1>ALBUMS</h1>}
 					<AlbumsList />
 				</div> */}
-			</div>
-		</MusicPageWrapper>
-	);
+      </div>
+    </MusicPageWrapper>
+  );
 }
 
 export default MusicPage;
 
 const MusicPageWrapper = styled.div`
-	justify-content: space-between;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	h1 {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  h1 {
+    font-weight: 300;
+    margin-top: rem;
+    font-size: 1.5rem;
+  }
 
-		font-weight: 300;
-		margin-top: rem;
-		font-size: 1.5rem;
-	}
-
-	.album-artists-container {
-		::-webkit-scrollbar {
-		display: none;
-	}
-		margin-top: 2rem;
-		overflow-y: scroll;
-		overflow-y: scroll;
-
-	}
+  .album-artists-container {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    margin-top: 2rem;
+    overflow-y: scroll;
+    overflow-y: scroll;
+  }
 `;
