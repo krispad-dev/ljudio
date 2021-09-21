@@ -68,7 +68,6 @@ export async function getOneArtist(req, res) {
 
 		const artist = await Music.GetOneArtist(browseId);
 
-		console.log(artist);
 		return res.json({ success: true, artist });
 		
 	} catch (error) {

@@ -36,9 +36,6 @@ export async function removePlaylist(req, res) {
 
 export async function updatePlaylistTitle(req, res) {
   try {
-
-    console.log('Body for title: ', req.body);
-
     const title = req.body.title;
     const playlistId = req.body.playlistId;
 
