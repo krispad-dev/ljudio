@@ -14,20 +14,14 @@ function AllPlaylistsPage() {
 export default AllPlaylistsPage;
 
 const AllPlaylistsPageWrapper = styled.div`
-  /* margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column; */
-  /* justify-content: space-between;
-  display: flex;
-  flex-direction: column;
-  width: 100%; */
+  width: 100%;
+  margin-top: 1rem;
 
   h1 {
     margin-bottom: 1rem;
+
     font-weight: 500;
     text-transform: uppercase;
-    /* color: white; */
+    color: #eee;
   }
 `;

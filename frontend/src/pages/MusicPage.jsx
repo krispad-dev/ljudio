@@ -67,4 +67,8 @@ const MusicPageWrapper = styled.div`
     overflow-y: scroll;
     overflow-y: scroll;
   }
+
+  .playlists-list {
+    margin-top: 2rem;
+  }
 `;

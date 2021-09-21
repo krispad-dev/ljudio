@@ -3,7 +3,6 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import AllPlaylistsListItemCard from './AllPlaylistsListItemCard';
-import useGetAllPlaylists from '../../hooks/useGetAllPlaylists';
 import useSearchPlaylists from '../../hooks/useSearchPlaylists';
 
 import { UiContext } from '../../context/UiState';
@@ -66,24 +65,10 @@ const AllPlaylistsListWrapper = styled.div`
   grid-auto-rows: 12rem;
   grid-template-columns: auto auto auto auto auto;
 
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 1200px) {
+    grid-template-columns: 33% 33% auto;
+  }
+  @media only screen and (max-width: 780px) {
     grid-template-columns: 50% 50%;
   }
 `;
-// const AllPlaylistsListWrapper = styled.div`
-/* ::-webkit-scrollbar {
-    display: none;
-  }
-  overflow-y: scroll;
-  width: 100%;
-  display: grid;
-  gap: 0.3rem;
-  grid-template-columns: 15vw 15vw 15vw 15vw;
-
-  @media only screen and (max-width: 1000px) {
-    grid-template-columns: 33vw auto 33vw;
-  }
-  @media only screen and (max-width: 500px) {
-    grid-template-columns: 50% 50%;
-  } */
-// `;
