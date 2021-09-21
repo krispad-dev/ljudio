@@ -4,39 +4,37 @@ import styled from 'styled-components';
 import Marquee from 'react-fast-marquee';
 import useGetSongs from '../../hooks/useGetSongs';
 
-
 function CurrentSongSideScroller() {
-	const [{ currentSong, activeCue, cuePosition }, dispatch] = useContext(playerControllerStateContext);
+  const [{ currentSong, activeCue, cuePosition, isPlaying }, dispatch] = useContext(playerControllerStateContext);
 
-	const { data } = useGetSongs(activeCue && activeCue[cuePosition])
-	const currentSongInfo = data && data.searchResults && data.searchResults.content[0];
+  const { data } = useGetSongs(activeCue && activeCue[cuePosition]);
+  const currentSongInfo = data && data.searchResults && data.searchResults.content[0];
 
-
-	return (
-		<CurrentSongDisplayerWrapper style={{visibility: `${currentSongInfo ? 'visible' : 'hidden' }`}}>
-			<Marquee gradient={false}>
-				<h4>
-					<strong>{currentSongInfo && currentSongInfo.name}</strong>
-				</h4>
-				{currentSong  &&  <p>&nbsp;&nbsp;///&nbsp;&nbsp;</p>}
-				<p>&nbsp;{currentSongInfo && currentSongInfo.artist.name}</p>
-			</Marquee>
-		</CurrentSongDisplayerWrapper>
-	);
+  return (
+    <CurrentSongDisplayerWrapper style={{ visibility: `${isPlaying ? 'visible' : 'hidden'}` }}>
+      <Marquee gradient={false}>
+        <h4>
+          <strong>{currentSongInfo && currentSongInfo.name}</strong>
+        </h4>
+        {currentSong && <p>&nbsp;&nbsp;///&nbsp;&nbsp;</p>}
+        <p>&nbsp;{currentSongInfo && currentSongInfo.artist.name}</p>
+      </Marquee>
+    </CurrentSongDisplayerWrapper>
+  );
 }
 
 export default CurrentSongSideScroller;
 
 const CurrentSongDisplayerWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	border: none;
-	color: #fff;
-	font-weight: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: #fff;
+  font-weight: 200;
 
-	h4 {
-		margin: rem;
-	}
+  h4 {
+    margin: rem;
+  }
 `;
