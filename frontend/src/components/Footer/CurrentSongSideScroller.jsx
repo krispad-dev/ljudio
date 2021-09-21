@@ -2,19 +2,24 @@ import React, { useContext } from 'react';
 import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
 import styled from 'styled-components';
 import Marquee from 'react-fast-marquee';
+import useGetSongs from '../../hooks/useGetSongs';
 
 
 function CurrentSongSideScroller() {
-	const [{ currentSong, isPlaying }, dispatch] = useContext(playerControllerStateContext);
+	const [{ currentSong, activeCue, cuePosition }, dispatch] = useContext(playerControllerStateContext);
+
+	const { data } = useGetSongs(activeCue && activeCue[cuePosition])
+	const currentSongInfo = data && data.searchResults && data.searchResults.content[0];
+
 
 	return (
-		<CurrentSongDisplayerWrapper style={{visibility: `${currentSong && currentSong.videoId ? 'visible' : 'hidden' }`}}>
+		<CurrentSongDisplayerWrapper style={{visibility: `${currentSongInfo ? 'visible' : 'hidden' }`}}>
 			<Marquee gradient={false}>
 				<h4>
-					<strong>&nbsp;{currentSong && currentSong.name}</strong>
+					<strong>{currentSongInfo && currentSongInfo.name}</strong>
 				</h4>
-				{currentSong  &&  <p> ///&nbsp;&nbsp;</p>}
-				<p>&nbsp;{currentSong && currentSong.artist && currentSong.artist.name && currentSong.artist.name}</p>
+				{currentSong  &&  <p>&nbsp;&nbsp;///&nbsp;&nbsp;</p>}
+				<p>&nbsp;{currentSongInfo && currentSongInfo.artist.name}</p>
 			</Marquee>
 		</CurrentSongDisplayerWrapper>
 	);
