@@ -21,11 +21,9 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
           <p>{name}</p>
         </div>
       </div>
-      {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
+
       <div className='play-symbol-container'>
         {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
-        {/* {auth && auth.loggedIn && <BsHeart />}
-         */}
         <MusicPlayBtn index={index} videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
       </div>
     </SongCardWrapper>
@@ -45,6 +43,7 @@ const SongCardWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   .thumbnail-title-container {
     border-radius: 10px;

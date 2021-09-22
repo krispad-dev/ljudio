@@ -84,6 +84,7 @@ h6 {
 	padding: 0;
 	color: #bbb;
 	font-weight: 200;
+	
 
 }
 
@@ -117,15 +118,18 @@ h6 {
 
 
 
-a {
-	color: #fff;
+a, a:hover, a:focus, a:active {
 	text-decoration: none;
+     color: inherit;
+
 }
 
 p {
 	margin: 0.5rem 0rem;
-	color: #fff;
+	color: #ddd;
 	font-size: 0.8rem;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 200;
 }
 
 li {
