@@ -10,7 +10,7 @@ export function setDB(source) {
         password: process.env.DB_PASS,
         database: source,
         ssl: true,
-        max: 5
+        max: 10
     });
 
     return db;

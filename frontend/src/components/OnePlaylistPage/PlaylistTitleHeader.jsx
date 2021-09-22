@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
+
 import ShareUrlBtn from '../ShareUrlBtn';
 import RemoveUserPlaylist from '../RemoveUserPlaylist';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 import MaterialFollowBtn from '../MaterialFollowBtn';
 import { FaEdit } from 'react-icons/fa';
 import EditPlaylistTitle from './EditPlaylistTitle';
-import { useQueryClient } from 'react-query';
+
 import FollowCountInfo from '../FollowCountInfo';
 import SongCount from '../SongCount';
 
@@ -14,7 +16,6 @@ import { useParams } from 'react-router-dom';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
 import useGetSongs from '../../hooks/useGetSongs';
-import useGetOneSavedUserPlaylist from '../../hooks/useGetOneSavedUserPlaylist';
 import useAuth from '../../hooks/useAuth';
 import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 import useGetOneArtist from '../../hooks/useGetOneArtist';
@@ -22,47 +23,46 @@ import useGetOneArtist from '../../hooks/useGetOneArtist';
 const fallbackPlaceholderImage =
 	'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80';
 
-function PlaylistTitleHeader({ title, playlist }) {
-	const [isEditingTitle, setIsEditingTitle] = useState(false);
-	const [isChanged, setIsChanged] = useState(false);
+function PlaylistTitleHeader({ playlist }) {
+
 	const queryClient = useQueryClient();
 
+
+	const [isEditingTitle, setIsEditingTitle] = useState(false);
+	const [isChanged, setIsChanged] = useState(false);
+
+
 	const { id } = useParams();
-	const { data: auth } = useAuth();
-
-	const { data: userPlaylist } = useGetOneSavedUserPlaylist(id);
-
-	console.log(userPlaylist);
-
-	const { data: userPlaylists } = useGetSavedUserPlaylists();
-	const playlistArray = userPlaylists && userPlaylists.userPlaylists;
-
 	const { data } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
-	const browseId = data && data.searchResults && data.searchResults.content[0].artist.browseId;
+	const { data: auth } = useAuth();
+	const { data: userPlaylists } = useGetSavedUserPlaylists();
+/* 	const { data: oneArtist, isSuccess } = useGetOneArtist(data && data.searchResults && data.searchResults.content[0].artist.browseId); */
+	
+	
+	const playlistArray = userPlaylists && userPlaylists.userPlaylists;
+	const playlistTitle = playlist && playlist.title && playlist.title;
+	const followCount = playlist && playlist.followCount && playlist.followCount;
+	const songCount = playlist && playlist.songs && playlist.songs.length;
+/* 	const plylistCoverImage = oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2]; */
 
-	const playlistTitle = userPlaylist && playlist.title && playlist.title;
-	const followCount = userPlaylist && playlist.followCount && playlist.followCount;
-	const songCount = userPlaylist && playlist.songs && playlist.songs.length;
-
-	const { data: oneArtist } = useGetOneArtist(browseId && browseId);
-	const plylistCoverImage =
-		oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2];
 
 	useEffect(() => {
 		queryClient.fetchQuery(['playlist']);
 		queryClient.fetchQuery(['user-playlists']);
 	}, [isChanged, isEditingTitle]);
 
-	useEffect(() => {
+
+/* 	useEffect(() => {
 		setTimeout(() => {
 			queryClient.fetchQuery(['artist']);
 		}, 500);
-	}, [id]);
+	}, [id, isSuccess]);
 
+ */
 	return (
 		<PlaylistTitleHeaderWrapper
 			className={'background-image'}
-			style={{ backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})` }}
+			/* style={{ backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})` }} */
 		>
 			<div className={'playlist-title-and-info'}>
 				<div className='playlist-info-container'>

@@ -41,8 +41,6 @@ function AddToPlaylistBtn({ videoId }) {
 			<BsPlusCircle
 				className='add-btn'
 				style={{
-					marginRight: '1rem',
-					fontSize: '1.2rem',
 					cursor: 'pointer',
 					color: `${
 						state.saveSongToPlaylistSelectorSectionIsOpen && videoId === state.songToSaveToUserPlaylist
@@ -59,9 +57,10 @@ function AddToPlaylistBtn({ videoId }) {
 const AddToPlaylistBtnWrapper = styled.div`
 	display: flex;
 	justify-content: center;
+	margin: 0.5rem;
 
 	.add-btn {
-		font-size: 1.5rem;
+		font-size: 1.4rem;
 		color: #c4c4c4;
 
 		&:hover {

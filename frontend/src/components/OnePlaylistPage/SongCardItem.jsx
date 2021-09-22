@@ -9,6 +9,7 @@ import useAuth from '../../hooks/useAuth';
 import AddMusicToOnePlayListList from './AddMusicToOnePlaylistPage/AddMusicToOnePlayListList';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
+import { useParams } from 'react-router-dom'; 
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
@@ -16,11 +17,15 @@ import { isInUserPlaylist } from '../../helpers/helpers';
 
 function SongCardItem({ song, playlistId, index }) {
 	//Video ID får göra en förfågan till Youtbe-api.
-
+	console.log(playlistId);
+	const { id } = useParams()
 	const { data, isLoading } = useGetSongs(song);
 	const { data: auth } = useAuth();
 	const { state } = useContext(UiContext);
 	const { data: userPlaylists } = useGetSavedUserPlaylists();
+
+
+	console.log(isInUserPlaylist(playlistId, userPlaylists.userPlaylists));
 
 	return (
 		<>
@@ -47,6 +52,13 @@ function SongCardItem({ song, playlistId, index }) {
 								</div>
 								<div className='song-icon-container'>
 								{auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
+
+								{userPlaylists &&
+										userPlaylists.userPlaylists &&
+										auth.loggedIn &&
+										isInUserPlaylist(id, userPlaylists.userPlaylists) && (
+											<RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
+										)}
 									<MusicPlayBtn
 										index={index}
 										videoId={song}
@@ -54,12 +66,7 @@ function SongCardItem({ song, playlistId, index }) {
 										artist={data && data.searchResults.content[0].artist.name}
 										thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
 									/>
-									{userPlaylists &&
-										userPlaylists.userPlaylists &&
-										auth.loggedIn &&
-										isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
-											<RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
-										)}
+							
 	
 								</div>
 								{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
@@ -74,8 +81,8 @@ function SongCardItem({ song, playlistId, index }) {
 
 const PlaylistsCardWrapper = styled.div`
 
-	.song-container {
 
+	.song-container {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -87,7 +94,7 @@ const PlaylistsCardWrapper = styled.div`
 	.song-artist-container,
 	.song-album-container,
 	.song-duration-container {
-		width: 90%;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -95,7 +102,7 @@ const PlaylistsCardWrapper = styled.div`
 	}
 
 	.song-icon-container {
-		width: 40%;
+		margin-right: 2rem ;
 		display: flex;
 		align-items: center;
 		justify-content: space-evenly;

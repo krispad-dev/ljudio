@@ -88,6 +88,16 @@ h6 {
 
 }
 
+h2 {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+h3 {
+	font-size: 0.8rem;
+}
+
+
 @media only screen and (max-width: 1000px) {
 	.App {
 		justify-content: space-between;

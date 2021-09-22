@@ -43,9 +43,10 @@ function MusicPlayBtn({ videoId, name, artist, thumbails, index }) {
 const MusicPlayBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 0.3rem;
 
   .play-btn {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #c4c4c4;
 
     &:hover {
