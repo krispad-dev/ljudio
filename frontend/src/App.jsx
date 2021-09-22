@@ -18,6 +18,7 @@ import RegisterPage from './pages/RegisterPage';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import MusicPage from './pages/MusicPage';
 import OnePlaylistPage from './pages/OnePlaylistPage';
+import ArtistPage from './pages/ArtistPage'
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
@@ -25,6 +26,7 @@ import Footer from './components/Footer/Footer';
 import AllPlaylistsPage from './pages/AllPlaylistsPage';
 import MobileMenu from './components/MobileMenu/MobileMenu';
 import ConfirmModal from './components/ConfirmModal';
+
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -68,6 +70,11 @@ function App() {
           <Route exact path='/playlists' component={AllPlaylistsPage}>
             {auth && !auth.loggedIn && <Redirect to='/' />}
           </Route>
+
+          <Route exact path='/artist/:id' component={ArtistPage}>
+  
+          </Route>
+
 
           <Route exact path='/playlist/:id' component={OnePlaylistPage} />
 

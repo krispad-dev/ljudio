@@ -8,32 +8,32 @@ import useGetSongs from '../../hooks/useGetSongs';
 import SongCard from './SongCard';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 import styled from 'styled-components';
-
+import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
 
 function SongsList() {
-	
 	const { state } = useContext(UiContext);
-	const [ playerState, dispatch ] = useContext(playerControllerStateContext)
+	const [playerState, dispatch] = useContext(playerControllerStateContext);
 
 	const { data, isLoading } = useGetSongs(state.headerSearchString);
 
 	const musicArrayToFilter = data && data.searchResults && data.searchResults.content && data.searchResults.content;
 
-	const filteredOutSongsArray = musicArrayToFilter && [...musicArrayToFilter].map((song)=> {
-		return song.videoId
-	})
+	const filteredOutSongsArray =
+		musicArrayToFilter &&
+		[...musicArrayToFilter].map(song => {
+			return song.videoId;
+		});
 
 	useEffect(() => {
-		dispatch({type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutSongsArray })
-	}, [data])
-	
-
+		dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutSongsArray });
+	}, [data]);
 
 	return (
 		<>
 			{isLoading && <SkeletonLoader />}
-	
+			{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
 			<SongListWrapper>
+	
 				{data &&
 					data.searchResults &&
 					data.searchResults.content &&
@@ -45,13 +45,11 @@ function SongsList() {
 	);
 }
 
-
-
-
 export default SongsList;
 
 const SongListWrapper = styled.div`
-    box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05);
+	position: relative;
+	box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05);
 	::-webkit-scrollbar {
 		display: none;
 	}

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import ShareUrlBtn from '../ShareUrlBtn';
 import RemoveUserPlaylist from '../RemoveUserPlaylist';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
-import FollowBtn from '../FollowBtn';
+import MaterialFollowBtn from '../MaterialFollowBtn';
 import { FaEdit } from 'react-icons/fa';
 import EditPlaylistTitle from './EditPlaylistTitle';
 import { useQueryClient } from 'react-query';
+import FollowCountInfo from '../FollowCountInfo';
+import SongCount from '../SongCount'
 
 import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
 import useGetSongs from '../../hooks/useGetSongs';
@@ -27,20 +28,31 @@ function PlaylistTitleHeader({ title, playlist }) {
 	const queryClient = useQueryClient();
 
 	const { id } = useParams();
-	const { pathname } = useLocation();
 	const { data: auth } = useAuth();
-	const { data: userPlaylist } = useGetOneSavedUserPlaylist(id);
-	const { data: userPlaylists } = useGetSavedUserPlaylists();
 
-	const { data, isLoading, isFetched } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
+	const { data: userPlaylist } = useGetOneSavedUserPlaylist(id);
+
+  console.log(userPlaylist);
+
+	const { data: userPlaylists } = useGetSavedUserPlaylists();
+	const playlistArray = userPlaylists && userPlaylists.userPlaylists;
+
+	const { data } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
 	const browseId = data && data.searchResults && data.searchResults.content[0].artist.browseId;
 
-	const playlistId = playlist && playlist.id && playlist.id;
-	const playlistArray = userPlaylists && userPlaylists.userPlaylists;
+  const playlistTitle = userPlaylist && playlist.title && playlist.title;
+  const followCount = userPlaylist && playlist.followCount && playlist.followCount;
+  const songCount =  userPlaylist && playlist.songs && playlist.songs.length;
+
+
+
 
 	const { data: oneArtist } = useGetOneArtist(browseId && browseId);
 	const plylistCoverImage =
 		oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2];
+
+
+
 
 	useEffect(() => {
 		queryClient.fetchQuery(['playlist']);
@@ -48,111 +60,148 @@ function PlaylistTitleHeader({ title, playlist }) {
 	}, [isChanged, isEditingTitle]);
 
 	useEffect(() => {
-    setTimeout(() => {
-      queryClient.fetchQuery(['artist']);
-    }, 500);
+		setTimeout(() => {
+			queryClient.fetchQuery(['artist']);
+		}, 500);
+	}, [id]);
 
-	}, [ id ]);
+
+
+
 
 	return (
-		<PlaylistTitleHeaderWrapper>
-			<div
-				className={'background-image'}
-				style={{
-					backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})`,
-				}}
-			>
-				{isLoading && <SkeletonLoader />}
-				{!isLoading && (
-					<>
-						<div className='playlist-info'>
-							{!isEditingTitle && <h2>{title}</h2>}
+		<PlaylistTitleHeaderWrapper
+			className={'background-image'}
+			style={{ backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})` }}
+		>
+<div className={'playlist-title-and-info'}>
 
-							{!isEditingTitle && (
-								<FaEdit
-									onClick={() => setIsEditingTitle(true)}
-									style={{ color: '#FFF', fontSize: '1.5rem', margin: '1rem' }}
-								/>
-							)}
+      <div className="playlist-info-container">
+            <FollowCountInfo text={followCount} />
+            <SongCount text={songCount} />
+          </div>
 
-							{isEditingTitle && (
-								<EditPlaylistTitle
-									title={title}
-									playlistId={id}
-									isChanged={isChanged}
-									setIsChanged={setIsChanged}
-									isEditingTitle={isEditingTitle}
-									setIsEditingTitle={setIsEditingTitle}
-								/>
-							)}
+    <div className="title-container">
+            <h1>{playlistTitle}</h1>
+          </div>
 
-							{userPlaylist && userPlaylist.playlist && (
-								<h4>Songs: {userPlaylist.playlist.songs.length}</h4>
-							)}
 
-							<div className='follow-container'>
-								{auth && auth.loggedIn && <FollowBtn playlistId={id} />}
-							</div>
 
-							{playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
-								<RemoveUserPlaylist playlistId={id} />
-							)}
-							<ShareUrlBtn />
-						</div>
-					</>
-				)}
+</div>
+
+
+
+			<div className={'playlist-tools'}>
+
+				<div className={'songs-count-container'}>
+					{userPlaylist && userPlaylist.playlist && <h4>Songs: {userPlaylist.playlist.songs.length}</h4>}
+				</div>
+
+				<div className='follow-container'>
+          {auth && auth.loggedIn && <MaterialFollowBtn playlistId={id} />}
+          
+        </div>
+
+        <div className={'remove-playlist-container'}>
+
+          {playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
+            <RemoveUserPlaylist playlistId={id} />
+          )}
+
+        </div>
+
+        <div className={'share-container'}>
+			  	<ShareUrlBtn />
+        </div>
+
 			</div>
 		</PlaylistTitleHeaderWrapper>
 	);
 }
 
 const PlaylistTitleHeaderWrapper = styled.div`
-	.background-image {
-		width: 100%;
-		height: 15rem;
-		background-position: center;
-	}
+	width: 100%;
+	height: 15rem;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 
-	display: flex;
 
-	img {
-		width: 100%;
-	}
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 
-	.playlist-info {
+
+  h1 {
+			font-weight: 900;
+			color: #fff;
+			font-size: 3rem;
+			align-self: flex-end;
+			background-color: rgba(0, 0, 0, 0.1);
+			border-radius: 5px;
+      margin: 1rem;
+		}
+
+    .playlist-title-and-info {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+
+	.playlist-tools {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
 		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 1rem;
+    flex-wrap: wrap;
 
-		margin-left: 1rem;
+    div {
+      margin: 0.3rem;
+    }
 
-		h2 {
-			font-size: 1.5rem;
-		}
-
-		h3 {
-			font-size: 1rem;
-		}
-	}
-
-	.follow-container {
-		width: 120px;
-	}
-
-	@media (min-width: 600px) {
-		img {
-			max-width: 350px;
-		}
-		.playlist-info {
-			h2 {
-				font-size: 2.2rem;
-			}
-
-			h3 {
-				font-size: 1.5rem;
-			}
-		}
 	}
 `;
 
 export default PlaylistTitleHeader;
+
+{
+	/* <div className={'playlist-tools'}>
+{userPlaylist && userPlaylist.playlist && (
+  <h4>Songs: {userPlaylist.playlist.songs.length}</h4>
+)}
+
+<div className='follow-container'>
+  {auth && auth.loggedIn && <MaterialFollowBtn playlistId={id} />}
+</div>
+
+{playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
+  <RemoveUserPlaylist playlistId={id} />
+)}
+<ShareUrlBtn />
+</div> */
+}
+
+/* 
+<div className='playlist-info'>
+
+{!isEditingTitle && (
+  <FaEdit
+    onClick={() => setIsEditingTitle(true)}
+    style={{ color: '#FFF', fontSize: '1.5rem', margin: '1rem' }}
+  />
+)}
+
+{isEditingTitle && (
+  <EditPlaylistTitle
+    title={title}
+    playlistId={id}
+    isChanged={isChanged}
+    setIsChanged={setIsChanged}
+    isEditingTitle={isEditingTitle}
+    setIsEditingTitle={setIsEditingTitle}
+  />
+)}  */
