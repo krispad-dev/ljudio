@@ -18,13 +18,14 @@ const SongCountWrapper = styled.div`
 	justify-content: center;
     width: 50%;
 	align-items: center;
-    background-color: rgba(0,0,0,0.3);
-    border: 1px solid rgba(0,0,0,0.1);
+
+
     border-radius: 2px ;
     margin: 1rem;
 
 	h2 {
         margin-left: 0.3rem;
 		font-weight: 400;
+		color: #eee;
 	}
 `;

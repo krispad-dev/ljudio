@@ -8,7 +8,7 @@ import { FaEdit } from 'react-icons/fa';
 import EditPlaylistTitle from './EditPlaylistTitle';
 import { useQueryClient } from 'react-query';
 import FollowCountInfo from '../FollowCountInfo';
-import SongCount from '../SongCount'
+import SongCount from '../SongCount';
 
 import { useParams } from 'react-router-dom';
 import { isInUserPlaylist } from '../../helpers/helpers';
@@ -32,7 +32,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 
 	const { data: userPlaylist } = useGetOneSavedUserPlaylist(id);
 
-  console.log(userPlaylist);
+	console.log(userPlaylist);
 
 	const { data: userPlaylists } = useGetSavedUserPlaylists();
 	const playlistArray = userPlaylists && userPlaylists.userPlaylists;
@@ -40,19 +40,13 @@ function PlaylistTitleHeader({ title, playlist }) {
 	const { data } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
 	const browseId = data && data.searchResults && data.searchResults.content[0].artist.browseId;
 
-  const playlistTitle = userPlaylist && playlist.title && playlist.title;
-  const followCount = userPlaylist && playlist.followCount && playlist.followCount;
-  const songCount =  userPlaylist && playlist.songs && playlist.songs.length;
-
-
-
+	const playlistTitle = userPlaylist && playlist.title && playlist.title;
+	const followCount = userPlaylist && playlist.followCount && playlist.followCount;
+	const songCount = userPlaylist && playlist.songs && playlist.songs.length;
 
 	const { data: oneArtist } = useGetOneArtist(browseId && browseId);
 	const plylistCoverImage =
 		oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2];
-
-
-
 
 	useEffect(() => {
 		queryClient.fetchQuery(['playlist']);
@@ -65,54 +59,38 @@ function PlaylistTitleHeader({ title, playlist }) {
 		}, 500);
 	}, [id]);
 
-
-
-
-
 	return (
 		<PlaylistTitleHeaderWrapper
 			className={'background-image'}
 			style={{ backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})` }}
 		>
-<div className={'playlist-title-and-info'}>
+			<div className={'playlist-title-and-info'}>
+				<div className='playlist-info-container'>
+					<FollowCountInfo text={followCount} />
+					<SongCount text={songCount} />
+				</div>
 
-      <div className="playlist-info-container">
-            <FollowCountInfo text={followCount} />
-            <SongCount text={songCount} />
-          </div>
-
-    <div className="title-container">
-            <h1>{playlistTitle}</h1>
-          </div>
-
-
-
-</div>
-
-
+				<div className='title-container'>
+					<h1>{playlistTitle}</h1>
+				</div>
+			</div>
 
 			<div className={'playlist-tools'}>
 
-				<div className={'songs-count-container'}>
-					{userPlaylist && userPlaylist.playlist && <h4>Songs: {userPlaylist.playlist.songs.length}</h4>}
-				</div>
-
+		
 				<div className='follow-container'>
           {auth && auth.loggedIn && <MaterialFollowBtn playlistId={id} />}
-          
         </div>
 
-        <div className={'remove-playlist-container'}>
+				<div className={'remove-playlist-container'}>
+					{playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
+						<RemoveUserPlaylist playlistId={id} />
+					)}
+				</div>
 
-          {playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
-            <RemoveUserPlaylist playlistId={id} />
-          )}
-
-        </div>
-
-        <div className={'share-container'}>
-			  	<ShareUrlBtn />
-        </div>
+				<div className={'share-container'}>
+					<ShareUrlBtn />
+				</div>
 
 			</div>
 		</PlaylistTitleHeaderWrapper>
@@ -126,43 +104,39 @@ const PlaylistTitleHeaderWrapper = styled.div`
 	background-size: cover;
 	background-repeat: no-repeat;
 
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+	h1 {
+		font-weight: 900;
+		color: #fff;
+		font-size: 3rem;
+		align-self: flex-end;
+		background-color: rgba(0, 0, 0, 0.1);
+		border-radius: 5px;
+		margin: 1rem;
+	}
 
-
-  h1 {
-			font-weight: 900;
-			color: #fff;
-			font-size: 3rem;
-			align-self: flex-end;
-			background-color: rgba(0, 0, 0, 0.1);
-			border-radius: 5px;
-      margin: 1rem;
-		}
-
-    .playlist-title-and-info {
-      display: flex;
-      height: 100%;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
+	.playlist-title-and-info {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		justify-content: space-between;
+	}
 
 	.playlist-tools {
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 5px;
+		background-color: rgba(0, 0, 0, 0.1);
+		border-radius: 5px;
 		display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 1rem;
-    flex-wrap: wrap;
+		justify-content: flex-end;
+		align-items: center;
+		margin: 1rem;
+		flex-wrap: wrap;
 
-    div {
-      margin: 0.3rem;
-    }
-
+		div {
+			margin: 0.3rem;
+		}
 	}
 `;
 
