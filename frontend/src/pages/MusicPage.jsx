@@ -38,8 +38,6 @@ function MusicPage() {
           <AllPlaylistsList />
         </div>
 
-        <VideoList />
-
         {/* 				<div className='albums-list'>
 					{data && state.headerSearchString && <h1>ALBUMS</h1>}
 					<AlbumsList />
