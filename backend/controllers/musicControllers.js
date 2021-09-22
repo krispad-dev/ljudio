@@ -72,7 +72,6 @@ export async function getMusicVideos(req, res) {
   try {
     const searchString = req.query;
     const searchResults = await Music.GetMusicVideos(searchString);
-    console.log(searchResults);
 
     return res.json({ success: true, searchResults });
   } catch (error) {

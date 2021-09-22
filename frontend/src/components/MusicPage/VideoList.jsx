@@ -3,7 +3,7 @@ import useGetMusicVideos from '../../hooks/useGetMusicVideos';
 import VideoCard from './VideoCard';
 import styled from 'styled-components';
 
-import UiContext from '../../context/UiState';
+import { UiContext } from '../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 
 import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
@@ -34,20 +34,32 @@ const colors = [
 ];
 
 function VideoList() {
-  const [playerState, dispatch] = useContext(playerControllerStateContext);
+  const { state, dispatch } = useContext(UiContext);
+  const [playerState, dispatchPlayerController] = useContext(playerControllerStateContext);
 
-  const data = useGetMusicVideos('rem');
+  //Search for videos with searchBar
+  const data = useGetMusicVideos(state.headerSearchString);
 
+  //Videos from arr from hook
   const videos = data && data.data && data.data.success && data.data.searchResults && data.data.searchResults.content;
 
+  //array of videoId's
   const filteredOutVideosArray =
     videos &&
     videos.map((video) => {
       return video.videoId;
     });
 
+  //Set default searchterm on pageload
   useEffect(() => {
-    dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutVideosArray });
+    dispatch({
+      type: UI_STATE_ACTIONS.SET_HEADER_SEARCH_STRING,
+      payload: { headerSearchString: 'rem' },
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatchPlayerController({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutVideosArray });
   }, [data.data]);
 
   return (
