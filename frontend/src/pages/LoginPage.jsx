@@ -88,7 +88,7 @@ const LoginPageWrapper = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: #1e272e;
+  background-color: #111;
 
   .login-page-contentWrapper {
     max-width: 700px;

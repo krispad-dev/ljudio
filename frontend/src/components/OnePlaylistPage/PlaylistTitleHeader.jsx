@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ShareUrlBtn from '../ShareUrlBtn';
 import RemoveUserPlaylist from '../RemoveUserPlaylist';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
-import FollowBtn from '../FollowBtn';
+import MaterialFollowBtn from '../MaterialFollowBtn';
 import { FaEdit } from 'react-icons/fa';
 import EditPlaylistTitle from './EditPlaylistTitle';
 import { useQueryClient } from 'react-query';
@@ -78,7 +78,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 
             {userPlaylist && userPlaylist.playlist && <h4>Songs: {userPlaylist.playlist.songs.length}</h4>}
 
-            <div className='follow-container'>{auth && auth.loggedIn && <FollowBtn playlistId={id} />}</div>
+            <div className='follow-container'>{auth && auth.loggedIn && <MaterialFollowBtn playlistId={id} />}</div>
 
             {playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
               <RemoveUserPlaylist playlistId={id} />
