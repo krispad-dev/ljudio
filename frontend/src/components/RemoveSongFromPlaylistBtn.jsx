@@ -23,7 +23,7 @@ const RemoveSongFromPlaylistBtnWrapper = styled.div`
     color: #c4c4c4;
 
     &:hover {
-      color: #2ecc71;
+      color: #1dd1a1;
       transition: ease-in-out 0.2s;
       cursor: pointer;
     }

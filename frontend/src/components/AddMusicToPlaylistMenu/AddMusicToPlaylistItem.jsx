@@ -42,7 +42,7 @@ const AddMusicToPlaylistItemWrapper = styled.li`
   }
 
   .confirm-music-btn {
-    color: #2ecc71;
+    color: #1dd1a1;
   }
 `;
 

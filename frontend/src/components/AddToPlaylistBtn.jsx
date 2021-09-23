@@ -44,7 +44,7 @@ function AddToPlaylistBtn({ videoId }) {
 					cursor: 'pointer',
 					color: `${
 						state.saveSongToPlaylistSelectorSectionIsOpen && videoId === state.songToSaveToUserPlaylist
-							? '#2ecc71'
+							? '#1dd1a1'
 							: ''
 					}`,
 				}}
@@ -64,7 +64,7 @@ const AddToPlaylistBtnWrapper = styled.div`
 		color: #c4c4c4;
 
 		&:hover {
-			color: #2ecc71;
+			color: #1dd1a1;
 			transition: ease-in-out 0.2s;
 			cursor: pointer;
 		}
