@@ -26,6 +26,7 @@ import Footer from './components/Footer/Footer';
 import AllPlaylistsPage from './pages/AllPlaylistsPage';
 import MobileMenu from './components/MobileMenu/MobileMenu';
 import ConfirmModal from './components/ConfirmModal';
+import VideosPage from './pages/VideosPage';
 
 
 const notLoggedInStyles = {
@@ -42,6 +43,7 @@ function App() {
   const [windowWidth, windowHeight] = useWindowSize();
   const { state } = useContext(UiContext);
   
+
   return (
     <div ref={appRef} style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
       <GlobalStyle />
@@ -74,6 +76,8 @@ function App() {
 
 
           <Route exact path='/playlist/:id' component={OnePlaylistPage} />
+
+          <Route exact path='/videos' component={VideosPage} />
 
           <Route exact path='/' component={MusicPage} />
           <Route exact path='/register' component={RegisterPage} />

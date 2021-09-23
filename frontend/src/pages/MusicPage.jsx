@@ -8,6 +8,7 @@ import ArtiststList from '../components/MusicPage/ArtiststList';
 import AlbumsList from '../components/MusicPage/AlbumsList';
 import AllPlaylistsList from '../components/AllPlaylistsPage/AllPlaylistsList';
 import { UI_STATE_ACTIONS } from '../reducers/UiReducer';
+import VideoList from '../components/MusicPage/VideoList';
 
 function MusicPage() {
   const { state, dispatch } = useContext(UiContext);
