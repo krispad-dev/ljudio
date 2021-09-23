@@ -18,6 +18,7 @@ import RegisterPage from './pages/RegisterPage';
 import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import MusicPage from './pages/MusicPage';
 import OnePlaylistPage from './pages/OnePlaylistPage';
+import CuePage from './pages/CuePage';
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
@@ -61,6 +62,10 @@ function App() {
 
           <Route exact path='/login' component={LoginPage}>
             {auth && auth.loggedIn && <Redirect to='/' />}
+          </Route>
+
+          <Route exact path='/cue' component={CuePage}>
+            {auth && !auth.loggedIn && <Redirect to='/' />}
           </Route>
 
           <Route exact path='/playlists' component={AllPlaylistsPage}>
