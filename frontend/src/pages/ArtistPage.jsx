@@ -6,8 +6,10 @@ import useGetOneArtist from '../hooks/useGetOneArtist';
 import styled from 'styled-components';
 import SongsList from '../components/MusicPage/SongsList';
 import ShareUrlBtn from '../components/ShareUrlBtn';
+import noDescriptionPlaceholder from '../assets/na.svg'
 
 function ArtistPage() {
+
 	const { state, dispatch } = useContext(UiContext);
 	const { id } = useParams();
 	const { data } = useGetOneArtist(id);
@@ -17,6 +19,7 @@ function ArtistPage() {
 
 	const artistDescription = data && data.artist && data.artist.description && data.artist.description;
 	const artistName = data && data.artist && data.artist.name && data.artist.name;
+
 
 	useEffect(() => {
 		dispatch({ type: UI_STATE_ACTIONS.SET_HEADER_SEARCH_STRING, payload: { headerSearchString: artistName } });
@@ -36,8 +39,8 @@ function ArtistPage() {
 				</div>
 			</div>
 
-			<div className='description-container'>
-				<h1>About:</h1>
+			<div className='description-container' style={{backgroundImage: `url(${!artistDescription ? noDescriptionPlaceholder : artistDescription})`}}>
+				{artistDescription && <h1>About:</h1>}
 				<p>{artistDescription}</p>
 			</div>
 
@@ -77,6 +80,9 @@ const ArtistPageWrapper = styled.div`
 		}
 	}
 	.description-container {
+		min-height: 8rem;
+		background-position: center;
+		background-size: cover;
 		display: flex;
 		flex-direction: column;
 	
