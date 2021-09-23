@@ -56,7 +56,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 				</div>
 
 				<div className='title-container'>
-					{!isEditingTitle && (
+					{!isEditingTitle && isInUserPlaylist(id, playlistArray) && (
 						<div>
 							<h1>{playlistTitle} </h1>
 							<FaEdit

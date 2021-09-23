@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 
 
-function PlayListCardItem({ title, id: playlistId }) {
+function PlayListCardItem({ title, playlistId }) {
+
 
 	const { state, dispatch } = useContext(UiContext);
 
