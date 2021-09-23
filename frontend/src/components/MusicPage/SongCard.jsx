@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { UiContext } from '../../context/UiState';
-import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
 import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
 
@@ -13,6 +12,7 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
 
   return (
     <SongCardWrapper>
+  
       <div className='thumbnail-title-container'>
         <div style={{ backgroundImage: `url(${thumbnails[1].url})` }} className='album-cover'></div>
 

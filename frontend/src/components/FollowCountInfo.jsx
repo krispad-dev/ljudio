@@ -5,7 +5,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 function FollowCountInfo({ text }) {
 	return (
 		<FollowCountInfoWrapper>
-			<AiOutlineUser />
+			<AiOutlineUser style={{color: '#eee'}} />
 			<h2>{text}</h2>
 		</FollowCountInfoWrapper>
 	);

@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
-import { UiContext } from '../../context/UiState';
+import React from 'react';
 import styled from 'styled-components';
 import useGetSongs from '../../hooks/useGetSongs';
 import MusicPlayBtn from '../MusicPlayBtn';
 import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
 import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 import useAuth from '../../hooks/useAuth';
-import AddMusicToOnePlayListList from './AddMusicToOnePlaylistPage/AddMusicToOnePlayListList';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 import { useParams } from 'react-router-dom'; 
@@ -17,11 +15,11 @@ import { isInUserPlaylist } from '../../helpers/helpers';
 
 function SongCardItem({ song, playlistId, index }) {
 	//Video ID får göra en förfågan till Youtbe-api.
-	console.log(playlistId);
+
 	const { id } = useParams()
 	const { data, isLoading } = useGetSongs(song);
 	const { data: auth } = useAuth();
-	const { state } = useContext(UiContext);
+
 	const { data: userPlaylists } = useGetSavedUserPlaylists();
 
 
@@ -69,7 +67,6 @@ function SongCardItem({ song, playlistId, index }) {
 							
 	
 								</div>
-								{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
 							</div>
 		
 					)}

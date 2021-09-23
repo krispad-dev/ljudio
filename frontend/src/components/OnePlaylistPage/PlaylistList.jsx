@@ -1,31 +1,26 @@
 import React, { useEffect, useContext } from 'react';
+import { UiContext } from '../../context/UiState';
 
 import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 
-import { useQueryClient } from 'react-query';
 
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import SongCardItem from './SongCardItem';
 import PlaylistTitleHeader from './PlaylistTitleHeader';
 import useGetOneSavedUserPlaylist from '../../hooks/useGetOneSavedUserPlaylist';
+import AddMusicToPlayListList from '../AddMusicToPlaylistMenu/AddMusicToPlayListList';
 
 function PlaylistList() {
 	const [playerState, dispatch] = useContext(playerControllerStateContext);
 
-	const queryClient = useQueryClient();
 	let { id } = useParams();
 	const { data, isSuccess } = useGetOneSavedUserPlaylist(id);
+	const { state } = useContext(UiContext);
 
 	const pendingCue = data && data.playlist && data.playlist.songs && data.playlist.songs;
 
-	useEffect(() => {
-
-			queryClient.fetchQuery(['playlist']);
-
-
-	}, [id, isSuccess]);
 
 	useEffect(() => {
 		dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: pendingCue });
@@ -34,6 +29,7 @@ function PlaylistList() {
 	return (
 		<>
 			<PlaylistTitleHeader isSuccess={isSuccess} playlist={data && data.success && data.playlist} />
+			{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
 			<PlayListCaPlaylistListWrapper>
 				{data &&
 					data.success &&

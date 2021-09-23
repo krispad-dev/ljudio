@@ -5,7 +5,7 @@ import { RiFileMusicLine } from 'react-icons/ri'
 function SongCount({ text }) {
 	return (
 		<SongCountWrapper>
-			<RiFileMusicLine />
+			<RiFileMusicLine style={{color: '#eee'}}/>
 			<h2>{text}</h2>
 		</SongCountWrapper>
 	);

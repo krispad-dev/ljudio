@@ -4,10 +4,18 @@ import { Link } from 'react-router-dom';
 import useGetOneArtist from '../../hooks/useGetOneArtist';
 
 function ArtistCard({ artist, thumbnails, name, bgColor, browseId }) {
+
+	const { data: oneArtist } = useGetOneArtist(browseId)
+
+	const bgImage = oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails
+	console.log(bgImage);
+
+
+
 	return (
 		<ArtistCardWrapper style={{ backgroundColor: bgColor }}>
 			<Link to={`/artist/${browseId}`}>
-				<div className={'background-image'} style={{ backgroundImage: `url(${thumbnails[1].url})` }}></div>
+				<div className={'background-image'} style={{ backgroundImage: `url(${bgImage && bgImage[1].url})` }}></div>
 				<div className={'info-container'}>
 					<h3>{name}</h3>
 				</div>
@@ -32,7 +40,7 @@ const ArtistCardWrapper = styled.div`
 
 	.info-container {
 		width: 100%;
-		height: 6rem;
+		height: rem;
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-end;
@@ -41,7 +49,7 @@ const ArtistCardWrapper = styled.div`
 	.background-image {
 		box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.2);
 		width: 100%;
-		height: 50%;
+		height: 85%;
 		border-radius: 5px;
 
 		background-position: center;

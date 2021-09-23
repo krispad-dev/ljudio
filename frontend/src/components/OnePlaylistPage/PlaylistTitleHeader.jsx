@@ -23,46 +23,31 @@ import useGetOneArtist from '../../hooks/useGetOneArtist';
 const fallbackPlaceholderImage =
 	'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80';
 
-function PlaylistTitleHeader({ playlist }) {
-
+function PlaylistTitleHeader({ title, playlist }) {
 	const queryClient = useQueryClient();
-
 
 	const [isEditingTitle, setIsEditingTitle] = useState(false);
 	const [isChanged, setIsChanged] = useState(false);
-
 
 	const { id } = useParams();
 	const { data } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
 	const { data: auth } = useAuth();
 	const { data: userPlaylists } = useGetSavedUserPlaylists();
-/* 	const { data: oneArtist, isSuccess } = useGetOneArtist(data && data.searchResults && data.searchResults.content[0].artist.browseId); */
-	
-	
+	const { data: oneArtist, isSuccess } = useGetOneArtist(
+		data && data.searchResults && data.searchResults.content[0].artist.browseId
+	);
+
 	const playlistArray = userPlaylists && userPlaylists.userPlaylists;
 	const playlistTitle = playlist && playlist.title && playlist.title;
 	const followCount = playlist && playlist.followCount && playlist.followCount;
 	const songCount = playlist && playlist.songs && playlist.songs.length;
-/* 	const plylistCoverImage = oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2]; */
+	const plylistCoverImage =
+		oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2];
 
-
-	useEffect(() => {
-		queryClient.fetchQuery(['playlist']);
-		queryClient.fetchQuery(['user-playlists']);
-	}, [isChanged, isEditingTitle]);
-
-
-/* 	useEffect(() => {
-		setTimeout(() => {
-			queryClient.fetchQuery(['artist']);
-		}, 500);
-	}, [id, isSuccess]);
-
- */
 	return (
 		<PlaylistTitleHeaderWrapper
 			className={'background-image'}
-			/* style={{ backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})` }} */
+			style={{ backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})` }}
 		>
 			<div className={'playlist-title-and-info'}>
 				<div className='playlist-info-container'>
@@ -71,16 +56,31 @@ function PlaylistTitleHeader({ playlist }) {
 				</div>
 
 				<div className='title-container'>
-					<h1>{playlistTitle}</h1>
+					{!isEditingTitle && (
+						<div>
+							<h1>{playlistTitle} </h1>
+							<FaEdit
+								onClick={() => setIsEditingTitle(!isEditingTitle)}
+								style={{ color: '#444', fontSize: '2rem', cursor: 'pointer' }}
+							/>
+						</div>
+					)}
+
+					{isEditingTitle && (
+						<EditPlaylistTitle
+							title={title}
+							playlistId={id}
+							isChanged={isChanged}
+							setIsChanged={setIsChanged}
+							isEditingTitle={isEditingTitle}
+							setIsEditingTitle={setIsEditingTitle}
+						/>
+					)}
 				</div>
 			</div>
 
 			<div className={'playlist-tools'}>
-
-		
-				<div className='follow-container'>
-          {auth && auth.loggedIn && <MaterialFollowBtn playlistId={id} />}
-        </div>
+				<div className='follow-container'>{auth && auth.loggedIn && <MaterialFollowBtn playlistId={id} />}</div>
 
 				<div className={'remove-playlist-container'}>
 					{playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
@@ -91,7 +91,6 @@ function PlaylistTitleHeader({ playlist }) {
 				<div className={'share-container'}>
 					<ShareUrlBtn />
 				</div>
-
 			</div>
 		</PlaylistTitleHeaderWrapper>
 	);
@@ -122,7 +121,22 @@ const PlaylistTitleHeaderWrapper = styled.div`
 		display: flex;
 		height: 100%;
 		flex-direction: column;
+		align-items: flex-start;
 		justify-content: space-between;
+
+		.playlist-info-container {
+			background-color: rgba(0, 0, 0, 0.5);
+			
+
+		}
+
+		.title-container {
+			div {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
 	}
 
 	.playlist-tools {
@@ -170,12 +184,5 @@ export default PlaylistTitleHeader;
 )}
 
 {isEditingTitle && (
-  <EditPlaylistTitle
-    title={title}
-    playlistId={id}
-    isChanged={isChanged}
-    setIsChanged={setIsChanged}
-    isEditingTitle={isEditingTitle}
-    setIsEditingTitle={setIsEditingTitle}
-  />
+  
 )}  */
