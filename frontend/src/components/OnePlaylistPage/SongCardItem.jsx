@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useLocation } from 'react-router';
 import { UiContext } from '../../context/UiState';
 import styled from 'styled-components';
 import useGetSongs from '../../hooks/useGetSongs';
@@ -9,18 +10,21 @@ import useAuth from '../../hooks/useAuth';
 import AddMusicToOnePlayListList from './AddMusicToOnePlaylistPage/AddMusicToOnePlayListList';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
+import AddToCueBtn from '../AddToCueBtn';
+import RemoveFromCueBtn from '../RemoveFromCueBtn';
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
-function SongCardItem({ song, playlistId, index }) {
-	//Video ID får göra en förfågan till Youtbe-api.
+function SongCardItem({ song, playlistId, index, cueId }) {
+	//VideoID (song-prop) får göra en förfågan till Youtbe-api.
 
   const { data, isLoading } = useGetSongs(song);
   const { data: auth } = useAuth();
   const { state } = useContext(UiContext);
   const { data: userPlaylists } = useGetSavedUserPlaylists();
+  const { pathname } = useLocation();
 
   
   return (
@@ -63,7 +67,9 @@ function SongCardItem({ song, playlistId, index }) {
             isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
               <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
             )}
+		   {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
            {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
+		   {auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} />}
         </div>
         {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
       </div>
