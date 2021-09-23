@@ -2,6 +2,7 @@ import express from 'express';
 import * as MusicController from '../controllers/musicControllers.js';
 import * as UserController from '../controllers/userController.js';
 import * as PlaylistController from '../controllers/playlistController.js';
+import * as CueController from '../controllers/cueController.js';
 import { authCheck } from '../controllers/authControllers.js';
 import { verifyToken } from '../middleware/auth.js';
 
@@ -49,6 +50,12 @@ userRouter.post('/playlists/user-playlists/songs', verifyToken, PlaylistControll
 //Remove song from playlist
 userRouter.delete('/playlists/user-playlists/songs', verifyToken, PlaylistController.removeSongFromPlaylist);
 
+//QUE
+userRouter.get('/cue', verifyToken, CueController.getAllFromCue);
+userRouter.post('/cue', verifyToken, CueController.addToCue);
+userRouter.delete('/cue', verifyToken, CueController.removeFromCue);
+
+//Login, logout, create - user
 userRouter.post('/', UserController.createUser);
 userRouter.post('/login', UserController.loginUser);
 userRouter.put('/logout', UserController.logoutUser);
