@@ -91,12 +91,12 @@ const VideoListWrapper = styled.div`
     }
   }
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1400px) {
     .grid-container {
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 1600px) {
     .grid-container {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
