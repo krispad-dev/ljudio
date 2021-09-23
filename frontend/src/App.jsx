@@ -19,6 +19,7 @@ import YouTubePlayer from './components/YoutubePlayer/YoutubePlayer';
 import MusicPage from './pages/MusicPage';
 import OnePlaylistPage from './pages/OnePlaylistPage';
 import CuePage from './pages/CuePage';
+import ArtistPage from './pages/ArtistPage'
 
 import Header from './components/Header/Header';
 import Aside from './components/Aside/Aside';
@@ -26,6 +27,8 @@ import Footer from './components/Footer/Footer';
 import AllPlaylistsPage from './pages/AllPlaylistsPage';
 import MobileMenu from './components/MobileMenu/MobileMenu';
 import ConfirmModal from './components/ConfirmModal';
+import VideosPage from './pages/VideosPage';
+
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -41,7 +44,6 @@ function App() {
   const [windowWidth, windowHeight] = useWindowSize();
   const { state } = useContext(UiContext);
 
-  
   return (
     <div ref={appRef} style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
       <GlobalStyle />
@@ -72,7 +74,14 @@ function App() {
             {auth && !auth.loggedIn && <Redirect to='/' />}
           </Route>
 
+          <Route exact path='/artist/:id' component={ArtistPage}>
+  
+          </Route>
+
+
           <Route exact path='/playlist/:id' component={OnePlaylistPage} />
+
+          <Route exact path='/videos' component={VideosPage} />
 
           <Route exact path='/' component={MusicPage} />
           <Route exact path='/register' component={RegisterPage} />

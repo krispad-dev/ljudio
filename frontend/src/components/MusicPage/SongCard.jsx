@@ -21,11 +21,9 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
           <p>{name}</p>
         </div>
       </div>
-      {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
+
       <div className='play-symbol-container'>
         {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
-        {/* {auth && auth.loggedIn && <BsHeart />}
-         */}
         <MusicPlayBtn index={index} videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
       </div>
     </SongCardWrapper>
@@ -35,7 +33,6 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
 export default SongCard;
 
 const SongCardWrapper = styled.div`
-
   background-color: rgba(255, 255, 255, 0.06);
   border-radius: 10px;
   margin: 0.2rem 0rem;
@@ -45,6 +42,7 @@ const SongCardWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   .thumbnail-title-container {
     border-radius: 10px;
@@ -77,5 +75,20 @@ const SongCardWrapper = styled.div`
     justify-content: center;
     align-items: center;
     color: #fff;
+  }
+
+  @media (max-width: 648px) {
+    h3 {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 390px) {
+    h3 {
+      font-size: 0.8rem;
+    }
+    p {
+      font-size: 0.7rem;
+    }
   }
 `;

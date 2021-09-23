@@ -22,7 +22,7 @@ function MobileMenu() {
 export default MobileMenu;
 
 const MobileMenuContainer = styled.div`
-	z-index: 0;
+	z-index: 999;
 	display: flex;
 	position: absolute;
 	background-color: #000;

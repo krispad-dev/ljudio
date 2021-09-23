@@ -66,7 +66,6 @@ const songs = '/api/music/songs';
 const music = '/api/music/';
 const cue = '/api/users/cue';
 
-
 export const API = {
   USER: {
     LOGIN: `${users}/login/`,
@@ -84,7 +83,7 @@ export const API = {
     REMOVE_SONG_FROM_PLAYLIST: `${playlists}/user-playlists/songs`,
     FOLLOW_PLAYLIST: `${playlists}/followed-playlists`,
     GET_FOLLOWED_PLAYLISTS: `${playlists}/followed-playlists`,
-    UNFOLLOW_PLAYLIST: `${playlists}/followed-playlists`
+    UNFOLLOW_PLAYLIST: `${playlists}/followed-playlists`,
   },
 
   SONGS: {
@@ -96,6 +95,7 @@ export const API = {
     ONE_ARTIST: `${music}/artists/1/`,
     ALBUMS: `${music}/albums`,
     PLAYLISTS: `${music}/playlists`,
+    VIDEOS: `${music}/videos`,
   },
 
   CUE: {
