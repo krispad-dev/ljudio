@@ -5,7 +5,6 @@ import styled from 'styled-components';
 function AllPlaylistsPage() {
   return (
     <AllPlaylistsPageWrapper>
-      <h1>Playlists:</h1>
       <AllPlaylistsList />
     </AllPlaylistsPageWrapper>
   );

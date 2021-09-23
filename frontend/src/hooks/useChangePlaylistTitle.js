@@ -5,7 +5,7 @@ export default function useChangePlaylistTitle() {
     const queryClient = useQueryClient();
     return useMutation(data => Fetch.POST(data, API.PLAYLIST.UPDATE_PLAYLIST_TITLE), {
         onSuccess: () => {
-            queryClient.invalidateQueries(['playlist']);
+            queryClient.invalidateQueries(['playlist', data.playlistId])
         }
     });
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TiDeleteOutline } from 'react-icons/ti';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 import useRemoveSongFromPlaylist from '../hooks/useRemoveSongFromPlaylist';
 import styled from 'styled-components';
 
@@ -8,7 +8,7 @@ function RemoveSongFromPlaylistBtn({ videoId, playlistId }) {
 
   return (
     <RemoveSongFromPlaylistBtnWrapper>
-      <TiDeleteOutline className='remove-btn' onClick={() => mutate({ videoId, playlistId })} />
+      <IoIosCloseCircleOutline className='remove-btn' onClick={() => mutate({ videoId, playlistId })} />
     </RemoveSongFromPlaylistBtnWrapper>
   );
 }
@@ -16,9 +16,10 @@ function RemoveSongFromPlaylistBtn({ videoId, playlistId }) {
 const RemoveSongFromPlaylistBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 0.5rem;
 
   .remove-btn {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: #c4c4c4;
 
     &:hover {

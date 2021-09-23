@@ -7,11 +7,11 @@ import MusicPlayBtn from '../MusicPlayBtn';
 import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
 import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 import useAuth from '../../hooks/useAuth';
-import AddMusicToOnePlayListList from './AddMusicToOnePlaylistPage/AddMusicToOnePlayListList';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 import AddToCueBtn from '../AddToCueBtn';
 import RemoveFromCueBtn from '../RemoveFromCueBtn';
+import { useParams } from 'react-router-dom'; 
 
 //HELPER
 import { durationConverter } from '../../helpers/helpers';
@@ -20,92 +20,86 @@ import { isInUserPlaylist } from '../../helpers/helpers';
 function SongCardItem({ song, playlistId, index, cueId }) {
 	//VideoID (song-prop) får göra en förfågan till Youtbe-api.
 
-  const { data, isLoading } = useGetSongs(song);
-  const { data: auth } = useAuth();
-  const { state } = useContext(UiContext);
-  const { data: userPlaylists } = useGetSavedUserPlaylists();
-  const { pathname } = useLocation();
+	const { id } = useParams()
+	const { data, isLoading } = useGetSongs(song);
+	const { data: auth } = useAuth();
+	const { pathname } = useLocation();
 
-  
-  return (
-    <>
-    {data && 
-    data.searchResults && 
-    data.searchResults.content[0] &&
-    <PlaylistsCardWrapper>
-      {isLoading && <SkeletonLoader />}
-      {!isLoading && 
-      <>
-      <div className='song-container'>
-        <div className='song-img-container'>
-          <img src={data && data.searchResults.content[0].thumbnails[1].url} alt='song-cover' />
-        </div>
-        <div className='song-artist-container'>
-          <h2>{data && data.searchResults.content[0].name}</h2>
-          <h3>{data && data.searchResults.content[0].artist.name}</h3>
-        </div>
+	const { data: userPlaylists } = useGetSavedUserPlaylists();
 
-        <div className='song-album-container'>
-          <h2>Album</h2>
-          <h3>{data && data.searchResults.content[0].album.name}</h3>
-        </div>
-        <div className='song-duration-container'>
-          <h2>Duration</h2>
-          <h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
-        </div>
-        <div className='song-icon-container'>
-          <MusicPlayBtn
-		  	index={index}
-            videoId={song}
-            name={data && data.searchResults.content[0].name}
-            artist={data && data.searchResults.content[0].artist.name}
-            thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
-          />
-          {userPlaylists &&
-            userPlaylists.userPlaylists &&
-            auth.loggedIn &&
-            isInUserPlaylist(playlistId, userPlaylists.userPlaylists) && (
-              <RemoveSongFromPlaylistBtn videoId={song} playlistId={playlistId} />
-            )}
-		   {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
-           {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
-		   {auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} />}
-        </div>
-        {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToOnePlayListList />}
-      </div>
-      </>
-      }
-    </PlaylistsCardWrapper>
-    }
-    </>
-  );
+
+	console.log(isInUserPlaylist(playlistId, userPlaylists.userPlaylists));
+
+	return (
+		<>
+			{data && data.searchResults && data.searchResults.content[0] && (
+				<PlaylistsCardWrapper>
+					{isLoading && <SkeletonLoader />}
+					{!isLoading && (
+				
+							<div className='song-container'>
+								<div className='song-img-container'>
+									<img
+										src={data && data.searchResults.content[0].thumbnails[1].url}
+										alt='song-cover'
+									/>
+								</div>
+								<div className='song-artist-container'>
+									<h2>{data && data.searchResults.content[0].name}</h2>
+									<h3>{data && data.searchResults.content[0].artist.name}</h3>
+								</div>
+
+								<div className='song-duration-container'>
+									<h2>Duration</h2>
+									<h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
+								</div>
+								<div className='song-icon-container'>
+								{auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
+
+								{userPlaylists &&
+										userPlaylists.userPlaylists &&
+										auth.loggedIn &&
+										isInUserPlaylist(id, userPlaylists.userPlaylists) && (
+											<RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
+										)}
+									
+									<MusicPlayBtn
+										index={index}
+										videoId={song}
+										name={data && data.searchResults.content[0].name}
+										artist={data && data.searchResults.content[0].artist.name}
+										thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
+									/>
+
+								{auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
+		   						{auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} />}
+	
+								</div>
+							</div>
+		
+					)}
+				</PlaylistsCardWrapper>
+			)}
+		</>
+	);
 }
 
 const PlaylistsCardWrapper = styled.div`
-	width: 100%;
-	display: flex;
+
 
 	.song-container {
-		margin-top: 10px;
-		width: 90%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		background-color: rgba(255, 255, 255, 0.1);
-
-		h2 {
-			font-size: 12px;
-		}
-		h3 {
-			font-size: 10px;
-		}
+		background-color: rgba(255, 255, 255, 0.02);
+		margin: 0.3rem;
 	}
 
 	.song-img-container,
 	.song-artist-container,
 	.song-album-container,
 	.song-duration-container {
-		width: 90%;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -113,7 +107,7 @@ const PlaylistsCardWrapper = styled.div`
 	}
 
 	.song-icon-container {
-		width: 40%;
+		margin-right: 2rem ;
 		display: flex;
 		align-items: center;
 		justify-content: space-evenly;
@@ -123,35 +117,6 @@ const PlaylistsCardWrapper = styled.div`
 		img {
 			border-radius: 2px;
 			max-width: 50px;
-		}
-	}
-
-	.song-artist-container h2,
-	.song-album-container h2,
-	.song-duration-container h2 {
-		color: c4c4c4;
-	}
-
-	.song-artist-container h3,
-	.song-album-container h3,
-	.song-duration-container h3 {
-		font-weight: lighter;
-		color: rgba(255, 255, 255, 0.5);
-	}
-
-	@media (min-width: 650px) {
-		.song-img-container {
-			img {
-				max-width: 100px;
-			}
-		}
-		.song-container {
-			h2 {
-				font-size: 20px;
-			}
-			h3 {
-				font-size: 15px;
-			}
 		}
 	}
 `;

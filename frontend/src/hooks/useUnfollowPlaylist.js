@@ -6,7 +6,8 @@ export default function useUnfollowPlaylist() {
 
   return useMutation((data) => Fetch.DELETE(data, API.PLAYLIST.UNFOLLOW_PLAYLIST), {
     onSuccess: () => {
-      queryClient.invalidateQueries(['followed-playlists']);
+      queryClient.invalidateQueries(['followed-playlists']),
+      queryClient.invalidateQueries(['playlist']);
     }
   });
 }

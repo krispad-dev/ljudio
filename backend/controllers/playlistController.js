@@ -93,9 +93,12 @@ export async function removeSongFromPlaylist(req, res) {
 }
 
 export async function getOneUserPlaylist(req, res) {
+
   try {
     //PlaylistID from url params
     const playlistId = req.params.id;
+
+    console.log(playlistId);
 
     //Get one playlist from database
     let playlist = await Playlist.GetOneUserPlaylist(playlistId);
