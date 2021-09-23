@@ -23,8 +23,6 @@ function SongCardItem({ song, playlistId, index }) {
 	const { data: userPlaylists } = useGetSavedUserPlaylists();
 
 
-	console.log(isInUserPlaylist(playlistId, userPlaylists.userPlaylists));
-
 	return (
 		<>
 			{data && data.searchResults && data.searchResults.content[0] && (

@@ -8,7 +8,7 @@ function ArtistCard({ artist, thumbnails, name, bgColor, browseId }) {
 	const { data: oneArtist } = useGetOneArtist(browseId)
 
 	const bgImage = oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails
-	console.log(bgImage);
+
 
 
 

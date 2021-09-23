@@ -4,13 +4,24 @@ import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-function MenuItem({ url, icon, text }) {
+const activeStyles = {
+	color: '#1dd1a1'
+}
+
+function MenuItem({ url, icon, text, active }) {
+
 	const { state, dispatch } = useContext(UiContext);
+	
 	return (
-		<MenuItemWrapper onClick={() => dispatch({ type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE })}>
+		<MenuItemWrapper 
+		onClick={() => dispatch({ type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE })}
+		style={active ? activeStyles : {}}
+		
+		>
 			<Link to={url}>
-				<h3>{icon}</h3>
-				<h3>{text}</h3>
+				{active && <div className='marker'></div>}
+				<h3 style={active ? activeStyles : {}} >{icon}</h3>
+				<h3 style={active ? activeStyles : {}} >{text}</h3>
 			</Link>
 		</MenuItemWrapper>
 	);
@@ -27,7 +38,27 @@ const MenuItemWrapper = styled.div`
 	}
 	width: 100%;
 
-	a {
+	a { 
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.marker {
+			border-radius: 2px;
+			animation: markerEffect ease-in-out 0.2s;
+			@keyframes markerEffect {
+				from {
+					width: 0rem;
+				} 
+				to {
+					width: 0.3rem;
+				}
+			}
+
+			width: 0.3rem;
+			height: 2rem;
+			background-color: #1dd1a1;
+
+		}
 		cursor: pointer;
 		align-items: center;
 		display: flex;

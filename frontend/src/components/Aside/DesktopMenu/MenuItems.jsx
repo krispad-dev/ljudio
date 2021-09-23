@@ -5,13 +5,18 @@ import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import styled from 'styled-components';
 import MenuItem from './MenuItem';
 import UserIndicator from '../../Header/UserIndicator';
+import { useLocation } from 'react-router-dom'
 
 function MenuItems() {
+
+  const { pathname } = useLocation()
+
   return (
     <MenuItemsWrapper>
-      <MenuItem url={'/'} icon={<Headset style={{ fontSize: '1.3rem' }} />} text={'MUSIC'} />
-      <MenuItem url={'/videos'} icon={<Video style={{ fontSize: '1.3rem' }} />} text={'VIDEOS'} />
-      <MenuItem url={'/playlists'} icon={<QueueMusicIcon style={{ fontSize: '1.3rem' }} />} text={'PLAYLISTS'} />
+
+      <MenuItem url={'/'} icon={<Headset style={{ fontSize: '1.3rem' }} />} text={'MUSIC'} active={pathname === '/' ? true : false} />
+      <MenuItem url={'/videos'} icon={<Video style={{ fontSize: '1.3rem' }} />} text={'VIDEOS'} active={pathname === '/videos' ? true : false} />
+      <MenuItem url={'/playlists'} icon={<QueueMusicIcon style={{ fontSize: '1.3rem' }} />} text={'PLAYLISTS'} active={pathname === '/playlists' ? true : false}  />
 
       <div className='divider'></div>
       <UserIndicator />

@@ -3,7 +3,7 @@ import { UiContext } from '../../context/UiState';
 
 import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
-
+import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
@@ -17,14 +17,17 @@ function PlaylistList() {
 
 	let { id } = useParams();
 	const { data, isSuccess } = useGetOneSavedUserPlaylist(id);
-	const { state } = useContext(UiContext);
+	const { state, dispatch: uiContextDispatch } = useContext(UiContext);
 
 	const pendingCue = data && data.playlist && data.playlist.songs && data.playlist.songs;
-
 
 	useEffect(() => {
 		dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: pendingCue });
 	}, [data]);
+
+	useEffect(() => {
+		uiContextDispatch({ type: UI_STATE_ACTIONS.SET_CURRENT_PLAYLIST_ID, payload: { currentPlaylistId: id } });
+	}, [id]);
 
 	return (
 		<>
@@ -35,9 +38,7 @@ function PlaylistList() {
 					data.success &&
 					data.playlist.songs &&
 					data.playlist.songs.length > 0 &&
-					data.playlist.songs.map((song, i) => (
-						<SongCardItem index={i} key={i} song={song} />
-					))}
+					data.playlist.songs.map((song, i) => <SongCardItem index={i} key={i} song={song} />)}
 				{data && !data.success && <h2>No songs here - add some :)</h2>}
 			</PlayListCaPlaylistListWrapper>
 		</>
@@ -51,8 +52,8 @@ const PlayListCaPlaylistListWrapper = styled.div`
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 	::-webkit-scrollbar {
-	display: none;
-}
+		display: none;
+	}
 `;
 
 export default PlaylistList;

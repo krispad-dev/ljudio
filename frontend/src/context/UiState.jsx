@@ -14,6 +14,7 @@ const initialState = {
   confirmAction: '',
   pushDir: '',
   isDeletingPlaylist: false,
+  currentPlaylistId: ''
 };
 
 function UiState({ children }) {

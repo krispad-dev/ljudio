@@ -13,6 +13,7 @@ export const UI_STATE_ACTIONS = {
 	SET_PLAYLIST_ID_TO_REMOVE: 'SET_PLAYLIST_ID_TO_REMOVE',
 	DELETE_PLAYLIST: 'DELETE_PLAYLIST',
 	RESET_DELETING_PLAYLIST: 'RESET_DELETING_PLAYLIST',
+	SET_CURRENT_PLAYLIST_ID: 'SET_CURRENT_PLAYLIST_ID',
 };
 
 export function UiReducer(state, action) {
@@ -77,34 +78,40 @@ export function UiReducer(state, action) {
 				modalOpen: true,
 				modalText: action.payload.modalText,
 				confirmAction: action.payload.confirmAction,
-				pushDir: action.payload.pushDir
+				pushDir: action.payload.pushDir,
 			};
-	
+
 		case UI_STATE_ACTIONS.SET_PLAYLIST_ID_TO_REMOVE:
 			return {
 				...state,
-				playlistIdToRemove: action.payload.playlistId
+				playlistIdToRemove: action.payload.playlistId,
 			};
-	
+
 		case UI_STATE_ACTIONS.DELETE_PLAYLIST:
 			return {
 				...state,
 				isDeletingPlaylist: true,
-				modalOpen: false
+				modalOpen: false,
 			};
-	
+
 		case UI_STATE_ACTIONS.SET_MODAL_IS_CLOSED:
 			return {
 				...state,
 				playlistIdToRemove: '',
-				modalOpen: false
+				modalOpen: false,
 			};
-	
+
 		case UI_STATE_ACTIONS.RESET_DELETING_PLAYLIST:
 			return {
 				...state,
 				playlistIdToRemove: '',
-				isDeletingPlaylist: false
+				isDeletingPlaylist: false,
+			};
+
+		case UI_STATE_ACTIONS.SET_CURRENT_PLAYLIST_ID:
+			return {
+				...state,
+				currentPlaylistId: action.payload.currentPlaylistId,
 			};
 
 		default:
