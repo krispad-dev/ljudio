@@ -33,7 +33,6 @@ export async function removePlaylist(req, res) {
   }
 }
 
-
 export async function updatePlaylistTitle(req, res) {
   try {
     const title = req.body.title;
@@ -42,7 +41,6 @@ export async function updatePlaylistTitle(req, res) {
     const data = { title, playlistId };
 
     await Playlist.UpdateUserPlaylistTitle(data);
-    
   } catch (error) {
     return res.status(400).json({ success: false });
   }
@@ -93,12 +91,9 @@ export async function removeSongFromPlaylist(req, res) {
 }
 
 export async function getOneUserPlaylist(req, res) {
-
   try {
     //PlaylistID from url params
     const playlistId = req.params.id;
-
-    console.log(playlistId);
 
     //Get one playlist from database
     let playlist = await Playlist.GetOneUserPlaylist(playlistId);
@@ -121,11 +116,10 @@ export async function getAllPlaylists(req, res) {
 }
 export async function searchPlaylists(req, res) {
   try {
-
-    const {searchString} = req.query 
+    const { searchString } = req.query;
 
     const playlists = await Playlist.SearchPlaylists(searchString);
-   
+
     return res.json({ success: true, playlists });
   } catch (err) {
     console.log(err.message);
