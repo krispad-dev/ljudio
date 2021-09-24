@@ -14,17 +14,11 @@ function SongPage() {
   const [playerState, dispatch] = useContext(playerControllerStateContext);
   const { data } = useGetSongs(id);
 
-  data && console.log(data);
-
   const fallBackDataString = data && data.searchResults && data.searchResults.content && data.searchResults.content[0];
 
   const songName = fallBackDataString && fallBackDataString.name;
   const artist = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.name;
-  // const image =
-  //   fallBackDataString &&
-  //   fallBackDataString.thumbnails &&
-  //   fallBackDataString.thumbnails[1] &&
-  //   fallBackDataString.thumbnails[1].url;
+
   const browseId = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.browseId;
 
   const { data: artistData } = useGetOneArtist(browseId);
@@ -35,8 +29,6 @@ function SongPage() {
     artistData.artist.thumbnails &&
     artistData.artist.thumbnails[0] &&
     artistData.artist.thumbnails[0].url;
-
-  console.log(largeImage);
 
   useEffect(() => {
     dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: [id] });
