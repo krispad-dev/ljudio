@@ -31,8 +31,8 @@ display: flex;
 
   @media (max-width: 648px) {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
   }
 `;

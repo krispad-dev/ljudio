@@ -37,7 +37,7 @@ const StyledHeader = styled.header`
   width: 100%;
   .search-bar-user-options-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: flex-end;
   }
 
@@ -57,10 +57,11 @@ const StyledHeader = styled.header`
       flex-direction: column;
       width: 100%;
       .search-bar-user-options-container {
-        width: 80%;
+        width: 95%;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        margin-bottom: 0.5rem;
       }
     }
   }
