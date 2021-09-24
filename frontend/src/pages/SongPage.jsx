@@ -6,17 +6,36 @@ import { PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
 import MusicPlayBtn from '../components/MusicPlayBtn';
 import ShareUrlBtn from '../components/ShareUrlBtn';
 import useGetSongs from '../hooks/useGetSongs';
+import useGetOneArtist from '../hooks/useGetOneArtist';
 
 function SongPage() {
   const { id } = useParams();
   const [playerState, dispatch] = useContext(playerControllerStateContext);
-
   const { data } = useGetSongs(id);
 
   data && console.log(data);
-  const songName = data && data.searchResults && data.searchResults.content[0].name;
-  const artist = data && data.searchResults && data.searchResults.content[0].artist.name;
-  const image = data && data.searchResults && data.searchResults.content[0].thumbnails[1].url;
+
+  const fallBackDataString = data && data.searchResults && data.searchResults.content && data.searchResults.content[0];
+
+  const songName = fallBackDataString && fallBackDataString.name;
+  const artist = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.name;
+  const image =
+    fallBackDataString &&
+    fallBackDataString.thumbnails &&
+    fallBackDataString.thumbnails[1] &&
+    fallBackDataString.thumbnails[1].url;
+  const browseId = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.browseId;
+
+  const { data: artistData } = useGetOneArtist(browseId);
+  console.log(artistData);
+
+  const largeImage =
+    artistData &&
+    artistData.artist &&
+    artistData.artist.thumbnails &&
+    artistData.artist.thumbnails[0] &&
+    artistData.artist.thumbnails[0].url;
+  console.log(largeImage);
 
   useEffect(() => {
     dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: [id] });
@@ -29,7 +48,7 @@ function SongPage() {
         <h2>{artist}</h2>
       </div>
       <div className='img-wrap'>
-        <img src={image} alt='Song Album Cover' />
+        <img src={largeImage} alt='Song Album Cover' />
       </div>
       <MusicPlayBtn className='play-btn' videoId={id} index={0} />
       <ShareUrlBtn />
@@ -48,13 +67,20 @@ const SongPageWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
 
+  /* z-index: 99999; */
+
   h1 {
-    font-size: 5rem;
+    font-size: 2rem;
   }
 
   h2 {
     font-size: 2rem;
     font-weight: bold;
+  }
+
+  img {
+    width: 100%;
+    max-width: 500px;
   }
 
   .play-btn {
