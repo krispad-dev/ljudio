@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
 
+import AddToCueBtn from '../AddToCueBtn';
 import MusicPlayBtn from '../MusicPlayBtn';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
 
@@ -26,6 +27,7 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
       <div className='play-symbol-container'>
         {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
         <MusicPlayBtn index={index} videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
+        <AddToCueBtn videoId={videoId} />
       </div>
     </SongCardWrapper>
   );
@@ -80,7 +82,7 @@ const SongCardWrapper = styled.div`
     margin-right: 0.5rem;
     height: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: #fff;
   }
