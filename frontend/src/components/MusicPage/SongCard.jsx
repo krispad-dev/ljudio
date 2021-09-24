@@ -59,6 +59,13 @@ const SongCardWrapper = styled.div`
       justify-content: flex-end;
       margin-left: 1rem;
     }
+
+    .song-info:hover {
+      h3,
+      p {
+        color: #1dd1a1;
+      }
+    }
   }
 
   .album-cover {

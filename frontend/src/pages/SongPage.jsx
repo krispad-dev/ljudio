@@ -7,6 +7,7 @@ import MusicPlayBtn from '../components/MusicPlayBtn';
 import ShareUrlBtn from '../components/ShareUrlBtn';
 import useGetSongs from '../hooks/useGetSongs';
 import useGetOneArtist from '../hooks/useGetOneArtist';
+import imagePlaceholder from '../assets/na.svg';
 
 function SongPage() {
   const { id } = useParams();
@@ -19,15 +20,14 @@ function SongPage() {
 
   const songName = fallBackDataString && fallBackDataString.name;
   const artist = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.name;
-  const image =
-    fallBackDataString &&
-    fallBackDataString.thumbnails &&
-    fallBackDataString.thumbnails[1] &&
-    fallBackDataString.thumbnails[1].url;
+  // const image =
+  //   fallBackDataString &&
+  //   fallBackDataString.thumbnails &&
+  //   fallBackDataString.thumbnails[1] &&
+  //   fallBackDataString.thumbnails[1].url;
   const browseId = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.browseId;
 
   const { data: artistData } = useGetOneArtist(browseId);
-  console.log(artistData);
 
   const largeImage =
     artistData &&
@@ -49,8 +49,7 @@ function SongPage() {
         <h2>{artist}</h2>
       </div>
 
-      <div style={{ backgroundImage: `url('${largeImage}')` }} className='img-wrap'>
-        {/* <img src={largeImage} alt='' /> */}
+      <div style={{ backgroundImage: `url('${largeImage ? largeImage : imagePlaceholder}')` }} className='img-wrap'>
         <MusicPlayBtn className='play-btn' videoId={id} index={0} />
       </div>
       <ShareUrlBtn />
@@ -102,7 +101,7 @@ const SongPageWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #2ecc71;
+    color: #1dd1a1;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
   }
