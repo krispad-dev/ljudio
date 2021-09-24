@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UiContext } from '../../context/UiState';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
 
@@ -12,14 +13,14 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
 
   return (
     <SongCardWrapper>
-  
       <div className='thumbnail-title-container'>
         <div style={{ backgroundImage: `url(${thumbnails[1].url})` }} className='album-cover'></div>
-
-        <div className='song-info'>
-          <h3>{artist.name}</h3>
-          <p>{name}</p>
-        </div>
+        <Link to={`/songs/${videoId}`}>
+          <div className='song-info'>
+            <h3>{artist.name}</h3>
+            <p>{name}</p>
+          </div>
+        </Link>
       </div>
 
       <div className='play-symbol-container'>
@@ -57,6 +58,13 @@ const SongCardWrapper = styled.div`
       align-items: flex-start;
       justify-content: flex-end;
       margin-left: 1rem;
+    }
+
+    .song-info:hover {
+      h3,
+      p {
+        color: #1dd1a1;
+      }
     }
   }
 

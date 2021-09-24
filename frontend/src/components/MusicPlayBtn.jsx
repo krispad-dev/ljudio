@@ -6,25 +6,25 @@ import { PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
 import { playerControllerStateContext } from '../context/YouTubePlayerContext';
 
 function MusicPlayBtn({ videoId, name, artist, thumbails, index }) {
-  const [{ currentSong, isPlaying, 
-    pauseVideo, playVideo, pendingCue, cuePosition, activeCue }, dispatchPlayerControllerStateContext] = useContext(playerControllerStateContext);
+  const [
+    { currentSong, isPlaying, pauseVideo, playVideo, pendingCue, cuePosition, activeCue },
+    dispatchPlayerControllerStateContext,
+  ] = useContext(playerControllerStateContext);
 
-  function onClickHandler(){
-
+  function onClickHandler() {
     dispatchPlayerControllerStateContext({
       type: PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION,
       payload: index,
-  
-    })
+    });
 
     dispatchPlayerControllerStateContext({
       type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
       payload: pendingCue,
-    })
+    });
   }
 
   return (
-    <MusicPlayBtnWrapper onClick={onClickHandler} >
+    <MusicPlayBtnWrapper onClick={onClickHandler}>
       {activeCue[cuePosition] === videoId && isPlaying ? (
         <IoPauseCircleOutline
           className='play-btn'

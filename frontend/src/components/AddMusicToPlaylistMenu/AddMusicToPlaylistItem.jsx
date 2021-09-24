@@ -10,15 +10,13 @@ function AddMusicToPlaylistItem({ title, id }) {
   const { state, dispatch } = useContext(UiContext);
 
   function onClickHandler() {
-
-  
     mutate({ playlistId: id, videoId: state.songToSaveToUserPlaylist });
     setTimeout(() => {
-      dispatch({ 
-        type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION, 
-        payload: { saveSongToPlaylistSelectorSectionIsOpen: false } });
+      dispatch({
+        type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
+        payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
+      });
     }, 300);
-
   }
 
   return (

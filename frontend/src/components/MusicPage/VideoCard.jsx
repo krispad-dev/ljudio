@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -9,10 +10,13 @@ function VideoCard({ videoId, name, author, thumbnails, index, bgColor }) {
     <VideoCardWrapper /* style={{ backgroundColor: bgColor }} */>
       <div style={{ backgroundImage: `url('${thumbnails.url}')` }} className='bg-image'>
         <MusicPlayBtn className='play-btn' index={index} videoId={videoId} />
-        <div className='video-info'>
-          <h3>{author}</h3>
-          <h2>{name.length < 25 ? name.substring(0, 25) : name.substring(0, 25) + '...'}</h2>
-        </div>
+
+        <Link to={`/songs/${videoId}`}>
+          <div className='video-info'>
+            <h3>{author}</h3>
+            <h2>{name.length < 25 ? name.substring(0, 25) : name.substring(0, 25) + '...'}</h2>
+          </div>
+        </Link>
       </div>
     </VideoCardWrapper>
   );
@@ -57,6 +61,12 @@ const VideoCardWrapper = styled.div`
     h2 {
       color: #fff;
       font-weight: 300;
+    }
+  }
+  .video-info:hover {
+    h3,
+    h2 {
+      color: #1dd1a1;
     }
   }
 `;
