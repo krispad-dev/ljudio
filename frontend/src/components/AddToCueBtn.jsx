@@ -11,7 +11,6 @@ import { ToastContainer } from 'react-toastify';
 function AddToCueBtn({ videoId }) {
   const { mutate } = useAddToCue();
 
-  const { mutate } = useAddToCue();
   const [{ pendingUserCue }, dispatch] = useContext(playerControllerStateContext);
 
   function saveToCue() {
