@@ -5,10 +5,9 @@ import styled from 'styled-components';
 
 import SongsList from '../components/MusicPage/SongsList';
 import ArtiststList from '../components/MusicPage/ArtiststList';
-import AlbumsList from '../components/MusicPage/AlbumsList';
 import AllPlaylistsList from '../components/AllPlaylistsPage/AllPlaylistsList';
 import { UI_STATE_ACTIONS } from '../reducers/UiReducer';
-import VideoList from '../components/MusicPage/VideoList';
+
 
 function MusicPage() {
   const { state, dispatch } = useContext(UiContext);
@@ -17,7 +16,7 @@ function MusicPage() {
   useEffect(() => {
     dispatch({
       type: UI_STATE_ACTIONS.SET_HEADER_SEARCH_STRING,
-      payload: { headerSearchString: 'home' },
+      payload: { headerSearchString: 'cold' },
     });
   }, []);
 

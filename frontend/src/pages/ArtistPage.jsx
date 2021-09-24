@@ -29,7 +29,7 @@ function ArtistPage() {
 		<ArtistPageWrapper>
 			<div
 				className={'background-image'}
-				style={{ backgroundImage: `url(${artistPicture && artistPicture.url})` }}
+				style={{ backgroundImage: `url(${artistPicture ? artistPicture.url : noDescriptionPlaceholder })` }}
 			>
 				<div className={'bottom-container'}>
 					<h1>{artistName}</h1>

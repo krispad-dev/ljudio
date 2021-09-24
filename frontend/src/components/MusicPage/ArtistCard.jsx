@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import useGetOneArtist from '../../hooks/useGetOneArtist';
+import noDescriptionPlaceholder from '../../assets/na.svg'
 
-function ArtistCard({ artist, thumbnails, name, bgColor, browseId }) {
+
+function ArtistCard({ name, bgColor, browseId }) {
 	const { data: oneArtist } = useGetOneArtist(browseId);
 
 	const bgImage = oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails;
@@ -11,7 +13,7 @@ function ArtistCard({ artist, thumbnails, name, bgColor, browseId }) {
 	return (
 		<ArtistCardWrapper style={{ backgroundColor: bgColor }}>
 			<Link to={`/artist/${browseId}`}>
-				<div className={'background-image'} style={{ backgroundImage: `url(${bgImage && bgImage[1].url})` }}>
+				<div className={'background-image'} style={{ backgroundImage: `url(${bgImage ? bgImage[1].url : noDescriptionPlaceholder})` }}>
 					<h3>{name}</h3>
 				</div>
 			</Link>

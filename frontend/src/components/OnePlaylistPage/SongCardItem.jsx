@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router';
-import { UiContext } from '../../context/UiState';
+
 import styled from 'styled-components';
 import useGetSongs from '../../hooks/useGetSongs';
 import MusicPlayBtn from '../MusicPlayBtn';
@@ -17,15 +17,26 @@ import { useParams } from 'react-router-dom';
 import { durationConverter } from '../../helpers/helpers';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
-function SongCardItem({ song, playlistId, index, cueId }) {
+function SongCardItem({ song, index, cueId }) {
 	//VideoID (song-prop) får göra en förfågan till Youtbe-api.
 
 	const { id } = useParams()
 	const { data, isLoading } = useGetSongs(song);
 	const { data: auth } = useAuth();
 	const { pathname } = useLocation();
-
 	const { data: userPlaylists } = useGetSavedUserPlaylists();
+
+	const fallbackDataString = data
+	&& data.searchResults
+	&& data.searchResults.content 
+	&& data.searchResults.content[0];
+
+
+	const thumbnailImg = fallbackDataString && fallbackDataString.thumbnails[1].url;
+	const artistName = fallbackDataString && fallbackDataString.artist && fallbackDataString.artist.name;
+	const songName = fallbackDataString && fallbackDataString.name; 
+	const duration = fallbackDataString && fallbackDataString.duration;
+
 
 
 	return (
@@ -38,18 +49,18 @@ function SongCardItem({ song, playlistId, index, cueId }) {
 							<div className='song-container'>
 								<div className='song-img-container'>
 									<img
-										src={data && data.searchResults.content[0].thumbnails[1].url}
+										src={thumbnailImg && thumbnailImg}
 										alt='song-cover'
 									/>
 								</div>
 								<div className='song-artist-container'>
-									<h2>{data && data.searchResults.content[0].name}</h2>
-									<h3>{data && data.searchResults.content[0].artist.name}</h3>
+									<h2>{songName && songName}</h2>
+									<h3>{artistName && artistName}</h3>
 								</div>
 
 								<div className='song-duration-container'>
 									<h2>Duration</h2>
-									<h3>{data && durationConverter(data.searchResults.content[0].duration)}</h3>
+									<h3>{durationConverter(duration && duration)}</h3>
 								</div>
 								<div className='song-icon-container'>
 								{auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
@@ -64,9 +75,9 @@ function SongCardItem({ song, playlistId, index, cueId }) {
 									<MusicPlayBtn
 										index={index}
 										videoId={song}
-										name={data && data.searchResults.content[0].name}
-										artist={data && data.searchResults.content[0].artist.name}
-										thumbnails={data && data.searchResults.content[0].thumbnails[1].url}
+										name={songName && songName}
+										artist={artistName && artistName}
+										thumbnails={thumbnailImg && thumbnailImg}
 									/>
 
 								{auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}

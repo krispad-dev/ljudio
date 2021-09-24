@@ -23,24 +23,24 @@ function AllPlaylistsListItemCard({ title, userName, playlistId, followCount, bg
 			song.searchResults.content[0].artist.browseId
 	);
 
-	const bgImage = artist && artist.artist && artist.artist.thumbnails && artist.artist.thumbnails[2]
+	const bgImage = artist && artist.artist && artist.artist.thumbnails && artist.artist.thumbnails[2];
 
 	return (
-		<AllPlaylistsListItemCardWrapper style={{ backgroundColor: bgColor, backgroundImage: `url(${bgImage && bgImage.url})` }}>
+		<AllPlaylistsListItemCardWrapper
+			style={{ backgroundColor: bgColor, backgroundImage: `url(${bgImage && bgImage.url})` }}
+		>
+			<div className='follow'>
+				<FollowBtn playlistId={playlistId} />
+				<h3>{userName}</h3>
+			</div>
 			<Link className='link' to={`/playlist/${playlistId}`}>
+				<div className={'info-container'}>{/* 					<h3>
+						<FaUser />: {followCount}
+					</h3> */}</div>
 				<div className='title-container'>
 					<h1>{title}</h1>
 				</div>
-				<div className={'info-container'}>
-					<h3>By: {userName}</h3>
-					<h3>
-						<FaUser />: {followCount}
-					</h3>
-				</div>
 			</Link>
-			<div className='follow'>
-				<FollowBtn playlistId={playlistId} />
-			</div>
 		</AllPlaylistsListItemCardWrapper>
 	);
 }
@@ -51,18 +51,33 @@ const AllPlaylistsListItemCardWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-
+	justify-content: space-between;
 	background-color: pink;
-	border-radius: 5px;
+	border-radius: 2px;
 
+	background-position: center;
+	.follow {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+
+		h3 {
+			font-size: 2rem;
+			background-color: #111;
+			color: #eee;
+		}
+
+	}
 	.title-container {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-end;
 		background-color: black;
 		opacity: 0.8;
 	}
 
 	h1 {
-		font-size: 1.2rem;
-		font-family: 'Damion', cursive;
+		font-size: 2rem;
 		color: white;
 		text-align: center;
 	}
@@ -75,6 +90,9 @@ const AllPlaylistsListItemCardWrapper = styled.div`
 	}
 
 	.link {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
 		width: 100%;
 		height: 100%;
 	}

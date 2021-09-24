@@ -4,7 +4,7 @@ import { UiReducer } from '../reducers/UiReducer';
 export const UiContext = createContext();
 
 const initialState = {
-  headerSearchString: 'home',
+  headerSearchString: 'cold',
   songToSaveToUserPlaylist: '',
   saveSongToPlaylistSelectorSectionIsOpen: false,
   playlistIdToSave: '',
