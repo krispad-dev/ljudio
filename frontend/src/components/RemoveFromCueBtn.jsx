@@ -1,6 +1,7 @@
 import React from 'react';
-import { TiDeleteOutline } from 'react-icons/ti';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 import useRemoveFromCue from '../hooks/useRemoveFromCue';
+import styled from 'styled-components';
 
 
 function RemoveFromCueBtn({ cueId }) {
@@ -8,10 +9,28 @@ function RemoveFromCueBtn({ cueId }) {
     const { mutate } = useRemoveFromCue();
 
     return (
-        <TiDeleteOutline 
-        style={{ fontSize: '1.5rem', color: '#FFF' }}
-        onClick={() => mutate({ cueId })} />
+        <RemoveFromCueBtnWrapper>
+            <IoIosCloseCircleOutline
+            className="remove-btn"
+            onClick={() => mutate({ cueId })} />
+        </RemoveFromCueBtnWrapper>
     );
 }
 
 export default RemoveFromCueBtn;
+
+
+const RemoveFromCueBtnWrapper = styled.div`
+
+    .remove-btn {
+        font-size: 1.8rem;
+        color: #FFF;
+        margin-top: 0.2rem;
+        margin-left: 0.3rem;
+
+        &:hover {
+            color: '#c0392b';
+            cursor: pointer;
+        }
+    }
+`;
