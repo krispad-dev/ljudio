@@ -28,12 +28,9 @@ import AllPlaylistsPage from './pages/AllPlaylistsPage';
 import MobileMenu from './components/MobileMenu/MobileMenu';
 import ConfirmModal from './components/ConfirmModal';
 import VideosPage from './pages/VideosPage';
-<<<<<<< HEAD
 import SongPage from './pages/SongPage';
-=======
 import { ThemeProvider } from '@material-ui/core';
 import theme from './materialUiTheme';
->>>>>>> dev
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -83,13 +80,11 @@ function App() {
               {auth && !auth.loggedIn && <Redirect to='/' />}
             </Route>
 
-        
             <Route exact path='/artist/:id' component={ArtistPage}></Route>
 
             <Route exact path='/playlist/:id' component={OnePlaylistPage} />
 
-       
-          <Route exact path='/songs/:id' component={SongPage} />
+            <Route exact path='/songs/:id' component={SongPage} />
             <Route exact path='/videos' component={VideosPage} />
 
             <Route exact path='/' component={MusicPage} />
