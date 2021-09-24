@@ -17,7 +17,7 @@ function ShareUrlBtn({ iconFontSize }) {
       hideProgressBar: true,
       style: {
         color: 'white',
-        backgroundColor: '#2ecc71',
+        backgroundColor: '#1dd1a1',
       },
     });
   };
@@ -39,7 +39,7 @@ function ShareUrlBtn({ iconFontSize }) {
 
 const ShareUrlBtnWrapper = styled.div`
   cursor: pointer;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export default ShareUrlBtn;

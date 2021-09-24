@@ -28,7 +28,12 @@ import AllPlaylistsPage from './pages/AllPlaylistsPage';
 import MobileMenu from './components/MobileMenu/MobileMenu';
 import ConfirmModal from './components/ConfirmModal';
 import VideosPage from './pages/VideosPage';
+<<<<<<< HEAD
 import SongPage from './pages/SongPage';
+=======
+import { ThemeProvider } from '@material-ui/core';
+import theme from './materialUiTheme';
+>>>>>>> dev
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -45,49 +50,56 @@ function App() {
   const { state } = useContext(UiContext);
 
   return (
-    <div ref={appRef} style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}} className='App'>
-      <GlobalStyle />
+    <ThemeProvider theme={theme}>
+      <div
+        ref={appRef}
+        style={(auth && !auth.loggedIn) || fullscreenVideoMode ? notLoggedInStyles : {}}
+        className='App'
+      >
+        <GlobalStyle />
 
-      {pathname !== '/register' && pathname !== '/login' && !fullscreenVideoMode && <Header />}
+        {pathname !== '/register' && pathname !== '/login' && !fullscreenVideoMode && <Header />}
 
-      <Aside />
+        <Aside />
 
-      <ConfirmModal />
+        <ConfirmModal />
 
-      <main className={'yt-player-main'}>
-        <YouTubePlayer />
-      </main>
-
-      {!fullscreenVideoMode && (
-        <main>
-          {state.mobileMenuIsOpen && windowWidth < 980 && auth.loggedIn && <MobileMenu />}
-
-          <Route exact path='/login' component={LoginPage}>
-            {auth && auth.loggedIn && <Redirect to='/' />}
-          </Route>
-
-          <Route exact path='/cue' component={CuePage}>
-            {auth && !auth.loggedIn && <Redirect to='/' />}
-          </Route>
-
-          <Route exact path='/playlists' component={AllPlaylistsPage}>
-            {auth && !auth.loggedIn && <Redirect to='/' />}
-          </Route>
-
-          <Route exact path='/artist/:id' component={ArtistPage}></Route>
-
-          <Route exact path='/playlist/:id' component={OnePlaylistPage} />
-
-          <Route exact path='/videos' component={VideosPage} />
-          <Route exact path='/songs/:id' component={SongPage} />
-
-          <Route exact path='/' component={MusicPage} />
-          <Route exact path='/register' component={RegisterPage} />
+        <main className={'yt-player-main'}>
+          <YouTubePlayer />
         </main>
-      )}
 
-      {pathname !== '/register' && pathname !== '/login' && <Footer />}
-    </div>
+        {!fullscreenVideoMode && (
+          <main>
+            {state.mobileMenuIsOpen && windowWidth <= 1000 && auth.loggedIn && <MobileMenu />}
+
+            <Route exact path='/login' component={LoginPage}>
+              {auth && auth.loggedIn && <Redirect to='/' />}
+            </Route>
+            <Route exact path='/cue' component={CuePage}>
+              {auth && !auth.loggedIn && <Redirect to='/' />}
+            </Route>
+
+            <Route exact path='/playlists' component={AllPlaylistsPage}>
+              {auth && !auth.loggedIn && <Redirect to='/' />}
+            </Route>
+
+        
+            <Route exact path='/artist/:id' component={ArtistPage}></Route>
+
+            <Route exact path='/playlist/:id' component={OnePlaylistPage} />
+
+       
+          <Route exact path='/songs/:id' component={SongPage} />
+            <Route exact path='/videos' component={VideosPage} />
+
+            <Route exact path='/' component={MusicPage} />
+            <Route exact path='/register' component={RegisterPage} />
+          </main>
+        )}
+
+        {pathname !== '/register' && pathname !== '/login' && <Footer />}
+      </div>
+    </ThemeProvider>
   );
 }
 
