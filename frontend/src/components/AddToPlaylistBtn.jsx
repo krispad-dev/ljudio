@@ -20,7 +20,7 @@ function AddToPlaylistBtn({ videoId }) {
     });
   }
 
-  useOutsideClick(ref, (e) => {
+  useOutsideClick(ref, () => {
     if (state.saveSongToPlaylistSelectorSectionIsOpen) {
       dispatch({
         type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
@@ -37,7 +37,7 @@ function AddToPlaylistBtn({ videoId }) {
   }, [pathname]);
 
   return (
-    <AddToPlaylistBtnWrapper ref={ref} onClick={(e) => console.log(ref)}>
+    <AddToPlaylistBtnWrapper ref={ref}>
       <BsPlusCircle
         className='add-btn'
         style={{
