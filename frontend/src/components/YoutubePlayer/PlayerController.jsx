@@ -4,6 +4,7 @@ import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import { MdPlayCircleOutline, MdPause } from 'react-icons/md';
 import { CgScreen } from 'react-icons/cg';
 import { MdSkipNext } from 'react-icons/md';
+import ShuffleBtn from '../../components/YoutubePlayer/ShuffleBtn'
 
 import VolumeSlider from './VolumeSlider';
 import ProgressSlider from './ProgressSlider';
@@ -51,6 +52,7 @@ function Controller() {
 					<MdPause onClick={() => pauseVideo()} className={'playPauseBtn'} style={{ color: '#1dd1a1' }} />
 				)}
 				<MdSkipNext onClick={setNextInCueHandler} className={'next-prevBtn'} style={{ color: '#fff', fontSize: '3rem' }} />
+				<ShuffleBtn />
 			</div>
 
 			<div>
