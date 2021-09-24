@@ -23,6 +23,8 @@ function GuestUserOptions() {
 export default GuestUserOptions;
 
 const GuestUserOptionsWrapper = styled.div`
+
+display: flex;
   a {
     margin: 0.2rem;
   }

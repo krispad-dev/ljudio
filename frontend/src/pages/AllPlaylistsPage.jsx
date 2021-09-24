@@ -14,7 +14,7 @@ export default AllPlaylistsPage;
 
 const AllPlaylistsPageWrapper = styled.div`
   width: 100%;
-  margin-top: 1rem;
+
 
   h1 {
     margin-bottom: 1rem;

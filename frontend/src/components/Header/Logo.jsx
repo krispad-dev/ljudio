@@ -17,5 +17,5 @@ function Logo() {
 export default Logo;
 
 const LogoWrapper = styled.div`
-  position: relative;
+margin-left: 0.5rem ;
 `;

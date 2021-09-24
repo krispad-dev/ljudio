@@ -91,7 +91,7 @@ const ArtistPageWrapper = styled.div`
 		text-align: center;
 
 		}
-		margin: 2rem 0rem 2rem 0rem;
+
 		background-color: rgba(255, 255, 255, 0.02);
 		border: 1px solid rgba(255, 255, 255, 0.03);
 		width: 100%;

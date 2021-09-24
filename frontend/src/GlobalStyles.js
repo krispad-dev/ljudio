@@ -29,7 +29,7 @@ body {
 	grid-template-columns: 15% 85%;
 	height: 100vh;
 
-	grid-template-rows: 10vh 70vh 20vh;
+	grid-template-rows: 6vh 74vh 20vh;
 	grid-template-areas:
 		'aside header'
 		'aside main'

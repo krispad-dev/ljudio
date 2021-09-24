@@ -30,22 +30,24 @@ function Header() {
 export default Header;
 
 const StyledHeader = styled.header`
+  height: 100%;
   display: flex;
   justify-content: center;
 
   width: 100%;
   .search-bar-user-options-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-end;
   }
 
   .header-container {
-    width: 99%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100% div {
+
+    div {
       display: flex;
       justify-content: center;
       align-items: center;
