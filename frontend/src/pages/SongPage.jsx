@@ -35,6 +35,7 @@ function SongPage() {
     artistData.artist.thumbnails &&
     artistData.artist.thumbnails[0] &&
     artistData.artist.thumbnails[0].url;
+
   console.log(largeImage);
 
   useEffect(() => {
@@ -47,10 +48,11 @@ function SongPage() {
         <h1>{songName}</h1>
         <h2>{artist}</h2>
       </div>
-      <div className='img-wrap'>
-        <img src={largeImage} alt='Song Album Cover' />
+
+      <div style={{ backgroundImage: `url('${largeImage}')` }} className='img-wrap'>
+        {/* <img src={largeImage} alt='' /> */}
+        <MusicPlayBtn className='play-btn' videoId={id} index={0} />
       </div>
-      <MusicPlayBtn className='play-btn' videoId={id} index={0} />
       <ShareUrlBtn />
     </SongPageWrapper>
   );
@@ -67,29 +69,41 @@ const SongPageWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
 
-  /* z-index: 99999; */
-
   h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
     font-size: 2rem;
     font-weight: bold;
   }
 
-  img {
-    width: 100%;
-    max-width: 500px;
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 650px) {
+    h1 {
+      font-size: 4rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+  }
+
+  .img-wrap {
+    position: relative;
+    min-width: 50%;
+    min-height: 50%;
+    background-size: cover;
+    background-position: center center;
   }
 
   .play-btn {
     font-size: 6rem;
-  }
-
-  .img-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #2ecc71;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
   }
 `;
