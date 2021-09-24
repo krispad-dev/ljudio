@@ -51,9 +51,9 @@ const SearchBarWrapper = styled.div`
   .search-Input {
     border-radius: 0.5rem;
     width: auto;
-    width: 50vw;
+    width: auto;
     max-width: 17rem;
-    min-width: 8rem;
+    min-width: 5rem;
     background-color: #eee;
     padding: 0.1rem 0.5rem;
   }

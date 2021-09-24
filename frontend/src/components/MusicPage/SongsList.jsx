@@ -57,5 +57,4 @@ const SongListWrapper = styled.div`
 	flex-direction: column;
 	height: 13rem;
 	overflow-y: scroll;
-	margin: 0.5rem 0rem;
 `;

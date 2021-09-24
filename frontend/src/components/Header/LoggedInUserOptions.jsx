@@ -18,7 +18,7 @@ function LoggedInUserOptions() {
 export default LoggedInUserOptions;
 
 const LoggedInUserOptionsWrapper = styled.div`
-  width: 100%;
+  width: auto;
   justify-content: center;
   align-items: center;
   padding: 1rem;

@@ -23,14 +23,16 @@ function GuestUserOptions() {
 export default GuestUserOptions;
 
 const GuestUserOptionsWrapper = styled.div`
+
+display: flex;
   a {
     margin: 0.2rem;
   }
 
   @media (max-width: 648px) {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
   }
 `;

@@ -6,7 +6,7 @@ import MusicPlayBtn from '../MusicPlayBtn';
 
 function VideoCard({ videoId, name, author, thumbnails, index, bgColor }) {
   return (
-    <VideoCardWrapper style={{ backgroundColor: bgColor }}>
+    <VideoCardWrapper /* style={{ backgroundColor: bgColor }} */>
       <div style={{ backgroundImage: `url('${thumbnails.url}')` }} className='bg-image'>
         <MusicPlayBtn className='play-btn' index={index} videoId={videoId} />
         <div className='video-info'>

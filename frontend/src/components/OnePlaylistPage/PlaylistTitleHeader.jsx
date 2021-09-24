@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import ShareUrlBtn from '../ShareUrlBtn';
 import RemoveUserPlaylist from '../RemoveUserPlaylist';
-import SkeletonLoader from '../Loaders/SkeletonLoader';
 import MaterialFollowBtn from '../MaterialFollowBtn';
 import { FaEdit } from 'react-icons/fa';
 import EditPlaylistTitle from './EditPlaylistTitle';
@@ -44,6 +43,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 	const plylistCoverImage =
 		oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2];
 
+
 	return (
 		<PlaylistTitleHeaderWrapper
 			className={'background-image'}
@@ -56,7 +56,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 				</div>
 
 				<div className='title-container'>
-					{!isEditingTitle && (
+					{!isEditingTitle && isInUserPlaylist(id, playlistArray) && (
 						<div>
 							<h1>{playlistTitle} </h1>
 							<FaEdit

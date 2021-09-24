@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import useGetFollowedPlaylists from '../../../hooks/useGetFollowedPlaylists';
 
 function FollowedPlaylists() {
-	// PLACEHOLDER HERE WILL WE INMPORT DATA WITH React query
 
 	const { data } = useGetFollowedPlaylists();
 
@@ -14,7 +13,7 @@ function FollowedPlaylists() {
 				data.followedPlaylists &&
 				data.followedPlaylists.length > 0 &&
 				data.followedPlaylists.map(playlist => {
-					return <PlayListCardItem key={playlist.id} {...playlist} followItem={true} />;
+					return <PlayListCardItem  key={playlist.id} {...playlist} followItem={true} />;
 				})}
 			{data && data.followedPlaylists && data.followedPlaylists.length === 0 && <p>No followed lists yet =/</p>}
 		</FollowingPlayListWrapper>
