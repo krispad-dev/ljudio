@@ -26,7 +26,7 @@ function FollowBtn({ playlistId }) {
           marginRight: '0.5rem',
           fontSize: ' 1rem',
           color: `${
-            data && data.followedPlaylists && isInPlaylist(playlistId, data.followedPlaylists) ? '#2ecc71' : 'white'
+            data && data.followedPlaylists && isInPlaylist(playlistId, data.followedPlaylists) ? '#1dd1a1' : 'white'
           }`,
         }}
       />

@@ -10,6 +10,7 @@ export const PLAYER_ACTIONS = {
 	SET_PLAYER_IS_PAUSED: 'SET_PLAYER_IS_PAUSED',
 	SET_IS_PLAYING: 'SET_IS_PLAYING',
 
+	SET_USER_PENDING_CUE: 'SET_USER_PENDING_CUE',
 	SET_PENDING_CUE: 'SET_PENDING_CUE',
 	SET_ACTIVE_CUE: 'SET_ACTIVE_CUE',
 	SET_ACTIVE_CUE_POSITION: 'SET_ACTIVE_CUE_POSITION',
@@ -87,6 +88,11 @@ export function playerControllerReducer(state, action) {
 			return {
 				...state,
 				pendingCue: action.payload,
+			};
+		case PLAYER_ACTIONS.SET_USER_PENDING_CUE:
+			return {
+				...state,
+				pendingUserCue: action.payload,
 			};
 		case PLAYER_ACTIONS.SET_ACTIVE_CUE:
 			return {
