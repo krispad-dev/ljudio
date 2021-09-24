@@ -25,6 +25,7 @@ export default UserIndicator;
 const UserIndicatorWrappe = styled.div`
   background-color: #222;
   font-size: 1rem;
+  border-radius: 5px;
 
   display: flex;
   justify-content: space-between;
@@ -45,8 +46,9 @@ const UserIndicatorWrappe = styled.div`
   }
 
   h4 {
-    color: #eee;
     margin: 1rem;
-    font-weight: 400;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 3px;
   }
 `;

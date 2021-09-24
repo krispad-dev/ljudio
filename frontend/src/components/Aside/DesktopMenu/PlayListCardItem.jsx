@@ -3,34 +3,47 @@ import { UiContext } from '../../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import RemoveUserPlaylist from '../../RemoveUserPlaylist';
-import useGetFollowedPlaylists from '../../../hooks/useGetFollowedPlaylists';
-import { isInPlaylist } from '../../../helpers/helpers';
 
-function PlayListCardItem({ title, playlistId, id }) {
-	const { data } = useGetFollowedPlaylists();
+
+
+
+function PlayListCardItem({ title, playlistId }) {
+
+
 	const { state, dispatch } = useContext(UiContext);
 
+	function onClickHandler() {
+		dispatch({ type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE })
+	}
+
 	return (
-		<PlayListCardItemWrapper onClick={() => dispatch({ type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE })}>
-			<Link to={`/playlist/${playlistId ? playlistId : id}`}>
-				<p className='songTitle' style={{fontSize: '1rem'}}>{title}</p>
+		<PlayListCardItemWrapper onClick={onClickHandler}>
+ 			{playlistId === state.currentPlaylistId && <div className='marker'></div>}
+			<Link to={`/playlist/${playlistId}`}>
+				<p className='songTitle' style={{ fontSize: '1rem' }}>
+					{title}
+				</p>
 			</Link>
-			<div>
-			</div>
 		</PlayListCardItemWrapper>
 	);
 }
 
 const PlayListCardItemWrapper = styled.li`
-
-
-	div {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-right: 1rem;
+	.marker {
+		width: 0.3rem;
+		height: 100%;
+		background-color: #1dd1a1;
+		animation: markerEffect ease-in-out 0.2s;
+			@keyframes markerEffect {
+				from {
+					width: 0rem;
+				} 
+				to {
+					width: 0.3rem;
+				}
+			}
 	}
+
 	width: 99%;
 	&:hover {
 		opacity: 60%;
@@ -58,8 +71,6 @@ const PlayListCardItemWrapper = styled.li`
 		text-decoration: none;
 		color: #fff;
 		cursor: pointer;
-
-	
 	}
 `;
 

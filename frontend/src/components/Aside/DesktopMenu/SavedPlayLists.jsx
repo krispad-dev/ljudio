@@ -15,7 +15,7 @@ function SavedPlayLists() {
 				data.userPlaylists.length > 0 &&
 				data.userPlaylists
 					.map(playlist => {
-						return <PlayListCardItem key={playlist.id} {...playlist} />;
+						return <PlayListCardItem playlistId={playlist.id} key={playlist.id} {...playlist} />;
 					})
 					.reverse()}
 			{data && data.userPlaylists && data.userPlaylists.length === 0 && <p>No playlists yet =/</p>}

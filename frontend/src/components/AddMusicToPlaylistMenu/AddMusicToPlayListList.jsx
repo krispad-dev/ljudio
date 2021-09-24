@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AddMusicToPlaylistItem from './AddMusicToPlaylistItem';
-import useGetSavedUserPlaylists from '../../../hooks/useGetSavedUserPlaylists';
+import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 
 function AddMusicToPlayListList() {
 	const { data } = useGetSavedUserPlaylists();
@@ -34,7 +34,7 @@ const AddMusicToPlayListListWrapper = styled.ul`
 	right: 7rem;
 	border-radius: 5px;
 	z-index: 2000;
-  height: 20rem;
+  height: 15rem;
   overflow-y: scroll;
 	position: absolute;
 	padding-left: 10px;

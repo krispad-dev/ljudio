@@ -29,7 +29,7 @@ body {
 	grid-template-columns: 15% 85%;
 	height: 100vh;
 
-	grid-template-rows: 10vh 70vh 20vh;
+	grid-template-rows: 6vh 74vh 20vh;
 	grid-template-areas:
 		'aside header'
 		'aside main'
@@ -87,6 +87,16 @@ h6 {
 	
 
 }
+
+h2 {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+h3 {
+	font-size: 0.8rem;
+}
+
 
 @media only screen and (max-width: 1000px) {
 	.App {

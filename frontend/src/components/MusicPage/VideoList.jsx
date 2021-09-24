@@ -64,8 +64,6 @@ function VideoList() {
 
   return (
     <VideoListWrapper>
-      <h1>Videos</h1>
-
       <div className='grid-container'>
         {videos &&
           videos.map((video, index) => (

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
-import useSaveSongToPlaylist from '../../../hooks/useSaveSongToPlaylist';
-import { UiContext } from '../../../context/UiState';
-import { UI_STATE_ACTIONS } from '../../../reducers/UiReducer';
+import useSaveSongToPlaylist from '../../hooks/useSaveSongToPlaylist';
+import { UiContext } from '../../context/UiState';
+import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 
 function AddMusicToPlaylistItem({ title, id }) {
   const { mutate } = useSaveSongToPlaylist();
@@ -42,7 +42,7 @@ const AddMusicToPlaylistItemWrapper = styled.li`
   }
 
   .confirm-music-btn {
-    color: #2ecc71;
+    color: #1dd1a1;
   }
 `;
 

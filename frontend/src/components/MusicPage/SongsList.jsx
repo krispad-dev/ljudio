@@ -8,7 +8,7 @@ import useGetSongs from '../../hooks/useGetSongs';
 import SongCard from './SongCard';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 import styled from 'styled-components';
-import AddMusicToPlayListList from './AddMusicToPlaylist/AddMusicToPlayListList';
+import AddMusicToPlayListList from '../AddMusicToPlaylistMenu/AddMusicToPlayListList';
 
 function SongsList() {
 	const { state } = useContext(UiContext);
@@ -57,5 +57,4 @@ const SongListWrapper = styled.div`
 	flex-direction: column;
 	height: 13rem;
 	overflow-y: scroll;
-	margin: 0.5rem 0rem;
 `;

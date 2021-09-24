@@ -64,6 +64,7 @@ const users = '/api/users';
 const playlists = '/api/users/playlists';
 const songs = '/api/music/songs';
 const music = '/api/music/';
+const cue = '/api/users/cue';
 
 export const API = {
   USER: {
@@ -96,4 +97,10 @@ export const API = {
     PLAYLISTS: `${music}/playlists`,
     VIDEOS: `${music}/videos`,
   },
+
+  CUE: {
+    ALL_CUED: `${cue}`,
+    ADD_TO_CUE: `${cue}`,
+    REMOVE_FROM_CUE: `${cue}`,
+  }
 };

@@ -30,7 +30,7 @@ function MusicPlayBtn({ videoId, name, artist, thumbails, index }) {
           className='play-btn'
           onClick={() => pauseVideo()}
           style={
-            activeCue[cuePosition] === videoId && isPlaying ? { color: '#2ecc71', transition: 'ease-in-out 0.2s' } : {}
+            activeCue[cuePosition] === videoId && isPlaying ? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' } : {}
           }
         />
       ) : (
@@ -43,13 +43,14 @@ function MusicPlayBtn({ videoId, name, artist, thumbails, index }) {
 const MusicPlayBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 0.3rem;
 
   .play-btn {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #c4c4c4;
 
     &:hover {
-      color: #2ecc71;
+      color: #1dd1a1;
       transition: ease-in-out 0.2s;
       cursor: pointer;
     }
