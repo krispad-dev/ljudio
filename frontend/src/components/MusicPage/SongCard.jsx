@@ -27,7 +27,7 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
       <div className='play-symbol-container'>
         {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
         <MusicPlayBtn index={index} videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
-        <AddToCueBtn videoId={videoId} />
+        {auth && auth.loggedIn && <AddToCueBtn videoId={videoId} />}
       </div>
     </SongCardWrapper>
   );
