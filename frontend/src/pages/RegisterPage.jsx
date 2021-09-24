@@ -103,11 +103,9 @@ function RegisterPage() {
           <Button variant='outlined' color='primary' fullWidth={true} type='submit'>
             REGISTER
           </Button>
-          <p>Already have an account ?</p>
 
           <Link style={{ textDecoration: 'underline' }} to='/login'>
-            {' '}
-            Sign in here
+            <p>Already have an account? Sign in here</p>
           </Link>
         </form>
       </div>

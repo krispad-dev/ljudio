@@ -15,7 +15,7 @@ function UserIndicator() {
         <FaRegUserCircle style={{ color: '#eee', fontSize: '1rem', marginLeft: '0.2rem' }} />
         <h4>{data && data.user && data.user.userName}</h4>
       </div>
-      <div className='logOutBtn-container'>{windowWidth <= 960 && <LogOutBtn />}</div>
+      <div className='logOutBtn-container'>{windowWidth <= 1000 && <LogOutBtn />}</div>
     </UserIndicatorWrappe>
   );
 }

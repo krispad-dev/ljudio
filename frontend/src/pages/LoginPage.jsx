@@ -66,12 +66,8 @@ function LoginPage() {
           <Button fullWidth={true} variant='outlined' color={'primary'} type='submit'>
             SIGN IN
           </Button>
-
-          <p>Don't have an account yet?</p>
-
           <Link style={{ textDecoration: 'underline' }} to='/register'>
-            {' '}
-            Sign up here
+            <p>Don't have an account yet? Sign up here</p>
           </Link>
         </form>
       </div>

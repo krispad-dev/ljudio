@@ -9,8 +9,8 @@ function LoggedInUserOptions() {
 
   return (
     <LoggedInUserOptionsWrapper>
-      {windowWidth > 960 && <LogOutBtn />}
-      {windowWidth <= 960 && <OpenMobileMenuBtn />}
+      {windowWidth > 1000 && <LogOutBtn />}
+      {windowWidth <= 1000 && <OpenMobileMenuBtn />}
     </LoggedInUserOptionsWrapper>
   );
 }
