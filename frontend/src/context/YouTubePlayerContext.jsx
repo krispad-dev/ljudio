@@ -17,9 +17,11 @@ const initialState = {
     playerIsPaused: true,
     isPlaying: false,
     
+    pendingUserCue: [],
     pendingCue: [],
     activeCue: [],
-    cuePosition: 0
+    cuePosition: 0,
+    //userHasOwnCuedSongs: pendingUserCue.length > 0 ? true : false
 
 }
 
