@@ -11,7 +11,7 @@ function YouTubePlayer() {
 	const { mutate } = useRemoveFromCue();
 	const playerRef = useRef();
 
-	const [{ fullscreenVideoMode, currentTime, cuePosition, activeCue, pendingUserCue  }, dispatch] = useContext(
+	const [{ fullscreenVideoMode, currentTime, cuePosition, activeCue, pendingUserCue }, dispatch] = useContext(
 		playerControllerStateContext
 	);
 	const [windowWidth, windowHeight] = useWindowSize();
@@ -68,34 +68,29 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SEEK_TO, payload: seekTo });
 	}, []);
 
-
 	function onEndHandler() {
+		const filteredPenfingCue = [...activeCue].filter((item, i) => {
+			return i !== cuePosition;
+		});
 
-    const filteredPenfingCue = [...activeCue].filter((item, i) => { 
-      return i !== cuePosition;
-    })
-
-    console.log(filteredPenfingCue);
-    if(pendingUserCue.length < 0 ) {
-      dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
-    }
+		if (pendingUserCue.length < 0) {
+			dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+		}
 
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, playload: false });
- 		dispatch({
+		dispatch({
 			type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
-			payload: filteredPenfingCue
+			payload: filteredPenfingCue,
 		});
 
-    dispatch({
+		dispatch({
 			type: PLAYER_ACTIONS.SET_USER_PENDING_CUE,
-			payload: filteredPenfingCue
-		}); 
-
+			payload: filteredPenfingCue,
+		});
 	}
 
 	function onPlayHandler() {
-
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: true });
 	}
@@ -104,7 +99,6 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false });
 	}
-
 
 	return (
 		<IframeWrapper
@@ -120,7 +114,6 @@ function YouTubePlayer() {
 				onPlay={onPlayHandler}
 				onEnd={onEndHandler}
 				videoId={activeCue[cuePosition]}
-
 			/>
 			;<div className={'mask-top'}></div>
 		</IframeWrapper>
