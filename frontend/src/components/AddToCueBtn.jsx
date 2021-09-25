@@ -9,16 +9,20 @@ import styled from 'styled-components';
 function AddToCueBtn({ videoId }) {
 
     const { mutate } = useAddToCue();
-	const [ { pendingUserCue }, dispatch ] = useContext(playerControllerStateContext);
+	const [ { pendingUserCue, activeCue, cuePosition }, dispatch ] = useContext(playerControllerStateContext);
+	console.log(cuePosition);
+
+
 
 	function saveToCue() {
-
+		activeCue.splice(cuePosition + 1, 0, videoId)
+/* 
 		dispatch({
-			type: PLAYER_ACTIONS.SET_USER_PENDING_CUE,
-			payload: [ ...pendingUserCue, videoId ]
+			type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
+			payload: activeCue.splice(cuePosition, 0, videoId)
 		});
-
-		mutate({ videoId });
+ */
+/* 		mutate({ videoId }); */
 	}
     
     return<AddToCueBtnWrapper> 

@@ -12,24 +12,26 @@ import styled from 'styled-components';
 function CueList() {
 
     const { state } = useContext(UiContext);
-    const { data } = useGetAllCued();
-    const [ { pendingUserCue }, dispatch ] = useContext(playerControllerStateContext);
+/*     const { data } = useGetAllCued(); */
+    const [ { pendingUserCue, activeCue }, dispatch ] = useContext(playerControllerStateContext);
 
-    const songs = data?.cue.map(({videoId}) => videoId) || [];
+/*     const songs = data?.cue.map(({videoId}) => videoId) || []; */
 
-    useEffect(() => {
+/*     useEffect(() => {
 
         dispatch({
             type: PLAYER_ACTIONS.SET_USER_PENDING_CUE,
             payload: songs
         });
         
-    }, [data]);
+    }, [data]); */
 
+
+  
     return (
         <CueListWrapper>
             {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
-            {data && data.cue.map((song, i) => <SongCardItem key={song.id} song={song.videoId} cueId={song.id} index={i} />)}
+            {pendingUserCue && activeCue.map((song, i) => <SongCardItem key={song.id} song={song} cueId={song.id} index={i} />)}
         </CueListWrapper>
     );
 }

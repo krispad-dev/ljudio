@@ -81,7 +81,7 @@ function SongCardItem({ song, index, cueId }) {
 									/>
 
 								{auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
-		   						{auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} />}
+		   						{auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} index={index} />}
 	
 								</div>
 							</div>

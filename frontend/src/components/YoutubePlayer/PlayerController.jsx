@@ -11,7 +11,7 @@ import ProgressSlider from './ProgressSlider';
 import styled from 'styled-components';
 
 function Controller() {
-	const [{ playVideo, pauseVideo, durationInMinutes, playerIsPaused }, dispatch] = useContext(
+	const [{ playVideo, pauseVideo, durationInMinutes, playerIsPaused,  }, dispatch] = useContext(
 		playerControllerStateContext
 	);
 

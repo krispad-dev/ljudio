@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { playerControllerStateContext } from '../context/YouTubePlayerContext';
+import { PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
+
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import useRemoveFromCue from '../hooks/useRemoveFromCue';
 import styled from 'styled-components';
 
 
-function RemoveFromCueBtn({ cueId }) {
+function RemoveFromCueBtn({ cueId, videoId, index }) {
 
     const { mutate } = useRemoveFromCue();
+    const [ { pendingUserCue, activeCue, cuePositon }, dispatch ] = useContext(playerControllerStateContext);
+
+    function onClickHandler(index) {
+        const filteredPendingUserCue = [...activeCue].filter(( cueItem, i ) => {
+            return index !== i;
+        })
+        dispatch({type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: filteredPendingUserCue})
+/*         dispatch({type: PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION, payload: cuePositon + 1 }) */
+    }
 
     return (
         <RemoveFromCueBtnWrapper>
             <IoIosCloseCircleOutline
             className="remove-btn"
-            onClick={() => mutate({ cueId })} />
+            onClick={(e) => onClickHandler(index)} />
         </RemoveFromCueBtnWrapper>
     );
 }
