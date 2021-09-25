@@ -45,6 +45,17 @@ export const Playlist = {
     }
   },
 
+  checkIfUserOwnsPlaylist: async (data) => {
+    try {
+      const sql = 'SELECT * FROM playlists WHERE "userId" = $1 AND playlists.id = $2';
+      const { rows } = await db.query(sql, [data.userId, data.playlistId]);
+
+      return rows;
+    } catch (error) {
+      return error;
+    }
+  },
+
   SaveSongToPlaylist: async (songInfo) => {
     try {
       const sql = 'INSERT INTO playlist_songs("playlistId", "videoId") VALUES($1, $2)';

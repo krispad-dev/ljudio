@@ -85,17 +85,22 @@ export async function saveSongToUserPlaylist(req, res) {
 
 export async function removeSongFromPlaylist(req, res) {
   try {
-    // videoId and playlistId from frontend
     const userId = req.obj.id;
+    // videoId and playlistId from frontend
     const videoId = req.body.videoId;
     const playlistId = req.body.playlistId;
+
+    //Checks if logged in user is the owner of the playlists
+    const isUserPlaylist = await Playlist.checkIfUserOwnsPlaylist({ userId, playlistId });
+
+    if (isUserPlaylist.length === 0) {
+      return res.status(400).json({ success: false, message: 'Unable to remove song from other users playlist' });
+    }
 
     const obj = {
       videoId,
       playlistId,
-      userId,
     };
-    console.log(obj);
 
     await Playlist.RemoveSongFromPlaylist(obj);
 
