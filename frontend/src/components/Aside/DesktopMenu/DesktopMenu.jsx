@@ -1,20 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 //Components
 import MenuItems from './MenuItems';
 import PlaylistSection from './PlaylistSection';
-import LogOutBtn from '../../LogOutBtn';
-import { useWindowSize } from '@react-hook/window-size';
-import AddPlayListButton from './AddPlayListButton';
 
 function DesktopMenu() {
-  const [windowWidth, windowHeight] = useWindowSize();
-
   return (
     <AsideMenuWrapper>
       <MenuItems />
-
       <PlaylistSection />
     </AsideMenuWrapper>
   );

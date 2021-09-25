@@ -1,14 +1,12 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { UiContext } from '../context/UiState';
 import { UI_STATE_ACTIONS } from '.././reducers/UiReducer';
 import { BsPlusCircle } from 'react-icons/bs';
 
-import useOutsideClick from '../hooks/uiHooks/useOutsideClick';
 import { useLocation } from 'react-router-dom';
 
 function AddToPlaylistBtn({ videoId }) {
-  const ref = useRef();
   const { state, dispatch } = useContext(UiContext);
   const { pathname } = useLocation();
 
@@ -20,15 +18,6 @@ function AddToPlaylistBtn({ videoId }) {
     });
   }
 
-  useOutsideClick(ref, (e) => {
-    if (state.saveSongToPlaylistSelectorSectionIsOpen) {
-      dispatch({
-        type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
-        payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
-      });
-    }
-  });
-
   useEffect(() => {
     dispatch({
       type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
@@ -37,7 +26,7 @@ function AddToPlaylistBtn({ videoId }) {
   }, [pathname]);
 
   return (
-    <AddToPlaylistBtnWrapper ref={ref} onClick={(e) => console.log(ref)}>
+    <AddToPlaylistBtnWrapper>
       <BsPlusCircle
         className='add-btn'
         style={{

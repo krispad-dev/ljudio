@@ -4,10 +4,13 @@ import { Button } from '@material-ui/core';
 import useSaveSongToPlaylist from '../../hooks/useSaveSongToPlaylist';
 import { UiContext } from '../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
+import useGetOneSavedUserPlaylist from '../../hooks/useGetOneSavedUserPlaylist';
 
 function AddMusicToPlaylistItem({ title, id }) {
   const { mutate } = useSaveSongToPlaylist();
   const { state, dispatch } = useContext(UiContext);
+  const { data } = useGetOneSavedUserPlaylist(id);
+  const songsInPlaylistArray = (data && data.playlist.songs) || [];
 
   function onClickHandler() {
     mutate({ playlistId: id, videoId: state.songToSaveToUserPlaylist });
@@ -21,7 +24,12 @@ function AddMusicToPlaylistItem({ title, id }) {
 
   return (
     <AddMusicToPlaylistItemWrapper>
-      <Button className='confirm-music-btn' onClick={onClickHandler}>
+      <Button
+        className={
+          songsInPlaylistArray.includes(state.songToSaveToUserPlaylist) ? 'music-isInPlaylist' : 'confirm-music-btn'
+        }
+        onClick={onClickHandler}
+      >
         {title}
       </Button>
     </AddMusicToPlaylistItemWrapper>
@@ -36,11 +44,17 @@ const AddMusicToPlaylistItemWrapper = styled.li`
   padding: 0.5rem;
   &:hover {
     opacity: 60%;
-    cursor: pointer;
   }
 
   .confirm-music-btn {
     color: #1dd1a1;
+    cursor: pointer;
+  }
+
+  .music-isInPlaylist {
+    color: #c4c4c4;
+    pointer-events: none;
+    text-decoration: line-through;
   }
 `;
 

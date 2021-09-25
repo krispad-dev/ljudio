@@ -23,10 +23,11 @@ function GuestUserOptions() {
 export default GuestUserOptions;
 
 const GuestUserOptionsWrapper = styled.div`
+  display: flex;
 
-display: flex;
   a {
     margin: 0.2rem;
+    color: #1dd1a1;
   }
 
   @media (max-width: 648px) {
