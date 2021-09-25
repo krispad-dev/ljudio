@@ -5,6 +5,8 @@ import * as PlaylistController from '../controllers/playlistController.js';
 import * as CueController from '../controllers/cueController.js';
 import { authCheck } from '../controllers/authControllers.js';
 import { verifyToken } from '../middleware/auth.js';
+import { validate } from '../middleware/validate.js';
+import * as ValidationSchema from '../helpers/schema.js';
 
 export const musicRouter = express.Router();
 export const userRouter = express.Router();
@@ -56,8 +58,8 @@ userRouter.post('/cue', verifyToken, CueController.addToCue);
 userRouter.delete('/cue', verifyToken, CueController.removeFromCue);
 
 //Login, logout, create - user
-userRouter.post('/', UserController.createUser);
-userRouter.post('/login', UserController.loginUser);
+userRouter.post('/', validate(ValidationSchema.registerSchema), UserController.createUser);
+userRouter.post('/login', validate(ValidationSchema.loginSchema), UserController.loginUser);
 userRouter.put('/logout', UserController.logoutUser);
 
 authRouter.get('/', verifyToken, authCheck);

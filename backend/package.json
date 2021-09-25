@@ -21,7 +21,8 @@
     "nanoid": "^3.1.25",
     "node-fetch": "^3.0.0",
     "pg": "^8.7.1",
-    "pg-format": "^1.0.4"
+    "pg-format": "^1.0.4",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

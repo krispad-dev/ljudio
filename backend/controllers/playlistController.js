@@ -86,9 +86,18 @@ export async function saveSongToUserPlaylist(req, res) {
 export async function removeSongFromPlaylist(req, res) {
   try {
     // videoId and playlistId from frontend
-    const songInfo = req.body;
+    const userId = req.obj.id;
+    const videoId = req.body.videoId;
+    const playlistId = req.body.playlistId;
 
-    await Playlist.RemoveSongFromPlaylist(songInfo);
+    const obj = {
+      videoId,
+      playlistId,
+      userId,
+    };
+    console.log(obj);
+
+    await Playlist.RemoveSongFromPlaylist(obj);
 
     return res.status(200).json({ success: true });
   } catch (error) {
