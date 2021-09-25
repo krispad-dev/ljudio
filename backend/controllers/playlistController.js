@@ -23,9 +23,15 @@ export async function createPlaylist(req, res) {
 
 export async function removePlaylist(req, res) {
   try {
-    const id = req.body.id;
+    const userId = req.obj.id;
+    const playlistId = req.body.id;
 
-    await Playlist.RemovePlaylist(id);
+    const obj = {
+      playlistId,
+      userId,
+    };
+
+    await Playlist.RemovePlaylist(obj);
 
     return res.status(201).json({ success: true });
   } catch (err) {
