@@ -18,6 +18,9 @@ export const PLAYER_ACTIONS = {
 	SET_NEXT_IN_CUE: 'SET_NEXT_IN_CUE',
 	SET_PREVIOUS_IN_CUE: 'SET_PREVIOUS_IN_CUE',
 
+	SET_SUFFLE_IS_ON: 'SET_SUFFLE_IS_ON',
+	SET_SHUFFLED_CUE: 'SET_SHUFFLED_CUE'
+
 
 };
 
@@ -115,6 +118,18 @@ export function playerControllerReducer(state, action) {
 			return {
 				...state,
 				cuePosition: state.cuePosition - 1,
+			};
+
+		case PLAYER_ACTIONS.SET_SUFFLE_IS_ON:
+			return {
+				...state,
+				shuffleIsOn: !state.shuffleIsOn,
+			};
+
+		case PLAYER_ACTIONS.SET_SHUFFLED_CUE:
+			return {
+				...state,
+				shuffledCue: action.payload,
 			};
 
 			

@@ -17,10 +17,12 @@ const initialState = {
     playerIsPaused: true,
     isPlaying: false,
     
+    shuffledCue: [],
     pendingUserCue: [],
     pendingCue: [],
     activeCue: [],
     cuePosition: 0,
+    shuffleIsOn: false
     //userHasOwnCuedSongs: pendingUserCue.length > 0 ? true : false
 
 }

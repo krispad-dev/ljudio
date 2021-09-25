@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect } from 'react';
 import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
+import { shuffle } from '../../helpers/helpers';
 
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import { useWindowSize } from '@react-hook/window-size';
@@ -11,7 +12,7 @@ function YouTubePlayer() {
 	const { mutate } = useRemoveFromCue();
 	const playerRef = useRef();
 
-	const [{ fullscreenVideoMode, currentTime, cuePosition, activeCue, pendingUserCue }, dispatch] = useContext(
+	const [{ fullscreenVideoMode, currentTime, cuePosition, activeCue, pendingUserCue, shuffleIsOn, shuffledCue }, dispatch] = useContext(
 		playerControllerStateContext
 	);
 	const [windowWidth, windowHeight] = useWindowSize();
@@ -68,6 +69,16 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SEEK_TO, payload: seekTo });
 	}, []);
 
+	useEffect(() => {
+		if(shuffleIsOn) {
+
+			dispatch({
+				type: PLAYER_ACTIONS.SET_SHUFFLED_CUE,
+				payload: shuffle(activeCue),
+			});
+		}
+	}, [cuePosition])
+
 	function onEndHandler() {
 		const filteredPenfingCue = [...activeCue].filter((item, i) => {
 			return i !== cuePosition;
@@ -113,7 +124,7 @@ function YouTubePlayer() {
 				onPause={onPauseHandler}
 				onPlay={onPlayHandler}
 				onEnd={onEndHandler}
-				videoId={activeCue[cuePosition]}
+				videoId={shuffleIsOn ? shuffledCue[cuePosition] : activeCue[cuePosition]}
 			/>
 			;<div className={'mask-top'}></div>
 		</IframeWrapper>
