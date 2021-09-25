@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import styled from 'styled-components';
@@ -19,6 +19,7 @@ const schema = yup.object().shape({
 });
 
 function RegisterPage() {
+  const [takenEmailError, setTakenEmailError] = useState(null);
   const history = useHistory();
 
   const {
@@ -47,12 +48,14 @@ function RegisterPage() {
       });
 
       const res = await req.json();
+
+      if (!res.success) {
+        return setTakenEmailError(res.message);
+        reset();
+      }
+      history.push('/login');
     };
     createUser();
-
-    history.push('/login');
-
-    reset();
   };
 
   return (
@@ -63,7 +66,12 @@ function RegisterPage() {
       />
       <div className='register-page-contentWrapper'>
         <h1 className='register-heading'>REGISTER</h1>
-        <form onSubmit={handleSubmit(onSubmitHandler)} className='register-form' action=''>
+        <form
+          onFocus={() => setTakenEmailError(null)}
+          onSubmit={handleSubmit(onSubmitHandler)}
+          className='register-form'
+          action=''
+        >
           <TextField
             fullWidth={true}
             variant={'filled'}
@@ -90,7 +98,10 @@ function RegisterPage() {
             type='password'
             name='password'
           />
-          <p>{errors.password?.message}</p>
+          <p>
+            {errors.password?.message} {takenEmailError && takenEmailError}
+          </p>
+
           <TextField
             fullWidth={true}
             variant={'filled'}

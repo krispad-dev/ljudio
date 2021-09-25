@@ -2,7 +2,6 @@ import { Bcrypt, generateToken } from '../helpers/helpers.js';
 import { Playlist } from '../models/Playlist.js';
 import { User } from '../models/User.js';
 
-
 export async function createUser(req, res) {
   try {
     const userName = req.body.userName;
@@ -14,13 +13,13 @@ export async function createUser(req, res) {
     const newUser = {
       userName,
       email,
-      password: hashedPassword
+      password: hashedPassword,
     };
 
     const user = await User.GetUserByEmail(email);
 
     if (user) {
-      return res.status(400).json({ success: false, message: 'Email already Exist' });
+      return res.status(400).json({ success: false, message: 'The chosen email has already been used' });
     }
 
     await User.CreateUser(newUser);
@@ -31,10 +30,8 @@ export async function createUser(req, res) {
   }
 }
 
-
 export async function loginUser(req, res) {
   try {
-    
     const email = req.body.email;
     const password = req.body.password;
 
@@ -43,8 +40,6 @@ export async function loginUser(req, res) {
     }
 
     const user = await User.GetUserByEmail(email);
-
-    console.log(user);
 
     if (!user) {
       throw new Error('Check username and password.');
@@ -59,12 +54,10 @@ export async function loginUser(req, res) {
     const token = await generateToken({ id: user.id, userName: user.userName });
 
     res.cookie('authToken', token, { httpOnly: true }).json({ success: true, token });
-
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
 }
-
 
 export function logoutUser(req, res) {
   try {
@@ -74,16 +67,14 @@ export function logoutUser(req, res) {
   }
 }
 
-
 export async function followPlaylist(req, res) {
   try {
-    
     const userId = req.obj.id;
     const playlistId = req.body.playlistId;
 
     const obj = {
       userId,
-      playlistId
+      playlistId,
     };
 
     await Playlist.FollowPlaylist(obj);
@@ -93,7 +84,6 @@ export async function followPlaylist(req, res) {
     return res.json({ success: false });
   }
 }
-
 
 export async function unFollowPlaylist(req, res) {
   try {
@@ -105,7 +95,7 @@ export async function unFollowPlaylist(req, res) {
 
     const obj = {
       userId,
-      playlistId
+      playlistId,
     };
 
     await Playlist.UnFollowPlaylist(obj);
@@ -115,7 +105,6 @@ export async function unFollowPlaylist(req, res) {
     return res.json({ success: false });
   }
 }
-
 
 export async function getFollowedPlaylists(req, res) {
   try {
