@@ -95,6 +95,7 @@ function YouTubePlayer() {
 	}
 
 	function onPlayHandler() {
+
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: true });
 	}
@@ -103,6 +104,7 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false });
 	}
+
 
 	return (
 		<IframeWrapper
@@ -118,6 +120,7 @@ function YouTubePlayer() {
 				onPlay={onPlayHandler}
 				onEnd={onEndHandler}
 				videoId={activeCue[cuePosition]}
+
 			/>
 			;<div className={'mask-top'}></div>
 		</IframeWrapper>

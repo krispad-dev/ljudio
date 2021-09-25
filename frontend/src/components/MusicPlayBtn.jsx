@@ -17,7 +17,7 @@ function MusicPlayBtn({ videoId, index }) {
 	function onClickHandler() {
 		dispatchPlayerControllerStateContext({
 			type: PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION,
-			payload: pathname !== '/cue' && pathname !== '/' || activeCue.length < 1 ? index : cuePosition,
+			payload:  pathname !== '/' || activeCue.length < 1 ? index : cuePosition,
 		});
 
 		if (pathname !== '/cue' && pathname !== '/' || activeCue.length < 1) {

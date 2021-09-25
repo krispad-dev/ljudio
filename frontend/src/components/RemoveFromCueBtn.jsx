@@ -17,7 +17,6 @@ function RemoveFromCueBtn({ cueId, videoId, index }) {
             return index !== i;
         })
         dispatch({type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: filteredPendingUserCue})
-/*         dispatch({type: PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION, payload: cuePositon + 1 }) */
     }
 
     return (
