@@ -31,7 +31,6 @@ function ShareUrlBtn({ iconFontSize }) {
 
 const ShareUrlBtnWrapper = styled.div`
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export default ShareUrlBtn;
