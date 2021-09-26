@@ -4,8 +4,6 @@ import styled from 'styled-components';
 function AlbumCard({ thumbnails, name }) {
 	return (
 		<AlbumCardWrapper style={{backgroundImage: `url(${thumbnails[1].url})`}}>
-{/*             <h3>{name}</h3> */}
-
 		</AlbumCardWrapper>
 	);
 }

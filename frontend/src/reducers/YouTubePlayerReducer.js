@@ -131,6 +131,7 @@ export function playerControllerReducer(state, action) {
 			}
 
 
+
 		case PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE:
 			return {
 				...state,

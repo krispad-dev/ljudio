@@ -11,9 +11,6 @@ function ShuffleBtn() {
 
     const [ { activeCue, shuffleIsOn }, dispatch ] = useContext(playerControllerStateContext)
 
-    console.log(shuffleIsOn);
-
-
    function onClickHandler() {
         dispatch({type: PLAYER_ACTIONS.SET_SUFFLE_IS_ON})
     }

@@ -8,13 +8,21 @@ import { useWindowSize } from '@react-hook/window-size';
 import useRemoveFromCue from '../../hooks/useRemoveFromCue';
 
 function YouTubePlayer() {
-
 	const { mutate } = useRemoveFromCue();
 	const playerRef = useRef();
 
-	const [{ fullscreenVideoMode, currentTime, cuePosition, activeCue, pendingUserCue, shuffleIsOn, shuffledCue, isPlaying }, dispatch] = useContext(
-		playerControllerStateContext
-	);
+	const [
+
+		{
+			fullscreenVideoMode,
+			currentTime,
+			cuePosition,
+			activeCue,
+		},
+
+		dispatch,
+	] = useContext(playerControllerStateContext);
+
 	const [windowWidth, windowHeight] = useWindowSize();
 
 	const opts = {
@@ -73,19 +81,14 @@ function YouTubePlayer() {
 		const filteredPenfingCue = [...activeCue].filter((item, i) => {
 			return i !== cuePosition;
 		});
-
-		dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
-		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
-		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, playload: false });
 		dispatch({
 			type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
 			payload: filteredPenfingCue,
 		});
 
-		dispatch({
-			type: PLAYER_ACTIONS.SET_USER_PENDING_CUE,
-			payload: filteredPenfingCue,
-		});
+		dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
+		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, playload: false });
 	}
 
 	function onPlayHandler() {
@@ -97,7 +100,6 @@ function YouTubePlayer() {
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: true });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, payload: false });
 	}
-
 
 	return (
 		<IframeWrapper

@@ -6,12 +6,11 @@ import useAddToCue from '../hooks/useAddToCue';
 import styled from 'styled-components';
 
 import toastMessage from '../helpers/toasts';
-import { ToastContainer } from 'react-toastify';
 
 function AddToCueBtn({ videoId }) {
 
 
-    const { mutate } = useAddToCue();
+  const { mutate } = useAddToCue();
 	const [ { pendingUserCue, activeCue, cuePosition }, dispatch ] = useContext(playerControllerStateContext);
 	console.log(cuePosition);
 
@@ -19,13 +18,7 @@ function AddToCueBtn({ videoId }) {
 
 	function saveToCue() {
 		activeCue.splice(cuePosition + 1, 0, videoId)
-/* 
-		dispatch({
-			type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
-			payload: activeCue.splice(cuePosition, 0, videoId)
-		});
- */
-/* 		mutate({ videoId }); */
+    toastMessage('Song added to cue!')
 	}
     
     return(

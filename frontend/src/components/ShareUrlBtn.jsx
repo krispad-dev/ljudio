@@ -1,5 +1,4 @@
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
 
 import styled from 'styled-components';
 import { IoMdShare } from 'react-icons/io';
@@ -16,7 +15,6 @@ function ShareUrlBtn({ iconFontSize }) {
 
   return (
     <ShareUrlBtnWrapper>
-      <ToastContainer />
       <Button
         variant='outlined'
         color='primary'
