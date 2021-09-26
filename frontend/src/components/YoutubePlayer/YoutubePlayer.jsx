@@ -5,10 +5,9 @@ import styled from 'styled-components';
 
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import { useWindowSize } from '@react-hook/window-size';
-import useRemoveFromCue from '../../hooks/useRemoveFromCue';
+
 
 function YouTubePlayer() {
-	const { mutate } = useRemoveFromCue();
 	const playerRef = useRef();
 
 	const [
