@@ -4,7 +4,7 @@ import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer'
 
 import styled from 'styled-components'
 import { ImShuffle } from 'react-icons/im'
-import { shuffle } from '../../helpers/helpers'
+
  
 
 function ShuffleBtn() {

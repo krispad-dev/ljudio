@@ -24,6 +24,8 @@ export const PLAYER_ACTIONS = {
 
 };
 
+import { randomNumber } from "../helpers/helpers";
+
 export function playerControllerReducer(state, action) {
 	switch (action.type) {
 		case PLAYER_ACTIONS.PLAY_VIDEO:
@@ -109,15 +111,30 @@ export function playerControllerReducer(state, action) {
 			};
 
 		case PLAYER_ACTIONS.SET_NEXT_IN_CUE:
-			return {
-				...state,
-				cuePosition: state.cuePosition + 1,
-			};
+
+			if(!state.shuffleIsOn) {
+
+				return {
+					...state,
+					cuePosition: state.activeCue.length - 1 === state.cuePosition ? state.cuePosition : state.cuePosition + 1
+				};
+
+			}
+
+			if(state.shuffleIsOn) {
+			
+				return {
+					...state,
+					cuePosition: randomNumber(0, state.activeCue.length -1 )
+				};
+				
+			}
+
 
 		case PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE:
 			return {
 				...state,
-				cuePosition: state.cuePosition - 1,
+				cuePosition: state.cuePosition === 0 ? state.cuePosition = 0 : state.cuePosition - 1,
 			};
 
 		case PLAYER_ACTIONS.SET_SUFFLE_IS_ON:
@@ -143,3 +160,5 @@ export function playerControllerReducer(state, action) {
 			return state;
 	}
 }
+
+

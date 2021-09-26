@@ -29,4 +29,17 @@ export const Cue = {
       return error;
     }
   },
+  UpdateCue: async (data) => {
+    try {
+
+      const sqlFirst = `DELETE FROM cue_songs WHERE "userId" = $1`;
+      await db.query(sqlFirst, [data.userId]);
+
+      const sqlSecond = `INSERT INTO cue_songs ("userId", "cueSongs") VALUES($1, $2)`;
+      await db.query(sqlSecond, [data.userId, JSON.stringify(data.cueArray)]);
+
+    } catch (error) {
+      return error;
+    }
+  },
 };

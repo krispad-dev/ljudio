@@ -74,7 +74,7 @@ function CueList() {
             {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
             {activeCue.map((song, i) => {
                 return <CueSongCardItem 
-                        key={song} 
+                        key={i} 
                         song={song} 
                         cueId={song.id} 
                         index={i} 

@@ -1,5 +1,7 @@
-import React, { createContext, useReducer } from 'react'
-import { playerControllerReducer } from '../reducers/YouTubePlayerReducer'
+import React, { createContext, useReducer, useEffect } from 'react'
+import { playerControllerReducer, PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer'
+import useGetAllCued from '../hooks/useGetAllCued'
+
 
 
 export const playerControllerStateContext = createContext()
@@ -23,7 +25,6 @@ const initialState = {
     activeCue: [],
     cuePosition: 0,
     shuffleIsOn: false
-    //userHasOwnCuedSongs: pendingUserCue.length > 0 ? true : false
 
 }
 
@@ -32,6 +33,7 @@ const initialState = {
 export function PlayerControllerStateProvider({ children }) {
 
     const [ playerState, dispatch ] = useReducer(playerControllerReducer, initialState)
+
 
     return <playerControllerStateContext.Provider value={[ playerState, dispatch ]} >{children}</playerControllerStateContext.Provider>
 

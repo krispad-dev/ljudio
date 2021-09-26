@@ -54,6 +54,7 @@ userRouter.delete('/playlists/user-playlists/songs', verifyToken, PlaylistContro
 userRouter.get('/cue', verifyToken, CueController.getAllFromCue);
 userRouter.post('/cue', verifyToken, CueController.addToCue);
 userRouter.delete('/cue', verifyToken, CueController.removeFromCue);
+userRouter.put('/cue', verifyToken, CueController.updateCue);
 
 //Login, logout, create - user
 userRouter.post('/', UserController.createUser);
