@@ -45,7 +45,7 @@ const VolumeSliderContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 35vw;
+	width: 25vw;
 	margin: 0rem 2rem;
 	@media (max-width: 1000px) {
 		width: 80vw;
