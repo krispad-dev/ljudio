@@ -55,15 +55,15 @@ function PlaylistTitleHeader({ title, playlist }) {
         </div>
 
         <div className='title-container'>
-          {!isEditingTitle && isInUserPlaylist(id, playlistArray) && (
-            <div>
-              <h1>{playlistTitle} </h1>
+          <div>
+            <h1>{playlistTitle} </h1>
+            {!isEditingTitle && isInUserPlaylist(id, playlistArray) && (
               <FaEdit
                 onClick={() => setIsEditingTitle(!isEditingTitle)}
-                style={{ color: '#444', fontSize: '2rem', cursor: 'pointer' }}
+                style={{ color: '#1dd1a1', fontSize: '2rem', cursor: 'pointer' }}
               />
-            </div>
-          )}
+            )}
+          </div>
 
           {isEditingTitle && (
             <EditPlaylistTitle
@@ -152,34 +152,3 @@ const PlaylistTitleHeaderWrapper = styled.div`
 `;
 
 export default PlaylistTitleHeader;
-
-{
-  /* <div className={'playlist-tools'}>
-{userPlaylist && userPlaylist.playlist && (
-  <h4>Songs: {userPlaylist.playlist.songs.length}</h4>
-)}
-
-<div className='follow-container'>
-  {auth && auth.loggedIn && <MaterialFollowBtn playlistId={id} />}
-</div>
-
-{playlist && isInUserPlaylist(id, playlistArray) && auth && auth.loggedIn && (
-  <RemoveUserPlaylist playlistId={id} />
-)}
-<ShareUrlBtn />
-</div> */
-}
-
-/* 
-<div className='playlist-info'>
-
-{!isEditingTitle && (
-  <FaEdit
-    onClick={() => setIsEditingTitle(true)}
-    style={{ color: '#FFF', fontSize: '1.5rem', margin: '1rem' }}
-  />
-)}
-
-{isEditingTitle && (
-  
-)}  */
