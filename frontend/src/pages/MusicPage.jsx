@@ -8,7 +8,6 @@ import ArtiststList from '../components/MusicPage/ArtiststList';
 import AllPlaylistsList from '../components/AllPlaylistsPage/AllPlaylistsList';
 import { UI_STATE_ACTIONS } from '../reducers/UiReducer';
 
-
 function MusicPage() {
   const { state, dispatch } = useContext(UiContext);
   const { data, isLoading } = useGetSongs(state.searchString);
@@ -36,11 +35,6 @@ function MusicPage() {
           <h1>Playlists</h1>
           <AllPlaylistsList />
         </div>
-
-        {/* 				<div className='albums-list'>
-					{data && state.headerSearchString && <h1>ALBUMS</h1>}
-					<AlbumsList />
-				</div> */}
       </div>
     </MusicPageWrapper>
   );
@@ -68,6 +62,5 @@ const MusicPageWrapper = styled.div`
   }
 
   .playlists-list {
-
   }
 `;

@@ -19,3 +19,9 @@ export function isInUserPlaylist(playlistId, arr) {
 		return arr.some(playlist => playlist.id === playlistId);
 	}
 }
+
+export function randomNumber(min, max) {
+	return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+

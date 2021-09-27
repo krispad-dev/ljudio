@@ -31,6 +31,7 @@ import VideosPage from './pages/VideosPage';
 import SongPage from './pages/SongPage';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './materialUiTheme';
+import { ToastContainer } from 'react-toastify'
 
 const notLoggedInStyles = {
   gridTemplateAreas: "'header header' 'main main' 'footer footer'",
@@ -67,6 +68,7 @@ function App() {
 
         {!fullscreenVideoMode && (
           <main>
+            <ToastContainer />
             {state.mobileMenuIsOpen && windowWidth <= 1000 && auth.loggedIn && <MobileMenu />}
 
             <Route exact path='/login' component={LoginPage}>
