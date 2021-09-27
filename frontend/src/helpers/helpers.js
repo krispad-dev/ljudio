@@ -13,8 +13,8 @@ export function isInPlaylist(playlistId, arr) {
 }
 
 export function isInUserPlaylist(playlistId, arr) {
-	if (!playlistId || !arr) {
-		return;
+	if (!Array.isArray(arr)) {
+		return false;
 	} else {
 		return arr.some(playlist => playlist.id === playlistId);
 	}
