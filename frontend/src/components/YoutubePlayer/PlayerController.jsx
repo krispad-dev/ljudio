@@ -65,7 +65,6 @@ function Controller() {
 export default Controller;
 
 const PlayerControllerWrapper = styled.div`
-
 	display: flex;
 	justify-content: center;
 	align-items: center;

@@ -1,5 +1,6 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import { playerControllerStateContext } from './context/YouTubePlayerContext';
+import { UI_STATE_ACTIONS } from './reducers/UiReducer';
 import { UiContext } from './context/UiState';
 
 import { Route, Redirect, useLocation } from 'react-router-dom';
@@ -45,7 +46,13 @@ function App() {
 
   const [{ fullscreenVideoMode }, dispatch] = useContext(playerControllerStateContext);
   const [windowWidth, windowHeight] = useWindowSize();
-  const { state } = useContext(UiContext);
+  const { state, dispatch: dispatchUiContext } = useContext(UiContext);
+
+  useEffect(() => {
+    if (windowWidth < 1000 ) {
+      dispatchUiContext({type: UI_STATE_ACTIONS.SET_CLOSE_MENU_MOBILE })
+    }
+  }, [windowWidth])
 
   return (
     <ThemeProvider theme={theme}>
@@ -65,11 +72,11 @@ function App() {
         <main className={'yt-player-main'}>
           <YouTubePlayer />
         </main>
-
+        {state.mobileMenuIsOpen && windowWidth <= 1000 && auth.loggedIn && <MobileMenu />}
         {!fullscreenVideoMode && (
           <main>
             <ToastContainer />
-            {state.mobileMenuIsOpen && windowWidth <= 1000 && auth.loggedIn && <MobileMenu />}
+
 
             <Route exact path='/login' component={LoginPage}>
               {auth && auth.loggedIn && <Redirect to='/' />}
