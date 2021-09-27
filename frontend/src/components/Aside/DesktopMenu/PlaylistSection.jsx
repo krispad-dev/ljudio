@@ -84,10 +84,10 @@ const PlayListSectionWrapper = styled.div`
 		}
 		height: 1rem;
 		color: #c4c4c4;
-		padding: 1rem;
+		padding: 1rem 0.5;
 		margin-top: 0.3rem;
 		margin-bottom: 0.3rem;
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 		font-weight: 300;
 	}
 

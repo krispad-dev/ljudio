@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import useCreatePlaylist from '../../../hooks/useCreatePlaylist';
 
 export default function CreatePlaylist() {
-	const [textFieldInput, setTextFieldInput] = useState('');
+	const [ textFieldInput, setTextFieldInput ] = useState('');
 	const { mutate } = useCreatePlaylist();
 
 	const savePlaylist = e => {
@@ -29,7 +29,8 @@ export default function CreatePlaylist() {
 					size={'small'}
 					variant={'filled'}
 					color='primary'
-					placeholder={'Add Playlist'}
+					inputProps={{ maxLength: 14 }}
+					maxLength={10}
 				/>
 								<AddIcon className='add-icon' onClick={savePlaylist} />
 			</form>

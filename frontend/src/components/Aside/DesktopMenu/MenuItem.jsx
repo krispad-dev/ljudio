@@ -39,9 +39,14 @@ const MenuItemWrapper = styled.div`
 	width: 100%;
 
 	a { 
+		&:hover {
+			opacity: 80%;
+			background-color: #222;
+		}
+		width: 100%;
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		justify-content: flex-start;
+		align-items: flex-start;
 		.marker {
 			border-radius: 2px;
 			animation: markerEffect ease-in-out 0.2s;
