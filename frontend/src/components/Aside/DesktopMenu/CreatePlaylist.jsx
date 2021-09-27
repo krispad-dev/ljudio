@@ -31,6 +31,7 @@ export default function CreatePlaylist() {
 					color='primary'
 					inputProps={{ maxLength: 14 }}
 					maxLength={10}
+					placeholder={'Add playlist...'}
 				/>
 								<AddIcon className='add-icon' onClick={savePlaylist} />
 			</form>
