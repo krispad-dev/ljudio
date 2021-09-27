@@ -8,6 +8,7 @@ import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 
 import { playerControllerStateContext } from '../../context/YouTubePlayerContext';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
+import GridLoader from '../Loaders/GridLoader';
 
 const colors = [
   '#ff9ff3',
@@ -38,10 +39,10 @@ function VideoList() {
   const [playerState, dispatchPlayerController] = useContext(playerControllerStateContext);
 
   //Search for videos with searchBar
-  const data = useGetMusicVideos(state.headerSearchString);
+  const { data, isLoading } = useGetMusicVideos(state.headerSearchString);
 
   //Videos from arr from hook
-  const videos = data && data.data && data.data.success && data.data.searchResults && data.data.searchResults.content;
+  const videos = data && data.success && data.searchResults && data.searchResults.content;
 
   //array of videoId's
   const filteredOutVideosArray =
@@ -60,10 +61,11 @@ function VideoList() {
 
   useEffect(() => {
     dispatchPlayerController({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutVideosArray });
-  }, [data.data]);
+  }, [data]);
 
   return (
     <VideoListWrapper>
+      {isLoading && <GridLoader />}
       <div className='grid-container'>
         {videos &&
           videos.map((video, index) => (

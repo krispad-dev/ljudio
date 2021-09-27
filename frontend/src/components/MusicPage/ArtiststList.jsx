@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useGetArtists from '../../hooks/useGetArtists';
 import ArtistCard from './ArtistCard';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
-import ArtistListLoader from '../Loaders/ArtistListLoader';
+import GridLoader from '../Loaders/GridLoader';
 
 const colors = [
   '#ff9ff3',
@@ -36,8 +36,7 @@ function ArtiststList() {
 
   return (
     <>
-      {/* {isLoading && <SkeletonLoader />} */}
-      {isLoading && <ArtistListLoader />}
+      {isLoading && <GridLoader />}
       <ArtistsListWrapper>
         {data &&
           data.searchResults &&

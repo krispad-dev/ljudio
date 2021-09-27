@@ -32,10 +32,9 @@ function SongsList() {
 
   return (
     <>
-      {/* {isLoading && <SkeletonLoader />} */}
-      {isLoading && <SongListLoader />}
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
       <SongListWrapper>
+        {isLoading && <SongListLoader />}
         {data &&
           data.searchResults &&
           data.searchResults.content &&
