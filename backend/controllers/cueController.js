@@ -8,7 +8,6 @@ export async function getAllFromCue(req, res) {
 
     res.status(200).json({ success: true, cue: cue[0].cueSongs });
   } catch (error) {
-    console.log(error);
     res.staus(400).json({ success: false, message: error });
   }
 }
@@ -27,7 +26,6 @@ export async function addToCue(req, res) {
 
     res.status(200).json({ success: true });
   } catch (error) {
-    console.log(error);
     res.staus(400).json({ success: false, message: error });
   }
 }
@@ -44,7 +42,6 @@ export async function removeFromCue(req, res) {
 
     res.status(200).json({ success: true });
   } catch (error) {
-    console.log(error);
     res.staus(400).json({ success: false, message: error });
   }
 }
@@ -53,8 +50,6 @@ export async function updateCue(req, res) {
   try {
     const userId = req.obj.id;
     const cueArray = req.body.cueArray;
-
-    console.log(cueArray);
 
     const obj = {
       cueArray,

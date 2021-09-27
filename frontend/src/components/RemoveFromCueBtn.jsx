@@ -6,42 +6,39 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 import useRemoveFromCue from '../hooks/useRemoveFromCue';
 import styled from 'styled-components';
 
-
 function RemoveFromCueBtn({ cueId, videoId, index }) {
+  const { mutate } = useRemoveFromCue();
+  const [{ pendingUserCue, activeCue, cuePositon }, dispatch] = useContext(playerControllerStateContext);
 
-    const { mutate } = useRemoveFromCue();
-    const [ { pendingUserCue, activeCue, cuePositon }, dispatch ] = useContext(playerControllerStateContext);
+  function onClickHandler(index) {
+    const filteredPendingUserCue = [...activeCue].filter((cueItem, i) => {
+      return index !== i;
+    });
+    dispatch({ type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: filteredPendingUserCue });
+  }
 
-    function onClickHandler(index) {
-        const filteredPendingUserCue = [...activeCue].filter(( cueItem, i ) => {
-            return index !== i;
-        })
-        dispatch({type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: filteredPendingUserCue})
-    }
-
-    return (
-        <RemoveFromCueBtnWrapper>
-            <IoIosCloseCircleOutline
-            className="remove-btn"
-            onClick={(e) => onClickHandler(index)} />
-        </RemoveFromCueBtnWrapper>
-    );
+  return (
+    <RemoveFromCueBtnWrapper>
+      <IoIosCloseCircleOutline className='remove-btn' onClick={(e) => onClickHandler(index)} />
+    </RemoveFromCueBtnWrapper>
+  );
 }
 
 export default RemoveFromCueBtn;
 
-
 const RemoveFromCueBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
 
-    .remove-btn {
-        font-size: 1.8rem;
-        color: #FFF;
-        margin-top: 0.2rem;
-        margin-left: 0.3rem;
+  .remove-btn {
+    font-size: 1.8rem;
+    color: #c4c4c4;
 
-        &:hover {
-            color: '#c0392b';
-            cursor: pointer;
-        }
+    &:hover {
+      color: #1dd1a1;
+      transition: ease-in-out 0.2s;
+      cursor: pointer;
     }
+  }
 `;

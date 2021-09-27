@@ -63,12 +63,5 @@ const AllPlaylistsListWrapper = styled.div`
   display: grid;
   gap: 1rem;
   grid-auto-rows: 12rem;
-  grid-template-columns: auto auto auto auto auto;
-
-  @media only screen and (max-width: 1200px) {
-    grid-template-columns: 33% 33% auto;
-  }
-  @media only screen and (max-width: 780px) {
-    grid-template-columns: 50% 50%;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 `;
