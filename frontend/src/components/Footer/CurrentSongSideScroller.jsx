@@ -5,13 +5,13 @@ import Marquee from 'react-fast-marquee';
 import useGetSongs from '../../hooks/useGetSongs';
 
 function CurrentSongSideScroller() {
-  const [{ currentSong, activeCue, cuePosition, isPlaying }, dispatch] = useContext(playerControllerStateContext);
+  const [{ currentSong, activeCue, cuePosition }] = useContext(playerControllerStateContext);
 
   const { data } = useGetSongs(activeCue && activeCue[cuePosition]);
   const currentSongInfo = data && data.searchResults && data.searchResults.content[0];
 
   return (
-    <CurrentSongDisplayerWrapper style={{ visibility: `${isPlaying ? 'visible' : 'hidden'}` }}>
+    <CurrentSongDisplayerWrapper >
       <Marquee gradient={false}>
         <h4>
           <strong>{currentSongInfo && currentSongInfo.name}</strong>
