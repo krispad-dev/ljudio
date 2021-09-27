@@ -51,7 +51,6 @@ export async function getAllPlaylists(req, res) {
 
     return res.json({ success: true, playlists });
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json({ success: false, message: err.message });
   }
 }
@@ -63,9 +62,7 @@ export async function getOneArtist(req, res) {
     const artist = await Music.GetOneArtist(browseId);
 
     return res.json({ success: true, artist });
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 
 export async function getMusicVideos(req, res) {
@@ -75,7 +72,6 @@ export async function getMusicVideos(req, res) {
 
     return res.json({ success: true, searchResults });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ success: false, message: err.message });
   }
 }

@@ -16,7 +16,6 @@ export async function createPlaylist(req, res) {
 
     return res.status(201).json({ success: true });
   } catch (err) {
-    console.log(err);
     return res.status(400).json({ success: false });
   }
 }
@@ -130,7 +129,6 @@ export async function getAllPlaylists(req, res) {
 
     return res.json({ success: true, playlists });
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json({ success: false, message: err.message });
   }
 }
@@ -142,7 +140,6 @@ export async function searchPlaylists(req, res) {
 
     return res.json({ success: true, playlists });
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json({ success: false, message: err.message });
   }
 }
