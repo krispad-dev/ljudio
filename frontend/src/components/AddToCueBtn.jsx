@@ -1,29 +1,22 @@
 import React, { useContext } from 'react';
 import { BiAddToQueue } from 'react-icons/bi';
 import { playerControllerStateContext } from '../context/YouTubePlayerContext';
-import { PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
-import useAddToCue from '../hooks/useAddToCue';
+
 import styled from 'styled-components';
 
 import toastMessage from '../helpers/toasts';
 
 function AddToCueBtn({ videoId }) {
+  const [{ activeCue, cuePosition }] = useContext(playerControllerStateContext);
 
+  function saveToCue() {
+    activeCue.splice(cuePosition + 1, 0, videoId);
+    toastMessage('Song added to cue!');
+  }
 
-  const { mutate } = useAddToCue();
-	const [ { pendingUserCue, activeCue, cuePosition }, dispatch ] = useContext(playerControllerStateContext);
-	console.log(cuePosition);
-
-
-
-	function saveToCue() {
-		activeCue.splice(cuePosition + 1, 0, videoId)
-    toastMessage('Song added to cue!')
-	}
-    
-    return(
-	<AddToCueBtnWrapper> 
-        <BiAddToQueue className="add-btn" onClick={saveToCue} />
+  return (
+    <AddToCueBtnWrapper>
+      <BiAddToQueue className='add-btn' onClick={saveToCue} />
     </AddToCueBtnWrapper>
   );
 }
