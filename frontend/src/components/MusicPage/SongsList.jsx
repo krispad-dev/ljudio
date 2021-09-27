@@ -33,7 +33,6 @@ function SongsList() {
 			{isLoading && <SkeletonLoader />}
 			{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
 			<SongListWrapper>
-	
 				{data &&
 					data.searchResults &&
 					data.searchResults.content &&
@@ -48,13 +47,17 @@ function SongsList() {
 export default SongsList;
 
 const SongListWrapper = styled.div`
-	position: relative;
-	box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05);
-	::-webkit-scrollbar {
-		display: none;
-	}
-	display: flex;
-	flex-direction: column;
-	height: 13rem;
+	height: 40vh;
 	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+
+	::-webkit-scrollbar {
+	display: none;
+	}
+
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+
+	box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05)
+
 `;
