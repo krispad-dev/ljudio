@@ -18,9 +18,11 @@ function Header() {
         </div>
 
         <div className={'search-bar-user-options-container'}>
-          <SearchBar />
-          {auth && !auth.loggedIn && <GuestUserOptions />}
-          {auth && auth.loggedIn && <LoggedInUserOptions />}
+          <SearchBar className='search-bar' />
+          <div className='user-options'>
+            {auth && !auth.loggedIn && <GuestUserOptions />}
+            {auth && auth.loggedIn && <LoggedInUserOptions />}
+          </div>
         </div>
       </div>
     </StyledHeader>
@@ -39,6 +41,11 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    margin-right: 1rem;
+  }
+
+  .user-options {
+    margin-left: 1rem;
   }
 
   .header-container {
@@ -56,24 +63,25 @@ const StyledHeader = styled.header`
     @media only screen and (max-width: 648px) {
       flex-direction: column;
       width: 100%;
+
+      .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 1rem;
+      }
       .search-bar-user-options-container {
         width: 95%;
-        display: flex;
-        justify-content: space-evenly;
+        flex-direction: column;
+        justify-content: space-between;
         align-items: center;
         margin-bottom: 0.5rem;
       }
-    }
-  }
 
-  @media only screen and (max-width: 648px) {
-    flex-direction: column;
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      margin: 1rem;
+      .user-options {
+        margin-top: 0.5rem;
+      }
     }
   }
 `;
