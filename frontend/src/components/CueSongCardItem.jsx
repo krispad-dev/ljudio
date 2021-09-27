@@ -38,61 +38,57 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
 	const duration = fallbackDataString && fallbackDataString.duration;
 
 	return (
-		<>
-			{data && data.searchResults && data.searchResults.content[0] && (
-				<PlaylistsCardWrapper >
-					{isLoading && <SkeletonLoader />}
-					{!isLoading && (
-						<div
-							className='song-container'
-							draggable={true}
-							onDrop={e => onDrop(e, index)}
-							onDragStart={e => onDragStart(e, index)}
-							onTouchStart={e => onDragStart(e, index)}
-						>
-							<div className='song-img-container'>
-								<img src={thumbnailImg && thumbnailImg} alt='song-cover' />
-							</div>
+		<PlaylistsCardWrapper>
+			{isLoading && <SkeletonLoader />}
+			{!isLoading && (
+				<div
+					className='song-container'
+					draggable={true}
+					onDrop={e => onDrop(e, index)}
+					onDragStart={e => onDragStart(e, index)}
+					onTouchStart={e => onDragStart(e, index)}
+				>
+					<div className='song-img-container'>
+						<img src={thumbnailImg && thumbnailImg} alt='song-cover' />
+					</div>
 
-							<div className='song-artist-container'>
-								<h2>{index + 1}.&nbsp;{songName && songName}</h2>
-								<h3>{artistName && artistName}</h3>
-							</div>
+					<div className='song-artist-container'>
+						<h2>
+							{index + 1}.&nbsp;{songName && songName}
+						</h2>
+						<h3>{artistName && artistName}</h3>
+					</div>
 
-							<div className='song-duration-container'>
-								<h2>Duration</h2>
-								<h3>{durationConverter(duration && duration)}</h3>
-							</div>
-							<div className='song-icon-container'>
-								{auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
+					<div className='song-duration-container'>
+						<h2>Duration</h2>
+						<h3>{durationConverter(duration && duration)}</h3>
+					</div>
+					<div className='song-icon-container'>
+						{auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
 
-								{userPlaylists &&
-									userPlaylists.userPlaylists &&
-									auth.loggedIn &&
-									isInUserPlaylist(id, userPlaylists.userPlaylists) && (
-										<RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
-									)}
+						{userPlaylists &&
+							userPlaylists.userPlaylists &&
+							auth.loggedIn &&
+							isInUserPlaylist(id, userPlaylists.userPlaylists) && (
+								<RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
+							)}
 
-								<MusicPlayBtn
-									index={index}
-									videoId={song}
-									name={songName && songName}
-									artist={artistName && artistName}
-									thumbnails={thumbnailImg && thumbnailImg}
-								/>
+						<MusicPlayBtn
+							index={index}
+							videoId={song}
+							name={songName && songName}
+							artist={artistName && artistName}
+							thumbnails={thumbnailImg && thumbnailImg}
+						/>
 
-								{auth && auth.loggedIn && pathname !== '/cue' && (
-									<AddToCueBtn videoId={song} cueId={cueId} />
-								)}
-								{auth && auth.loggedIn && pathname === '/cue' && (
-									<RemoveFromCueBtn videoId={song} cueId={cueId} index={index} />
-								)}
-							</div>
-						</div>
-					)}
-				</PlaylistsCardWrapper>
+						{auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
+						{auth && auth.loggedIn && pathname === '/cue' && (
+							<RemoveFromCueBtn videoId={song} cueId={cueId} index={index} />
+						)}
+					</div>
+				</div>
 			)}
-		</>
+		</PlaylistsCardWrapper>
 	);
 }
 
