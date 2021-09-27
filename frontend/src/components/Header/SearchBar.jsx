@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
 import SearchIcon from '@material-ui/icons/Search';
 import { UiContext } from '../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 import { Input, TextField } from '@material-ui/core';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 function SearchBar() {
   const { pathname } = useLocation();

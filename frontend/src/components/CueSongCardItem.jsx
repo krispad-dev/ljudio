@@ -1,6 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router';
-
 import styled from 'styled-components';
 import useGetSongs from '../hooks/useGetSongs';
 import MusicPlayBtn from './MusicPlayBtn';
@@ -11,7 +9,7 @@ import AddToPlaylistBtn from './AddToPlaylistBtn';
 import SkeletonLoader from './Loaders/SkeletonLoader';
 import AddToCueBtn from './AddToCueBtn';
 import RemoveFromCueBtn from './RemoveFromCueBtn';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 //HELPER
 import { durationConverter } from '../helpers/helpers';
