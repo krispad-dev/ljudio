@@ -28,7 +28,12 @@ function SongCardItem({ song, index, cueId }) {
 
   const fallbackDataString = data && data.searchResults && data.searchResults.content && data.searchResults.content[0];
 
-  const thumbnailImg = fallbackDataString && fallbackDataString.thumbnails[1].url;
+  const thumbnailImg =
+    fallbackDataString &&
+    fallbackDataString.thumbnails &&
+    fallbackDataString.thumbnails[1] &&
+    fallbackDataString.thumbnails[1].url;
+
   const artistName = fallbackDataString && fallbackDataString.artist && fallbackDataString.artist.name;
   const songName = fallbackDataString && fallbackDataString.name;
   const duration = fallbackDataString && fallbackDataString.duration;

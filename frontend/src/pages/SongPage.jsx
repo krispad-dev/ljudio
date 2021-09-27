@@ -18,7 +18,6 @@ function SongPage() {
 
   const songName = fallBackDataString && fallBackDataString.name;
   const artist = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.name;
-
   const browseId = fallBackDataString && fallBackDataString.artist && fallBackDataString.artist.browseId;
 
   const { data: artistData } = useGetOneArtist(browseId);

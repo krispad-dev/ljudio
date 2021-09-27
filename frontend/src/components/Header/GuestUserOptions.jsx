@@ -7,12 +7,12 @@ function GuestUserOptions() {
   return (
     <GuestUserOptionsWrapper>
       <Link to='/register'>
-        <Button variant='outlined' color='primary' href='#outlined-buttons'>
+        <Button variant='outlined' color='primary'>
           REGISTER
         </Button>
       </Link>
       <Link to='/login'>
-        <Button variant='outlined' color='primary' href='#outlined-buttons'>
+        <Button variant='outlined' color='primary'>
           LOGIN
         </Button>
       </Link>
