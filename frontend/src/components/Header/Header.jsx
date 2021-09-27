@@ -37,6 +37,7 @@ const StyledHeader = styled.header`
   justify-content: center;
 
   width: 100%;
+
   .search-bar-user-options-container {
     display: flex;
     justify-content: flex-end;
@@ -62,7 +63,6 @@ const StyledHeader = styled.header`
 
     @media only screen and (max-width: 648px) {
       flex-direction: column;
-      width: 100%;
 
       .logo-container {
         display: flex;
