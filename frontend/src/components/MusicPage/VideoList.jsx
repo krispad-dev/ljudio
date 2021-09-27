@@ -81,23 +81,7 @@ const VideoListWrapper = styled.div`
     display: grid;
     gap: 1rem;
     grid-auto-rows: 12rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 650px) {
-    .grid-container {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (min-width: 1400px) {
-    .grid-container {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-  @media (min-width: 1600px) {
-    .grid-container {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   }
 
   h1 {
