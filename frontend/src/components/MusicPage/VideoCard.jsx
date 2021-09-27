@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { shortenLongStrings } from '../../helpers/helpers';
 
 import MusicPlayBtn from '../MusicPlayBtn';
 
@@ -14,7 +15,7 @@ function VideoCard({ videoId, name, author, thumbnails, index, bgColor }) {
         <Link to={`/songs/${videoId}`}>
           <div className='video-info'>
             <h3>{author}</h3>
-            <h2>{name.length < 25 ? name.substring(0, 25) : name.substring(0, 25) + '...'}</h2>
+            <h2>{shortenLongStrings(name, 25)}</h2>
           </div>
         </Link>
       </div>

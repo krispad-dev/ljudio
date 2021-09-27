@@ -7,6 +7,7 @@ import useAuth from '../../hooks/useAuth';
 import AddToCueBtn from '../AddToCueBtn';
 import MusicPlayBtn from '../MusicPlayBtn';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
+import { shortenLongStrings } from '../../helpers/helpers';
 
 function SongCard({ videoId, name, artist, thumbnails, index }) {
   const { data: auth } = useAuth();
@@ -19,7 +20,8 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
         <Link to={`/songs/${videoId}`}>
           <div className='song-info'>
             <h3>{artist.name}</h3>
-            <p>{name}</p>
+            {/* <p>{name}</p> */}
+            <p>{shortenLongStrings(name)}</p>
           </div>
         </Link>
       </div>

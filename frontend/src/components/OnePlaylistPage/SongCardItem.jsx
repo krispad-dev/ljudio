@@ -14,7 +14,7 @@ import RemoveFromCueBtn from '../RemoveFromCueBtn';
 import { useParams } from 'react-router-dom';
 
 //HELPER
-import { durationConverter } from '../../helpers/helpers';
+import { durationConverter, shortenLongStrings } from '../../helpers/helpers';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
 function SongCardItem({ song, index, cueId }) {
@@ -49,7 +49,7 @@ function SongCardItem({ song, index, cueId }) {
                 <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
               </div>
               <div className='song-artist-container'>
-                <h2>{songName && songName}</h2>
+                <h2>{songName && shortenLongStrings(songName, 20)}</h2>
                 <h3>{artistName && artistName}</h3>
               </div>
 

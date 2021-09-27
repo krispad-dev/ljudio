@@ -14,7 +14,7 @@ import RemoveFromCueBtn from './RemoveFromCueBtn';
 import { useParams } from 'react-router-dom';
 
 //HELPER
-import { durationConverter } from '../helpers/helpers';
+import { durationConverter, shortenLongStrings } from '../helpers/helpers';
 import { isInUserPlaylist } from '../helpers/helpers';
 
 function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
@@ -55,7 +55,7 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
                 <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
               </div>
               <div className='song-artist-container'>
-                <h2>{songName && songName}</h2>
+                <h2>{songName && shortenLongStrings(songName, 25)}</h2>
                 <h3>{artistName && artistName}</h3>
               </div>
 
