@@ -89,7 +89,7 @@ function YouTubePlayer() {
 			payload: filteredPenfingCue,
 		});
 
-		dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+/* 		dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE }); */
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, playload: false });
 	}
