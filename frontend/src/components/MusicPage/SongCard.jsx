@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useAuth from '../../hooks/useAuth';
 
-import AddToCueBtn from '../AddToCueBtn';
 import MusicPlayBtn from '../MusicPlayBtn';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
 import { shortenLongStrings } from '../../helpers/helpers';
 
 function SongCard({ videoId, name, artist, thumbnails, index }) {
   const { data: auth } = useAuth();
-  const { state } = useContext(UiContext);
+  // const { state } = useContext(UiContext);
 
   return (
     <SongCardWrapper>
@@ -26,9 +25,8 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
       </div>
 
       <div className='play-symbol-container'>
-        {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
         <MusicPlayBtn index={index} videoId={videoId} name={name} artist={artist} thumbnails={thumbnails} />
-        {auth && auth.loggedIn && <AddToCueBtn videoId={videoId} />}
+        {auth && auth.loggedIn && <AddToPlaylistBtn videoId={videoId} />}
       </div>
     </SongCardWrapper>
   );

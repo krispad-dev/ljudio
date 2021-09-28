@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { UiContext } from '../context/UiState';
 import { UI_STATE_ACTIONS } from '.././reducers/UiReducer';
-import { BsPlusCircle } from 'react-icons/bs';
+import { HiOutlineDotsVertical } from 'react-icons/hi';
 
 import { useLocation } from 'react-router-dom';
 
-function AddToPlaylistBtn({ videoId }) {
+function AddToPlaylistBtn({ videoId, index }) {
   const { state, dispatch } = useContext(UiContext);
   const { pathname } = useLocation();
 
@@ -15,6 +15,10 @@ function AddToPlaylistBtn({ videoId }) {
     dispatch({
       type: UI_STATE_ACTIONS.SET_SONG_TO_SAVE_TO_USER_PLAYLIST,
       payload: { songToSaveToUserPlaylist: videoId ? videoId : '' },
+    });
+    dispatch({
+      type: UI_STATE_ACTIONS.SET_SELECTED_SONG_CARD_INDEX,
+      payload: { selectedSongCardIndex: index },
     });
   }
 
@@ -27,7 +31,7 @@ function AddToPlaylistBtn({ videoId }) {
 
   return (
     <AddToPlaylistBtnWrapper>
-      <BsPlusCircle
+      <HiOutlineDotsVertical
         className='add-btn'
         style={{
           cursor: 'pointer',
@@ -47,7 +51,8 @@ const AddToPlaylistBtnWrapper = styled.div`
   margin: 0.5rem;
 
   .add-btn {
-    font-size: 1.4rem;
+    margin-left: 0.6rem;
+    font-size: 2rem;
     color: #c4c4c4;
 
     &:hover {

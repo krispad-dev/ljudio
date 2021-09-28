@@ -6,15 +6,24 @@ import useOutsideClick from '../../hooks/uiHooks/useOutsideClick';
 import { UiContext } from '../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 import CreatePlaylist from '../Aside/DesktopMenu/CreatePlaylist';
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom';
+
+import useAuth from '../../hooks/useAuth';
+
+import AddToCueBtn from '../AddToCueBtn';
+import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
+
+import { isInUserPlaylist } from '../../helpers/helpers';
+import RemoveFromCueBtn from '../RemoveFromCueBtn';
 
 function AddMusicToPlayListList() {
+  const { data: auth } = useAuth();
+  const { pathname } = useLocation();
+  const { id } = useParams();
 
-  const { pathname } = useLocation()
-  const { id } = useParams()
- 
   const { data } = useGetSavedUserPlaylists();
   const { state, dispatch } = useContext(UiContext);
+
   const ref = useRef();
 
   useOutsideClick(ref, () => {
@@ -26,10 +35,18 @@ function AddMusicToPlayListList() {
     }
   });
 
-
   return (
-    <AddMusicToPlayListListWrapper style={pathname === `/artist/${id}` ? {bottom: '20rem'} : {} } ref={ref}>
+    <AddMusicToPlayListListWrapper style={pathname === `/artist/${id}` ? { bottom: '20rem' } : {}} ref={ref}>
+      {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={state.songToSaveToUserPlaylist} />}
+
+      {data && data.userPlaylists && auth.loggedIn && isInUserPlaylist(id, data.userPlaylists) && (
+        <RemoveSongFromPlaylistBtn videoId={state.songToSaveToUserPlaylist} playlistId={id} />
+      )}
+
+      {auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn />}
       <CreatePlaylist />
+
+      <p className='add-to-playlist-text'>Add Song To Playlist</p>
       {data &&
         data.userPlaylists &&
         data.userPlaylists.map((playlist, index) => <AddMusicToPlaylistItem key={index} {...playlist} />)}
@@ -41,6 +58,12 @@ export default AddMusicToPlayListList;
 
 const AddMusicToPlayListListWrapper = styled.ul`
   animation: grow ease-in-out 0.1s;
+
+  .add-to-playlist-text {
+    margin-top: 1rem;
+    font-weight: 900;
+    text-align: center;
+  }
 
   @keyframes grow {
     from {
@@ -54,7 +77,7 @@ const AddMusicToPlayListListWrapper = styled.ul`
 
   width: auto;
   height: auto;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.9);
   right: 7rem;
   border-radius: 5px;
   z-index: 2000;
@@ -65,5 +88,4 @@ const AddMusicToPlayListListWrapper = styled.ul`
   ::-webkit-scrollbar {
     display: none;
   }
-
 `;

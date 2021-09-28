@@ -62,15 +62,6 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
             <h3>{durationConverter(duration && duration)}</h3>
           </div>
           <div className='song-icon-container'>
-            {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
-
-            {userPlaylists &&
-              userPlaylists.userPlaylists &&
-              auth.loggedIn &&
-              isInUserPlaylist(id, userPlaylists.userPlaylists) && (
-                <RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
-              )}
-
             <MusicPlayBtn
               index={index}
               videoId={song}
@@ -80,9 +71,10 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
             />
 
             {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
-            {auth && auth.loggedIn && pathname === '/cue' && (
+            {/* {auth && auth.loggedIn && pathname === '/cue' && (
               <RemoveFromCueBtn videoId={song} cueId={cueId} index={index} />
-            )}
+            )} */}
+            {auth && auth.loggedIn && <AddToPlaylistBtn index={index} videoId={song} />}
           </div>
         </div>
       )}

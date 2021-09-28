@@ -15,6 +15,7 @@ const initialState = {
   pushDir: '',
   isDeletingPlaylist: false,
   currentPlaylistId: '',
+  selectedSongCardIndex: null,
 };
 
 function UiState({ children }) {

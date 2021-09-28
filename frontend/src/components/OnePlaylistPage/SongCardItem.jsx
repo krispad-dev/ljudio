@@ -2,26 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import useGetSongs from '../../hooks/useGetSongs';
 import MusicPlayBtn from '../MusicPlayBtn';
-import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
-import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
+
 import useAuth from '../../hooks/useAuth';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
-import AddToCueBtn from '../AddToCueBtn';
-import RemoveFromCueBtn from '../RemoveFromCueBtn';
-import { useParams, useLocation } from 'react-router-dom';
 
 //HELPER
 import { durationConverter, shortenLongStrings } from '../../helpers/helpers';
-import { isInUserPlaylist } from '../../helpers/helpers';
 
 function SongCardItem({ song, index, cueId }) {
   //VideoID (song-prop) får göra en förfågan till Youtbe-api.
 
-  const { id } = useParams();
   const { data, isLoading } = useGetSongs(song);
   const { data: auth } = useAuth();
-  const { pathname } = useLocation();
-  const { data: userPlaylists } = useGetSavedUserPlaylists();
 
   const fallbackDataString = data && data.searchResults && data.searchResults.content && data.searchResults.content[0];
 
@@ -43,7 +35,6 @@ function SongCardItem({ song, index, cueId }) {
             <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
           </div>
           <div className='song-artist-container'>
-            {/* <h2>{songName && songName}</h2> */}
             <h2>{songName && shortenLongStrings(songName, 20)}</h2>
             <h3>{artistName && artistName}</h3>
           </div>
@@ -53,15 +44,6 @@ function SongCardItem({ song, index, cueId }) {
             <h3>{durationConverter(duration && duration)}</h3>
           </div>
           <div className='song-icon-container'>
-            {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
-
-            {userPlaylists &&
-              userPlaylists.userPlaylists &&
-              auth.loggedIn &&
-              isInUserPlaylist(id, userPlaylists.userPlaylists) && (
-                <RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
-              )}
-
             <MusicPlayBtn
               index={index}
               videoId={song}
@@ -69,9 +51,7 @@ function SongCardItem({ song, index, cueId }) {
               artist={artistName && artistName}
               thumbnails={thumbnailImg && thumbnailImg}
             />
-
-            {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
-            {auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} />}
+            {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
           </div>
         </div>
       )}
@@ -100,7 +80,6 @@ const PlaylistsCardWrapper = styled.div`
   }
 
   .song-icon-container {
-    margin-right: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

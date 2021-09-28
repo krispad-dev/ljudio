@@ -37,9 +37,9 @@ function AddMusicToPlaylistItem({ title, id }) {
 }
 
 const AddMusicToPlaylistItemWrapper = styled.li`
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   background-color: rgba(0, 0, 0, 0.1);
   padding: 0.5rem;
   &:hover {

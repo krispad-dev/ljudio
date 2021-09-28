@@ -7,63 +7,63 @@ import { playerControllerStateContext } from '../context/YouTubePlayerContext';
 import { useLocation } from 'react-router-dom';
 
 function MusicPlayBtn({ videoId, index }) {
-	const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-	const [
-		{ currentSong, isPlaying, pauseVideo, playVideo, pendingCue, pendingUserCue, cuePosition, activeCue },
-		dispatchPlayerControllerStateContext,
-	] = useContext(playerControllerStateContext);
+  const [
+    { currentSong, isPlaying, pauseVideo, playVideo, pendingCue, pendingUserCue, cuePosition, activeCue },
+    dispatchPlayerControllerStateContext,
+  ] = useContext(playerControllerStateContext);
 
-	function onClickHandler() {
-		dispatchPlayerControllerStateContext({
-			type: PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION,
-			payload:  pathname !== '/' || activeCue.length < 1 ? index : cuePosition,
-		});
+  function onClickHandler() {
+    dispatchPlayerControllerStateContext({
+      type: PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION,
+      payload: pathname !== '/' || activeCue.length < 1 ? index : cuePosition,
+    });
 
-		if (pathname !== '/cue' && pathname !== '/' || activeCue.length < 1) {
-			dispatchPlayerControllerStateContext({
-				type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
-				payload: [...pendingCue],
-			});
-		} else if(pathname !== '/cue'){
-			activeCue.splice(cuePosition, 0, videoId);
-		}
-	}
+    if ((pathname !== '/cue' && pathname !== '/') || activeCue.length < 1) {
+      dispatchPlayerControllerStateContext({
+        type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
+        payload: [...pendingCue],
+      });
+    } else if (pathname !== '/cue') {
+      activeCue.splice(cuePosition, 0, videoId);
+    }
+  }
 
-	return (
-		<MusicPlayBtnWrapper onClick={onClickHandler}>
-			{activeCue[cuePosition] === videoId && isPlaying ? (
-				<IoPauseCircleOutline
-					className='play-btn'
-					onClick={() => pauseVideo()}
-					style={
-						activeCue[cuePosition] === videoId && isPlaying || index === cuePosition
-							? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' }
-							: {}
-					}
-				/>
-			) : (
-				<IoPlayCircleOutline onClick={() => playVideo()} className='play-btn' />
-			)}
-		</MusicPlayBtnWrapper>
-	);
+  return (
+    <MusicPlayBtnWrapper onClick={onClickHandler}>
+      {activeCue[cuePosition] === videoId && isPlaying ? (
+        <IoPauseCircleOutline
+          className='play-btn'
+          onClick={() => pauseVideo()}
+          style={
+            (activeCue[cuePosition] === videoId && isPlaying) || index === cuePosition
+              ? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' }
+              : {}
+          }
+        />
+      ) : (
+        <IoPlayCircleOutline onClick={() => playVideo()} className='play-btn' />
+      )}
+    </MusicPlayBtnWrapper>
+  );
 }
 
 const MusicPlayBtnWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	margin: 0.3rem;
+  display: flex;
+  justify-content: center;
+  margin: 0.3rem;
 
-	.play-btn {
-		font-size: 1.8rem;
-		color: #c4c4c4;
+  .play-btn {
+    font-size: 2rem;
+    color: #c4c4c4;
 
-		&:hover {
-			color: #1dd1a1;
-			transition: ease-in-out 0.2s;
-			cursor: pointer;
-		}
-	}
+    &:hover {
+      color: #1dd1a1;
+      transition: ease-in-out 0.2s;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default MusicPlayBtn;
