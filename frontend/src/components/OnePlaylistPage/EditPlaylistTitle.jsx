@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import { FaCheck, FaRegTimesCircle } from 'react-icons/fa';
 import useChangePlaylistTitle from '../../hooks/useChangePlaylistTitle';
 import styled from 'styled-components';
 
 
-function EditPlaylistTitle({ title, setIsChanged, setIsEditingTitle, playlistId, setCurrentTitle }) {
+function EditPlaylistTitle({ title, setIsEditingTitle, playlistId }) {
 	const [value, setValue] = useState(title);
 	const { mutate } = useChangePlaylistTitle();
 
 	function confirmChange() {
 		mutate({ title: value, playlistId });
-		setCurrentTitle(value);
-		setIsChanged(true);
 		setIsEditingTitle(false);
 	}
 

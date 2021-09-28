@@ -27,8 +27,10 @@ function MusicPlayBtn({ videoId, index }) {
         payload: [...pendingCue],
       });
     } else if (pathname !== '/cue') {
-      const activeCueSpliced = [...activeCue];
+      const filteredActiveCue = [...activeCue].filter((videoIdToRemove) => videoIdToRemove !== videoId);
+      const activeCueSpliced = [...filteredActiveCue];
       activeCueSpliced.splice(cuePosition, 0, videoId);
+
       dispatchPlayerControllerStateContext({ type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: activeCueSpliced });
     }
   }
