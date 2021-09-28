@@ -6,8 +6,13 @@ import useOutsideClick from '../../hooks/uiHooks/useOutsideClick';
 import { UiContext } from '../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
 import CreatePlaylist from '../Aside/DesktopMenu/CreatePlaylist';
+import { useLocation, useParams } from 'react-router-dom'
 
 function AddMusicToPlayListList() {
+
+  const { pathname } = useLocation()
+  const { id } = useParams()
+ 
   const { data } = useGetSavedUserPlaylists();
   const { state, dispatch } = useContext(UiContext);
   const ref = useRef();
@@ -21,8 +26,9 @@ function AddMusicToPlayListList() {
     }
   });
 
+
   return (
-    <AddMusicToPlayListListWrapper ref={ref}>
+    <AddMusicToPlayListListWrapper style={pathname === `/artist/${id}` ? {bottom: '20rem'} : {} } ref={ref}>
       <CreatePlaylist />
       {data &&
         data.userPlaylists &&
@@ -59,4 +65,5 @@ const AddMusicToPlayListListWrapper = styled.ul`
   ::-webkit-scrollbar {
     display: none;
   }
+
 `;
