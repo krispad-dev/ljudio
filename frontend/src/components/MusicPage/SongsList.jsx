@@ -61,5 +61,4 @@ const SongListWrapper = styled.div`
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
-  box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05);
 `;

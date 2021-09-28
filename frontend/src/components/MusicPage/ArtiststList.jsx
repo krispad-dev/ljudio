@@ -58,4 +58,6 @@ const ArtistsListWrapper = styled.div`
   gap: 1rem;
   grid-auto-rows: 12rem;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  -ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 `;
