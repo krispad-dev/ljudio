@@ -5,7 +5,7 @@ export default function SongListLoader() {
   return (
     <ContentLoader
       style={{ width: '100%' }}
-      height={500}
+      height={400}
       speed={2}
       backgroundColor={'rgba(255, 255, 255, 0.06)'}
       foregroundColor={'#333'}

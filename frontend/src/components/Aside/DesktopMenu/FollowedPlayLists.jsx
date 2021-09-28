@@ -41,6 +41,8 @@ const FollowingPlayListWrapper = styled.ul`
 	overflow: auto;
 	/* for Firefox */
 	min-height: 0;
+  -ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 
 
 `;

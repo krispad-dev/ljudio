@@ -6,7 +6,6 @@ import RemoveSongFromPlaylistBtn from '../RemoveSongFromPlaylistBtn';
 import useGetSavedUserPlaylists from '../../hooks/useGetSavedUserPlaylists';
 import useAuth from '../../hooks/useAuth';
 import AddToPlaylistBtn from '../AddToPlaylistBtn';
-import SkeletonLoader from '../Loaders/SkeletonLoader';
 import AddToCueBtn from '../AddToCueBtn';
 import RemoveFromCueBtn from '../RemoveFromCueBtn';
 import { useParams, useLocation } from 'react-router-dom';
@@ -38,7 +37,6 @@ function SongCardItem({ song, index, cueId }) {
 
   return (
     <PlaylistsCardWrapper>
-      {isLoading && <SkeletonLoader />}
       {!isLoading && (
         <div className='song-container'>
           <div className='song-img-container'>

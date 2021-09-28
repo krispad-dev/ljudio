@@ -6,10 +6,9 @@ import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 
 import useGetSongs from '../../hooks/useGetSongs';
 import SongCard from './SongCard';
-import SkeletonLoader from '../Loaders/SkeletonLoader';
 import styled from 'styled-components';
 import AddMusicToPlayListList from '../AddMusicToPlaylistMenu/AddMusicToPlayListList';
-import MyLoader from '../Loaders/SongListLoader';
+
 import SongListLoader from '../Loaders/SongListLoader';
 
 function SongsList() {
@@ -60,6 +59,4 @@ const SongListWrapper = styled.div`
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-
-  box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05);
 `;

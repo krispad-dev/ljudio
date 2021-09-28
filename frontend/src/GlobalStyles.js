@@ -54,6 +54,8 @@ main {
 	justify-content: flex-start;
 	align-items: flex-start;
 	background-color: #111;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }
 
 footer {
@@ -145,17 +147,6 @@ ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.hideC::-webkit-scrollbar {
-	display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.hideC {
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
 }
 
 
