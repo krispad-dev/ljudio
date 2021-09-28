@@ -24,6 +24,7 @@ function CueList() {
   }
 
   function onDrop(e, index) {
+    e.preventDefault();
     const defaultEl = index;
     const newEl = e.dataTransfer.getData('text/plain');
 

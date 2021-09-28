@@ -67,6 +67,7 @@ function PlaylistSection() {
 }
 
 const PlayListSectionWrapper = styled.div`
+
 	position: relative;
 	z-index: 999;
 	height: 85vh;
