@@ -20,8 +20,7 @@ function SongCard({ videoId, name, artist, thumbnails, index }) {
         <Link to={`/songs/${videoId}`}>
           <div className='song-info'>
             <h3>{artist.name}</h3>
-            {/* <p>{name}</p> */}
-            <p>{shortenLongStrings(name)}</p>
+            <p>{shortenLongStrings(name, 20)}</p>
           </div>
         </Link>
       </div>

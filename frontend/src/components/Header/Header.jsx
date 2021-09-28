@@ -33,6 +33,7 @@ export default Header;
 
 const StyledHeader = styled.header`
   height: 100%;
+
   display: flex;
   justify-content: center;
 
@@ -55,6 +56,8 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
 
+    min-height: 60px;
+
     div {
       display: flex;
       justify-content: center;
@@ -74,7 +77,7 @@ const StyledHeader = styled.header`
       .search-bar-user-options-container {
         width: 95%;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         margin-bottom: 0.5rem;
       }
