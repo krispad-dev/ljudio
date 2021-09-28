@@ -1,12 +1,18 @@
 import React, { useContext } from 'react';
-import { BiAddToQueue } from 'react-icons/bi';
+import { BiAddToQueue, BiNoEntry } from 'react-icons/bi';
 import { playerControllerStateContext } from '../context/YouTubePlayerContext';
+import { isInCueList } from '../helpers/helpers';
 
 import styled from 'styled-components';
-
 import toastMessage from '../helpers/toasts';
 
+const disabledBtnStyles = {
+  pointerEvents: 'none',
+  opacity: '40%'
+}
+
 function AddToCueBtn({ videoId }) {
+
   const [{ activeCue, cuePosition }] = useContext(playerControllerStateContext);
 
   function saveToCue() {
@@ -16,7 +22,7 @@ function AddToCueBtn({ videoId }) {
 
   return (
     <AddToCueBtnWrapper>
-      <BiAddToQueue className='add-btn' onClick={saveToCue} />
+      <BiAddToQueue className='add-btn' onClick={saveToCue} style={isInCueList(videoId, activeCue) ? disabledBtnStyles : {}} />
     </AddToCueBtnWrapper>
   );
 }
