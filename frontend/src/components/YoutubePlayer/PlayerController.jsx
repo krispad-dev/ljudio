@@ -5,6 +5,7 @@ import { MdPlayCircleOutline, MdPause } from 'react-icons/md';
 import { CgScreen } from 'react-icons/cg';
 import { MdSkipNext } from 'react-icons/md';
 import ShuffleBtn from '../../components/YoutubePlayer/ShuffleBtn';
+import RepeatBtn from './RepeatBtn';
 
 import VolumeSlider from './VolumeSlider';
 import ProgressSlider from './ProgressSlider';
@@ -56,6 +57,7 @@ function Controller() {
 					style={{ color: '#fff', fontSize: '3rem', margin: '0.5rem' }}
 				/>
 				<ShuffleBtn />
+				<RepeatBtn />
 			</div>
 
 			<div>

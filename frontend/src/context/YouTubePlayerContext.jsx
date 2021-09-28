@@ -22,6 +22,7 @@ const initialState = {
 	activeCue: [],
 	cuePosition: 0,
 	shuffleIsOn: false,
+	repeatIsOn: false,
 };
 
 export function PlayerControllerStateProvider({ children }) {

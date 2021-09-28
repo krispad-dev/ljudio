@@ -27,6 +27,7 @@ export default ShuffleBtn
 
 const ShuffleBtnWrapper = styled.div`
 .shuffle-btn {
+    margin: 0.5rem;
     color: #fff;
     &:hover {
         cursor: pointer;
