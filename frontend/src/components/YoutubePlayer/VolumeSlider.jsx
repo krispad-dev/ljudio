@@ -16,7 +16,7 @@ export default function VolumeSlider() {
 
 	return (
 		<VolumeSliderContainer>
-			<GiSpeaker style={{ color: '#fff', fontSize: '1.5rem' }} />
+			<GiSpeaker style={{ color: '#fff', fontSize: '1.5rem', marginRight: '1rem' }} />
 			<Slider
 				style={{ margin: '0rem 1rem' }}
 				value={value}
@@ -39,6 +39,6 @@ const VolumeSliderContainer = styled.div`
 		width: 80vw;
 	}
 	h6 {
-		margin-right: 1rem;
+		margin-left: 1rem;
 	}
 `;

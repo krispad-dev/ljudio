@@ -19,7 +19,9 @@ export const PLAYER_ACTIONS = {
 	SET_PREVIOUS_IN_CUE: 'SET_PREVIOUS_IN_CUE',
 
 	SET_SUFFLE_IS_ON: 'SET_SUFFLE_IS_ON',
-	SET_SHUFFLED_CUE: 'SET_SHUFFLED_CUE'
+	SET_SHUFFLED_CUE: 'SET_SHUFFLED_CUE',
+
+	ADD_SONG_TO_CUE: 'ADD_SONG_TO_CUE'
 
 };
 
@@ -110,7 +112,6 @@ export function playerControllerReducer(state, action) {
 			};
 
 		case PLAYER_ACTIONS.SET_NEXT_IN_CUE:
-
 			if(!state.shuffleIsOn) {
 
 				return {
@@ -132,10 +133,24 @@ export function playerControllerReducer(state, action) {
 
 
 		case PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE:
-			return {
-				...state,
-				cuePosition: state.cuePosition === 0 ? state.cuePosition = 0 : state.cuePosition - 1,
-			};
+			if(!state.shuffleIsOn) {
+
+				return {
+					...state,
+					cuePosition: state.cuePosition === 0 ? state.cuePosition = 0 : state.cuePosition - 1,
+				}; 
+
+			}
+
+			if(state.shuffleIsOn) {
+			
+				return {
+					...state,
+					cuePosition: randomNumber(0, state.activeCue.length -1 )
+				};
+				
+			}
+
 
 		case PLAYER_ACTIONS.SET_SUFFLE_IS_ON:
 			return {
@@ -147,6 +162,14 @@ export function playerControllerReducer(state, action) {
 			return {
 				...state,
 				shuffledCue: action.payload,
+			};
+
+			
+		case PLAYER_ACTIONS.ADD_SONG_TO_CUE:
+			
+			return {
+				...state,
+				activeCue: action.payload,
 			};
 
 			

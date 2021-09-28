@@ -7,43 +7,62 @@ import { playerControllerStateContext } from '../context/YouTubePlayerContext';
 import { useLocation } from 'react-router-dom';
 
 function MusicPlayBtn({ videoId, index }) {
+	
 	const { pathname } = useLocation();
 
 	const [
-		{ currentSong, isPlaying, pauseVideo, playVideo, pendingCue, pendingUserCue, cuePosition, activeCue },
+
+		{ 
+			isPlaying, 
+			pauseVideo, 
+			playVideo, 
+			pendingCue, 
+			cuePosition, 
+			activeCue 
+		},
+
 		dispatchPlayerControllerStateContext,
+
 	] = useContext(playerControllerStateContext);
 
 	function onClickHandler() {
 		dispatchPlayerControllerStateContext({
 			type: PLAYER_ACTIONS.SET_ACTIVE_CUE_POSITION,
-			payload:  pathname !== '/' || activeCue.length < 1 ? index : cuePosition,
+			payload: pathname !== '/' || activeCue.length < 1 ? index : cuePosition,
 		});
 
-		if (pathname !== '/cue' && pathname !== '/' || activeCue.length < 1) {
+		if ((pathname !== '/cue' && pathname !== '/') || activeCue.length < 1) {
 			dispatchPlayerControllerStateContext({
 				type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
 				payload: [...pendingCue],
 			});
-		} else if(pathname !== '/cue'){
-			activeCue.splice(cuePosition, 0, videoId);
+		} else if (pathname !== '/cue') {
+			const activeCueSpliced = [...activeCue];
+			activeCueSpliced.splice(cuePosition, 0, videoId);
+			dispatchPlayerControllerStateContext({ type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: activeCueSpliced });
 		}
 	}
 
 	return (
 		<MusicPlayBtnWrapper onClick={onClickHandler}>
-			{activeCue[cuePosition] === videoId && isPlaying ? (
+			{activeCue[cuePosition] === videoId && isPlaying  ? (
 				<IoPauseCircleOutline
 					className='play-btn'
 					onClick={() => pauseVideo()}
-					style={
-						activeCue[cuePosition] === videoId && isPlaying || index === cuePosition
+					style={ activeCue[cuePosition] === videoId && isPlaying 
 							? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' }
 							: {}
 					}
 				/>
 			) : (
-				<IoPlayCircleOutline onClick={() => playVideo()} className='play-btn' />
+				<IoPlayCircleOutline 
+				onClick={() => playVideo()} 
+				className='play-btn' 
+				style={ activeCue[cuePosition] === videoId && isPlaying 
+					? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' }
+					: {}
+			}
+				/>
 			)}
 		</MusicPlayBtnWrapper>
 	);

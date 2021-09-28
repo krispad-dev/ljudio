@@ -21,9 +21,10 @@ function YouTubePlayer() {
 		},
 
 		dispatch,
+
 	] = useContext(playerControllerStateContext);
 
-	const [windowWidth, windowHeight] = useWindowSize();
+	const [ windowWidth, windowHeight ] = useWindowSize();
 
 	const opts = {
 		controls: 0,
