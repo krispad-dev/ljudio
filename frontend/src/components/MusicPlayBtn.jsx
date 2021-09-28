@@ -45,18 +45,24 @@ function MusicPlayBtn({ videoId, index }) {
 
 	return (
 		<MusicPlayBtnWrapper onClick={onClickHandler}>
-			{activeCue[cuePosition] === videoId && isPlaying ? (
+			{activeCue[cuePosition] === videoId && isPlaying  ? (
 				<IoPauseCircleOutline
 					className='play-btn'
 					onClick={() => pauseVideo()}
-					style={
-						(activeCue[cuePosition] === videoId && isPlaying) || index === cuePosition
+					style={ activeCue[cuePosition] === videoId && isPlaying 
 							? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' }
 							: {}
 					}
 				/>
 			) : (
-				<IoPlayCircleOutline onClick={() => playVideo()} className='play-btn' />
+				<IoPlayCircleOutline 
+				onClick={() => playVideo()} 
+				className='play-btn' 
+				style={ activeCue[cuePosition] === videoId && isPlaying 
+					? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' }
+					: {}
+			}
+				/>
 			)}
 		</MusicPlayBtnWrapper>
 	);
