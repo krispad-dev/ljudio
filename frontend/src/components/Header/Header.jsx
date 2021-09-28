@@ -56,8 +56,6 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
 
-    min-height: 60px;
-
     div {
       display: flex;
       justify-content: center;
@@ -66,6 +64,14 @@ const StyledHeader = styled.header`
 
     @media only screen and (max-width: 648px) {
       flex-direction: column;
+
+      .header-container {
+        width: 80%;
+        justify-content: center;
+      }
+      .user-options {
+        margin-left: 0rem;
+      }
 
       .logo-container {
         display: flex;
@@ -76,7 +82,7 @@ const StyledHeader = styled.header`
       }
       .search-bar-user-options-container {
         width: 95%;
-        flex-direction: column;
+        /* flex-direction: column; */
         justify-content: center;
         align-items: center;
         margin-bottom: 0.5rem;

@@ -35,6 +35,7 @@ function SongsList() {
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
       <SongListWrapper>
         {isLoading && <SongListLoader />}
+
         {data &&
           data.searchResults &&
           data.searchResults.content &&

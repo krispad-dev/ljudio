@@ -37,6 +37,7 @@ function ArtiststList() {
   return (
     <>
       {isLoading && <GridLoader />}
+
       <ArtistsListWrapper>
         {data &&
           data.searchResults &&
