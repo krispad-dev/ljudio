@@ -85,8 +85,9 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
 const PlaylistsCardWrapper = styled.div`
   &:hover {
     transition: ease-in-out 0.2s;
-    transform: scale(1.01);
+    transform: scale(1.003);
     cursor: pointer;
+    opacity: 0.8;
   }
 
   .song-container {

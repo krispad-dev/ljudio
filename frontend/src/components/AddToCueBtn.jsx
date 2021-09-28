@@ -16,25 +16,21 @@ const disabledBtnStyles = {
 function AddToCueBtn({ videoId }) {
   const [{ activeCue, cuePosition }, dispatch] = useContext(playerControllerStateContext);
 
-  console.log(videoId);
-
   function saveToCue() {
-    const activeCueSpliced = [...activeCue];
-    activeCueSpliced.splice(cuePosition + 1, 0, videoId);
+    if (!isInCueList(videoId, activeCue)) {
+      const activeCueSpliced = [...activeCue];
+      activeCueSpliced.splice(cuePosition + 1, 0, videoId);
 
-    dispatch({ type: PLAYER_ACTIONS.ADD_SONG_TO_CUE, payload: activeCueSpliced });
-    toastMessage('Song added to cue!');
+      dispatch({ type: PLAYER_ACTIONS.ADD_SONG_TO_CUE, payload: activeCueSpliced });
+      toastMessage('Song added to cue!');
+    } else {
+      return;
+    }
   }
 
   return (
     <AddToCueBtnWrapper style={isInCueList(videoId, activeCue) ? disabledBtnStyles : {}}>
-      <Button
-        // color={'primary'}
-
-        style={{ color: '#eee' }}
-        onClick={saveToCue}
-        endIcon={<BiAddToQueue className='add-btn' />}
-      >
+      <Button style={{ color: '#eee' }} onClick={saveToCue} endIcon={<BiAddToQueue className='add-btn' />}>
         + Add To Cue
       </Button>
     </AddToCueBtnWrapper>
