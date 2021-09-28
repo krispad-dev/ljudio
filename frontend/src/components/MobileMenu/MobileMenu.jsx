@@ -52,4 +52,10 @@ const MobileMenuContainer = styled.div`
 	@media only screen and (max-width: 1000px) {
 		width: 100vw;
 	}
+
+
+	position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
 `;

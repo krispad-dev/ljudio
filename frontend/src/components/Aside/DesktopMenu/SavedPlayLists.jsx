@@ -35,14 +35,17 @@ const SavedPlayListsWrapper = styled.ul`
 		}
 	}
 
-	height: 100%;
+	height: max-content;
 	::-webkit-scrollbar {
 		display: none;
 	}
-	overflow-y: scroll;
-	color: #c4c4c4;
-	margin-bottom: 10px;
+
+	margin-bottom: 8rem;
 	width: 100%;
+
+	overflow: auto;
+	/* for Firefox */
+	min-height: 0;
 `;
 
 export default SavedPlayLists;

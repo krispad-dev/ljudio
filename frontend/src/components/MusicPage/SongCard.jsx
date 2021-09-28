@@ -38,7 +38,7 @@ export default SongCard;
 
 const SongCardWrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0.2rem 0rem;
   height: 3rem;
   width: 100%;
@@ -49,7 +49,7 @@ const SongCardWrapper = styled.div`
   position: relative;
 
   .thumbnail-title-container {
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     background-position: center;
     background-size: cover;

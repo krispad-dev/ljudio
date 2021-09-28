@@ -8,7 +8,6 @@ import SavedPlayLists from './SavedPlayLists';
 import FollowedPlaylists from './FollowedPlayLists';
 
 function PlaylistSection() {
-	
 	const [savedPlaylistIsOpen, setSavedPlaylistIsOpen] = useState(true);
 	const [followedPlaylistsIsOpen, setFollowedPlaylistsIsOpen] = useState(false);
 
@@ -21,8 +20,6 @@ function PlaylistSection() {
 		setSavedPlaylistIsOpen(false);
 		setFollowedPlaylistsIsOpen(!followedPlaylistsIsOpen);
 	}
-
-
 
 	return (
 		<PlayListSectionWrapper>
@@ -70,8 +67,9 @@ function PlaylistSection() {
 }
 
 const PlayListSectionWrapper = styled.div`
+	position: relative;
 	z-index: 999;
-	height: 84vh;
+	height: 85vh;
 	width: 100%;
 	scrollbar-width: thin;
 	scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
@@ -80,13 +78,25 @@ const PlayListSectionWrapper = styled.div`
 	align-items: flex-start;
 	.savedPlaylist-btn,
 	.followedPlaylists-btn {
+		&:hover {
+			color: #1dd1a1;
+			transition: 0.5s ease-in-out;
+		}
+		height: 1rem;
 		color: #c4c4c4;
-		padding: 0;
+		padding: 1rem 0.5;
 		margin-top: 0.3rem;
 		margin-bottom: 0.3rem;
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 		font-weight: 300;
 	}
+
+	margin-bottom: 5rem;
+	width: 100%;
+
+	overflow: auto;
+	/* for Firefox */
+	min-height: 0;
 `;
 
 export default PlaylistSection;

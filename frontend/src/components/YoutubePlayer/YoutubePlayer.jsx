@@ -17,6 +17,7 @@ function YouTubePlayer() {
 			currentTime,
 			cuePosition,
 			activeCue,
+			isPlaying
 		},
 
 		dispatch,
@@ -58,11 +59,13 @@ function YouTubePlayer() {
 
 	useEffect(() => {
 		const interval = setInterval(async () => {
-			const currentTime = await playerRef.current.internalPlayer.getCurrentTime();
-			dispatch({ type: PLAYER_ACTIONS.SET_CURRENT_TIME, payload: currentTime });
+			if(isPlaying) {
+				const currentTime = await playerRef.current.internalPlayer.getCurrentTime();
+				dispatch({ type: PLAYER_ACTIONS.SET_CURRENT_TIME, payload: currentTime });
+			}
 		}, 1000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [isPlaying]);
 
 	useEffect(async () => {
 		const durationInMinutes = await playerRef.current.internalPlayer.getDuration();
@@ -106,6 +109,7 @@ function YouTubePlayer() {
 			className={'ytPlayerContainer'}
 		>
 			;
+			<div className={'mask-bottom'}></div>
 			<YouTube
 				containerClassName={'ytplayer'}
 				opts={opts}
@@ -123,18 +127,33 @@ function YouTubePlayer() {
 export default YouTubePlayer;
 
 const IframeWrapper = styled.div`
+	position: relative;
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
 
 	.mask-top {
 		background-color: black;
-		height: 5rem;
+		height: 6rem;
 		position: absolute;
+		z-index: 888;
 		bottom: 0rem;
 		width: 100%;
 		display: flex;
 		justify-content: center;
 		letter-spacing: 6px;
+	}
+
+	.mask-bottom {
+		top: 0;
+		background-color: black;
+		height: 6rem;
+		position: absolute;
+		z-index: 888;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		letter-spacing: 6px;
+
 	}
 `;

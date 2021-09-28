@@ -44,7 +44,7 @@ const PlayListCardItemWrapper = styled.li`
 			}
 	}
 
-	width: 99%;
+	width: 100%;
 	&:hover {
 		opacity: 60%;
 		transition: 0.2s ease-in-out;
@@ -52,11 +52,11 @@ const PlayListCardItemWrapper = styled.li`
 
 	height: 3rem;
 	background-color: rgba(255, 255, 255, 0.08);
-	border: 3px solid black;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 5px;
+	border-radius: 2px;
+	margin: 0.1rem 0rem;
 
 	.songTitle {
 		font-size: 0.9rem;
@@ -72,6 +72,7 @@ const PlayListCardItemWrapper = styled.li`
 		color: #fff;
 		cursor: pointer;
 	}
+	
 `;
 
 export default PlayListCardItem;

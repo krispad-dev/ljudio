@@ -40,13 +40,15 @@ function PlaylistTitleHeader({ title, playlist }) {
   const playlistTitle = playlist && playlist.title && playlist.title;
   const followCount = playlist && playlist.followCount && playlist.followCount;
   const songCount = playlist && playlist.songs && playlist.songs.length;
-  const plylistCoverImage =
+  const playlistCoverImage =
     oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2];
+  
+  const isSongsInPlaylist = playlist && playlist.songs && playlist.songs.length && playlist.songs.length > 0;
 
   return (
     <PlaylistTitleHeaderWrapper
       className={'background-image'}
-      style={{ backgroundImage: `url(${plylistCoverImage ? plylistCoverImage.url : fallbackPlaceholderImage})` }}
+      style={{ backgroundImage: `url(${isSongsInPlaylist && isSongsInPlaylist ? playlistCoverImage && playlistCoverImage.url : fallbackPlaceholderImage})` }}
     >
       <div className={'playlist-title-and-info'}>
         <div className='playlist-info-container'>

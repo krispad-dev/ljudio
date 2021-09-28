@@ -11,7 +11,7 @@ function CurrentSongSideScroller() {
   const currentSongInfo = data && data.searchResults && data.searchResults.content[0];
 
   return (
-    <CurrentSongDisplayerWrapper style={{ visibility: `${isPlaying ? 'visible' : 'hidden'}` }}>
+    <CurrentSongDisplayerWrapper style={{ visibility: `${currentSongInfo && currentSongInfo.name && currentSongInfo.name !== 'Undefined' ? 'visible' : 'hidden'}` }}>
       <Marquee gradient={false}>
         <h4>
           <strong>{currentSongInfo && currentSongInfo.name}</strong>

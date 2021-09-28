@@ -7,13 +7,19 @@ import useGetOneArtist from '../../hooks/useGetOneArtist';
 import useGetSongs from '../../hooks/useGetSongs';
 import useGetOneSavedUserPlaylist from '../../hooks/useGetOneSavedUserPlaylist';
 
-import { FaUser } from 'react-icons/fa';
+const fallbackPlaceholderImage =
+  'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80';
+
 
 function AllPlaylistsListItemCard({ title, userName, playlistId, followCount, bgColor }) {
 	const { data: playlist } = useGetOneSavedUserPlaylist(playlistId);
 	const { data: song } = useGetSongs(
 		playlist && playlist.playlist && playlist.playlist.songs && playlist.playlist.songs[0]
 	);
+
+
+	const isSongs = playlist && playlist.playlist && playlist.playlist.songs && playlist.playlist.songs.length < 1;
+
 
 	const { data: artist } = useGetOneArtist(
 		song &&
@@ -25,18 +31,16 @@ function AllPlaylistsListItemCard({ title, userName, playlistId, followCount, bg
 
 	const bgImage = artist && artist.artist && artist.artist.thumbnails && artist.artist.thumbnails[2];
 
+
 	return (
 		<AllPlaylistsListItemCardWrapper
-			style={{ backgroundColor: bgColor, backgroundImage: `url(${bgImage && bgImage.url})` }}
+			style={{ backgroundColor: bgColor, backgroundImage: `url(${isSongs ? fallbackPlaceholderImage : bgImage && bgImage.url})` }}
 		>
 			<div className='follow'>
 				<FollowBtn playlistId={playlistId} />
 				<h3>{userName}</h3>
 			</div>
 			<Link className='link' to={`/playlist/${playlistId}`}>
-				<div className={'info-container'}>{/* 					<h3>
-						<FaUser />: {followCount}
-					</h3> */}</div>
 				<div className='title-container'>
 					<h1>{title}</h1>
 				</div>
