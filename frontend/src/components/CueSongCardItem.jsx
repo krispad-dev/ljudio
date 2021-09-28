@@ -49,13 +49,12 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
         >
           <div className='song-img-container'>
             <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
-          </div>
-
-          <div className='song-artist-container'>
-            <h2>
-              {index + 1}.&nbsp;{songName && shortenLongStrings(songName, 25)}
-            </h2>
-            <h3>{artistName && artistName}</h3>
+            <div className='song-artist-container'>
+              <h2>
+                {index + 1}.&nbsp;{songName && shortenLongStrings(songName, 25)}
+              </h2>
+              <h3>{artistName && artistName}</h3>
+            </div>
           </div>
 
           <div className='song-duration-container'>
@@ -109,17 +108,25 @@ const PlaylistsCardWrapper = styled.div`
     align-items: flex-start;
   }
 
+  @media (max-width: 986px) {
+    .song-duration-container {
+      display: none;
+    }
+  }
+
   .song-icon-container {
-    margin-right: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
   }
 
   .song-img-container {
+    display: flex;
+    flex-direction: row;
     img {
       border-radius: 2px;
       max-width: 50px;
+      margin-right: 2rem;
     }
   }
 `;

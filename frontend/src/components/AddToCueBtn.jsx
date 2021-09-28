@@ -27,13 +27,15 @@ function AddToCueBtn({ videoId }) {
   }
 
   return (
-    <AddToCueBtnWrapper>
+    <AddToCueBtnWrapper style={isInCueList(videoId, activeCue) ? disabledBtnStyles : {}}>
       <Button
-        color={'primary'}
+        // color={'primary'}
+
+        style={{ color: '#eee' }}
         onClick={saveToCue}
-        endIcon={<BiAddToQueue className='add-btn' style={isInCueList(videoId, activeCue) ? disabledBtnStyles : {}} />}
+        endIcon={<BiAddToQueue className='add-btn' />}
       >
-        Add To Cue
+        + Add To Cue
       </Button>
     </AddToCueBtnWrapper>
   );

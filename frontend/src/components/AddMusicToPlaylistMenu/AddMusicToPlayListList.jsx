@@ -44,9 +44,9 @@ function AddMusicToPlayListList() {
       )}
 
       {auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn />}
+      <p className='add-to-playlist-text'>Choose Playlist...</p>
       <CreatePlaylist />
 
-      <p className='add-to-playlist-text'>Add Song To Playlist</p>
       {data &&
         data.userPlaylists &&
         data.userPlaylists.map((playlist, index) => <AddMusicToPlaylistItem key={index} {...playlist} />)}
@@ -60,9 +60,10 @@ const AddMusicToPlayListListWrapper = styled.ul`
   animation: grow ease-in-out 0.1s;
 
   .add-to-playlist-text {
+    color: #555;
     margin-top: 1rem;
     font-weight: 900;
-    text-align: center;
+    margin-left: 1rem;
   }
 
   @keyframes grow {

@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import useRemoveSongFromPlaylist from '../hooks/useRemoveSongFromPlaylist';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 
+import { UiContext } from '../context/UiState';
+import { UI_STATE_ACTIONS } from '../reducers/UiReducer';
+
 function RemoveSongFromPlaylistBtn({ videoId, playlistId }) {
   const { mutate } = useRemoveSongFromPlaylist();
+  const { dispatch } = useContext(UiContext);
 
-  console.log(videoId, playlistId);
+  function onClickHandler() {
+    mutate({ videoId, playlistId });
+    setTimeout(() => {
+      dispatch({
+        type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
+        payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
+      });
+    }, 300);
+  }
 
   return (
     <RemoveSongFromPlaylistBtnWrapper>
       <Button
-        color={'primary'}
+        style={{ color: '#eee' }}
         endIcon={<IoIosCloseCircleOutline className='remove-btn' />}
-        onClick={() => mutate({ videoId, playlistId })}
+        onClick={onClickHandler}
       >
-        Remove Song
+        - Remove Song
       </Button>
     </RemoveSongFromPlaylistBtnWrapper>
   );

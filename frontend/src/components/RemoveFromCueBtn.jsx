@@ -8,26 +8,33 @@ import styled from 'styled-components';
 
 import { Button } from '@material-ui/core';
 import { UiContext } from '../context/UiState';
+import { UI_STATE_ACTIONS } from '../reducers/UiReducer';
 
 function RemoveFromCueBtn() {
   const [{ activeCue }, dispatch] = useContext(playerControllerStateContext);
-  const { state } = useContext(UiContext);
+  const { state, dispatch: dispatchUiContext } = useContext(UiContext);
 
   function onClickHandler(index) {
     const filteredPendingUserCue = [...activeCue].filter((cueItem, i) => {
       return index !== i;
     });
     dispatch({ type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: filteredPendingUserCue });
+    setTimeout(() => {
+      dispatchUiContext({
+        type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
+        payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
+      });
+    }, 200);
   }
 
   return (
     <RemoveFromCueBtnWrapper>
       <Button
         endIcon={<IoIosCloseCircleOutline className='remove-btn' />}
-        color='primary'
+        style={{ color: '#eee' }}
         onClick={(e) => onClickHandler(state.selectedSongCardIndex)}
       >
-        Remove From Cue
+        - Remove From Cue
       </Button>
     </RemoveFromCueBtnWrapper>
   );
