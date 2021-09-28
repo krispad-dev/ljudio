@@ -5,8 +5,8 @@ export const durationConverter = duration => {
 };
 
 export function isInPlaylist(playlistId, arr) {
-	if (!playlistId || !arr) {
-		return;
+	if (!Array.isArray(arr)) {
+		return false;
 	} else {
 		return arr.some(playlist => playlist.playlistId === playlistId);
 	}
