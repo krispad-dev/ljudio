@@ -10,7 +10,7 @@ function Footer() {
 
 	return (
 		<footer>
-{/* 			{auth && auth.loggedIn && <CurrentSongDisplayer />} */}
+			{auth && auth.loggedIn && <CurrentSongDisplayer />}
 			<PlayerController />
 		</footer>
 	);
