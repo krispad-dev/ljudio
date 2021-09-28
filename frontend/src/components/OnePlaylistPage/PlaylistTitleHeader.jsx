@@ -60,6 +60,7 @@ function PlaylistTitleHeader({ title, playlist }) {
           <div>
             <h1>{playlistTitle} </h1>
             {!isEditingTitle && isInUserPlaylist(id, playlistArray) && (
+              auth && auth.loggedIn &&
               <FaEdit
                 onClick={() => setIsEditingTitle(!isEditingTitle)}
                 style={{ color: '#1dd1a1', fontSize: '2rem', cursor: 'pointer' }}
