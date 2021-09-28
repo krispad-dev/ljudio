@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { BiAddToQueue, BiNoEntry } from 'react-icons/bi';
+import React, { useContext, useEffect } from 'react';
+import { BiAddToQueue } from 'react-icons/bi';
 import { playerControllerStateContext } from '../context/YouTubePlayerContext';
 import { isInCueList } from '../helpers/helpers';
 
 import styled from 'styled-components';
 import toastMessage from '../helpers/toasts';
+import { PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
 
 const disabledBtnStyles = {
   pointerEvents: 'none',
@@ -13,16 +14,24 @@ const disabledBtnStyles = {
 
 function AddToCueBtn({ videoId }) {
 
-  const [{ activeCue, cuePosition }] = useContext(playerControllerStateContext);
+  const [{ activeCue, cuePosition }, dispatch ] = useContext(playerControllerStateContext);
 
   function saveToCue() {
-    activeCue.splice(cuePosition + 1, 0, videoId);
+    const activeCueSpliced = [...activeCue]
+    activeCueSpliced.splice(cuePosition + 1, 0, videoId)
+ 
+    dispatch({type: PLAYER_ACTIONS.ADD_SONG_TO_CUE, payload: activeCueSpliced }) 
     toastMessage('Song added to cue!');
   }
 
   return (
     <AddToCueBtnWrapper>
-      <BiAddToQueue className='add-btn' onClick={saveToCue} style={isInCueList(videoId, activeCue) ? disabledBtnStyles : {}} />
+      
+      <BiAddToQueue 
+      className='add-btn' 
+      onClick={saveToCue} 
+      style={isInCueList(videoId, activeCue) ? disabledBtnStyles : {}} />
+
     </AddToCueBtnWrapper>
   );
 }
