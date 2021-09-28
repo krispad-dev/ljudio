@@ -46,6 +46,9 @@ export async function updatePlaylistTitle(req, res) {
     const data = { title, playlistId };
 
     await Playlist.UpdateUserPlaylistTitle(data);
+
+    return res.json({ success: true });
+
   } catch (error) {
     return res.status(400).json({ success: false });
   }

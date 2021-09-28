@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useQueryClient } from 'react-query';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import ShareUrlBtn from '../ShareUrlBtn';
@@ -23,17 +22,14 @@ const fallbackPlaceholderImage =
   'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1169&q=80';
 
 function PlaylistTitleHeader({ title, playlist }) {
-  const queryClient = useQueryClient();
-
+  
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [isChanged, setIsChanged] = useState(false);
-  const [currentTitle, setCurrentTitle] = useState('');
-
+  
   const { id } = useParams();
   const { data } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
   const { data: auth } = useAuth();
   const { data: userPlaylists } = useGetSavedUserPlaylists();
-  const { data: oneArtist, isSuccess } = useGetOneArtist(
+  const { data: oneArtist } = useGetOneArtist(
     data && data.searchResults && data.searchResults.content[0].artist.browseId
   );
 
@@ -45,14 +41,6 @@ function PlaylistTitleHeader({ title, playlist }) {
     oneArtist && oneArtist.artist && oneArtist.artist.thumbnails && oneArtist.artist.thumbnails[2];
   
   const isSongsInPlaylist = playlist && playlist.songs && playlist.songs.length && playlist.songs.length > 0;
-
-  useEffect(() => {
-
-      if(playlist && playlist.title) {
-        setCurrentTitle(playlist.title);
-      }
-  
-  }, [playlist]);
 
   return (
     <PlaylistTitleHeaderWrapper
@@ -67,7 +55,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 
         <div className='title-container'>
           <div>
-            {!isEditingTitle && <h1>{currentTitle}</h1>}
+            {!isEditingTitle && <h1>{playlistTitle}</h1>}
             {!isEditingTitle && isInUserPlaylist(id, playlistArray) && (
               auth && auth.loggedIn &&
               <FaEdit
@@ -81,11 +69,8 @@ function PlaylistTitleHeader({ title, playlist }) {
             <EditPlaylistTitle
               title={title}
               playlistId={id}
-              isChanged={isChanged}
-              setIsChanged={setIsChanged}
               isEditingTitle={isEditingTitle}
               setIsEditingTitle={setIsEditingTitle}
-              setCurrentTitle={setCurrentTitle}
             />
           )}
         </div>
