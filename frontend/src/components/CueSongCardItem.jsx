@@ -6,6 +6,7 @@ import RemoveSongFromPlaylistBtn from './RemoveSongFromPlaylistBtn';
 import useGetSavedUserPlaylists from '../hooks/useGetSavedUserPlaylists';
 import useAuth from '../hooks/useAuth';
 import AddToPlaylistBtn from './AddToPlaylistBtn';
+import { useWindowSize } from '@react-hook/window-size';
 
 import AddToCueBtn from './AddToCueBtn';
 import RemoveFromCueBtn from './RemoveFromCueBtn';
@@ -23,6 +24,7 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
   const { data: auth } = useAuth();
   const { pathname } = useLocation();
   const { data: userPlaylists } = useGetSavedUserPlaylists();
+  const [windowWidth, windowHeight] = useWindowSize();
 
   const fallbackDataString = data && data.searchResults && data.searchResults.content && data.searchResults.content[0];
 
@@ -41,10 +43,9 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
       {!isLoading && (
         <div
           className='song-container'
-          draggable={true}
+          draggable={windowWidth > 1024}
           onDrop={(e) => onDrop(e, index)}
           onDragStart={(e) => onDragStart(e, index)}
-          onTouchStart={(e) => onDragStart(e, index)}
         >
           <div className='song-img-container'>
             <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
