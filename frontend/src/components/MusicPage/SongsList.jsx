@@ -59,5 +59,4 @@ const SongListWrapper = styled.div`
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-
 `;
