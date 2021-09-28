@@ -27,6 +27,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+  const [currentTitle, setCurrentTitle] = useState('');
 
   const { id } = useParams();
   const { data } = useGetSongs(playlist && playlist.songs && playlist.songs[0]);
@@ -45,6 +46,14 @@ function PlaylistTitleHeader({ title, playlist }) {
   
   const isSongsInPlaylist = playlist && playlist.songs && playlist.songs.length && playlist.songs.length > 0;
 
+  useEffect(() => {
+
+      if(playlist && playlist.title) {
+        setCurrentTitle(playlist.title);
+      }
+  
+  }, [playlist]);
+
   return (
     <PlaylistTitleHeaderWrapper
       className={'background-image'}
@@ -58,7 +67,7 @@ function PlaylistTitleHeader({ title, playlist }) {
 
         <div className='title-container'>
           <div>
-            <h1>{playlistTitle} </h1>
+            {!isEditingTitle && <h1>{currentTitle}</h1>}
             {!isEditingTitle && isInUserPlaylist(id, playlistArray) && (
               auth && auth.loggedIn &&
               <FaEdit
@@ -76,6 +85,7 @@ function PlaylistTitleHeader({ title, playlist }) {
               setIsChanged={setIsChanged}
               isEditingTitle={isEditingTitle}
               setIsEditingTitle={setIsEditingTitle}
+              setCurrentTitle={setCurrentTitle}
             />
           )}
         </div>
@@ -150,6 +160,12 @@ const PlaylistTitleHeaderWrapper = styled.div`
 
     div {
       margin: 0.3rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .title-container h1 {
+      font-size: 1.5rem;
     }
   }
 `;

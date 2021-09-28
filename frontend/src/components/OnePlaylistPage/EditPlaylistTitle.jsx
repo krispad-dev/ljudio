@@ -4,12 +4,14 @@ import { FaCheck, FaRegTimesCircle } from 'react-icons/fa';
 import useChangePlaylistTitle from '../../hooks/useChangePlaylistTitle';
 import styled from 'styled-components';
 
-function EditPlaylistTitle({ title, setIsChanged, setIsEditingTitle, playlistId }) {
+
+function EditPlaylistTitle({ title, setIsChanged, setIsEditingTitle, playlistId, setCurrentTitle }) {
 	const [value, setValue] = useState(title);
 	const { mutate } = useChangePlaylistTitle();
 
 	function confirmChange() {
 		mutate({ title: value, playlistId });
+		setCurrentTitle(value);
 		setIsChanged(true);
 		setIsEditingTitle(false);
 	}
@@ -27,12 +29,12 @@ function EditPlaylistTitle({ title, setIsChanged, setIsEditingTitle, playlistId 
 			/>
 			<FaCheck
 				onClick={confirmChange}
-				style={{ color: '#FFF', marginTop: '0.5rem', marginLeft: '0.5rem', fontSize: '2rem' }}
+				className="check"
 			/>
 
 			<FaRegTimesCircle
 				onClick={() => setIsEditingTitle(false)}
-				style={{ color: '#FFF', marginTop: '1rem', marginLeft: '0.5rem', fontSize: '2rem' }}
+				className="close"
 			/>
 		</EditPlaylistTitleWrapper>
 	);
@@ -50,6 +52,29 @@ const EditPlaylistTitleWrapper = styled.div`
 
 		::placeholder {
 			color: #fff;
+		}
+	}
+
+	.check {
+		font-size: 2rem;
+		color: #FFF;
+		margin: 0.5rem;
+	}
+
+	.close {
+		font-size: 2rem;
+		color: #FFF;
+	}
+
+	@media (max-width: 400px) {
+		.check, .close {
+			font-size: 3rem;
+			margin: 0.3rem;
+		}
+
+		input {
+			width: 100%;
+		
 		}
 	}
 `;
