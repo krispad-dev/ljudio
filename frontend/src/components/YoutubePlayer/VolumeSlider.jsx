@@ -39,6 +39,6 @@ const VolumeSliderContainer = styled.div`
 		width: 80vw;
 	}
 	h6 {
-		margin-right: 1rem;
+		margin-left: 1rem;
 	}
 `;
