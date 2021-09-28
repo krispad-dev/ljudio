@@ -10,7 +10,8 @@ function MusicPlayBtn({ videoId, index }) {
   const { pathname } = useLocation();
 
   const [
-    { currentSong, isPlaying, pauseVideo, playVideo, pendingCue, pendingUserCue, cuePosition, activeCue },
+    { isPlaying, pauseVideo, playVideo, pendingCue, cuePosition, activeCue },
+
     dispatchPlayerControllerStateContext,
   ] = useContext(playerControllerStateContext);
 
@@ -26,7 +27,9 @@ function MusicPlayBtn({ videoId, index }) {
         payload: [...pendingCue],
       });
     } else if (pathname !== '/cue') {
-      activeCue.splice(cuePosition, 0, videoId);
+      const activeCueSpliced = [...activeCue];
+      activeCueSpliced.splice(cuePosition, 0, videoId);
+      dispatchPlayerControllerStateContext({ type: PLAYER_ACTIONS.SET_ACTIVE_CUE, payload: activeCueSpliced });
     }
   }
 
@@ -37,13 +40,17 @@ function MusicPlayBtn({ videoId, index }) {
           className='play-btn'
           onClick={() => pauseVideo()}
           style={
-            (activeCue[cuePosition] === videoId && isPlaying) || index === cuePosition
-              ? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' }
-              : {}
+            activeCue[cuePosition] === videoId && isPlaying ? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' } : {}
           }
         />
       ) : (
-        <IoPlayCircleOutline onClick={() => playVideo()} className='play-btn' />
+        <IoPlayCircleOutline
+          onClick={() => playVideo()}
+          className='play-btn'
+          style={
+            activeCue[cuePosition] === videoId && isPlaying ? { color: '#1dd1a1', transition: 'ease-in-out 0.2s' } : {}
+          }
+        />
       )}
     </MusicPlayBtnWrapper>
   );

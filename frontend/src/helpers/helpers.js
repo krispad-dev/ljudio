@@ -20,6 +20,14 @@ export function isInUserPlaylist(playlistId, arr) {
 	}
 }
 
+export function isInCueList(videoId, arr) {
+	if (!Array.isArray(arr)) {
+		return false;
+	} else {
+		return arr.some(arrItem => arrItem === videoId);
+	}
+}
+
 export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }

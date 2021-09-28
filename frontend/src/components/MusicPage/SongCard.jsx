@@ -10,7 +10,6 @@ import { shortenLongStrings } from '../../helpers/helpers';
 
 function SongCard({ videoId, name, artist, thumbnails, index }) {
   const { data: auth } = useAuth();
-  // const { state } = useContext(UiContext);
 
   return (
     <SongCardWrapper>
