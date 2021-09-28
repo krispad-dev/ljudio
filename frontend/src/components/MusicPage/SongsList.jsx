@@ -6,10 +6,9 @@ import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 
 import useGetSongs from '../../hooks/useGetSongs';
 import SongCard from './SongCard';
-import SkeletonLoader from '../Loaders/SkeletonLoader';
 import styled from 'styled-components';
 import AddMusicToPlayListList from '../AddMusicToPlaylistMenu/AddMusicToPlayListList';
-import MyLoader from '../Loaders/SongListLoader';
+
 import SongListLoader from '../Loaders/SongListLoader';
 
 function SongsList() {

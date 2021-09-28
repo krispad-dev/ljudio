@@ -3,7 +3,6 @@ import { UiContext } from '../../context/UiState';
 import styled from 'styled-components';
 import useGetArtists from '../../hooks/useGetArtists';
 import ArtistCard from './ArtistCard';
-import SkeletonLoader from '../Loaders/SkeletonLoader';
 import GridLoader from '../Loaders/GridLoader';
 
 const colors = [

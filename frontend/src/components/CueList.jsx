@@ -8,6 +8,8 @@ import CueSongCardItem from './CueSongCardItem';
 import AddMusicToPlayListList from './AddMusicToPlaylistMenu/AddMusicToPlayListList';
 import styled from 'styled-components';
 
+import SongListLoader from '../components/Loaders/SongListLoader';
+
 function CueList() {
   const { state } = useContext(UiContext);
 
@@ -37,6 +39,7 @@ function CueList() {
   return (
     <CueListWrapper onDragOver={(e) => onDragOver(e)}>
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
+      {!activeCue && <SongListLoader />}
       {activeCue.map((song, i) => {
         return (
           <CueSongCardItem key={i} song={song} cueId={song.id} index={i} onDragStart={onDragStart} onDrop={onDrop} />
