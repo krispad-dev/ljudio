@@ -15,9 +15,6 @@ function DesktopMenu() {
 }
 
 const AsideMenuWrapper = styled.div`
-  margin-top: 1rem;
-
-  height: 100%;
   width: 95%;
   .logout-btn-container {
     margin-left: 1rem;
@@ -35,6 +32,13 @@ const AsideMenuWrapper = styled.div`
     color: #c4c4c4;
     cursor: default;
   }
+  
+@media(max-width: 1000px) {
+  width: 100%;
+
+} 
+
+
 `;
 
 export default DesktopMenu;

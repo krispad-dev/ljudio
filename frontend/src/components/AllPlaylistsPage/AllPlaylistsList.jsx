@@ -7,6 +7,7 @@ import useSearchPlaylists from '../../hooks/useSearchPlaylists';
 
 import { UiContext } from '../../context/UiState';
 import { UI_STATE_ACTIONS } from '../../reducers/UiReducer';
+import GridLoader from '../Loaders/GridLoader';
 
 const colors = [
   '#ff9ff3',
@@ -36,7 +37,7 @@ function AllPlaylistsList() {
   // const { data: allPlaylists } = useGetAllPlaylists();
   const { state, dispatch } = useContext(UiContext);
 
-  const { data: allPlaylists } = useSearchPlaylists(state.headerSearchString);
+  const { data: allPlaylists, isLoading } = useSearchPlaylists(state.headerSearchString);
 
   useEffect(() => {
     dispatch({
@@ -46,13 +47,16 @@ function AllPlaylistsList() {
   }, []);
 
   return (
-    <AllPlaylistsListWrapper>
-      {allPlaylists &&
-        allPlaylists.playlists &&
-        allPlaylists.playlists.map((playlist, i) => (
-          <AllPlaylistsListItemCard key={playlist.playlistId} {...playlist} bgColor={colors[i]} />
-        ))}
-    </AllPlaylistsListWrapper>
+    <>
+      {isLoading && <GridLoader />}
+      <AllPlaylistsListWrapper>
+        {allPlaylists &&
+          allPlaylists.playlists &&
+          allPlaylists.playlists.map((playlist, i) => (
+            <AllPlaylistsListItemCard key={playlist.playlistId} {...playlist} bgColor={colors[i]} />
+          ))}
+      </AllPlaylistsListWrapper>
+    </>
   );
 }
 

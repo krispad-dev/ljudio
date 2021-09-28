@@ -35,10 +35,14 @@ const FollowingPlayListWrapper = styled.ul`
   ::-webkit-scrollbar {
     display: none;
   }
-  overflow-y: scroll;
-  color: #c4c4c4;
-  margin-bottom: 10px;
-  width: 100%;
+	margin-bottom: 8rem;
+	width: 100%;
+
+	overflow: auto;
+	/* for Firefox */
+	min-height: 0;
+
+
 `;
 
 export default FollowedPlaylists;

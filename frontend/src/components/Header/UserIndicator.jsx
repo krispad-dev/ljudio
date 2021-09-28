@@ -25,7 +25,7 @@ export default UserIndicator;
 const UserIndicatorWrappe = styled.div`
   background-color: #222;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 2px;
 
   display: flex;
   justify-content: space-between;

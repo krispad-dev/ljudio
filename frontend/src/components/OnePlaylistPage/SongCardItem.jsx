@@ -12,7 +12,7 @@ import RemoveFromCueBtn from '../RemoveFromCueBtn';
 import { useParams, useLocation } from 'react-router-dom';
 
 //HELPER
-import { durationConverter } from '../../helpers/helpers';
+import { durationConverter, shortenLongStrings } from '../../helpers/helpers';
 import { isInUserPlaylist } from '../../helpers/helpers';
 
 function SongCardItem({ song, index, cueId }) {
@@ -37,50 +37,47 @@ function SongCardItem({ song, index, cueId }) {
   const duration = fallbackDataString && fallbackDataString.duration;
 
   return (
-    <>
-      {data && data.searchResults && data.searchResults.content[0] && (
-        <PlaylistsCardWrapper>
-          {isLoading && <SkeletonLoader />}
-          {!isLoading && (
-            <div className='song-container'>
-              <div className='song-img-container'>
-                <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
-              </div>
-              <div className='song-artist-container'>
-                <h2>{songName && songName}</h2>
-                <h3>{artistName && artistName}</h3>
-              </div>
+    <PlaylistsCardWrapper>
+      {isLoading && <SkeletonLoader />}
+      {!isLoading && (
+        <div className='song-container'>
+          <div className='song-img-container'>
+            <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
+          </div>
+          <div className='song-artist-container'>
+            {/* <h2>{songName && songName}</h2> */}
+            <h2>{songName && shortenLongStrings(songName, 20)}</h2>
+            <h3>{artistName && artistName}</h3>
+          </div>
 
-              <div className='song-duration-container'>
-                <h2>Duration</h2>
-                <h3>{durationConverter(duration && duration)}</h3>
-              </div>
-              <div className='song-icon-container'>
-                {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
+          <div className='song-duration-container'>
+            <h2>Duration</h2>
+            <h3>{durationConverter(duration && duration)}</h3>
+          </div>
+          <div className='song-icon-container'>
+            {auth && auth.loggedIn && <AddToPlaylistBtn videoId={song} />}
 
-                {userPlaylists &&
-                  userPlaylists.userPlaylists &&
-                  auth.loggedIn &&
-                  isInUserPlaylist(id, userPlaylists.userPlaylists) && (
-                    <RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
-                  )}
+            {userPlaylists &&
+              userPlaylists.userPlaylists &&
+              auth.loggedIn &&
+              isInUserPlaylist(id, userPlaylists.userPlaylists) && (
+                <RemoveSongFromPlaylistBtn videoId={song} playlistId={id} />
+              )}
 
-                <MusicPlayBtn
-                  index={index}
-                  videoId={song}
-                  name={songName && songName}
-                  artist={artistName && artistName}
-                  thumbnails={thumbnailImg && thumbnailImg}
-                />
+            <MusicPlayBtn
+              index={index}
+              videoId={song}
+              name={songName && songName}
+              artist={artistName && artistName}
+              thumbnails={thumbnailImg && thumbnailImg}
+            />
 
-                {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
-                {auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} />}
-              </div>
-            </div>
-          )}
-        </PlaylistsCardWrapper>
+            {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
+            {auth && auth.loggedIn && pathname === '/cue' && <RemoveFromCueBtn videoId={song} cueId={cueId} />}
+          </div>
+        </div>
       )}
-    </>
+    </PlaylistsCardWrapper>
   );
 }
 

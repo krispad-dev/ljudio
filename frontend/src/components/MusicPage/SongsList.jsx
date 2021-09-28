@@ -9,55 +9,57 @@ import SongCard from './SongCard';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 import styled from 'styled-components';
 import AddMusicToPlayListList from '../AddMusicToPlaylistMenu/AddMusicToPlayListList';
+import MyLoader from '../Loaders/SongListLoader';
+import SongListLoader from '../Loaders/SongListLoader';
 
 function SongsList() {
-	const { state } = useContext(UiContext);
-	const [playerState, dispatch] = useContext(playerControllerStateContext);
+  const { state } = useContext(UiContext);
+  const [playerState, dispatch] = useContext(playerControllerStateContext);
 
-	const { data, isLoading } = useGetSongs(state.headerSearchString);
+  const { data, isLoading } = useGetSongs(state.headerSearchString);
 
-	const musicArrayToFilter = data && data.searchResults && data.searchResults.content && data.searchResults.content;
+  const musicArrayToFilter = data && data.searchResults && data.searchResults.content && data.searchResults.content;
 
-	const filteredOutSongsArray =
-		musicArrayToFilter &&
-		[...musicArrayToFilter].map(song => {
-			return song.videoId;
-		});
+  const filteredOutSongsArray =
+    musicArrayToFilter &&
+    [...musicArrayToFilter].map((song) => {
+      return song.videoId;
+    });
 
-	useEffect(() => {
-		dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutSongsArray });
-	}, [data]);
+  useEffect(() => {
+    dispatch({ type: PLAYER_ACTIONS.SET_PENDING_CUE, payload: filteredOutSongsArray });
+  }, [data]);
 
-	return (
-		<>
-			{isLoading && <SkeletonLoader />}
-			{state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
-			<SongListWrapper>
-				{data &&
-					data.searchResults &&
-					data.searchResults.content &&
-					data.searchResults.content.map((item, index) => {
-						return <SongCard index={index} key={item.videoId} {...item} />;
-					})}
-			</SongListWrapper>
-		</>
-	);
+  return (
+    <>
+      {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
+      <SongListWrapper>
+        {isLoading && <SongListLoader />}
+
+        {data &&
+          data.searchResults &&
+          data.searchResults.content &&
+          data.searchResults.content.map((item, index) => {
+            return <SongCard index={index} key={item.videoId} {...item} />;
+          })}
+      </SongListWrapper>
+    </>
+  );
 }
 
 export default SongsList;
 
 const SongListWrapper = styled.div`
-	height: 40vh;
-	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
+  height: 40vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 
-	::-webkit-scrollbar {
-	display: none;
-	}
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 
-	box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05)
-
+  box-shadow: 25px 25px 35px rgba(104, 104, 104, 0.05);
 `;

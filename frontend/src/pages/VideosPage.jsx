@@ -14,5 +14,4 @@ export default VideosPage;
 
 const VideosPageWrapper = styled.div`
   width: 100%;
-
 `;
