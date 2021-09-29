@@ -31,12 +31,6 @@ function Controller() {
 			</div>
 
 			<div className={'buttonsContainer'}>
-				<CgScreen
-					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE })}
-					className={'showVideo'}
-					style={{ color: '#fff', fontSize: '1rem', margin: '0.5rem' }}
-				/>
-
 				<MdSkipNext
 					className={'next-prevBtn'}
 					style={{ color: '#fff', fontSize: '3rem', transform: 'rotate(-180deg)' }}
@@ -54,10 +48,16 @@ function Controller() {
 				<MdSkipNext
 					onClick={setNextInCueHandler}
 					className={'next-prevBtn'}
-					style={{ color: '#fff', fontSize: '3rem', margin: '0.5rem' }}
+					style={{ color: '#fff', fontSize: '3rem' }}
 				/>
-				<ShuffleBtn />
+
+				<CgScreen
+					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE })}
+					className={'showVideo'}
+					style={{ color: '#fff', fontSize: '1rem', margin: '1rem', cursor: 'pointer' }}
+				/>
 				<RepeatBtn />
+				<ShuffleBtn />
 			</div>
 
 			<div>
@@ -94,6 +94,7 @@ const PlayerControllerWrapper = styled.div`
 	}
 
 	.buttonsContainer {
+
 		display: flex;
 		justify-content: center;
 		align-items: center;
