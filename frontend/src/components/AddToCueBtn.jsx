@@ -8,6 +8,9 @@ import styled from 'styled-components';
 import toastMessage from '../helpers/toasts';
 import { PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
 
+import { UiContext } from '../context/UiState';
+import { UI_STATE_ACTIONS } from '../reducers/UiReducer';
+
 const disabledBtnStyles = {
   pointerEvents: 'none',
   opacity: '40%',
@@ -15,6 +18,7 @@ const disabledBtnStyles = {
 
 function AddToCueBtn({ videoId }) {
   const [{ activeCue, cuePosition }, dispatch] = useContext(playerControllerStateContext);
+  const { dispatch: dispatchUiContext } = useContext(UiContext);
 
   function saveToCue() {
     if (!isInCueList(videoId, activeCue)) {
@@ -22,6 +26,12 @@ function AddToCueBtn({ videoId }) {
       activeCueSpliced.splice(cuePosition + 1, 0, videoId);
 
       dispatch({ type: PLAYER_ACTIONS.ADD_SONG_TO_CUE, payload: activeCueSpliced });
+      setTimeout(() => {
+        dispatchUiContext({
+          type: UI_STATE_ACTIONS.CLOSE_SAVE_SONG_TO_PLAYLIST_SELECTOR_SECTION,
+          payload: { saveSongToPlaylistSelectorSectionIsOpen: false },
+        });
+      }, 200);
       toastMessage('Song added to cue!');
     } else {
       return;

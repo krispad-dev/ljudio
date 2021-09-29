@@ -35,6 +35,9 @@ function PlaylistList() {
       <PlaylistTitleHeader isSuccess={isSuccess} playlist={data && data.success && data.playlist} />
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
       <PlayListCaPlaylistListWrapper>
+        {data && data.success && data.playlist.songs && !data.playlist.songs.length && (
+          <h2 className='empty-cue'>Wow, such empty... </h2>
+        )}
         {isLoading && <SongListLoader />}
         {data &&
           data.success &&
@@ -55,6 +58,9 @@ const PlayListCaPlaylistListWrapper = styled.div`
   scrollbar-width: none; /* Firefox */
   ::-webkit-scrollbar {
     display: none;
+  }
+  .empty-cue {
+    padding: 1rem;
   }
 `;
 
