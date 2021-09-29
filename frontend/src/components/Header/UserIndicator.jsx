@@ -32,7 +32,6 @@ const UserIndicatorWrappe = styled.div`
   align-items: center;
 
   .user-info {
-    width: 70%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
