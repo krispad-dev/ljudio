@@ -71,12 +71,12 @@ function YouTubePlayer() {
 
 	function onEndHandler() {
 		if (!repeatIsOn) {
-			const filteredPenfingCue = [...activeCue].filter((item, i) => {
+			const filteredPendingCue = [...activeCue].filter((item, i) => {
 				return i !== cuePosition;
 			});
 			dispatch({
 				type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
-				payload: filteredPenfingCue,
+				payload: filteredPendingCue,
 			});
 		}
 
