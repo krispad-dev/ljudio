@@ -4,6 +4,10 @@ export const durationConverter = (duration) => {
   return (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 };
 
+export const getTime = (time) => {
+  return Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2);
+};
+
 export function isInPlaylist(playlistId, arr) {
   if (!Array.isArray(arr)) {
     return false;
