@@ -40,7 +40,7 @@ function CueList() {
   return (
     <CueListWrapper onDragOver={(e) => onDragOver(e)}>
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
-      {!activeCue.length && <h2 className='empty-cue'>Wow, such empty...</h2>}
+      {!activeCue.length && <h2 className='empty-cue'>No songs in cue...Add some!</h2>}
       {!activeCue && <SongListLoader />}
       {activeCue.map((song, i) => {
         return (

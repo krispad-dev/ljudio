@@ -33,6 +33,9 @@ function SongsList() {
     <>
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
       <SongListWrapper>
+        {data && data.searchResults && data.searchResults.content && !data.searchResults.content.length && (
+          <h2 className='no-results'>NO RESULTS</h2>
+        )}
         {isLoading && <SongListLoader />}
 
         {data &&
@@ -59,4 +62,12 @@ const SongListWrapper = styled.div`
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+
+  .no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    margin-top: 6rem;
+  }
 `;

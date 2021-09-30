@@ -37,6 +37,9 @@ function ArtiststList() {
     <>
       {isLoading && <GridLoader />}
 
+      {data && data.searchResults && data.searchResults.content && data.searchResults.content.length > 0 && (
+        <h2 style={{ fontWeight: '300', fontSize: '1.5rem' }}>Artists</h2>
+      )}
       <ArtistsListWrapper>
         {data &&
           data.searchResults &&

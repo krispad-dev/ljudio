@@ -36,7 +36,7 @@ function PlaylistList() {
       {state.saveSongToPlaylistSelectorSectionIsOpen && <AddMusicToPlayListList />}
       <PlayListCaPlaylistListWrapper>
         {data && data.success && data.playlist.songs && !data.playlist.songs.length && (
-          <h2 className='empty-cue'>Wow, such empty... </h2>
+          <h2 className='empty-cue'>No songs in this playlist...Add some!</h2>
         )}
         {isLoading && <SongListLoader />}
         {data &&
