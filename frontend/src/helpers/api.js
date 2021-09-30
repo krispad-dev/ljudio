@@ -19,7 +19,7 @@ export const Fetch = {
     const data = await res.json();
 
     if (!res.ok) {
-      return { error: 'Error!' };
+      return { error: data.message };
     }
 
     return data;
