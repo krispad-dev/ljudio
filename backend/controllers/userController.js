@@ -81,7 +81,7 @@ export async function followPlaylist(req, res) {
 
     return res.json({ success: true });
   } catch (error) {
-    return res.json({ success: false });
+    return res.status(400).json({ success: false });
   }
 }
 
@@ -102,7 +102,7 @@ export async function unFollowPlaylist(req, res) {
 
     return res.json({ success: true });
   } catch (error) {
-    return res.json({ success: false });
+    return res.status(400).json({ success: false });
   }
 }
 
@@ -113,5 +113,7 @@ export async function getFollowedPlaylists(req, res) {
     const followedPlaylists = await Playlist.GetFollowedPlaylists(userId);
 
     return res.json({ success: true, followedPlaylists });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(400).json({ success: false });
+  }
 }
