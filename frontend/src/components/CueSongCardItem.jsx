@@ -2,28 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import useGetSongs from '../hooks/useGetSongs';
 import MusicPlayBtn from './MusicPlayBtn';
-import RemoveSongFromPlaylistBtn from './RemoveSongFromPlaylistBtn';
-import useGetSavedUserPlaylists from '../hooks/useGetSavedUserPlaylists';
+
 import useAuth from '../hooks/useAuth';
 import AddToPlaylistBtn from './AddToPlaylistBtn';
 import { useWindowSize } from '@react-hook/window-size';
 
 import AddToCueBtn from './AddToCueBtn';
-import RemoveFromCueBtn from './RemoveFromCueBtn';
-import { useParams, useLocation } from 'react-router-dom';
+
+import { useLocation, Link } from 'react-router-dom';
 
 //HELPER
 import { durationConverter, shortenLongStrings } from '../helpers/helpers';
-import { isInUserPlaylist } from '../helpers/helpers';
 
 function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
   //VideoID (song-prop) får göra en förfågan till Youtbe-api.
 
-  const { id } = useParams();
   const { data, isLoading } = useGetSongs(song);
   const { data: auth } = useAuth();
   const { pathname } = useLocation();
-  const { data: userPlaylists } = useGetSavedUserPlaylists();
+
   const [windowWidth, windowHeight] = useWindowSize();
 
   const fallbackDataString = data && data.searchResults && data.searchResults.content && data.searchResults.content[0];
@@ -49,12 +46,14 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
         >
           <div className='song-img-container'>
             <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
-            <div className='song-artist-container'>
-              <h2>
-                {index + 1}.&nbsp;{songName && shortenLongStrings(songName, 25)}
-              </h2>
-              <h3>{artistName && artistName}</h3>
-            </div>
+            <Link to={`/songs/${song}`}>
+              <div className='song-artist-container'>
+                <h2>
+                  {index + 1}.&nbsp;{songName && shortenLongStrings(songName, 25)}
+                </h2>
+                <h3>{artistName && artistName}</h3>
+              </div>
+            </Link>
           </div>
 
           <div className='song-duration-container'>
@@ -71,9 +70,7 @@ function CueSongCardItem({ song, index, cueId, onDragStart, onDrop }) {
             />
 
             {auth && auth.loggedIn && pathname !== '/cue' && <AddToCueBtn videoId={song} cueId={cueId} />}
-            {/* {auth && auth.loggedIn && pathname === '/cue' && (
-              <RemoveFromCueBtn videoId={song} cueId={cueId} index={index} />
-            )} */}
+
             {auth && auth.loggedIn && <AddToPlaylistBtn index={index} videoId={song} />}
           </div>
         </div>
@@ -128,6 +125,13 @@ const PlaylistsCardWrapper = styled.div`
       border-radius: 2px;
       max-width: 50px;
       margin-right: 2rem;
+    }
+  }
+
+  .song-artist-container:hover {
+    h2,
+    h3 {
+      color: #1dd1a1;
     }
   }
 `;

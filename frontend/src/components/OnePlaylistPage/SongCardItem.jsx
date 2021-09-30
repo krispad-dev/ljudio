@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import useGetSongs from '../../hooks/useGetSongs';
 import MusicPlayBtn from '../MusicPlayBtn';
 
@@ -33,10 +34,12 @@ function SongCardItem({ song, index, cueId }) {
         <div className='song-container'>
           <div className='song-img-container'>
             <img src={thumbnailImg && thumbnailImg} alt='song-cover' />
-            <div className='song-artist-container'>
-              <h2>{songName && shortenLongStrings(songName, 20)}</h2>
-              <h3>{artistName && artistName}</h3>
-            </div>
+            <Link to={`/songs/${song}`}>
+              <div className='song-artist-container'>
+                <h2>{songName && shortenLongStrings(songName, 20)}</h2>
+                <h3>{artistName && artistName}</h3>
+              </div>
+            </Link>
           </div>
 
           <div className='song-duration-container'>
@@ -98,6 +101,13 @@ const PlaylistsCardWrapper = styled.div`
       border-radius: 2px;
       max-width: 50px;
       margin-right: 2rem;
+    }
+  }
+
+  .song-artist-container:hover {
+    h2,
+    h3 {
+      color: #1dd1a1;
     }
   }
 `;
