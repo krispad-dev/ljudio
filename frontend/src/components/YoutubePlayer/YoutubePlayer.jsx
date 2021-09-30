@@ -80,10 +80,16 @@ function YouTubePlayer() {
 			});
 		}
 
-		if (repeatIsOn) {
+		if ( repeatIsOn && cuePosition !== 0 ) {
 			dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE });
 			dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
-		}
+		} else if ( repeatIsOn && cuePosition === 0 ) {
+			dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+			dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE });
+		}  else {
+			dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE });
+			dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+		} 
 
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, playload: false });
