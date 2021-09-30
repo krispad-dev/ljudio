@@ -24,6 +24,7 @@ function EditPlaylistTitle({ title, setIsEditingTitle, playlistId }) {
 				variant={'filled'}
 				color='primary'
 				placeholder='New title:'
+				inputProps={{ maxLength: 14 }}
 			/>
 			<FaCheck
 				onClick={confirmChange}
