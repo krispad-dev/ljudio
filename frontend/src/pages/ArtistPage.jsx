@@ -9,7 +9,7 @@ import ShareUrlBtn from '../components/ShareUrlBtn';
 import noDescriptionPlaceholder from '../assets/na.svg';
 
 function ArtistPage() {
-  const { state, dispatch } = useContext(UiContext);
+  const { dispatch } = useContext(UiContext);
   const { id } = useParams();
   const { data } = useGetOneArtist(id);
 
@@ -39,10 +39,10 @@ function ArtistPage() {
 
       <div
         className='description-container'
-        style={{ backgroundImage: `url(${!artistDescription ? noDescriptionPlaceholder : artistDescription})` }}
+        style={{ backgroundImage: `url(${!artistDescription && noDescriptionPlaceholder})` }}
       >
         {artistDescription && <h1>About:</h1>}
-        <p>{artistDescription}</p>
+        <p>{artistDescription && artistDescription}</p>
       </div>
 
       <div>
