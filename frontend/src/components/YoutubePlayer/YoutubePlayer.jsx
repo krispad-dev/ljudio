@@ -6,25 +6,14 @@ import styled from 'styled-components';
 import { PLAYER_ACTIONS } from '../../reducers/YouTubePlayerReducer';
 import { useWindowSize } from '@react-hook/window-size';
 
-
 function YouTubePlayer() {
 	const playerRef = useRef();
 
-	const [
+	const [{ fullscreenVideoMode, currentTime, cuePosition, activeCue, isPlaying, repeatIsOn }, dispatch] = useContext(
+		playerControllerStateContext
+	);
 
-		{
-			fullscreenVideoMode,
-			currentTime,
-			cuePosition,
-			activeCue,
-			isPlaying
-		},
-
-		dispatch,
-
-	] = useContext(playerControllerStateContext);
-
-	const [ windowWidth, windowHeight ] = useWindowSize();
+	const [windowWidth, windowHeight] = useWindowSize();
 
 	const opts = {
 		controls: 0,
@@ -60,7 +49,7 @@ function YouTubePlayer() {
 
 	useEffect(() => {
 		const interval = setInterval(async () => {
-			if(isPlaying) {
+			if (isPlaying) {
 				const currentTime = await playerRef.current.internalPlayer.getCurrentTime();
 				dispatch({ type: PLAYER_ACTIONS.SET_CURRENT_TIME, payload: currentTime });
 			}
@@ -81,15 +70,27 @@ function YouTubePlayer() {
 	}, []);
 
 	function onEndHandler() {
-		const filteredPenfingCue = [...activeCue].filter((item, i) => {
-			return i !== cuePosition;
-		});
-		dispatch({
-			type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
-			payload: filteredPenfingCue,
-		});
+		if (!repeatIsOn) {
+			const filteredPendingCue = [...activeCue].filter((item, i) => {
+				return i !== cuePosition;
+			});
+			dispatch({
+				type: PLAYER_ACTIONS.SET_ACTIVE_CUE,
+				payload: filteredPendingCue,
+			});
+		}
 
-/* 		dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE }); */
+		if ( repeatIsOn && cuePosition !== 0 ) {
+			dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE });
+			dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+		} else if ( repeatIsOn && cuePosition === 0 ) {
+			dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+			dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE });
+		}  else {
+			dispatch({ type: PLAYER_ACTIONS.SET_PREVIOUS_IN_CUE });
+			dispatch({ type: PLAYER_ACTIONS.SET_NEXT_IN_CUE });
+		} 
+
 		dispatch({ type: PLAYER_ACTIONS.SET_PLAYER_IS_PAUSED, payload: false });
 		dispatch({ type: PLAYER_ACTIONS.SET_IS_PLAYING, playload: false });
 	}
@@ -109,8 +110,7 @@ function YouTubePlayer() {
 			style={{ visibility: `${fullscreenVideoMode ? 'visible' : 'hidden'}` }}
 			className={'ytPlayerContainer'}
 		>
-			;
-			<div className={'mask-bottom'}></div>
+			;<div className={'mask-bottom'}></div>
 			<YouTube
 				containerClassName={'ytplayer'}
 				opts={opts}
@@ -155,6 +155,5 @@ const IframeWrapper = styled.div`
 		display: flex;
 		justify-content: center;
 		letter-spacing: 6px;
-
 	}
 `;

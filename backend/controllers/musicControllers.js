@@ -6,9 +6,9 @@ export async function searchMusic(req, res) {
     const searchString = req.query;
     const searchResults = await Music.SearchAll(searchString);
 
-    res.status(200).json({ success: true, searchResults });
+    return res.status(200).json({ success: true, searchResults });
   } catch (error) {
-    res.status(400).json({ success: false, message: error });
+    return res.status(400).json({ success: false, message: error });
   }
 }
 
@@ -17,9 +17,9 @@ export async function searchSongs(req, res) {
     const searchString = req.query;
     const searchResults = await Music.SearchSongs(searchString);
 
-    res.status(200).json({ success: true, searchResults });
+    return res.status(200).json({ success: true, searchResults });
   } catch (error) {
-    res.status(400).json({ success: false, message: error });
+    return res.status(400).json({ success: false, message: error });
   }
 }
 
@@ -28,9 +28,9 @@ export async function searchAlbums(req, res) {
     const searchString = req.query;
     const searchResults = await Music.SearchAlbums(searchString);
 
-    res.status(200).json({ success: true, searchResults });
+    return res.status(200).json({ success: true, searchResults });
   } catch (error) {
-    res.status(400).json({ success: false, message: error });
+    return res.status(400).json({ success: false, message: error });
   }
 }
 
@@ -39,9 +39,9 @@ export async function searchArtists(req, res) {
     const searchString = req.query;
     const searchResults = await Music.SearchArtists(searchString);
 
-    res.status(200).json({ success: true, searchResults });
+    return res.status(200).json({ success: true, searchResults });
   } catch (error) {
-    res.status(400).json({ success: false, message: error });
+    return res.status(400).json({ success: false, message: error });
   }
 }
 
@@ -51,7 +51,7 @@ export async function getAllPlaylists(req, res) {
 
     return res.json({ success: true, playlists });
   } catch (err) {
-    return res.status(500).json({ success: false, message: err.message });
+    return res.status(400).json({ success: false, message: err.message });
   }
 }
 
@@ -62,7 +62,9 @@ export async function getOneArtist(req, res) {
     const artist = await Music.GetOneArtist(browseId);
 
     return res.json({ success: true, artist });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error });
+  }
 }
 
 export async function getMusicVideos(req, res) {
@@ -72,6 +74,6 @@ export async function getMusicVideos(req, res) {
 
     return res.json({ success: true, searchResults });
   } catch (error) {
-    return res.status(500).json({ success: false, message: err.message });
+    return res.status(400).json({ success: false, message: err.message });
   }
 }

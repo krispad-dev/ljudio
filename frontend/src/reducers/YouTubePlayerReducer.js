@@ -21,7 +21,8 @@ export const PLAYER_ACTIONS = {
 	SET_SUFFLE_IS_ON: 'SET_SUFFLE_IS_ON',
 	SET_SHUFFLED_CUE: 'SET_SHUFFLED_CUE',
 
-	ADD_SONG_TO_CUE: 'ADD_SONG_TO_CUE'
+	ADD_SONG_TO_CUE: 'ADD_SONG_TO_CUE',
+	SET_REPEAT_IS_ON: 'SET_REPEAT_IS_ON'
 
 };
 
@@ -172,13 +173,14 @@ export function playerControllerReducer(state, action) {
 				activeCue: action.payload,
 			};
 
+		case PLAYER_ACTIONS.SET_REPEAT_IS_ON:
 			
+			return {
+				...state,
+				repeatIsOn: !state.repeatIsOn,
+			};
 
-
-
-
-
-
+			
 		default:
 			return state;
 	}

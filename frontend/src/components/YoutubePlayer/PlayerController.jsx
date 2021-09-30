@@ -5,6 +5,7 @@ import { MdPlayCircleOutline, MdPause } from 'react-icons/md';
 import { CgScreen } from 'react-icons/cg';
 import { MdSkipNext } from 'react-icons/md';
 import ShuffleBtn from '../../components/YoutubePlayer/ShuffleBtn';
+import RepeatBtn from './RepeatBtn';
 
 import VolumeSlider from './VolumeSlider';
 import ProgressSlider from './ProgressSlider';
@@ -30,12 +31,6 @@ function Controller() {
 			</div>
 
 			<div className={'buttonsContainer'}>
-				<CgScreen
-					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE })}
-					className={'showVideo'}
-					style={{ color: '#fff', fontSize: '1rem', margin: '0.5rem' }}
-				/>
-
 				<MdSkipNext
 					className={'next-prevBtn'}
 					style={{ color: '#fff', fontSize: '3rem', transform: 'rotate(-180deg)' }}
@@ -53,8 +48,15 @@ function Controller() {
 				<MdSkipNext
 					onClick={setNextInCueHandler}
 					className={'next-prevBtn'}
-					style={{ color: '#fff', fontSize: '3rem', margin: '0.5rem' }}
+					style={{ color: '#fff', fontSize: '3rem' }}
 				/>
+
+				<CgScreen
+					onClick={() => dispatch({ type: PLAYER_ACTIONS.SET_FULLSCREEN_VIDEO_MODE })}
+					className={'showVideo'}
+					style={{ color: '#fff', fontSize: '1rem', margin: '1rem', cursor: 'pointer' }}
+				/>
+				<RepeatBtn />
 				<ShuffleBtn />
 			</div>
 
@@ -92,6 +94,7 @@ const PlayerControllerWrapper = styled.div`
 	}
 
 	.buttonsContainer {
+
 		display: flex;
 		justify-content: center;
 		align-items: center;

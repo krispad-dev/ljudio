@@ -6,9 +6,9 @@ export async function getAllFromCue(req, res) {
 
     const cue = await Cue.GetAllFromCue(userId);
 
-    res.status(200).json({ success: true, cue: cue[0].cueSongs });
+    return res.status(200).json({ success: true, cue: cue[0].cueSongs });
   } catch (error) {
-    res.staus(400).json({ success: false, message: error });
+    return res.staus(400).json({ success: false, message: error });
   }
 }
 export async function addToCue(req, res) {
@@ -24,9 +24,9 @@ export async function addToCue(req, res) {
 
     await Cue.AddToCue(obj);
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (error) {
-    res.staus(400).json({ success: false, message: error });
+    return res.staus(400).json({ success: false, message: error });
   }
 }
 export async function removeFromCue(req, res) {
@@ -40,9 +40,9 @@ export async function removeFromCue(req, res) {
     };
     await Cue.RemoveFromCue(obj);
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (error) {
-    res.staus(400).json({ success: false, message: error });
+    return res.staus(400).json({ success: false, message: error });
   }
 }
 
@@ -57,8 +57,8 @@ export async function updateCue(req, res) {
     };
     await Cue.UpdateCue(obj);
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (error) {
-    res.staus(400).json({ success: false, message: error });
+    return res.staus(400).json({ success: false, message: error });
   }
 }
