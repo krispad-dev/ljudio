@@ -9,9 +9,14 @@ function CurrentSongSideScroller() {
 
   const { data } = useGetSongs(activeCue && activeCue[cuePosition]);
   const currentSongInfo = data && data.searchResults && data.searchResults.content[0];
+  currentSongInfo && currentSongInfo.name && currentSongInfo.name
+
+  const activeCueIsEmpty = activeCue && activeCue.length > 0;
+
+
 
   return (
-    <CurrentSongDisplayerWrapper style={{ visibility: `${currentSongInfo && currentSongInfo.name && currentSongInfo.name !== 'Undefined' ? 'visible' : 'hidden'}` }}>
+    <CurrentSongDisplayerWrapper style={{ visibility: `${activeCueIsEmpty ? 'visible' : 'hidden'}` }}>
       <Marquee gradient={false}>
         <h4>
           <strong>{currentSongInfo && currentSongInfo.name}</strong>
