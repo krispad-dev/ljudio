@@ -53,11 +53,9 @@ function AllPlaylistsList() {
   return (
     <>
       {isLoading && <GridLoader />}
-      {pathname !== '/playlists' &&
-        allPlaylists &&
-        allPlaylists.playlists &&
-        allPlaylists.playlists.length &&
-        allPlaylists.playlists.length > 0 && <h1>Playlists</h1>}
+      {pathname !== '/playlists' && allPlaylists && allPlaylists.playlists && allPlaylists.playlists.length > 0 && (
+        <h1>Playlists</h1>
+      )}
 
       <AllPlaylistsListWrapper>
         {pathname === '/playlists' && allPlaylists && allPlaylists.playlists && !allPlaylists.playlists.length && (

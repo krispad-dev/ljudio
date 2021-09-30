@@ -69,5 +69,6 @@ const SongListWrapper = styled.div`
     align-items: center;
     font-size: 3rem;
     margin-top: 6rem;
+    color: #444;
   }
 `;
