@@ -1,6 +1,5 @@
-import React, { createContext, useReducer, useEffect } from 'react';
-import { playerControllerReducer, PLAYER_ACTIONS } from '../reducers/YouTubePlayerReducer';
-import useGetAllCued from '../hooks/useGetAllCued';
+import React, { createContext, useReducer } from 'react';
+import { playerControllerReducer } from '../reducers/YouTubePlayerReducer';
 
 export const playerControllerStateContext = createContext();
 
