@@ -18,7 +18,7 @@ export const Bcrypt = {
 };
 
 export async function generateToken(data) {
-  const token = await jwt.sign(data, 'sEcReTkEy', { expiresIn: '60d' });
+  const token = await jwt.sign(data, process.env.SECRET, { expiresIn: '60d' });
   return token;
 }
 
