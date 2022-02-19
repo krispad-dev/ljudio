@@ -15,4 +15,4 @@ YouTube Music API - som vi skulle använda, beskrivs här [YouTube API](https://
 
 - Databas: Postgress
 
-![ljudio](https://user-images.githubusercontent.com/78469582/154795178-ce05a7a0-3383-44ca-a436-fb0792a803bd.png)
+[ljudio](https://user-images.githubusercontent.com/78469582/154795178-ce05a7a0-3383-44ca-a436-fb0792a803bd.png)
